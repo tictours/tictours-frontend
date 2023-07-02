@@ -42,6 +42,12 @@ export const MenuList = [
         ],
     },
     {
+        title: 'Client',	
+        classsChange: 'mm-collapse',		
+        iconStyle: <i className="material-icons-outlined">dashboard</i>,
+        to:'client'
+    },
+    {
         title: 'File Manager',	
         classsChange: 'mm-collapse',		
         iconStyle: <i className="material-icons">folder</i>,

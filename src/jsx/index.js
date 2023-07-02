@@ -132,6 +132,8 @@ import Error500 from "./pages/Error500";
 import Error503 from "./pages/Error503";
 import Setting from "./layouts/Setting";
 import { ThemeContext } from "../context/ThemeContext";
+import Client from "./components/Client";
+import Quotation from "./components/Client/Quotation";
 
 const Markup = () => {
 
@@ -261,7 +263,12 @@ const Markup = () => {
                 <Route path='/ui-progressbar' exact element={<UiProgressBar/>} />   
                 <Route path='/ui-tab' exact element={<UiTab/>} />   
                 <Route path='/ui-pagination' exact element={<UiPagination/>} />                       
-              </Route>                   
+              </Route>
+              <Route element={<Layout7 />}>
+                <Route exact path='/client' element={<Client/>}>
+                <Route path='quotation' exact element={<Quotation/>} />                                          
+                  </Route>	                 
+              </Route>                     
               <Route element={<Layout7 />}>	                
                 { allRoutes.map((data, i) => (
                   <Route key={i} exact path={`/${data.url}`} element={data.component} />

@@ -10,6 +10,7 @@ import { isAuthenticated } from './store/selectors/AuthSelectors';
 import './other/swiper/css/swiper-bundle.min.css';
 import "./other/bootstrap-select/dist/css/bootstrap-select.min.css";
 import "./css/style.css";
+import './jsx/custom.css'
 
 
 const SignUp = lazy(() => import('./jsx/pages/Registration'));
