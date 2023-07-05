@@ -210,7 +210,7 @@ const Markup = () => {
           <Route path='/page-error-500' element={<Error500 />} />
           <Route path='/page-error-503' element={<Error503 />} />     
           <Route path='/page-lock-screen' element={<LockScreen />} />     
-            <Route element={<Layout1 />}>
+            <Route element={<Layout7 />}>
               <Route path='/' exact element={<Home/>} />
               <Route path='/dashboard' exact element={<Home/>} />
               <Route path='/dashboard-dark' exact element={<DashboardDark/>} />

@@ -14,6 +14,7 @@ import alb from '../../../images/svg/albania.svg';
 import alg from '../../../images/svg/algeria.svg';
 import usf from '../../../images/svg/usflag.svg';
 import rus from '../../../images/svg/rus.svg';
+import { isDevelopement } from "../../utilis/isDevelopment";
 
 const Header = ({ onNote }) => {
   const [searchBut, setSearchBut] = useState(false);	
@@ -48,6 +49,7 @@ const Header = ({ onNote }) => {
 				</div>			
             </div>
 			<ul className="navbar-nav header-right">
+				{isDevelopement && <>
 				<li>
 					<div className="search-coundry">						
 						<Dropdown className="header-drop">
@@ -285,7 +287,7 @@ const Header = ({ onNote }) => {
 						</div>
 					</PerfectScrollbar>
 					</Dropdown.Menu>
-              	</Dropdown> 
+              	</Dropdown> </>}
 			  
 				
 			   
@@ -303,6 +305,7 @@ const Header = ({ onNote }) => {
 							</div>
 						</Dropdown.Toggle>
 						<Dropdown.Menu align="right" className="mt-3 dropdown-menu dropdown-menu-end">
+							{isDevelopement && <>
 							<Link to="/app-profile" className="dropdown-item ai-icon">
 								<svg xmlns="http://www.w3.org/2000/svg"  width="24px" height="24px" viewBox="0 0 24 24" version="1.1" className="svg-main-icon">
 									<g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -342,6 +345,7 @@ const Header = ({ onNote }) => {
 								</svg>
 								<span className="ms-2">Settings </span>
 							</Link>
+							</>}
 							<LogoutPage />
 						</Dropdown.Menu>
 					</Dropdown>	

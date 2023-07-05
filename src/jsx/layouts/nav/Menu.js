@@ -1,427 +1,423 @@
 export const MenuList = [
-    //Dashboard
-    {
-        title: 'Dashboard',	
-        classsChange: 'mm-collapse',		
-        iconStyle: <i className="material-icons-outlined">dashboard</i>,
-        content: [
+  //Dashboard
+  {
+    title: "Dashboard",
+    classsChange: "mm-collapse",
+    iconStyle: <i className="material-icons-outlined">dashboard</i>,
+    ...(process.env.NODE_ENV === "development" && {content: [
+      {
+        title: "Dashboard Light",
+        to: "dashboard",
+      },
+      {
+        title: "Dashboard Dark",
+        to: "dashboard-dark",
+      },
+      {
+        title: "Banking",
+        to: "banking",
+      },
+      {
+        title: "Ticketing",
+        to: "ticketing",
+      },
+      {
+        title: "Crypto",
+        to: "crypto",
+      },
+      {
+        title: "Invoice",
+        to: "invoice",
+      },
+      {
+        title: "Contact",
+        to: "contact",
+      },
+      {
+        title: "Kanban",
+        to: "kanban",
+      },
+    ]}),
+  },
+  {
+    title: "Client",
+    classsChange: "mm-collapse",
+    iconStyle: <i className="material-icons">assessment</i>,
+    to: "client",
+  },
+  ...(process.env.NODE_ENV === "development"
+    ? [
+        {
+          title: "File Manager",
+          classsChange: "mm-collapse",
+          iconStyle: <i className="material-icons">folder</i>,
+          content: [
             {
-                title: 'Dashboard Light',
-                to: 'dashboard',					
-            },
-            {
-                title: 'Dashboard Dark',
-                to: 'dashboard-dark',
-            },
-            {
-                title: 'Banking',
-                to: 'banking',
-            },
-            {
-                title: 'Ticketing',
-                to: 'ticketing',
-            },
-            {
-                title: 'Crypto',
-                to: 'crypto',
-                
-            },
-			{
-                title: 'Invoice',
-                to: 'invoice',                
-            },
-			{
-                title: 'Contact',
-                to: 'contact',                
-            },
-			{
-                title: 'Kanban',
-                to: 'kanban',                
-            },
-			   
-        ],
-    },
-    {
-        title: 'Client',	
-        classsChange: 'mm-collapse',		
-        iconStyle: <i className="material-icons-outlined">dashboard</i>,
-        to:'client'
-    },
-    {
-        title: 'File Manager',	
-        classsChange: 'mm-collapse',		
-        iconStyle: <i className="material-icons">folder</i>,
-        content: [
-            {
-                title: 'File Manager',
-                to: 'file-manager',					
-            },
-            {
-                title: 'User',
-                to: 'user',
+              title: "File Manager",
+              to: "file-manager",
             },
             {
-                title: 'Calendar',
-                to: 'calendar',
+              title: "User",
+              to: "user",
             },
             {
-                title: 'To Do List',
-                to: 'to-do-list',
+              title: "Calendar",
+              to: "calendar",
             },
             {
-                title: 'Chat',
-                to: 'chat',
+              title: "To Do List",
+              to: "to-do-list",
             },
             {
-                title: 'Activity',
-                to: 'activity',
-            },
-        ],
-    },    
-    {
-        title:"Course",
-        classsChange:"mm-collapse",
-        update : "New",
-        iconStyle:<i className="mdi-bank" />,
-        content : [
-            {
-                title:'Course List',
-                to:'/course-listing'
+              title: "Chat",
+              to: "chat",
             },
             {
-                title:'Course Details',
-                to:'/course-details'
-            }
-        ],
-    },
-    //CMS
-    {
-        title : "CMS",
-        classsChange: 'mm-collapse',
-        update:"New",
-        iconStyle: <i className="material-icons">settings</i>,
-        content:[
+              title: "Activity",
+              to: "activity",
+            },
+          ],
+        },
+        {
+          title: "Course",
+          classsChange: "mm-collapse",
+          update: "New",
+          iconStyle: <i className="mdi-bank" />,
+          content: [
             {
-                title:'Content',
-                to:'/content'
+              title: "Course List",
+              to: "/course-listing",
             },
             {
-                title:'Menu',
-                to:'/menu'
+              title: "Course Details",
+              to: "/course-details",
+            },
+          ],
+        },
+        //CMS
+        {
+          title: "CMS",
+          classsChange: "mm-collapse",
+          update: "New",
+          iconStyle: <i className="material-icons">settings</i>,
+          content: [
+            {
+              title: "Content",
+              to: "/content",
             },
             {
-                title:'Email Template',
-                to:'/email-template'
+              title: "Menu",
+              to: "/menu",
             },
             {
-                title:'Blog',
-                to:'/blog'
-            },
-        ],
-    },
-    //Apps
-    {
-        title: 'Apps',	
-        classsChange: 'mm-collapse',
-        iconStyle: <i className="flaticon-050-info">app_registration </i>,
-        content: [
-            {
-                title: 'Profile',
-                to: 'app-profile'
+              title: "Email Template",
+              to: "/email-template",
             },
             {
-                title: 'Edit Profile',
-                to: 'edit-profile'
+              title: "Blog",
+              to: "/blog",
+            },
+          ],
+        },
+        //Apps
+        {
+          title: "Apps",
+          classsChange: "mm-collapse",
+          iconStyle: <i className="flaticon-050-info">app_registration </i>,
+          content: [
+            {
+              title: "Profile",
+              to: "app-profile",
             },
             {
-                title: 'Post Details',
-                to: 'post-details'
+              title: "Edit Profile",
+              to: "edit-profile",
             },
             {
-                title: 'Email',
-                //to: './',
-                hasMenu : true,
-                content: [
-                    {
-                        title: 'Compose',
-                        to: 'email-compose',
-                    },
-                    {
-                        title: 'Index',
-                        to: 'email-inbox',
-                    },
-                    {
-                        title: 'Read',
-                        to: 'email-read',
-                    }
-                ],
+              title: "Post Details",
+              to: "post-details",
             },
             {
-                title:'Calendar',
-                to: 'app-calender'
+              title: "Email",
+              //to: './',
+              hasMenu: true,
+              content: [
+                {
+                  title: "Compose",
+                  to: "email-compose",
+                },
+                {
+                  title: "Index",
+                  to: "email-inbox",
+                },
+                {
+                  title: "Read",
+                  to: "email-read",
+                },
+              ],
             },
             {
-                title: 'Shop',
-                //to: './',
-                hasMenu : true,
-                content: [
-                    {
-                        title: 'Product Grid',
-                        to: 'ecom-product-grid',
-                    },
-                    {
-                        title: 'Product List',
-                        to: 'ecom-product-list',
-                    },
-                    {
-                        title: 'Product Details',
-                        to: 'ecom-product-detail',
-                    },
-                    {
-                        title: 'Order',
-                        to: 'ecom-product-order',
-                    },
-                    {
-                        title: 'Checkout',
-                        to: 'ecom-checkout',
-                    },
-                    {
-                        title: 'Invoice',
-                        to: 'ecom-invoice',
-                    },
-                    {
-                        title: 'Customers',
-                        to: 'ecom-customers',
-                    },
-                ],
-            },
-        ],
-    },
-    //Charts
-    {
-        title: 'Charts',	
-        classsChange: 'mm-collapse',
-        iconStyle: <i className="material-icons">assessment</i>,
-        content: [
-            
-            {
-                title: 'RechartJs',
-                to: 'chart-rechart',					
+              title: "Calendar",
+              to: "app-calender",
             },
             {
-                title: 'Chartjs',
-                to: 'chart-chartjs',					
+              title: "Shop",
+              //to: './',
+              hasMenu: true,
+              content: [
+                {
+                  title: "Product Grid",
+                  to: "ecom-product-grid",
+                },
+                {
+                  title: "Product List",
+                  to: "ecom-product-list",
+                },
+                {
+                  title: "Product Details",
+                  to: "ecom-product-detail",
+                },
+                {
+                  title: "Order",
+                  to: "ecom-product-order",
+                },
+                {
+                  title: "Checkout",
+                  to: "ecom-checkout",
+                },
+                {
+                  title: "Invoice",
+                  to: "ecom-invoice",
+                },
+                {
+                  title: "Customers",
+                  to: "ecom-customers",
+                },
+              ],
+            },
+          ],
+        },
+        //Charts
+        {
+          title: "Charts",
+          classsChange: "mm-collapse",
+          iconStyle: <i className="material-icons">assessment</i>,
+          content: [
+            {
+              title: "RechartJs",
+              to: "chart-rechart",
             },
             {
-                title: 'Sparkline',
-                to: 'chart-sparkline',					
+              title: "Chartjs",
+              to: "chart-chartjs",
             },
             {
-                title: 'Apexchart',
-                to: 'chart-apexchart',					
-            },
-        ]
-    },
-    //Boosttrap
-    {
-        title: 'Bootstrap',	
-        classsChange: 'mm-collapse',
-        iconStyle: <i className="material-icons">favorite</i>,	
-        content: [
-            {
-                title: 'Accordion',
-                to: 'ui-accordion',					
+              title: "Sparkline",
+              to: "chart-sparkline",
             },
             {
-                title: 'Alert',
-                to: 'ui-alert',					
+              title: "Apexchart",
+              to: "chart-apexchart",
+            },
+          ],
+        },
+        //Boosttrap
+        {
+          title: "Bootstrap",
+          classsChange: "mm-collapse",
+          iconStyle: <i className="material-icons">favorite</i>,
+          content: [
+            {
+              title: "Accordion",
+              to: "ui-accordion",
             },
             {
-                title: 'Badge',
-                to: 'ui-badge',					
+              title: "Alert",
+              to: "ui-alert",
             },
             {
-                title: 'Button',
-                to: 'ui-button',					
+              title: "Badge",
+              to: "ui-badge",
             },
             {
-                title: 'Modal',
-                to: 'ui-modal',					
+              title: "Button",
+              to: "ui-button",
             },
             {
-                title: 'Button Group',
-                to: 'ui-button-group',					
+              title: "Modal",
+              to: "ui-modal",
             },
             {
-                title: 'List Group',
-                to: 'ui-list-group',					
+              title: "Button Group",
+              to: "ui-button-group",
             },
             {
-                title: 'Cards',
-                to: 'ui-card',					
+              title: "List Group",
+              to: "ui-list-group",
             },
             {
-                title: 'Carousel',
-                to: 'ui-carousel',					
+              title: "Cards",
+              to: "ui-card",
             },
             {
-                title: 'Dropdown',
-                to: 'ui-dropdown',					
+              title: "Carousel",
+              to: "ui-carousel",
             },
             {
-                title: 'Popover',
-                to: 'ui-popover',					
+              title: "Dropdown",
+              to: "ui-dropdown",
             },
             {
-                title: 'Progressbar',
-                to: 'ui-progressbar',					
+              title: "Popover",
+              to: "ui-popover",
             },
             {
-                title: 'Tab',
-                to: 'ui-tab',					
+              title: "Progressbar",
+              to: "ui-progressbar",
             },
             {
-                title: 'Typography',
-                to: 'ui-typography',					
+              title: "Tab",
+              to: "ui-tab",
             },
             {
-                title: 'Pagination',
-                to: 'ui-pagination',					
+              title: "Typography",
+              to: "ui-typography",
             },
             {
-                title: 'Grid',
-                to: 'ui-grid',					
+              title: "Pagination",
+              to: "ui-pagination",
             },
-        ]
-    },
-    //plugins
-    {
-        title:'Plugins',
-        classsChange: 'mm-collapse',
-        iconStyle : <i className="material-icons">extension </i>,
-        content : [
             {
-                title:'Select 2',
-                to: 'uc-select2',
+              title: "Grid",
+              to: "ui-grid",
+            },
+          ],
+        },
+        //plugins
+        {
+          title: "Plugins",
+          classsChange: "mm-collapse",
+          iconStyle: <i className="material-icons">extension </i>,
+          content: [
+            {
+              title: "Select 2",
+              to: "uc-select2",
             },
             // {
             //     title:'Noui Slider',
             //     to: 'uc-noui-slider',
             // },
             {
-                title:'Sweet Alert',
-                to: 'uc-sweetalert',
+              title: "Sweet Alert",
+              to: "uc-sweetalert",
             },
             {
-                title:'Toastr',
-                to: 'uc-toastr',
+              title: "Toastr",
+              to: "uc-toastr",
             },
             {
-                title:'Jqv Map',
-                to: 'map-jqvmap',
+              title: "Jqv Map",
+              to: "map-jqvmap",
             },
             {
-                title:'Light Gallery',
-                to: 'uc-lightgallery',
+              title: "Light Gallery",
+              to: "uc-lightgallery",
             },
-        ]
-    },
-    //Widget
-    {   
-        title:'Widget',
-        //classsChange: 'mm-collapse',
-        iconStyle: <i className="material-icons">widgets</i>,
-        to: 'widget',
-    },
-    //Forms
-    {
-        title:'Forms',
-        classsChange: 'mm-collapse',
-        iconStyle: <i className="material-icons">insert_drive_file</i>,
-        content : [
+          ],
+        },
+        //Widget
+        {
+          title: "Widget",
+          //classsChange: 'mm-collapse',
+          iconStyle: <i className="material-icons">widgets</i>,
+          to: "widget",
+        },
+        //Forms
+        {
+          title: "Forms",
+          classsChange: "mm-collapse",
+          iconStyle: <i className="material-icons">insert_drive_file</i>,
+          content: [
             {
-                title:'Form Elements',
-                to: 'form-element',
-            },
-            {
-                title:'Wizard',
-                to: 'form-wizard',
+              title: "Form Elements",
+              to: "form-element",
             },
             {
-                title:'CkEditor',
-                to: 'form-ckeditor',
+              title: "Wizard",
+              to: "form-wizard",
             },
             {
-                title:'Pickers',
-                to: 'form-pickers',
+              title: "CkEditor",
+              to: "form-ckeditor",
             },
             {
-                title:'Form Validate',
-                to: 'form-validation',
-            },
-
-        ]
-    },
-    //Table
-    {
-        title:'Table',
-        classsChange: 'mm-collapse',
-        iconStyle: <i className="material-icons">table_chart</i>,
-        content : [
-            {
-                title:'Table Filtering',
-                to: 'table-filtering',
+              title: "Pickers",
+              to: "form-pickers",
             },
             {
-                title:'Table Sorting',
-                to: 'table-sorting',
+              title: "Form Validate",
+              to: "form-validation",
+            },
+          ],
+        },
+        //Table
+        {
+          title: "Table",
+          classsChange: "mm-collapse",
+          iconStyle: <i className="material-icons">table_chart</i>,
+          content: [
+            {
+              title: "Table Filtering",
+              to: "table-filtering",
             },
             {
-                title:'Bootstrap',
-                to: 'table-bootstrap-basic',
-            },
-           
-
-        ]
-    },
-    //Pages
-    {
-        title:'Pages',
-        classsChange: 'mm-collapse',
-        iconStyle: <i className="merial-icons">article</i>,
-        content : [
-            {
-                title:'Error',
-                hasMenu : true,
-                content : [
-                    {
-                        title: 'Error 400',
-                        to : 'page-error-400',
-                    },
-                    {
-                        title: 'Error 403',
-                        to : 'page-error-403',
-                    },
-                    {
-                        title: 'Error 404',
-                        to : 'page-error-404',
-                    },
-                    {
-                        title: 'Error 500',
-                        to : 'page-error-500',
-                    },
-                    {
-                        title: 'Error 503',
-                        to : 'page-error-503',
-                    },
-                ],
+              title: "Table Sorting",
+              to: "table-sorting",
             },
             {
-                title:'Lock Screen',
-                to: 'page-lock-screen',
+              title: "Bootstrap",
+              to: "table-bootstrap-basic",
             },
-
-        ]
-    },
-    
-]
+          ],
+        },
+        //Pages
+        {
+          title: "Pages",
+          classsChange: "mm-collapse",
+          iconStyle: <i className="merial-icons">article</i>,
+          content: [
+            {
+              title: "Error",
+              hasMenu: true,
+              content: [
+                {
+                  title: "Error 400",
+                  to: "page-error-400",
+                },
+                {
+                  title: "Error 403",
+                  to: "page-error-403",
+                },
+                {
+                  title: "Error 404",
+                  to: "page-error-404",
+                },
+                {
+                  title: "Error 500",
+                  to: "page-error-500",
+                },
+                {
+                  title: "Error 503",
+                  to: "page-error-503",
+                },
+              ],
+            },
+            {
+              title: "Lock Screen",
+              to: "page-lock-screen",
+            },
+          ],
+        },
+      ]
+    : []),
+];

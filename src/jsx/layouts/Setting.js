@@ -10,6 +10,7 @@ import demo3 from '../../images/demo/pic3.jpg';
 import demo4 from '../../images/demo/pic4.jpg';
 import demo5 from '../../images/demo/pic5.jpg';
 import demo6 from '../../images/demo/pic6.jpg';
+import { isDevelopement } from "../utilis/isDevelopment";
 
 
 const Setting = () => {
@@ -229,11 +230,14 @@ const Setting = () => {
 						</Tab.Pane>
 					</Tab.Content>
 				</Tab.Container>
-				<div className="note-text"><span className="text-danger">*Note :</span> This theme switcher is not part of product. It is only for demo. you will get all guideline in documentation. please check <a href="https://finlab.dexignlab.com/react/doc" target="_blank" className="text-primary">documentation.</a></div>
+			{isDevelopement &&	<div className="note-text"><span className="text-danger">*Note :</span> 
+				This theme switcher is not part of product. It is only for demo. you will get all
+				 guideline in documentation. please check <a href="https://finlab.dexignlab.com/react/doc" 
+				 target="_blank" className="text-primary">documentation.</a></div>}
 			</div>
 		</div>
 	
-		<div className={`dlab-demo-panel ${demoToggle ? "show" : ""}`}>
+		{isDevelopement && <div className={`dlab-demo-panel ${demoToggle ? "show" : ""}`}>
 			<div className="bg-overlay" onClick={() => setDemoToggle(!demoToggle)}></div>
 				<div className="bg-close"  onClick={() => setDemoToggle(!demoToggle)} ></div>
 				<Link to="#" className="dlab-demo-trigger" onClick={() => setDemoToggle(!demoToggle)}>
@@ -305,7 +309,7 @@ const Setting = () => {
 					<Link to={"#"}  className="text-primary"> documentation.</Link>
 				</div>
 			</div>
-		</div>
+		</div>}
 	</>
   );
 };

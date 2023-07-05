@@ -167,7 +167,7 @@ const SideBar = () => {
               })}          
           </ul>	
         
-            <div className="support-box">
+            {/* <div className="support-box">
                 <div className="media"> 
                   <span>
                     <svg width="22" height="29" viewBox="0 0 22 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -198,7 +198,7 @@ const SideBar = () => {
                   <h3 className="fs-20">Upgrade you Account to Pro</h3>
                   <Link to={"#"} className="btn bg-white btn-sm">Upgrade</Link>
                 </div>
-              </div>
+              </div> */}
           </PerfectScrollbar>
       </div>
     );
