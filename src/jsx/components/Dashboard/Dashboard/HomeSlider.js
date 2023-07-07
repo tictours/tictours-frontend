@@ -44,9 +44,9 @@ export default function HomeSlider() {
                                 </svg>
                             </div>
                             <div  className="chart-num">
-                                <h2 className="font-w600 mb-0">932</h2>
+                                <h2 className="font-w600 mb-0">132</h2>
                                 <p>
-                                    Project
+                                    Today Queries
                                 </p>
                             </div>
                         </div>
@@ -66,7 +66,7 @@ export default function HomeSlider() {
                             <div className="chart-num">
                                 <h2 className="font-w600 mb-0">1,032</h2>
                                 <p>
-                                    Inquiries
+                                    Total Queries
                                 </p>
                             </div>
                         </div>
@@ -85,9 +85,9 @@ export default function HomeSlider() {
                                 </svg>	
                             </div>
                             <div className="chart-num">
-                                <h2 className="font-w600 mb-0">102k</h2>
+                                <h2 className="font-w600 mb-0">802</h2>
                                 <p>
-                                    Invesment
+                                    Total Confirmed
                                 </p>
                             </div>
                         </div>                    
@@ -102,9 +102,9 @@ export default function HomeSlider() {
                                 </svg>		
                             </div>
                             <div className="chart-num">
-                                <h2 className="font-w600 mb-0">32k</h2>
+                                <h2 className="font-w600 mb-0">321</h2>
                                 <p>
-                                    Assets
+                                    Total Pro Conf
                                 </p>
                             </div>
                         </div>

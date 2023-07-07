@@ -96,7 +96,7 @@ const Home = () => {
 								<div className="card-header pb-0 border-0 flex-wrap">
 									<div className="mb-2 mb-sm-0">
 										<div className="chart-title mb-3">
-											<h2 className="heading">Project Statistic</h2>	
+											<h2 className="heading">Queries Statistic</h2>	
 										</div>
 										<div className="d-flex align-items-center mb-3 mb-sm-0">
 											<div className="round weekly" id="dzOldSeries">
@@ -160,7 +160,7 @@ const Home = () => {
 						<div className="col-xl-4 wow fadeInUp" data-wow-delay="1s">
 							<div className="card">
 								<div className="card-header border-0">
-									<h2 className="heading">Email </h2>
+									<h2 className="heading">Queries Sources </h2>
 									<DropDownBlog />
 								</div>
 								<div className="card-body text-center pt-0 pb-2">
@@ -214,7 +214,7 @@ const Home = () => {
 							</div>
 						</div>
 					</div>	
-					<div className="row">						
+					{/* <div className="row">						
 						<div className="col-lg-12 wow fadeInUp" data-wow-delay="1.5s">
 							
 							<div className="card statistic">
@@ -337,12 +337,12 @@ const Home = () => {
 						<div className="col-xl-12">
 							<div className="user_reviews overflow-hidden">
 								<h4 className="heading mb-3"> User Reviews</h4>
-								{/* swiper */}
+								//  swiper 
 								<ReviewsHomeSlider />
 
 							</div>
 						</div>			
-					</div>
+					</div> */}
 
 				</div>		
 			</div>		
