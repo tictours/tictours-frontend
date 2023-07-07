@@ -40,10 +40,10 @@ export const MenuList = [
     ]}),
   },
   {
-    title: "Client",
+    title: "Enquiry",
     classsChange: "mm-collapse",
     iconStyle: <i className="material-icons">assessment</i>,
-    to: "client",
+    to: "enquiry",
   },
   ...(process.env.NODE_ENV === "development"
     ? [

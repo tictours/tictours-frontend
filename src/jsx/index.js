@@ -132,8 +132,9 @@ import Error500 from "./pages/Error500";
 import Error503 from "./pages/Error503";
 import Setting from "./layouts/Setting";
 import { ThemeContext } from "../context/ThemeContext";
-import Client from "./components/Client";
-import Quotation from "./components/Client/Quotation";
+import EnquiryDetails from "./components/Enquiry/EnquiryDetails";
+import Quotation from "./components/Enquiry/Quotation";
+import Enquiry from "./components/Enquiry";
 
 const Markup = () => {
 
@@ -264,10 +265,11 @@ const Markup = () => {
                 <Route path='/ui-tab' exact element={<UiTab/>} />   
                 <Route path='/ui-pagination' exact element={<UiPagination/>} />                       
               </Route>
-              <Route element={<Layout7 />}>
-                <Route exact path='/client' element={<Client/>}>
-                <Route path='quotation' exact element={<Quotation/>} />                                          
-                  </Route>	                 
+              <Route  element={<Layout7 />}>
+                <Route exact path="/enquiry"  element={<Enquiry/>} />
+                <Route path="/enquiry" element={<EnquiryDetails/>}>
+                <Route path='quotation' element={<Quotation/>} />                                          
+                </Route>	                 
               </Route>                     
               <Route element={<Layout7 />}>	                
                 { allRoutes.map((data, i) => (

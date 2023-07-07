@@ -2,7 +2,7 @@ import React from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import { Outlet, useNavigate } from "react-router-dom";
 
-function Client() {
+function EnquiryDetails() {
   const MENU = [
     { name: "profile", path: "", component: "" },
     { name: "quotation", path: "/quotation", component: "" },
@@ -44,4 +44,4 @@ function Client() {
   );
 }
 
-export default Client;
+export default EnquiryDetails;

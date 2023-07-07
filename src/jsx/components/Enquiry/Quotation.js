@@ -424,7 +424,7 @@ const Quotation = () =>{
                     </div>
                   </div> */}
                   <button type="submit" className="btn btn-primary">
-                    Submit
+                    Create itinerary
                   </button>
                 </form>
               </div>

@@ -60,7 +60,7 @@ export default function InvoiceSlider() {
                                         </svg>		
                                     </div>
                                     <div>
-                                        <h4 className="fs-15 font-w600 mb-0">Invoice<br/>Completed</h4>
+                                        <h4 className="fs-15 font-w600 mb-0">Total<br/>Enquiry</h4>
                                     </div>
                                 </div>	
                                 <div  className="chart-num">
@@ -94,7 +94,7 @@ export default function InvoiceSlider() {
                                             
                                     </div>
                                     <div>
-                                        <h4 className="fs-15 font-w600 mb-0">Invoice<br/> Created</h4>
+                                        <h4 className="fs-15 font-w600 mb-0">Confirmed<br/> Lead</h4>
                                     </div>
                                 </div>	
                                 <div  className="chart-num">
@@ -129,7 +129,7 @@ export default function InvoiceSlider() {
                                             
                                     </div>
                                     <div>
-                                        <h4 className="fs-15 font-w600 mb-0">Invoice<br/> Draft</h4>
+                                        <h4 className="fs-15 font-w600 mb-0">Proposal<br/> Send</h4>
                                     </div>
                                 </div>	
                                 <div  className="chart-num">
@@ -163,7 +163,7 @@ export default function InvoiceSlider() {
                                             
                                     </div>
                                     <div>
-                                        <h4 className="fs-15 font-w600 mb-0">Invoice<br/> Sent</h4>
+                                        <h4 className="fs-15 font-w600 mb-0">Enquiry<br/> Sent</h4>
                                     </div>
                                 </div>	
                                 <div  className="chart-num">
