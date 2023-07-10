@@ -190,7 +190,7 @@ const Enquiry = () =>{
                                                             </svg>
                                                         </Dropdown.Toggle>
                                                         <Dropdown.Menu className="dropdown-menu-end">
-                                                            <Dropdown.Item>Edit</Dropdown.Item>
+                                                            <Dropdown.Item onClick={()=>navigate(`/enquiry/profile`)}>Edit</Dropdown.Item>
                                                             <Dropdown.Item>Delete</Dropdown.Item>
                                                         </Dropdown.Menu>
                                                     </Dropdown>
