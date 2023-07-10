@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Autoplay } from "swiper";
 
-export default function InvoiceSlider() {	
+export default function InvoiceSlider({title='Enquiry'}) {	
 	return (
 		<>
 			<Swiper className="overflow-hidden" 			
@@ -60,7 +60,7 @@ export default function InvoiceSlider() {
                                         </svg>		
                                     </div>
                                     <div>
-                                        <h4 className="fs-15 font-w600 mb-0">Total<br/>Enquiry</h4>
+                                        <h4 className="fs-15 font-w600 mb-0">Total<br/>{title}</h4>
                                     </div>
                                 </div>	
                                 <div  className="chart-num">
@@ -94,7 +94,7 @@ export default function InvoiceSlider() {
                                             
                                     </div>
                                     <div>
-                                        <h4 className="fs-15 font-w600 mb-0">Confirmed<br/> Lead</h4>
+                                        <h4 className="fs-15 font-w600 mb-0">Confirmed<br/> {title}</h4>
                                     </div>
                                 </div>	
                                 <div  className="chart-num">
@@ -129,7 +129,7 @@ export default function InvoiceSlider() {
                                             
                                     </div>
                                     <div>
-                                        <h4 className="fs-15 font-w600 mb-0">Proposal<br/> Send</h4>
+                                        <h4 className="fs-15 font-w600 mb-0">Follow up<br/> {title}</h4>
                                     </div>
                                 </div>	
                                 <div  className="chart-num">
@@ -163,11 +163,11 @@ export default function InvoiceSlider() {
                                             
                                     </div>
                                     <div>
-                                        <h4 className="fs-15 font-w600 mb-0">Enquiry<br/> Sent</h4>
+                                        <h4 className="fs-15 font-w600 mb-0">{title}<br/> Sent</h4>
                                     </div>
                                 </div>	
                                 <div  className="chart-num">
-                                    <h2 className="font-w600 mb-0 fs-28">4,512</h2>
+                                    <h2 className="font-w600 mb-0 fs-28">2,512</h2>
                                 </div>
                             </div>	
                         </div>

@@ -4,6 +4,7 @@ export const MenuList = [
     title: "Dashboard",
     classsChange: "mm-collapse",
     iconStyle: <i className="material-icons-outlined">dashboard</i>,
+    ...(process.env.NODE_ENV !== 'development' && {to:'dashboard'}),
     ...(process.env.NODE_ENV === "development" && {content: [
       {
         title: "Dashboard Light",
@@ -44,6 +45,24 @@ export const MenuList = [
     classsChange: "mm-collapse",
     iconStyle: <i className="material-icons">assessment</i>,
     to: "enquiry",
+  },
+  {
+    title: "Leads",
+    classsChange: "mm-collapse",
+    iconStyle: <i className="flaticon-050-info">app_registration </i>,
+    to: "leads",
+  },
+  {
+    title: "Mails",
+    classsChange: "mm-collapse",
+    iconStyle: <i className="material-icons">folders</i>,
+    to: "email-inbox",
+  },
+  {
+    title: "Settings",
+    classsChange: "mm-collapse",
+    iconStyle: <i className="material-icons">settings</i>,
+    to: "",
   },
   ...(process.env.NODE_ENV === "development"
     ? [

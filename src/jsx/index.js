@@ -132,9 +132,14 @@ import Error500 from "./pages/Error500";
 import Error503 from "./pages/Error503";
 import Setting from "./layouts/Setting";
 import { ThemeContext } from "../context/ThemeContext";
+
+// Enquiry
+import Enquiry from "./components/Enquiry";
 import EnquiryDetails from "./components/Enquiry/EnquiryDetails";
 import Quotation from "./components/Enquiry/Quotation";
-import Enquiry from "./components/Enquiry";
+import Leads from "./components/Leads";
+
+// Leads
 
 const Markup = () => {
 
@@ -198,6 +203,9 @@ const Markup = () => {
 	  { url: 'table-filtering', component: <FilteringTable/> },
     { url: 'table-sorting', component: <SortingTable/> },
     { url: "table-bootstrap-basic", component: <BootstrapTable/> },  
+
+    // Leads
+    {url:'leads', component: <Leads/>}
   ];
   
  
