@@ -137,9 +137,12 @@ import { ThemeContext } from "../context/ThemeContext";
 import Enquiry from "./components/Enquiry";
 import EnquiryDetails from "./components/Enquiry/EnquiryDetails";
 import Quotation from "./components/Enquiry/Quotation";
-import Leads from "./components/Leads";
 
 // Leads
+import Leads from "./components/Leads";
+
+// Settings
+import Settings from "./components/Settings";
 
 const Markup = () => {
 
@@ -205,7 +208,9 @@ const Markup = () => {
     { url: "table-bootstrap-basic", component: <BootstrapTable/> },  
 
     // Leads
-    {url:'leads', component: <Leads/>}
+    {url:'leads', component: <Leads/>},
+    // Settings
+    {url:'settings', component: <Settings/>},
   ];
   
  

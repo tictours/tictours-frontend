@@ -62,7 +62,7 @@ export const MenuList = [
     title: "Settings",
     classsChange: "mm-collapse",
     iconStyle: <i className="material-icons">settings</i>,
-    to: "",
+    to: "settings",
   },
   ...(process.env.NODE_ENV === "development"
     ? [
