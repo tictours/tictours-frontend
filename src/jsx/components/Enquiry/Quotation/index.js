@@ -4,8 +4,9 @@ import Select from 'react-select';
 import Collapse from 'react-bootstrap/Collapse';
 import DatePicker from "react-datepicker";
 import { Badge, Button, Form } from 'react-bootstrap';
-import CustomModal from '../../layouts/CustomModal';
+import CustomModal from '../../../layouts/CustomModal';
 import { ToastContainer, toast } from 'react-toastify';
+import SetupModal from './SetupModal';
 
 const options = [
     //{ value: '1', label: 'Select Status' },
@@ -35,12 +36,9 @@ const tableData = [
 
 const Quotation = () =>{
     const [startDate, setStartDate] = useState(new Date());
-    const [formStartDate, setFormStartDate] = useState(new Date());
-    const [formEndDate, setFormEndDate] = useState(new Date());
-    const [formValidityDate, setFormValidityDate] = useState(new Date());
     const [open, setOpen] = useState(false);
     const [open2, setOpen2] = useState(true);
-    const [showModal, setShowModal] = useState(false);
+    const [showSetupModal, setShowSetupModal] = useState(false);
     
     const [data, setData] = useState(
 		document.querySelectorAll("#content_wrapper tbody tr")
@@ -87,22 +85,7 @@ const Quotation = () =>{
           return oldValues.filter((_, i) => i !== ind)
         })
     }
-    const notifyTopCenter = () => {
-      toast.success("Itinerary Created Successfuly", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    };
-    const formSubmit = (e) => {
-      e.preventDefault()
-      setShowModal(false)
-      notifyTopCenter()
-    }
+   
     return (
       <>
         <div className="row">
@@ -185,7 +168,7 @@ const Quotation = () =>{
                   </Link>
                 </div>
                 <div className="ms-2">
-                  <button className="btn btn-primary" onClick={()=>setShowModal(true)}>
+                  <button className="btn btn-primary" onClick={()=>setShowSetupModal(true)}>
                     Create itinerary
                   </button>
                 </div>
@@ -329,107 +312,8 @@ const Quotation = () =>{
               </Collapse>
             </div>
           </div>
-          <CustomModal
-            showModal={showModal}
-            title={"Create itinerary"}
-            handleModalClose={() => setShowModal(false)}
-          >
-            <div className="card-body">
-              <div className="basic-form">
-                <form onSubmit={formSubmit}>
-                  <div className="row">
-                    <div className="form-group mb-3 col-md-4">
-                      <label>Package Name</label>
-                      <input
-                        type="text"
-                        className="form-control custom-input"
-                        placeholder="Package 1"
-                      />
-                    </div>
-                    <div className="form-group mb-3 col-md-4">
-                      <label>Start Date</label>
-                      <DatePicker  className="form-control custom-input"
-                        selected={formStartDate}
-                        onChange={(date) => setFormStartDate(date)}/>
-                    </div>
-                    <div className="form-group mb-3 col-md-4">
-                      <label>End Date</label>
-                      <DatePicker  className="form-control custom-input"
-                        selected={formEndDate}
-                        onChange={(date) => setFormEndDate(date)}/>
-                    </div>
-                    <div className="form-group mb-3 col-md-4">
-                      <label>Adult</label>
-                      <input
-                        type="text"
-                        className="form-control custom-input"
-                        // placeholder="Package 1"
-                      />
-                    </div>
-                    <div className="form-group mb-3 col-md-4">
-                      <label>Child</label>
-                      <input
-                        type="text"
-                        className="form-control custom-input"
-                        // placeholder="Package 1"
-                      />
-                    </div>
-                    <div className="form-group mb-3 col-md-3">
-                      <label>Destination</label>
-                      <select
-                        defaultValue={"option"}
-                        id="inputState"
-                        className="form-control custom-input"
-                      >
-                        <option value="option" disabled>
-                          Choose...
-                        </option>
-                        <option>Dubai</option>
-                        <option>Sharjah</option>
-                        <option>Qatar</option>
-                      </select>
-                    </div>
-                    <div className="form-group mb-3 col-md-4">
-                      <label>Validity</label>
-                      <DatePicker  className="form-control custom-input"
-                        selected={formValidityDate}
-                        onChange={(date) => setFormValidityDate(date)}/>
-                    </div>
-                    </div>
-                  {/* <div className="row">
-                    <div className="form-group mb-3 col-md-4">
-                      <label>State</label>
-                      <select
-                        defaultValue={"option"}
-                        id="inputState"
-                        className="form-control"
-                      >
-                        <option value="option" disabled>
-                          Choose...
-                        </option>
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                        <option>Option 3</option>
-                      </select>
-                    </div>
-                    <div className="form-group col-md-2">
-                      <label>Zip</label>
-                      <input type="text" className="form-control" />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <div className="form-check">
-                      <input className="form-check-input" type="checkbox" />
-                      <label className="form-check-label">Check me out</label>
-                    </div>
-                  </div> */}
-                  <button type="submit" className="btn btn-primary">
-                    Create itinerary
-                  </button>
-                </form>
-              </div>
-            </div>
-          </CustomModal>
+          
+         <SetupModal showModal={showSetupModal} setShowModal={setShowSetupModal}/>
         </div>
       </>
     );
