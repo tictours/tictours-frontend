@@ -7,10 +7,10 @@ import wallet from './../../../images/svg/cryptowallet.svg';
 import crypto from './../../../images/svg/cryptocurrency.svg';
 import transfer from './../../../images/svg/wire-transfer.svg';
 const smallCard = [
-    { image: school, title:'Trade History' },
-    { image: wallet, title:'Quick Transfer' },
-    { image: crypto, title:'Your Investments' },
-    { image: transfer, title:'Exchange' },
+    { image: school, title:'Total Hotel' },
+    { image: wallet, title:'Active Hotel' },
+    { image: crypto, title:'Option 3' },
+    { image: transfer, title:'Option 4' },
 ];
 
 const CourseSlider = () =>{
@@ -58,7 +58,7 @@ const CourseSlider = () =>{
                                     <img src={data.image} alt="" />
                                     <div class="flex-1 ms-3">
                                         <h4>{data.title}</h4>
-                                        <span>Lorem ipsum dolor</span>
+                                        {/* <span>Lorem ipsum dolor</span> */}
                                     </div>	
                                 </div>	
                                 <Link to={"#"}><i class="las la-angle-right text-primary"></i></Link>

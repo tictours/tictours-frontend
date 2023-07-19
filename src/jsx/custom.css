@@ -1,3 +1,6 @@
+.cursor-pointer {
+  cursor: pointer;
+}
 /* client */
 
 .nav-tabs .nav-link.active {

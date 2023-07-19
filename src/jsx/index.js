@@ -143,7 +143,8 @@ import Leads from "./components/Leads";
 
 // Settings
 import Settings from "./components/Settings";
-
+import Hotels from "./components/Settings/Hotels/index";
+import AddHotel from "./components/Settings/Hotels/AddHotel";
 const Markup = () => {
 
   const allRoutes = [
@@ -211,6 +212,8 @@ const Markup = () => {
     {url:'leads', component: <Leads/>},
     // Settings
     {url:'settings', component: <Settings/>},
+    {url:'hotels', component: <Hotels/>},
+    {url:'add-hotel',component: <AddHotel/>}
   ];
   
  

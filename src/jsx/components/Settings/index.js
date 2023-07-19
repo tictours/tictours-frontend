@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import ModalVideo from 'react-modal-video'
 
 import bitcoin from './../../../images/svg/bitcoin.svg';
@@ -24,7 +24,15 @@ const smallCard = [
 
 
 function Settings() {
-    const [isOpen, setOpen] = useState();    
+    const [isOpen, setOpen] = useState();  
+    const navigate = useNavigate() 
+    
+    const onClick = (item) => {
+        console.log('item',item)
+        if(item == 'Hotels'){
+            navigate('/hotels')
+        }
+    }
   return (
     <>
         {/* <div className="widget-heading d-flex justify-content-between align-items-center">
@@ -41,7 +49,7 @@ function Settings() {
         <div className="row">
             {smallCard.map((item, index)=>(
                 <div className="col-xl-3 col-xxl-3 col-md-4 col-sm-6  mb-4" key={index}>
-                    <div class="card h-100">
+                    <div class="card h-100  cursor-pointer" onClick={()=>onClick(item.title)}>
                         <div class="card-body">
                             <div class="widget-courses align-items-center d-flex justify-content-between flex-wrap">
                                 <div class="d-flex align-items-center flex-wrap">
