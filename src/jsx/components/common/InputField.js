@@ -4,7 +4,7 @@ function InputField(props) {
   const { label, type = 'text', placeholder = '', name, values, ...restProps } = props
   return (
     <div className="form-group mb-3">
-      <label className="text-label">{label}</label>
+      {label && <label className="text-label">{label}</label>}
       <input
         {...restProps}
         type={type}

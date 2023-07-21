@@ -25,3 +25,8 @@
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
 }
+.table.custom-table-bordered {
+  border: 0.0625rem solid #E6EBEE; }
+.table .thead-table th {
+  background-color: #E6EBEE;
+  color: #000; }

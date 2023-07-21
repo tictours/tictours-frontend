@@ -1,7 +1,7 @@
 import React from 'react'
 
 function SelectField(props) {
-    const { label, name, values, options, ...restProps } = props
+    const { label, name, values, options, optionValue,optionLabel,...restProps } = props
     return (
         <div className="form-group mb-3">
             <label className="text-label">{label}</label>
@@ -11,13 +11,13 @@ function SelectField(props) {
                 id="inputState"
                 className="form-control"
                 name={name}
-                value={values[name]}
+                value={values?values[name]:name}
             >
                 <option value="option" disabled>
                     Choose...
                 </option>
                 {options.map((option, key) => (
-                    <option key={key}>{option}</option>
+                    <option key={key} value={optionValue ? option[optionValue]:option}>{optionLabel?option[optionLabel]:option}</option>
                 ))}
 
             </select>
