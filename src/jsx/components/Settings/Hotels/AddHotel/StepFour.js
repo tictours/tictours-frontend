@@ -19,11 +19,11 @@ const StepFour = () => {
                      />
                      <span className="mail-icon">
                         <i
-                           className="mdi mdi-google-plus"
+                           className="mdi mdi-google-drive"
                            aria-hidden="true"
                         ></i>
                      </span>
-                     <span className="mail-text">I'm using Gmail</span>
+                     <span className="mail-text">Document 1</span>
                   </label>
                </div>
             </div>
@@ -40,9 +40,12 @@ const StepFour = () => {
                         id="mailclient12"
                      />
                      <span className="mail-icon">
-                        <i className="mdi mdi-office" aria-hidden="true"></i>
+                        <i
+                           className="mdi mdi-google-drive"
+                           aria-hidden="true"
+                        ></i>
                      </span>
-                     <span className="mail-text">I'm using Office</span>
+                     <span className="mail-text">Document 2</span>
                   </label>
                </div>
             </div>
@@ -64,7 +67,7 @@ const StepFour = () => {
                            aria-hidden="true"
                         ></i>
                      </span>
-                     <span className="mail-text">I'm using Drive</span>
+                     <span className="mail-text">Document 3</span>
                   </label>
                </div>
             </div>
@@ -80,13 +83,13 @@ const StepFour = () => {
                         name="emailclient"
                         id="mailclient14"
                      />
-                     <span className="mail-icon">
+                      <span className="mail-icon">
                         <i
-                           className="fas fa-question-circle"
+                           className="mdi mdi-google-drive"
                            aria-hidden="true"
                         ></i>
                      </span>
-                     <span className="mail-text">Another Service</span>
+                     <span className="mail-text">Document 4</span>
                   </label>
                </div>
             </div>
