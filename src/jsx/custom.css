@@ -30,3 +30,8 @@
 .table .thead-table th {
   background-color: #E6EBEE;
   color: #000; }
+.amenity-count {
+  font-size: 10px;
+  color:#5ab5eb;
+  margin-bottom: 2px;
+}
