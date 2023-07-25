@@ -77,6 +77,10 @@ export const MenuList = [
             title: "User",
             to: "user",
           },
+          {
+            title: "User Role",
+            to: "user-role",
+          },
         ],
       },
     ]

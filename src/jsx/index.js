@@ -146,6 +146,7 @@ import Settings from "./components/Settings";
 import Hotels from "./components/Settings/Hotels/index";
 import AddHotel from "./components/Settings/Hotels/AddHotel";
 import User from "./components/Settings/UserManagement/User";
+import UserRole from "./components/Settings/UserManagement/Role";
 const Markup = () => {
 
   const allRoutes = [
@@ -215,7 +216,8 @@ const Markup = () => {
     {url:'settings', component: <Settings/>},
     {url:'hotels', component: <Hotels/>},
     {url:'add-hotel',component: <AddHotel/>},
-    {url:'user',component: <User/>}
+    {url:'user',component: <User/>},
+    {url:'user-role',component: <UserRole/>},
   ];
   
  
