@@ -88,6 +88,13 @@ const User = () =>{
          }
       }
     };
+
+    const sliderArr = [
+        {name:'Total',value:'8'},
+        {name:'Active',value:'6'},
+        {name:'Inactive',value:'2'},
+        {name:'Type',value:'6'},
+    ]
     return (
         <>
             <div className="row">
@@ -123,7 +130,7 @@ const User = () =>{
                         </div>
                     </div>
                     {/* swiper */}
-                        <InvoiceSlider title='User'/>
+                        <InvoiceSlider title='User' array={sliderArr}/>
                     {/* swiper end */}
 
                     <div className="row">
@@ -135,10 +142,10 @@ const User = () =>{
                                             {/* <th className="sorting_asc ">
                                                 <input type="checkbox" onClick={() => chackboxFun("all")} className="form-check-input" id="checkAll" required="" />
                                             </th> */}
-                                            <th>SL No</th>
-                                            <th>Username</th>
-                                            <th>Name / Email</th>
-                                            <th>Role</th>
+                                            <th className="text-center">SL No</th>
+                                            <th className="">Username</th>
+                                            <th className="">Name / Email</th>
+                                            <th className="">Role</th>
                                             <th className="text-center">Join Date</th>
                                             <th className="text-center">Expire Date</th>
                                             <th className="text-end">Status</th>
@@ -158,8 +165,8 @@ const User = () =>{
                                                         </div>
                                                     </div>
                                                 </td> */}
-                                                <td>{ind+1}</td>
-                                                <td>{`username ${ind+1}`}</td>
+                                                <td className="text-center">{ind+1}</td>
+                                                <td className="">{`username ${ind+1}`}</td>
                                                 <td className="whitesp-no p-0">
                                                     <div className="py-sm-3 py-1 ps-3">
                                                         <div >
@@ -168,11 +175,11 @@ const User = () =>{
                                                         </div>												
                                                     </div>
                                                 </td>
-                                                <td>Manager</td>
+                                                <td className="">Manager</td>
                                                 {/* <td>Dubai, Qatar</td>
                                                 <td className= "doller">Shanid CA</td> */}
-                                                <td className="whitesp-no fs-14 font-w400">June 1, 2022</td>
-                                                <td className="whitesp-no fs-14 font-w400">June 1, 2023</td>
+                                                <td className="whitesp-no fs-14 font-w400 text-center">June 1, 2022</td>
+                                                <td className="whitesp-no fs-14 font-w400 text-center">June 1, 2023</td>
                                                 <td className="text-end">
                                                     <span className={`btn light fs-14  btn-sm ${item.iconClass}`}>
                                                         {/* {item.icon2}
