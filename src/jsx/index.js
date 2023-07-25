@@ -39,7 +39,7 @@ import CourseDetails from './components/Dashboard/CourseDetails'
 
 /// File Manager
 import FileManager from './components/FileManager/FileManager';
-import User from './components/FileManager/User';
+import FUser from './components/FileManager/User';
 import HomeCalendar from './components/FileManager/HomeCalendar';
 import Activity from './components/FileManager/Activity';
 import ToDoList from './components/FileManager/ToDoList';
@@ -145,6 +145,7 @@ import Leads from "./components/Leads";
 import Settings from "./components/Settings";
 import Hotels from "./components/Settings/Hotels/index";
 import AddHotel from "./components/Settings/Hotels/AddHotel";
+import User from "./components/Settings/UserManagement/User";
 const Markup = () => {
 
   const allRoutes = [
@@ -156,7 +157,7 @@ const Markup = () => {
     { url: "kanban", component: <Kanban/>},
    
     //File Manager
-    {url:'user', component: <User/> },
+    {url:'users', component: <FUser/> },
     {url:'calendar', component: <HomeCalendar/> }, 
      //Cms
 	  { url: 'content', component: <Content/> },
@@ -213,7 +214,8 @@ const Markup = () => {
     // Settings
     {url:'settings', component: <Settings/>},
     {url:'hotels', component: <Hotels/>},
-    {url:'add-hotel',component: <AddHotel/>}
+    {url:'add-hotel',component: <AddHotel/>},
+    {url:'user',component: <User/>}
   ];
   
  

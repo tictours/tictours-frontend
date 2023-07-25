@@ -62,7 +62,24 @@ export const MenuList = [
     title: "Settings",
     classsChange: "mm-collapse",
     iconStyle: <i className="material-icons">settings</i>,
-    to: "settings",
+    // to: "settings",
+    content:[
+      {
+        title: 'Admin Settings',
+        to:'settings'
+      }
+      ,{
+        title: "User Management",
+        //to: './',
+        hasMenu: true,
+        content: [
+          {
+            title: "User",
+            to: "user",
+          },
+        ],
+      },
+    ]
   },
   ...(process.env.NODE_ENV === "development"
     ? [
