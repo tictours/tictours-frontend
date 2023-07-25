@@ -6,7 +6,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Autoplay } from "swiper";
 
-export default function InvoiceSlider({title='Enquiry'}) {	
+const arr = [
+    {name:'Total',value:'3,932'},
+    {name:'Confirmed',value:'2,654'},
+    {name:'Follow up',value:'1,932'},
+    {name:'Sent',value:'2,432'},
+]
+export default function InvoiceSlider({title='Enquiry',array=arr}) {	
 	return (
 		<>
 			<Swiper className="overflow-hidden" 			
@@ -60,11 +66,11 @@ export default function InvoiceSlider({title='Enquiry'}) {
                                         </svg>		
                                     </div>
                                     <div>
-                                        <h4 className="fs-15 font-w600 mb-0">Total<br/>{title}</h4>
+                                        <h4 className="fs-15 font-w600 mb-0">{array[0].name}<br/>{title}</h4>
                                     </div>
                                 </div>	
                                 <div  className="chart-num">
-                                    <h2 className="font-w600 mb-0 fs-28">3,932</h2>
+                                    <h2 className="font-w600 mb-0 fs-28">{array[0].value}</h2>
                                 </div>
                             </div>	
                         </div>
@@ -94,11 +100,11 @@ export default function InvoiceSlider({title='Enquiry'}) {
                                             
                                     </div>
                                     <div>
-                                        <h4 className="fs-15 font-w600 mb-0">Confirmed<br/> {title}</h4>
+                                        <h4 className="fs-15 font-w600 mb-0">{array[1].name}<br/> {title}</h4>
                                     </div>
                                 </div>	
                                 <div  className="chart-num">
-                                    <h2 className="font-w600 mb-0 fs-28">2,654</h2>
+                                    <h2 className="font-w600 mb-0 fs-28">{array[1].value}</h2>
                                 </div>
                             </div>	
                             
@@ -129,11 +135,11 @@ export default function InvoiceSlider({title='Enquiry'}) {
                                             
                                     </div>
                                     <div>
-                                        <h4 className="fs-15 font-w600 mb-0">Follow up<br/> {title}</h4>
+                                        <h4 className="fs-15 font-w600 mb-0">{array[2].name}<br/> {title}</h4>
                                     </div>
                                 </div>	
                                 <div  className="chart-num">
-                                    <h2 className="font-w600 mb-0 fs-28">1,001</h2>
+                                    <h2 className="font-w600 mb-0 fs-28">{array[2].value}</h2>
                                 </div>
                             </div>	
                         </div>
@@ -163,11 +169,11 @@ export default function InvoiceSlider({title='Enquiry'}) {
                                             
                                     </div>
                                     <div>
-                                        <h4 className="fs-15 font-w600 mb-0">{title}<br/> Sent</h4>
+                                        <h4 className="fs-15 font-w600 mb-0">{title}<br/>{array[3].name}</h4>
                                     </div>
                                 </div>	
                                 <div  className="chart-num">
-                                    <h2 className="font-w600 mb-0 fs-28">2,512</h2>
+                                    <h2 className="font-w600 mb-0 fs-28">{array[3].value}</h2>
                                 </div>
                             </div>	
                         </div>
