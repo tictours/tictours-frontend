@@ -17,7 +17,7 @@
 }
 
 /* form input */
-.modal .modal-content input.form-control,
+.modal .modal-content input.custom-input,
 .custom-input {
   border: none;
   border-bottom: 1px solid #d5dfe7;
