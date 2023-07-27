@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import CustomModal from '../../../../layouts/CustomModal';
-import { notify } from '../../../common/Notify';
+import  notify  from '../../../common/Notify';
 import { Formik } from 'formik';
 import InputField from '../../../common/InputField';
 import ReactSelect from '../../../common/ReactSelect';

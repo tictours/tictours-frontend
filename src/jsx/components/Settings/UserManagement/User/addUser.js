@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import DatePicker from "react-datepicker";
 import CustomModal from '../../../../layouts/CustomModal';
-import { notify } from '../../../common/Notify';
+import  notify  from '../../../common/Notify';
 import { Formik } from 'formik';
 import SelectField from '../../../common/SelectField';
 import InputField from '../../../common/InputField';

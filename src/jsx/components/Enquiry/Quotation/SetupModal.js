@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import CustomModal from '../../../layouts/CustomModal'
 import DatePicker from "react-datepicker";
-import { notify } from '../../common/Notify';
+import  notify  from '../../common/Notify';
 
 
 
@@ -14,7 +14,7 @@ function SetupModal({showModal,setShowModal}) {
     const formSubmit = (e) => {
         e.preventDefault()
         setShowModal(false)
-        notify('Completed notify')
+        notify({message:'Added Successfully'})
       }
   return (
     <>

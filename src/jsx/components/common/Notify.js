@@ -1,17 +1,41 @@
-import React from 'react'
+// notify.js
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export function notify({message,position='top-center'}) {
-    const notifier = () => {
-        toast.success(message, {
-          position: position,
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      };
-      return notifier;
+export default function notify({ type = 'success', message = 'success', position = 'top-center' }) {
+  const toastConfig = {
+    position: position,
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  }
+  switch (type) {
+    case 'success':
+      toast.success(message, toastConfig);
+      break;
+    case 'error':
+      toast.error(message, toastConfig);
+      break;
+    case 'info':
+      toast.info(message, toastConfig);
+      break;
+    case 'warning':
+      toast.warning(message, toastConfig);
+      break;
+    default:
+      toast(message, toastConfig);
+      break;
+  }
+  // toast.configure({
+  //     position: position,
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //   });
 }
