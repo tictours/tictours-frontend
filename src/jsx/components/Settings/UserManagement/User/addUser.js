@@ -5,117 +5,184 @@ import { notify } from '../../../common/Notify';
 import { Formik } from 'formik';
 import SelectField from '../../../common/SelectField';
 import InputField from '../../../common/InputField';
+import ReactSelect from '../../../common/ReactSelect';
 
 
 
-function AddUser({showModal,setShowModal}) {
-    const [formStartDate, setFormStartDate] = useState(new Date());
-    const [formEndDate, setFormEndDate] = useState(new Date());
-    const [formValidityDate, setFormValidityDate] = useState(new Date());
+function AddUser({ showModal, setShowModal }) {
+  const [formStartDate, setFormStartDate] = useState(new Date());
+  const [formEndDate, setFormEndDate] = useState(new Date());
+  const [formValidityDate, setFormValidityDate] = useState(new Date());
 
 
-    const formSubmit = (e) => {
-        e.preventDefault()
-        setShowModal(false)
-        notify('Completed notify')
-      }
-      const initialValues = {}
-      const marketTypeOptions = ["Type 1", "Type 2", "Type 3"];
+  const formSubmit = (e) => {
+    e.preventDefault()
+    setShowModal(false)
+    notify('Completed notify')
+  }
+  const initialValues = {}
+  const marketTypeOptions = ["Type 1", "Type 2", "Type 3"];
+  const countryOptions = [
+    { label: 'Country 1', value: 'country1' },
+    { label: 'Country 2', value: 'country2' },
+    { label: 'Country 3', value: 'country3' },
+    { label: 'Country 4', value: 'country4' },
+    { label: 'Country 5', value: 'country5' },
+  ]
+  const languageOptions = [
+    { label: 'Language 1', value: 'language1' },
+    { label: 'Language 2', value: 'language2' },
+    { label: 'Language 3', value: 'language3' },
+    { label: 'Language 4', value: 'language4' },
+    { label: 'Language 5', value: 'language5' },
+  ]
   return (
     <>
-    <CustomModal
-            showModal={showModal}
-            title={"Add User"}
-            handleModalClose={() => setShowModal(false)}
-          >
-             <Formik
-        initialValues={initialValues}
-        // validationSchema={loginSchema}
-        onSubmit={(values, { setSubmitting }) => {
-        //   setTimeout(() => {
-        //     alert(JSON.stringify(values, null, 2));
-        //     setSubmitting(false);
-        //   }, 400);
-        }}
+      <CustomModal
+        showModal={showModal}
+        title={"Add User"}
+        handleModalClose={() => setShowModal(false)}
       >
-        {({
-          values,
-          errors,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting,
-          setFieldValue,
-        }) => (
-          <form onSubmit={handleSubmit}>
-            <div className="row">
-            <div className="col-md-6  mb-2">
-                <div className="form-group mb-3">
+        <Formik
+          initialValues={initialValues}
+          // validationSchema={loginSchema}
+          onSubmit={(values, { setSubmitting }) => {
+            //   setTimeout(() => {
+            //     alert(JSON.stringify(values, null, 2));
+            //     setSubmitting(false);
+            //   }, 400);
+          }}
+        >
+          {({
+            values,
+            errors,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+            setFieldValue,
+          }) => (
+            <form onSubmit={handleSubmit}>
+              <div className="row">
+                <div className="col-md-6  mb-2">
                   <InputField
-                    label="Name"
-                    name="singleBed"
+                    label="User Name"
+                    name="username"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     values={values}
                   />
                 </div>
-              </div>
-              <div className="col-md-6  mb-2">
-                <div className="form-group mb-3">
+                <div className="col-md-6  mb-2">
+                  <InputField
+                    label="Password"
+                    name="password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    values={values}
+                  />
+                </div>
+                <div className="col-md-6  mb-2">
+                  <InputField
+                    label="First Name"
+                    name="firstName"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    values={values}
+                  />
+                </div>
+                <div className="col-md-6  mb-2">
+                  <InputField
+                    label="Second Name"
+                    name="secondName"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    values={values}
+                  />
+                </div>
+                <div className="col-md-6  mb-2">
                   <InputField
                     label="Phone"
-                    name="singleBed"
+                    name="phone"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     values={values}
                   />
                 </div>
-              </div>
-              <div className="col-md-6  mb-2">
-                <div className="form-group mb-3">
+                <div className="col-md-6  mb-2">
                   <InputField
                     label="Email"
-                    name="singleBed"
+                    name="email"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     values={values}
                   />
                 </div>
+                <div className="col-md-6  mb-2">
+                  <div className="form-group mb-3">
+                    <label className="text-label">Address</label>
+                    <textarea
+                      className="form-control"
+                      name='address'
+                      value={values.address}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    ></textarea>
+                  </div>
+                </div>
+                <div className="col-md-6 mb-2">
+                  <SelectField
+                    label="Role Type"
+                    name="marketType"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    values={values}
+                    options={marketTypeOptions}
+                  />
+                </div>
+                <div className="col-md-6 mb-2">
+                  <ReactSelect
+                    label='Country'
+                    options={countryOptions}
+                    onChange={(selected) =>
+                      setFieldValue("mealType", selected)
+                    }
+                  />
+                </div>
+                <div className="col-md-6 mb-2">
+                  <ReactSelect
+                    label='Language'
+                    options={languageOptions}
+                    onChange={(selected) =>
+                      setFieldValue("mealType", selected)
+                    }
+                  />
+                </div>
+
+                <div className="col-md-6 m-b30">
+                  <label>From Date</label>
+                  <DatePicker
+                    className="form-control"
+                    selected={values.roomStartDate}
+                    onChange={(date) => setFieldValue("roomStartDate", date)}
+                  />
+                </div>
+                <div className="col-md-6 m-b30">
+                  <label>To Date</label>
+                  <DatePicker
+                    className="form-control"
+                    selected={values.roomEndDate}
+                    onChange={(date) => setFieldValue("roomEndDate", date)}
+                  />
+                </div>
               </div>
-              <div className="col-md-6 mb-2">
-                <SelectField
-                  label="Role Type"
-                  name="marketType"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  values={values}
-                  options={marketTypeOptions}
-                />
-              </div>
-              <div className="col-md-6 m-b30">
-                <label>From Date</label>
-                <DatePicker
-                  className="form-control"
-                  selected={values.roomStartDate}
-                  onChange={(date) => setFieldValue("roomStartDate", date)}
-                />
-              </div>
-              <div className="col-md-6 m-b30">
-                <label>To Date</label>
-                <DatePicker
-                  className="form-control"
-                  selected={values.roomEndDate}
-                  onChange={(date) => setFieldValue("roomEndDate", date)}
-                />
-              </div>
-            </div>
-            <button type="submit" className="btn btn-primary mt-4">
-                   Add User
-                  </button>
-          </form>
-        )}
-      </Formik>
-          </CustomModal>
+              <button type="submit" className="btn btn-primary mt-4">
+                Add User
+              </button>
+            </form>
+          )}
+        </Formik>
+      </CustomModal>
     </>
   )
 }
