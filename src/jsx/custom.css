@@ -35,3 +35,15 @@
   color:#5ab5eb;
   margin-bottom: 2px;
 }
+.package {
+  min-height: 50vh;
+}
+.day-circle{
+  /* padding: 1rem; */
+  width: 1.6rem;
+  height: 1.6rem;
+}
+.schedule-box{
+  background-color: #ebf2ff;
+  height: 100%;
+}

@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import  notify  from '../../common/Notify';
 import SetupForm from './SetupForm';
 import { Formik } from 'formik';
+import PackageForm from './PackageForm';
 
 
 
@@ -11,6 +12,7 @@ function SetupModal({showModal,setShowModal}) {
     const [formStartDate, setFormStartDate] = useState(new Date());
     const [formEndDate, setFormEndDate] = useState(new Date());
     const [formValidityDate, setFormValidityDate] = useState(new Date());
+    const [formComponent, setFormComponent] = useState('setupFormm');
 
 
     const formSubmit = (e) => {
@@ -38,16 +40,13 @@ function SetupModal({showModal,setShowModal}) {
             //   }, 400);
           }}
         >
-          {({
-            values,
-            errors,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-            setFieldValue,
-          }) => (
-            <SetupForm />
+          {(formik) => (
+            <>
+            {formComponent === 'setupForm' ?
+            <SetupForm formik={formik} setFormComponent={setFormComponent} /> :
+            <PackageForm formik={formik} setFormComponent={setFormComponent}/>         
+          }
+          </>
           )}
           </Formik>
               </div>

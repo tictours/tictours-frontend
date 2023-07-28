@@ -1,10 +1,10 @@
 import React from 'react'
 
 function SelectField(props) {
-    const { label, name, values, options, optionValue,optionLabel,...restProps } = props
+    const { formClass,label, name, values, options, optionValue,optionLabel,...restProps } = props
     return (
-        <div className="form-group mb-3">
-            <label className="text-label">{label}</label>
+        <div className={`form-group mb-3 ${formClass}`}>
+            {!!label &&<label className="text-label">{label}</label>}
             <select
                 {...restProps}
                 // defaultValue={"option"}

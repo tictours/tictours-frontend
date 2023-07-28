@@ -2,11 +2,26 @@ import React from 'react'
 import DatePicker from "react-datepicker";
 
 
-const SetupForm = () => {
+const SetupForm = ({formik,setFormComponent}) => {
+  const {
+    values,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isSubmitting,
+    setFieldValue,
+  } = formik
+
+  const formSubmit = (e) => {
+    e.preventDefault()
+    setFormComponent('packageForm')
+    console.log('submited')
+  }
   return (
     <>
     <form 
-    // onSubmit={formSubmit}
+    onSubmit={formSubmit}
     >
                   <div className="row">
                     <div className="form-group mb-3 col-md-4">
