@@ -18,6 +18,8 @@ const PackageForm = ({formik,setFormComponent}) => {
   const dayList = [1,2,3,4]
   const scheduleData = [1,2,3]
   const destinationOptions = ["Destination 1", "Destination 2"];
+  const categoryOptions = ['Hotel','Activity','Transfer']
+  const dataList = [1,2,3,4]
   return (
     <>
     <form 
@@ -35,7 +37,7 @@ const PackageForm = ({formik,setFormComponent}) => {
                             <div className='col-md-9'>
                                 <p className='text-center mb-1'>26-5-2023</p>
                                     <SelectField
-                                        name="marketType"
+                                        name={`${key+1}marketType`}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         values={values}
@@ -46,15 +48,15 @@ const PackageForm = ({formik,setFormComponent}) => {
 
                         ))}
                     </div>
-                    <div className='col-6'>
+                    <div className='col-5 px-1'>
                         <div className='schedule-box'>
                             <div className='p-3'>
                                 <h6>Day 1 - 21/02/2023</h6>
                             </div>
                             <div className=''>
                             {scheduleData.map((item, ind)=>(
-                                    <div className="" key={ind}>
-                                        <div className="card contact_list ">
+                                    <div className="d-flex justify-content-center" key={ind}>
+                                        <div className="card contact_list schedule-card">
                                             <div className="card-body">
                                                 <div className="user-content">
                                                     <div className="user-info">
@@ -62,9 +64,21 @@ const PackageForm = ({formik,setFormComponent}) => {
                                                             <img src={Img1} alt="" />
                                                         </div>
                                                         <div className="user-details">
-                                                            <h4 className="user-name">{item.title}</h4>
-                                                            <span className="number">+1234567890</span>
-                                                            <span className="mail">jordan@mail.com</span> 
+                                                            <h4 className="user-name">Hotel: Marriott</h4>
+                                                            <span className="number">10am to 2pm</span>
+                                                                    <span className="mail">Room type : Deluxe</span>
+                                                                    <span className="mail">No of guest : 02</span>
+                                                            <div className='d-flex justify-content-between mt-1'>
+                                                                <div className='me-1'>
+                                                                <span className="mail">Check in Date & Time</span>
+                                                                <span className="mail">26-05-2023 11am</span>
+                                                                </div>
+                                                                <div>
+                                                                <span className="mail">Check out Date & Time</span>
+                                                                <span className="mail">27-05-2023 11am</span>
+                                                                </div>
+                                                            </div>
+                                                            {/* <span className="mail">jordan@mail.com</span>  */}
                                                         </div>
                                                     </div>
                                                     <DropDownBlog  />
@@ -100,7 +114,45 @@ const PackageForm = ({formik,setFormComponent}) => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-3 bg-secondary'></div>
+                    <div className='col-4'>
+                        <div className='d-flex'>
+                        <div className="input-group search-area flex-1">
+					<input type="text" 
+						className={`form-control ${false ? "active" : ""}`}
+						placeholder="Search here..." 
+					/>
+					{/* <span className="input-group-text">
+						<Link to={"#"}>
+							<svg width="15" height="15" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M17.5605 15.4395L13.7527 11.6317C14.5395 10.446 15 9.02625 15 7.5C15 3.3645 11.6355 0 7.5 0C3.3645 0 0 3.3645 0 7.5C0 11.6355 3.3645 15 7.5 15C9.02625 15 10.446 14.5395 11.6317 13.7527L15.4395 17.5605C16.0245 18.1462 16.9755 18.1462 17.5605 17.5605C18.1462 16.9747 18.1462 16.0252 17.5605 15.4395V15.4395ZM2.25 7.5C2.25 4.605 4.605 2.25 7.5 2.25C10.395 2.25 12.75 4.605 12.75 7.5C12.75 10.395 10.395 12.75 7.5 12.75C4.605 12.75 2.25 10.395 2.25 7.5V7.5Z" fill="#01A3FF"/>
+							</svg>
+						</Link>
+					</span> */}
+				</div>
+                <div className='flex-1 ms-2'>
+                <SelectField
+                   name={`categoryOptions`}
+                   onChange={handleChange}
+                   onBlur={handleBlur}
+                   values={values}
+                   options={categoryOptions}
+                                    />
+                </div>	
+                        </div>
+                        <div>
+                            {dataList.map((list,key)=>(
+                                <div className='d-flex'>
+                                    <div className='d-flex align-item-center custom-img-container'>
+                                     <img src={Img1} alt="" className='custom-img'/>
+                                     <h6>{`${values.categoryOptions}${key+1}`}</h6>
+                                    </div>
+                                    <div>
+                                        
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                    </div>
                   <button type="submit" className="btn btn-primary mt-4">
                     Create itinerary

@@ -47,3 +47,29 @@
   background-color: #ebf2ff;
   height: 100%;
 }
+.setup-modal{
+  max-width: 1000px;
+}
+.schedule-card{
+  margin-bottom: 0;
+  background-color: transparent;
+  border-radius: 0;
+  border-top: 2px solid #fff;
+  width: 96%;
+}
+.schedule-card .card-body{
+  padding: 1rem;
+}
+.flex-1{
+  flex:1
+}
+.custom-img-container{
+  width: 3rem;
+  height: 3rem;
+}
+.custom-img-container img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}

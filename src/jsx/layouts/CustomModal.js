@@ -1,13 +1,13 @@
 import React from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
-const CustomModal = ({ showModal, handleModalClose, title, children }) => {
+const CustomModal = ({ showModal, handleModalClose, title, children, modalClass='' }) => {
   return (
     <>
       <Modal
         show={showModal}
         onHide={handleModalClose}
-        dialogClassName="custom-modal"
+        dialogClassName={`custom-modal ${modalClass}`}
         // centered
       >
         <Modal.Header closeButton>
