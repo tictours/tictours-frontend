@@ -73,3 +73,25 @@
   object-fit: cover;
   border-radius: 50%;
 }
+.insert-modal{
+  max-width: 800px;
+}
+.itinery-card{
+  width: 24%;
+}
+.itinery-img{
+  height: 50%;
+  width: 100%;
+  /* border-radius: 1rem; */
+  border-radius: 1rem 1rem 0 0;
+}
+.itinery-card .details{
+  border: 1px solid #eee;
+  border-radius: 0 0 1rem 1rem;
+}
+.itinery-card .details button{
+  padding: 0;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+}

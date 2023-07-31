@@ -7,6 +7,7 @@ import { Badge, Button, Form } from 'react-bootstrap';
 import CustomModal from '../../../layouts/CustomModal';
 import { ToastContainer, toast } from 'react-toastify';
 import SetupModal from './SetupModal';
+import InsertModal from './InsertModal';
 
 const options = [
     //{ value: '1', label: 'Select Status' },
@@ -39,6 +40,7 @@ const Quotation = () =>{
     const [open, setOpen] = useState(false);
     const [open2, setOpen2] = useState(true);
     const [showSetupModal, setShowSetupModal] = useState(false);
+    const [showInsertModal, setShowInsertModal] = useState(false);
     
     const [data, setData] = useState(
 		document.querySelectorAll("#content_wrapper tbody tr")
@@ -163,9 +165,9 @@ const Quotation = () =>{
               </div>
               <div className="d-flex">
                 <div className="">
-                  <Link to={"/combine"} className="btn btn-primary">
+                  <button className="btn btn-primary" onClick={()=>setShowInsertModal(true)}>
                     Insert itinerary
-                  </Link>
+                  </button>
                 </div>
                 <div className="ms-2">
                   <button className="btn btn-primary" onClick={()=>setShowSetupModal(true)}>
@@ -314,6 +316,7 @@ const Quotation = () =>{
           </div>
           
          <SetupModal showModal={showSetupModal} setShowModal={setShowSetupModal}/>
+         <InsertModal showModal={showInsertModal} setShowModal={setShowInsertModal}/>
         </div>
       </>
     );
