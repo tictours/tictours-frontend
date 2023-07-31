@@ -12,7 +12,7 @@ function SetupModal({showModal,setShowModal}) {
     const [formStartDate, setFormStartDate] = useState(new Date());
     const [formEndDate, setFormEndDate] = useState(new Date());
     const [formValidityDate, setFormValidityDate] = useState(new Date());
-    const [formComponent, setFormComponent] = useState('setupFormm');
+    const [formComponent, setFormComponent] = useState('setupForm');
 
 
     const formSubmit = (e) => {
@@ -20,7 +20,7 @@ function SetupModal({showModal,setShowModal}) {
         setShowModal(false)
         notify({message:'Added Successfully'})
       }
-      const initialValues = {}
+      const initialValues = {categoryOptions:'Hotel'}
   return (
     <>
     <CustomModal
@@ -44,8 +44,8 @@ function SetupModal({showModal,setShowModal}) {
           {(formik) => (
             <>
             {formComponent === 'setupForm' ?
-            <SetupForm formik={formik} setFormComponent={setFormComponent} /> :
-            <PackageForm formik={formik} setFormComponent={setFormComponent}/>         
+            <SetupForm formik={formik} setFormComponent={setFormComponent} setShowModal={setShowModal} /> :
+            <PackageForm formik={formik} setFormComponent={setFormComponent} setShowModal={setShowModal} />         
           }
           </>
           )}

@@ -3,9 +3,11 @@ import DatePicker from "react-datepicker";
 import SelectField from '../../common/SelectField';
 import Img1 from '../../../../images/course/hotel-1.jpg'
 import DropDownBlog from '../../Dashboard/DropDownBlog';
+import { useNavigate } from 'react-router-dom';
+import notify from '../../common/Notify';
 
 
-const PackageForm = ({formik,setFormComponent}) => {
+const PackageForm = ({formik,setFormComponent,setShowModal}) => {
   const {
     values,
     errors,
@@ -15,11 +17,23 @@ const PackageForm = ({formik,setFormComponent}) => {
     isSubmitting,
     setFieldValue,
   } = formik
+  const navigation = useNavigate()
   const dayList = [1,2,3,4]
-  const scheduleData = [1,2,3]
+  const scheduleData = [1,2]
   const destinationOptions = ["Destination 1", "Destination 2"];
   const categoryOptions = ['Hotel','Activity','Transfer']
   const dataList = [1,2,3,4]
+  console.log('val',values)
+  const handleAddCategory = ()=>{
+    if(values.categoryOptions === 'Hotel'){
+        navigation('/add-hotel')
+    }
+  }
+  const formSubmit = () => {
+    setShowModal(false)
+    setFormComponent('setupForm')
+    notify({message:'Itinary Created Successfully'})
+  }
   return (
     <>
     <form 
@@ -139,22 +153,29 @@ const PackageForm = ({formik,setFormComponent}) => {
                                     />
                 </div>	
                         </div>
-                        <div>
+                        <div className='mt-4'>
                             {dataList.map((list,key)=>(
-                                <div className='d-flex'>
-                                    <div className='d-flex align-item-center custom-img-container'>
+                                <div className='d-flex justify-content-between mb-3 ps-2' key={key}>
+                                    <div className='d-flex align-item-center'>
+                                        <div className='custom-img-container'>
                                      <img src={Img1} alt="" className='custom-img'/>
-                                     <h6>{`${values.categoryOptions}${key+1}`}</h6>
+                                        </div>
+                                     <h6 className='m-2'>{`${values.categoryOptions} ${key+1}`}</h6>
                                     </div>
                                     <div>
-                                        
+                                        <button type='button' className='btn btn-white p-0 mt-2'>
+                                        <i class="fa-solid fa-plus text-primary"></i>
+                                        </button>
                                     </div>
                                 </div>
                             ))}
+                            <div>
+                                <button type="button" className="btn btn-primary mt-5" onClick={handleAddCategory}>{`Add ${values.categoryOptions}`}</button>
+                            </div>
                         </div>
                     </div>
                    </div>
-                  <button type="submit" className="btn btn-primary mt-4">
+                  <button type="button" className="btn btn-primary mt-4" onClick={formSubmit}>
                     Create itinerary
                   </button>
                 </form>
