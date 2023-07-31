@@ -10,13 +10,6 @@ import ReactSelect from '../../../common/ReactSelect';
 function AddRole({ showModal, setShowModal }) {
   const [formStartDate, setFormStartDate] = useState(new Date());
 
-
-
-  const formSubmit = (e) => {
-    e.preventDefault()
-    setShowModal(false)
-    notify('Completed notify')
-  }
   const initialValues = {}
   const permissionOptions = [
     { label: 'Read', value: 'read' },
@@ -36,10 +29,8 @@ function AddRole({ showModal, setShowModal }) {
           initialValues={initialValues}
           // validationSchema={loginSchema}
           onSubmit={(values, { setSubmitting }) => {
-            //   setTimeout(() => {
-            //     alert(JSON.stringify(values, null, 2));
-            //     setSubmitting(false);
-            //   }, 400);
+            setShowModal(false)
+            notify({message:'User Role Added Successfully'})
           }}
         >
           {({

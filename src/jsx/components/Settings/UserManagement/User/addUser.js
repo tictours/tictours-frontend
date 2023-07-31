@@ -10,16 +10,9 @@ import ReactSelect from '../../../common/ReactSelect';
 
 
 function AddUser({ showModal, setShowModal }) {
-  const [formStartDate, setFormStartDate] = useState(new Date());
-  const [formEndDate, setFormEndDate] = useState(new Date());
-  const [formValidityDate, setFormValidityDate] = useState(new Date());
 
 
-  const formSubmit = (e) => {
-    e.preventDefault()
-    setShowModal(false)
-    notify('Completed notify')
-  }
+
   const initialValues = {}
   const marketTypeOptions = ["Type 1", "Type 2", "Type 3"];
   const countryOptions = [
@@ -47,10 +40,8 @@ function AddUser({ showModal, setShowModal }) {
           initialValues={initialValues}
           // validationSchema={loginSchema}
           onSubmit={(values, { setSubmitting }) => {
-            //   setTimeout(() => {
-            //     alert(JSON.stringify(values, null, 2));
-            //     setSubmitting(false);
-            //   }, 400);
+            setShowModal(false)
+            notify({message:'User Added Successfully'})
           }}
         >
           {({
