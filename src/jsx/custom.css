@@ -95,3 +95,13 @@
   width: 1.5rem;
   height: 1.5rem;
 }
+.custom-tr td{
+  border-top:1px solid red
+}
+.package-table thead th{
+  color:#000!important
+}
+.package-table td input{
+  width: 5rem;
+  padding: .5rem 0 .5rem 0.5rem;
+}
