@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import CustomModal from '../../../layouts/CustomModal'
-import DatePicker from "react-datepicker";
 import  notify  from '../../common/Notify';
 import SetupForm from './SetupForm';
 import { Formik } from 'formik';
@@ -9,9 +8,7 @@ import PackageForm from './PackageForm';
 
 
 function SetupModal({showModal,setShowModal}) {
-    const [formStartDate, setFormStartDate] = useState(new Date());
-    const [formEndDate, setFormEndDate] = useState(new Date());
-    const [formValidityDate, setFormValidityDate] = useState(new Date());
+    const [formStartDate, setFormStartDate] = useState(new Date())
     const [formComponent, setFormComponent] = useState('setupForm');
 
 
