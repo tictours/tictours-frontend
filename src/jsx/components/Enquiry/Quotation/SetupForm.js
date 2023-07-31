@@ -16,7 +16,7 @@ const SetupForm = ({formik,setFormComponent}) => {
   const formSubmit = (e) => {
     e.preventDefault()
     setFormComponent('packageForm')
-    console.log('submited')
+    console.log('submited',values)
   }
   return (
     <>
@@ -35,15 +35,15 @@ const SetupForm = ({formik,setFormComponent}) => {
                     <div className="form-group mb-3 col-md-4">
                       <label>Start Date</label>
                       <DatePicker  className="form-control custom-input"
-                        // selected={formStartDate}
-                        // onChange={(date) => setFormStartDate(date)}
+                        selected={values.formStartDate}
+                        onChange={(date) => setFieldValue('formStartDate',date)}
                         />
                     </div>
                     <div className="form-group mb-3 col-md-4">
                       <label>End Date</label>
                       <DatePicker  className="form-control custom-input"
-                        // selected={formEndDate}
-                        // onChange={(date) => setFormEndDate(date)}
+                        selected={values.formEndDate}
+                        onChange={(date) => setFieldValue('formEndDate',date)}
                         />
                     </div>
                     <div className="form-group mb-3 col-md-4">
@@ -80,8 +80,8 @@ const SetupForm = ({formik,setFormComponent}) => {
                     <div className="form-group mb-3 col-md-4">
                       <label>Validity</label>
                       <DatePicker  className="form-control custom-input"
-                        // selected={formValidityDate}
-                        // onChange={(date) => setFormValidityDate(date)}
+                        selected={values.formValidityDate}
+                        onChange={(date) => setFieldValue('formValidityDate',date)}
                         />
                     </div>
                     </div>

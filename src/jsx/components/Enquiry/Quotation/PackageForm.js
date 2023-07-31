@@ -23,7 +23,19 @@ const PackageForm = ({formik,setFormComponent,setShowModal}) => {
   const destinationOptions = ["Destination 1", "Destination 2"];
   const categoryOptions = ['Hotel','Activity','Transfer']
   const dataList = [1,2,3,4]
-  console.log('val',values)
+
+   // Step 1: Parse the date strings into Date objects
+   const startDate = new Date(values.formStartDate);
+   const endDate = new Date(values.formEndDate);
+ 
+   // Step 2 and Step 3: Generate all dates between the two dates and store in an array
+   const datesArray = [];
+   let currentDate = startDate;
+   while (currentDate <= endDate) {
+     datesArray.push(new Date(currentDate));
+     currentDate.setDate(currentDate.getDate() + 1);
+   }
+
   const handleAddCategory = ()=>{
     if(values.categoryOptions === 'Hotel'){
         navigation('/add-hotel')
@@ -39,17 +51,18 @@ const PackageForm = ({formik,setFormComponent,setShowModal}) => {
     <form 
     // onSubmit={formSubmit}
     >
+        {console.log('ddd',datesArray[0])}
                   <div className="row package">
                     <div className='col-3'>
-                        {dayList.map((list,key)=>(
+                        {datesArray?.map((date,key)=>(
                         <div className='row border-bottom' key={key}>
                             <div className='col-md-3 align-self-center'>
                             <div className=' day-circle bg-primary d-flex align-items-center justify-content-center m-0 rounded-circle'>
-                                <h6 className='text-white m-0'>{list}</h6>
+                                <h6 className='text-white m-0'>{key+1}</h6>
                             </div>
                             </div>
                             <div className='col-md-9'>
-                                <p className='text-center mb-1'>26-5-2023</p>
+                                <p className='text-center mb-1'>{date.toLocaleDateString('en-GB')}</p>
                                     <SelectField
                                         name={`${key+1}marketType`}
                                         onChange={handleChange}

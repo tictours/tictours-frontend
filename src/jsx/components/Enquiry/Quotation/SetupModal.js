@@ -26,7 +26,11 @@ function SetupModal({showModal,setShowModal}) {
     <CustomModal
             showModal={showModal}
             title={"Create itinerary"}
-            handleModalClose={() => setShowModal(false)}
+            handleModalClose={() => {
+              setShowModal(false)
+              setFormComponent('setupForm')
+            }
+            }
             modalClass={`${formComponent ?'setup-modal':''}`}
           >
             <div className="card-body">
