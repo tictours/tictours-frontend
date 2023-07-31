@@ -4,8 +4,6 @@ import Select from 'react-select';
 import Collapse from 'react-bootstrap/Collapse';
 import DatePicker from "react-datepicker";
 import { Badge, Button, Form } from 'react-bootstrap';
-import CustomModal from '../../../layouts/CustomModal';
-import { ToastContainer, toast } from 'react-toastify';
 import SetupModal from './SetupModal';
 import InsertModal from './InsertModal';
 import notify from '../../common/Notify';
@@ -117,7 +115,7 @@ const Quotation = () =>{
     return (
       <>
         <div className="row">
-        <ToastContainer />
+        {/* <ToastContainer /> */}
           <div className="col-xl-12">
             <div className="filter cm-content-box box-primary">
               <div className="content-title">

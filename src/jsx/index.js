@@ -147,6 +147,7 @@ import Hotels from "./components/Settings/Hotels/index";
 import AddHotel from "./components/Settings/Hotels/AddHotel";
 import User from "./components/Settings/UserManagement/User";
 import UserRole from "./components/Settings/UserManagement/Role";
+import { ToastContainer } from "react-toastify";
 const Markup = () => {
 
   const allRoutes = [
@@ -399,6 +400,7 @@ function Layout7(){
   return(
     <div id="main-wrapper" className={`show ${sidebariconHover ? "iconhover-toggle": ""} ${ menuToggle ? "menu-toggle" : ""}`}>   
         <Nav />
+        <ToastContainer/>
         <div className="content-body" style={{ minHeight: window.screen.height + 20 }}>
           <div className="container-fluid">     
               <Outlet />

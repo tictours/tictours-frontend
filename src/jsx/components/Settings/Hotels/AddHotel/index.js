@@ -7,9 +7,16 @@ import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 import StepOne from "./StepOne";
 import PageTitle from "../../../../layouts/PageTitle";
+import { useNavigate } from "react-router-dom";
+import notify from "../../../common/Notify";
 
 const AddHotel = () => {
 	const [goSteps, setGoSteps] = useState(0);
+	const navigate = useNavigate()
+	const handleSubmit = () => {
+		notify({message:'Hotel Added Successfully'})
+		navigate('/hotels')
+	}
 	
 	return (
 		<Fragment>
@@ -61,7 +68,7 @@ const AddHotel = () => {
 									<StepFour />
 									<div className="text-end toolbar toolbar-bottom p-2">
 										<button  className="btn btn-secondary sw-btn-prev me-1" onClick={() => setGoSteps(2)}>Prev</button>
-										<button className="btn btn-primary sw-btn-next ms-1"  onClick={() => setGoSteps(4)}>Submit</button>
+										<button className="btn btn-primary sw-btn-next ms-1"  onClick={() => handleSubmit()}>Submit</button>
 									</div>	
 								</>	
 							  )}
