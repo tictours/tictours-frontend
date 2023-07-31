@@ -10,6 +10,7 @@ import PackageForm from './PackageForm';
 function SetupModal({showModal,setShowModal}) {
     const [formStartDate, setFormStartDate] = useState(new Date())
     const [formComponent, setFormComponent] = useState('setupForm');
+    const date = new Date()
 
 
     const formSubmit = (e) => {
@@ -17,7 +18,7 @@ function SetupModal({showModal,setShowModal}) {
         setShowModal(false)
         notify({message:'Added Successfully'})
       }
-      const initialValues = {categoryOptions:'Hotel'}
+      const initialValues = {categoryOptions:'Hotel',formStartDate:date,formEndDate:date,formValidityDate:date,}
   return (
     <>
     <CustomModal
