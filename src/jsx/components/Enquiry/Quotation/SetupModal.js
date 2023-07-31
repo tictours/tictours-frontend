@@ -4,6 +4,7 @@ import  notify  from '../../common/Notify';
 import SetupForm from './SetupForm';
 import { Formik } from 'formik';
 import PackageForm from './PackageForm';
+import PaymentForm from './PaymentForm';
 
 
 
@@ -47,7 +48,9 @@ function SetupModal({showModal,setShowModal}) {
             <>
             {formComponent === 'setupForm' ?
             <SetupForm formik={formik} setFormComponent={setFormComponent} setShowModal={setShowModal} /> :
-            <PackageForm formik={formik} setFormComponent={setFormComponent} setShowModal={setShowModal} />         
+            formComponent === 'packageForm' ?
+            <PackageForm formik={formik} setFormComponent={setFormComponent} setShowModal={setShowModal} />:
+            <PaymentForm formik={formik} setFormComponent={setFormComponent} setShowModal={setShowModal} />        
           }
           </>
           )}

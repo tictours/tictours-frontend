@@ -42,16 +42,15 @@ const PackageForm = ({formik,setFormComponent,setShowModal}) => {
     }
   }
   const formSubmit = () => {
-    setShowModal(false)
-    setFormComponent('setupForm')
-    notify({message:'Itinary Created Successfully'})
+    // setShowModal(false)
+    setFormComponent('paymentForm')
+    // notify({message:'Itinary Created Successfully'})
   }
   return (
     <>
     <form 
     // onSubmit={formSubmit}
     >
-        {console.log('ddd',datesArray[0])}
                   <div className="row package">
                     <div className='col-3'>
                         {datesArray?.map((date,key)=>(
@@ -91,7 +90,7 @@ const PackageForm = ({formik,setFormComponent,setShowModal}) => {
                                                             <img src={Img1} alt="" />
                                                         </div>
                                                         <div className="user-details">
-                                                            <h4 className="user-name">Hotel: Marriott</h4>
+                                                            <h6 className="user-name">Hotel: Marriott</h6>
                                                             <span className="number">10am to 2pm</span>
                                                                     <span className="mail">Room type : Deluxe</span>
                                                                     <span className="mail">No of guest : 02</span>
@@ -145,7 +144,7 @@ const PackageForm = ({formik,setFormComponent,setShowModal}) => {
                         <div className='d-flex'>
                         <div className="input-group search-area flex-1">
 					<input type="text" 
-						className={`form-control ${false ? "active" : ""}`}
+						className={`form-control ${false ? "active" : ""} border-0`}
 						placeholder="Search here..." 
 					/>
 					{/* <span className="input-group-text">
@@ -189,7 +188,7 @@ const PackageForm = ({formik,setFormComponent,setShowModal}) => {
                     </div>
                    </div>
                   <button type="button" className="btn btn-primary mt-4" onClick={formSubmit}>
-                    Create itinerary
+                    Schedule itinerary
                   </button>
                 </form>
     </>

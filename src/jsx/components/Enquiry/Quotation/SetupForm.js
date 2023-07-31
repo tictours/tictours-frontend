@@ -113,7 +113,7 @@ const SetupForm = ({formik,setFormComponent}) => {
                     </div>
                   </div> */}
                   <button type="submit" className="btn btn-primary">
-                    Create itinerary
+                    Setup itinerary
                   </button>
                 </form>
     </>
