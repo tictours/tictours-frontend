@@ -8,6 +8,7 @@ import CustomModal from '../../../layouts/CustomModal';
 import { ToastContainer, toast } from 'react-toastify';
 import SetupModal from './SetupModal';
 import InsertModal from './InsertModal';
+import notify from '../../common/Notify';
 
 const options = [
     //{ value: '1', label: 'Select Status' },
@@ -87,6 +88,31 @@ const Quotation = () =>{
           return oldValues.filter((_, i) => i !== ind)
         })
     }
+  const chackbox = document.querySelectorAll(".sorting_1 input");
+  const motherChackBox = document.querySelector(".sorting_asc input");
+  const chackboxFun = (type) => {
+    for (let i = 0; i < chackbox.length; i++) {
+      const element = chackbox[i];
+      if (type === "all") {
+        if (motherChackBox.checked) {
+          element.checked = true;
+        } else {
+          element.checked = false;
+        }
+      } else {
+        if (!element.checked) {
+          motherChackBox.checked = false;
+          break;
+        } else {
+          motherChackBox.checked = true;
+        }
+      }
+    }
+  };
+
+    const handleCombine = () => {
+      notify({message:'Downloaded Successfully'})
+    }
    
     return (
       <>
@@ -159,9 +185,9 @@ const Quotation = () =>{
             </div>
             <div className="mb-3 d-flex justify-content-between">
               <div className="">
-                <Link to={"/combine"} className="btn btn-primary">
-                  Combine itinerary
-                </Link>
+                <button className="btn btn-primary" onClick={()=>handleCombine()}>
+                   Combine itinerary
+                </button>
               </div>
               <div className="d-flex">
                 <div className="">
@@ -204,6 +230,9 @@ const Quotation = () =>{
                         <table className="table table-bordered table-responsive-lg table-striped table-condensed flip-content">
                           <thead>
                             <tr>
+                              <th className="sorting_asc">
+                                <input type="checkbox" onClick={() => chackboxFun("all")} className="form-check-input" id="checkAll" required="" />
+                              </th>
                               <th>ID</th>
                               <th>Package Name</th>
                               <th>Pax</th>
@@ -220,6 +249,16 @@ const Quotation = () =>{
                           <tbody>
                             {deleteItem.map((item, ind) => (
                               <tr key={ind}>
+                                 <td className="sorting_1 ps-3">
+                                      <div className="checkbox me-0 align-self-center">
+                                          <div className="custom-control custom-checkbox ">
+                                              <input type="checkbox" className="form-check-input" id={"customCheckBox2"+ ind} required="" 
+                                                  onClick={() => chackboxFun()} 
+                                              />
+                                              <label className="custom-control-label" htmlFor={"customCheckBox2"+ ind} ></label>
+                                          </div>
+                                      </div>
+                                  </td>
                                 <td>{item.number}</td>
                                 <td>{`Package ${item.number}`}</td>
                                 <td>2 Adults</td>
