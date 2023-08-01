@@ -41,16 +41,69 @@ export const MenuList = [
     ]}),
   },
   {
+    title: "Leads",
+    classsChange: "mm-collapse",
+    iconStyle: <i className="flaticon-050-info">app_registration </i>,
+    to: "leads",
+  },
+  {
     title: "Enquiry",
     classsChange: "mm-collapse",
     iconStyle: <i className="material-icons">assessment</i>,
     to: "enquiry",
   },
   {
-    title: "Leads",
+    title: "Follow ups",
     classsChange: "mm-collapse",
-    iconStyle: <i className="flaticon-050-info">app_registration </i>,
-    to: "leads",
+    iconStyle: <i class="fa fa-list" aria-hidden="true"></i>,
+    to: "follow",
+  },
+  {
+    title: "Tickets",
+    classsChange: "mm-collapse",
+    iconStyle: <i className="merial-icons">article</i>,
+    to: "tickets",
+  },
+  {
+    title: "Works",
+    classsChange: "mm-collapse",
+    iconStyle: <i className="material-icons">extension </i>,
+    // to: "follow",
+    content: [
+      {
+        title: "Task",
+        to: "/task",
+      },
+      {
+        title: "Timesheet",
+        to: "/timesheet",
+      },
+    ],
+  },
+  {
+    title: "Finance",
+    classsChange: "mm-collapse",
+    iconStyle: <i className="mdi-bank" />,
+    // to: "follow",
+    content: [
+      {
+        title: "Quotation",
+        to: "quotatiion",
+      },
+      {
+        title: "Invoice",
+        to: "t-invoice",
+      },
+      {
+        title: "Credit Invoice",
+        to: "credit-Invoice",
+      },
+      {
+        title: "Supplier Payment",
+        to: "supplier-payment",
+      },
+      
+    ],
   },
   {
     title: "Mails",
