@@ -18,7 +18,8 @@ const PaymentForm = ({formik,setFormComponent,setShowModal}) => {
     isSubmitting,
     setFieldValue,
   } = formik
-  const navigation = useNavigate()
+  const navigate = useNavigate()
+  
   const dayList = [1,2,3,4]
   const scheduleData = [1,2]
   const destinationOptions = ["Destination 1", "Destination 2"];
@@ -39,13 +40,14 @@ const PaymentForm = ({formik,setFormComponent,setShowModal}) => {
 
   const handleAddCategory = ()=>{
     if(values.categoryOptions === 'Hotel'){
-        navigation('/add-hotel')
+        navigate('/add-hotel')
     }
   }
   const formSubmit = () => {
-    setShowModal(false)
-    setFormComponent('setupForm')
+    // setShowModal(false)
+    // setFormComponent('setupForm')
     notify({message:'Itinary Created Successfully'})
+    navigate('/enquiry/quotation')
   }
   const tableBlog = [1,2]
   return (

@@ -148,6 +148,7 @@ import AddHotel from "./components/Settings/Hotels/AddHotel";
 import User from "./components/Settings/UserManagement/User";
 import UserRole from "./components/Settings/UserManagement/Role";
 import { ToastContainer } from "react-toastify";
+import SetupModal from "./components/Enquiry/Quotation/SetupModal";
 const Markup = () => {
 
   const allRoutes = [
@@ -292,6 +293,7 @@ const Markup = () => {
                 <Route path="/enquiry" element={<EnquiryDetails/>}>
                 <Route path='profile' element={<EditProfile/>} />                                          
                 <Route path='quotation' element={<Quotation/>} />                                          
+                <Route path='itinerary' element={<SetupModal/>} />                                          
                 </Route>	                 
               </Route>                     
               <Route element={<Layout7 />}>	                

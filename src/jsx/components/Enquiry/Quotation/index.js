@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Select from 'react-select';
 import Collapse from 'react-bootstrap/Collapse';
 import DatePicker from "react-datepicker";
@@ -38,7 +38,6 @@ const Quotation = () =>{
     const [startDate, setStartDate] = useState(new Date());
     const [open, setOpen] = useState(false);
     const [open2, setOpen2] = useState(true);
-    const [showSetupModal, setShowSetupModal] = useState(false);
     const [showInsertModal, setShowInsertModal] = useState(false);
     
     const [data, setData] = useState(
@@ -47,6 +46,8 @@ const Quotation = () =>{
 	const sort = 8;
 	const activePag = useRef(0);
 	const [test, settest] = useState(0);
+
+  const navigate = useNavigate()
 
 	// Active data
 	const chageData = (frist, sec) => {
@@ -194,7 +195,7 @@ const Quotation = () =>{
                   </button>
                 </div>
                 <div className="ms-2">
-                  <button className="btn btn-primary" onClick={()=>setShowSetupModal(true)}>
+                  <button className="btn btn-primary" onClick={()=>navigate('/enquiry/itinerary')}>
                     Create itinerary
                   </button>
                 </div>
@@ -352,7 +353,7 @@ const Quotation = () =>{
             </div>
           </div>
           
-         <SetupModal showModal={showSetupModal} setShowModal={setShowSetupModal}/>
+         {/* <SetupModal showModal={showSetupModal} setShowModal={setShowSetupModal}/> */}
          <InsertModal showModal={showInsertModal} setShowModal={setShowInsertModal}/>
         </div>
       </>

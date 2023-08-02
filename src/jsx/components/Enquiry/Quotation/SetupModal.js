@@ -8,7 +8,8 @@ import PaymentForm from './PaymentForm';
 
 
 
-function SetupModal({showModal,setShowModal}) {
+function SetupModal() {
+    const [showModal, setShowModal] = useState(true);
     const [formStartDate, setFormStartDate] = useState(new Date())
     const [formComponent, setFormComponent] = useState('setupForm');
     const date = new Date()
@@ -22,18 +23,7 @@ function SetupModal({showModal,setShowModal}) {
       const initialValues = {categoryOptions:'Hotel',formStartDate:date,formEndDate:date,formValidityDate:date,}
   return (
     <>
-    <CustomModal
-            showModal={showModal}
-            title={"Create itinerary"}
-            handleModalClose={() => {
-              setShowModal(false)
-              setFormComponent('setupForm')
-            }
-            }
-            modalClass={`${formComponent ?'setup-modal':''}`}
-          >
-            <div className="card-body">
-              <div className="basic-form">
+    
               <Formik
           initialValues={initialValues}
           // validationSchema={loginSchema}
@@ -47,17 +37,16 @@ function SetupModal({showModal,setShowModal}) {
           {(formik) => (
             <>
             {formComponent === 'setupForm' ?
-            <SetupForm formik={formik} setFormComponent={setFormComponent} setShowModal={setShowModal} /> :
-            formComponent === 'packageForm' ?
+            <SetupForm formik={formik} setFormComponent={setFormComponent} showModal={showModal} setShowModal={setShowModal} /> :
+            <div className='bg-white mt-4 p-4 rounded'>
+            {formComponent === 'packageForm' ?
             <PackageForm formik={formik} setFormComponent={setFormComponent} setShowModal={setShowModal} />:
-            <PaymentForm formik={formik} setFormComponent={setFormComponent} setShowModal={setShowModal} />        
+            <PaymentForm formik={formik} setFormComponent={setFormComponent} setShowModal={setShowModal} />  }
+            </div>      
           }
           </>
           )}
           </Formik>
-              </div>
-            </div>
-          </CustomModal>
     </>
   )
 }

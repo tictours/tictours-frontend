@@ -1,8 +1,10 @@
 import React from 'react'
 import DatePicker from "react-datepicker";
+import CustomModal from '../../../layouts/CustomModal';
+import { useNavigate } from 'react-router-dom';
 
 
-const SetupForm = ({formik,setFormComponent}) => {
+const SetupForm = ({formik,setFormComponent,setShowModal,showModal}) => {
   const {
     values,
     errors,
@@ -13,16 +15,30 @@ const SetupForm = ({formik,setFormComponent}) => {
     setFieldValue,
   } = formik
 
+  const navigate = useNavigate()
+
   const formSubmit = (e) => {
     e.preventDefault()
+    setShowModal(false)
     setFormComponent('packageForm')
-    console.log('submited',values)
   }
   return (
     <>
-    <form 
-    onSubmit={formSubmit}
-    >
+    <CustomModal
+            showModal={showModal}
+            title={"Create itinerary"}
+            handleModalClose={() => {
+              setShowModal(false)
+              setFormComponent('setupForm')
+              navigate('/enquiry/quotation')
+            }
+            }
+          >
+            <div className="card-body">
+              <div className="basic-form">
+            <form
+              onSubmit={formSubmit}
+            >
                   <div className="row">
                     <div className="form-group mb-3 col-md-4">
                       <label>Package Name</label>
@@ -115,7 +131,10 @@ const SetupForm = ({formik,setFormComponent}) => {
                   <button type="submit" className="btn btn-primary">
                     Setup itinerary
                   </button>
-                </form>
+            </form>
+          </div>
+        </div>
+      </CustomModal>
     </>
   )
 }
