@@ -150,6 +150,7 @@ import UserRole from "./components/Settings/UserManagement/Role";
 import { ToastContainer } from "react-toastify";
 import SetupModal from "./components/Enquiry/Quotation/SetupModal";
 import Payment from "./components/Enquiry/Payment";
+import MailToSupplier from "./components/Enquiry/Mail";
 const Markup = () => {
 
   const allRoutes = [
@@ -296,6 +297,7 @@ const Markup = () => {
                 <Route path='quotation' element={<Quotation/>} />                                          
                 <Route path='itinerary' element={<SetupModal/>} />                                          
                 <Route path='payments' element={<Payment/>} />                                          
+                <Route path='mail-to-supplier' element={<MailToSupplier/>} />                                          
                 </Route>	                 
               </Route>                     
               <Route element={<Layout7 />}>	                
