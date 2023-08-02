@@ -293,6 +293,7 @@ const Markup = () => {
               <Route  element={<Layout7 />}>
                 <Route exact path="/enquiry"  element={<Enquiry/>} />
                 <Route path="/enquiry" element={<EnquiryDetails/>}>
+                <Route path='*' element={null} />
                 <Route path='profile' element={<EditProfile/>} />                                          
                 <Route path='quotation' element={<Quotation/>} />                                          
                 <Route path='itinerary' element={<SetupModal/>} />                                          
