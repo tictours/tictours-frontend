@@ -15,7 +15,7 @@ function EnquiryDetails() {
   ];
   const navigate = useNavigate();
   const handleClick = (path) => {
-    console.log("clicked", path);
+    // console.log("clicked", path);
     navigate(path.split(/[\s]+/).join("-"));
   };
   return (

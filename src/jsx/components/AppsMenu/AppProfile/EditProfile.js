@@ -78,7 +78,7 @@ const EditProfile = () => {
                         </div>
                     </div>
                 </div> */}
-                <div className="col-xl-12 col-lg-10">
+                <div className="col-xl-12 col-lg-12">
                     <div className="card profile-card card-bx m-b30">
                         <div className="card-header">
                             <h6 className="title">Customer Info</h6>
