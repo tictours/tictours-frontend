@@ -176,7 +176,7 @@ const PackageForm = ({formik,setFormComponent,setShowModal}) => {
                                     </div>
                                     <div>
                                         <button type='button' className='btn btn-white p-0 mt-2'>
-                                        <i class="fa-solid fa-plus text-primary"></i>
+                                        <i className="fa-solid fa-plus text-primary"></i>
                                         </button>
                                     </div>
                                 </div>

@@ -51,17 +51,17 @@ const CourseSlider = () =>{
         >  
             {smallCard.map((data, index)=>(
                 <SwiperSlide key={index}>
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="widget-courses align-items-center d-flex justify-content-between flex-wrap">
-                                <div class="d-flex align-items-center flex-wrap">
+                    <div className="card">
+                        <div className="card-body">
+                            <div className="widget-courses align-items-center d-flex justify-content-between flex-wrap">
+                                <div className="d-flex align-items-center flex-wrap">
                                     <img src={data.image} alt="" />
-                                    <div class="flex-1 ms-3">
+                                    <div className="flex-1 ms-3">
                                         <h4>{data.title}</h4>
                                         {/* <span>Lorem ipsum dolor</span> */}
                                     </div>	
                                 </div>	
-                                <Link to={"#"}><i class="las la-angle-right text-primary"></i></Link>
+                                <Link to={"#"}><i className="las la-angle-right text-primary"></i></Link>
                             </div>
                         </div>
                     </div>

@@ -49,17 +49,17 @@ function Settings() {
         <div className="row">
             {smallCard.map((item, index)=>(
                 <div className="col-xl-3 col-xxl-3 col-md-4 col-sm-6  mb-4" key={index}>
-                    <div class="card h-100  cursor-pointer" onClick={()=>onClick(item.title)}>
-                        <div class="card-body">
-                            <div class="widget-courses align-items-center d-flex justify-content-between flex-wrap">
-                                <div class="d-flex align-items-center flex-wrap">
+                    <div className="card h-100  cursor-pointer" onClick={()=>onClick(item.title)}>
+                        <div className="card-body">
+                            <div className="widget-courses align-items-center d-flex justify-content-between flex-wrap">
+                                <div className="d-flex align-items-center flex-wrap">
                                     {/* <img src={item.image} alt="" /> */}
-                                    <div class="flex-1 ms-3">
+                                    <div className="flex-1 ms-3">
                                         <h4>{item.title}</h4>
                                         {/* <span>Lorem ipsum dolor</span> */}
                                     </div>	
                                 </div>	
-                                <Link to={"#"}><i class="las la-angle-right text-primary"></i></Link>
+                                <Link to={"#"}><i className="las la-angle-right text-primary"></i></Link>
                             </div>
                         </div>
                     </div>

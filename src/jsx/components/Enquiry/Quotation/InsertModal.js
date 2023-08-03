@@ -57,7 +57,7 @@ function InsertModal({showModal,setShowModal}) {
                             </div>
                             <div>
                                 <button className='btn btn-primary'>
-                                <i class="fa-solid fa-plus text-white"></i>
+                                <i className="fa-solid fa-plus text-white"></i>
                                 </button>
                             </div>
                         </div>

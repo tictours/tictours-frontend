@@ -55,7 +55,7 @@ export const MenuList = [
   {
     title: "Follow ups",
     classsChange: "mm-collapse",
-    iconStyle: <i class="fa fa-list" aria-hidden="true"></i>,
+    iconStyle: <i className="fa fa-list" aria-hidden="true"></i>,
     to: "follow",
   },
   {
