@@ -151,6 +151,7 @@ import { ToastContainer } from "react-toastify";
 import SetupModal from "./components/Enquiry/Quotation/SetupModal";
 import Payment from "./components/Enquiry/Payment";
 import MailToSupplier from "./components/Enquiry/Mail";
+import Agent from "./components/Settings/Agent";
 const Markup = () => {
 
   const allRoutes = [
@@ -222,6 +223,7 @@ const Markup = () => {
     {url:'add-hotel',component: <AddHotel/>},
     {url:'user',component: <User/>},
     {url:'user-role',component: <UserRole/>},
+    {url:'agent',component: <Agent/>}
   ];
   
  

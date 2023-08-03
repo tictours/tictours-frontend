@@ -8,18 +8,18 @@ import wallet from './../../../images/svg/cryptowallet.svg';
 import crypto from './../../../images/svg/cryptocurrency.svg';
 import transfer from './../../../images/svg/wire-transfer.svg';
 const smallCard = [
-    { image: school, title:'Destinations' },
-    { image: wallet, title:'Suppliers' },
-    { image: crypto, title:'Hotels' },
-    { image: transfer, title:'Room Type' },
-    { image: school, title:'Meal Plan' },
-    { image: wallet, title:'Activity' },
-    { image: transfer, title:'Transfer' },
-    { image: crypto, title:'Day Itinarary' },
-    { image: school, title:'Lead Source' },
-    { image: wallet, title:'Mail Settings' },
-    { image: crypto, title:'Currency' },
-    { image: transfer, title:'Other' },
+    { image: school, title:'Destinations', path:'/destination' },
+    { image: wallet, title:'Suppliers', path:'/supplier' },
+    { image: crypto, title:'Hotels', path:'/hotels' },
+    { image: transfer, title:'Room Type', path:'/room-type' },
+    { image: school, title:'Meal Plan', path:'/meal-plan' },
+    { image: wallet, title:'Activity', path:'/activity' },
+    { image: transfer, title:'Transfer', path:'/transfer' },
+    { image: crypto, title:'Day Itinerary', path:'/day-itinerary' },
+    { image: school, title:'Lead Source', path:'/lead-source' },
+    { image: wallet, title:'Mail Settings', path:'/mail-settings' },
+    { image: crypto, title:'Currency', path:'/currency' },
+    { image: transfer, title:'Agents', path:'/agent' },
 ];
 
 
@@ -49,7 +49,8 @@ function Settings() {
         <div className="row">
             {smallCard.map((item, index)=>(
                 <div className="col-xl-3 col-xxl-3 col-md-4 col-sm-6  mb-4" key={index}>
-                    <div className="card h-100  cursor-pointer" onClick={()=>onClick(item.title)}>
+                    <Link to={item.path}>
+                    <div className="card h-100">
                         <div className="card-body">
                             <div className="widget-courses align-items-center d-flex justify-content-between flex-wrap">
                                 <div className="d-flex align-items-center flex-wrap">
@@ -63,6 +64,7 @@ function Settings() {
                             </div>
                         </div>
                     </div>
+                    </Link>
                 </div>	
             ))}
         </div>	
