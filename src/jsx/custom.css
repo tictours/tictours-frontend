@@ -1,6 +1,9 @@
 .cursor-pointer {
   cursor: pointer;
 }
+.text-neutral {
+  color: #d5dfe7;
+}
 /* client */
 
 .nav-tabs .nav-link.active {

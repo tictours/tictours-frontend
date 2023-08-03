@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import PerfectScrollbar from "react-perfect-scrollbar";
 
@@ -8,6 +8,29 @@ import { Dropdown } from "react-bootstrap";
 import DropFile from "../../AppsMenu/Email/Compose/DropFile";
 
 const MailToSupplier = () => {
+	const supplierList = [
+		{ id: 1, label: 'Checkbox 1', checked: false },
+		{ id: 2, label: 'Checkbox 2', checked: false },
+		{ id: 3, label: 'Checkbox 3', checked: false },
+		// Add more checkboxes as needed
+	  ];
+	
+	  const [checkboxes, setCheckboxes] = useState(supplierList);
+	const handleCheckboxChange = (id) => {
+		const updatedCheckboxes = checkboxes.map((checkbox) =>
+		  checkbox.id === id ? { ...checkbox, checked: !checkbox.checked } : checkbox
+		);
+		setCheckboxes(updatedCheckboxes);
+	  };
+	
+	  const handleCheckAll = () => {
+		const allChecked = checkboxes.every((checkbox) => checkbox.checked);
+		const updatedCheckboxes = checkboxes.map((checkbox) => ({
+		  ...checkbox,
+		  checked: !allChecked,
+		}));
+		setCheckboxes(updatedCheckboxes);
+	  };
   return (
     <Fragment>
       <div className="row">
@@ -164,81 +187,49 @@ const MailToSupplier = () => {
 							</div>	
 						  </div>	
 					</div>
-                    <div className="col-lg-3 col-xl-2 col-xxl-3">
-                        <div className="mt-2 px-2">
-                    <div className="input-group search-area">
-					<input type="text" 
-						className={`form-control ${false ? "active" : ""} border-0`}
-						placeholder="Search here..." 
-					/>
-					<span className="input-group-text">
-						<Link to={"#"}>
-							<svg width="15" height="15" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M17.5605 15.4395L13.7527 11.6317C14.5395 10.446 15 9.02625 15 7.5C15 3.3645 11.6355 0 7.5 0C3.3645 0 0 3.3645 0 7.5C0 11.6355 3.3645 15 7.5 15C9.02625 15 10.446 14.5395 11.6317 13.7527L15.4395 17.5605C16.0245 18.1462 16.9755 18.1462 17.5605 17.5605C18.1462 16.9747 18.1462 16.0252 17.5605 15.4395V15.4395ZM2.25 7.5C2.25 4.605 4.605 2.25 7.5 2.25C10.395 2.25 12.75 4.605 12.75 7.5C12.75 10.395 10.395 12.75 7.5 12.75C4.605 12.75 2.25 10.395 2.25 7.5V7.5Z" fill="#01A3FF"/>
-							</svg>
-						</Link>
-					</span>
-				</div>
-                </div>
-					  <PerfectScrollbar className="email-left-box dlab-scroll  pt-3">
-						{/* <div className="p-0">
-						  <Link
-							to="/email-compose"
-							className="btn text-white btn-block"
-						  >
-							<i className="fa-solid fa-plus me-2"></i>Compose Email
-						  </Link>
-						</div>
-						<div className="mail-list rounded ">
-						  <Link to="/email-inbox" className="list-group-item active">
-							<i className="fa-regular fa-envelope align-middle"></i>
-							Inbox
-							<span className="badge badge-purple badge-sm float-end rounded">
-							  123
-							</span>
-						  </Link>
-						  <Link to="/email-compose" className="list-group-item">
-							<i className="fa-regular fa-paper-plane align-middle"></i>
-							Sent
-						  </Link>
-						  <Link to="/email-compose" className="list-group-item">
-							<i className="fa-regular fa-star align-middle"></i>
-							Favorite
-							 <span className="badge badge-danger text-white badge-sm float-end">
-							  47
-							</span> 
-						  </Link>
-						  <Link to="/email-compose" className="list-group-item">
-							<i className="fa-regular fa-file align-middle"></i>
-							Draft
-						  </Link>
-						  	<Link to="/email-compose" className="list-group-item">
-						  		<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" >
-									<path d="M15.4425 10.0575L10.065 15.435C9.92569 15.5745 9.76026 15.6851 9.57816 15.7606C9.39606 15.8361
-									9.20087 15.8749 9.00375 15.8749C8.80663 15.8749 8.61144 15.8361 8.42934 15.7606C8.24724 15.6851 8.08181 15.5745 7.9425 15.435L1.5 9V1.5H9L15.4425
-									7.9425C15.7219 8.22354 15.8787 8.60372 15.8787 9C15.8787 9.39628 15.7219 9.77646 15.4425 10.0575Z"
-									stroke="#666666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-									<path d="M5.25 5.25H5.268" stroke="#666666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-								</svg>
-								Important
-						  	</Link>
-						  	<Link to="#" className="list-group-item"><i className="fa-regular fa-clock align-middle"></i> Scheduled</Link>
-							<Link to="#" className="list-group-item ">
-								<svg width="15" height="15" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M5.5 8.25L11 13.75L16.5 8.25" stroke="#666666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-								</svg>
-								{" "} Move
-							</Link>
-						</div>
-						<div className="mail-list rounded overflow-hidden mt-4 ">
-							<div className="intro-title d-flex justify-content-between my-0">
-								<h5>Categories</h5>								
+							  <div className="col-lg-3 col-xl-2 col-xxl-3">
+								  <div className="mt-2 px-2">
+									  <div className="input-group search-area">
+										  <input type="text"
+											  className={`form-control ${false ? "active" : ""} border-0`}
+											  placeholder="Search here..."
+										  />
+										  <span className="input-group-text">
+											  <Link to={"#"}>
+												  <svg width="15" height="15" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+													  <path d="M17.5605 15.4395L13.7527 11.6317C14.5395 10.446 15 9.02625 15 7.5C15 3.3645 11.6355 0 7.5 0C3.3645 0 0 3.3645 0 7.5C0 11.6355 3.3645 15 7.5 15C9.02625 15 10.446 14.5395 11.6317 13.7527L15.4395 17.5605C16.0245 18.1462 16.9755 18.1462 17.5605 17.5605C18.1462 16.9747 18.1462 16.0252 17.5605 15.4395V15.4395ZM2.25 7.5C2.25 4.605 4.605 2.25 7.5 2.25C10.395 2.25 12.75 4.605 12.75 7.5C12.75 10.395 10.395 12.75 7.5 12.75C4.605 12.75 2.25 10.395 2.25 7.5V7.5Z" fill="#01A3FF" />
+												  </svg>
+											  </Link>
+										  </span>
+									  </div>
+								  </div>
+								  <div className="d-flex align-items-center pt-3">
+									<label className="fw-bold mb-0 me-2" style={{padding: '0 1.25rem'}}>
+										Select All
+										</label>
+									<input
+										type="checkbox"
+										className="form-check-input"
+										onChange={handleCheckAll}
+									/>
+								</div>
+					  <PerfectScrollbar className="email-left-box dlab-scroll">
+						{checkboxes?.map((data,key)=>(
+							<div className="d-flex" key={key}>
+								<div>
+									<input
+										type="checkbox"
+										className="form-check-input"
+										checked={data.checked}
+										onChange={()=>handleCheckboxChange(data.id)}
+									/>
+								</div>
+								<div className="ms-2">
+									<h6>Burj khalifa</h6>
+									<p className="text-neutral">{`Supplier ${key+1} - supplier${key+1}@gmail.com`}</p>
+								</div>
 							</div>
-						  <Link to="/email-inbox" className="list-group-item change">Work </Link>
-						  <Link to="/email-inbox" className="list-group-item change">Private </Link>
-						  <Link to="/email-inbox" className="list-group-item change">Support</Link>
-						  <Link to="/email-inbox" className="list-group-item change">Social</Link>
-						</div> */}
+						))}
 					  </PerfectScrollbar>
 					</div>
 				</div>
