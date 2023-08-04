@@ -6,6 +6,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 //import PageTitle from "../../../../layouts/PageTitle";
 import { Dropdown } from "react-bootstrap";
 import DropFile from "../../AppsMenu/Email/Compose/DropFile";
+import CkEditorBlog from "../../Forms/CkEditor/CkEditorBlog";
 
 const MailToSupplier = () => {
 	const supplierList = [
@@ -156,9 +157,13 @@ const MailToSupplier = () => {
 										<input type="text" className="form-control bg-transparent" placeholder=" Subject:"/>
 										</div>
 										<div className="form-group mb-3">
-										<textarea id="email-compose-editor" className="textarea_editor form-control bg-transparent" rows="5"
+										{/* <textarea id="email-compose-editor" className="textarea_editor form-control bg-transparent" rows="5"
 											placeholder="Enter text ..."
-										></textarea>
+										></textarea> */}
+										<div id="email-compose-editor" className="textarea_editor">
+										{/* <h2>Using CKEditor 5 build in React</h2> */}
+										<CkEditorBlog />
+										</div>
 										</div>
 									</form>
 									<h5 className="my-3"><i className="fa fa-paperclip me-2"></i> Attatchment</h5>
