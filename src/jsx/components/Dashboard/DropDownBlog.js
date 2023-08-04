@@ -12,9 +12,9 @@ const DropDownBlog = () =>{
 					</svg>
                 </DropDown.Toggle>
                 <DropDown.Menu align="end" className="dropdown-menu dropdown-menu-end">
-                    <DropDown.Item>Option 1</DropDown.Item>
-                    <DropDown.Item>Option 2</DropDown.Item>
-                    <DropDown.Item>Option 3</DropDown.Item>
+                    <DropDown.Item>Edit</DropDown.Item>
+                    <DropDown.Item>Delete</DropDown.Item>
+                    {/* <DropDown.Item>Option 3</DropDown.Item> */}
                 </DropDown.Menu>
             </DropDown>
         </>

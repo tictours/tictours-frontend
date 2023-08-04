@@ -1,161 +1,102 @@
-import React, { Fragment } from "react";
-import PageTitle from "../../../layouts/PageTitle";
-import { Dropdown } from "react-bootstrap";
+import React from 'react';
+import {Link} from 'react-router-dom';
 
-/// images
-import avartar5 from "../../../../images/avatar/5.png";
-import avartar1 from "../../../../images/avatar/1.png";
-import { Link } from "react-router-dom";
+//component
+// import DropDownBlog from '../../DropDownBlog';
+
+//images
+import pic1 from '../../../../images/contacts/1.jpg';
+
+import DropDownBlog from '../../Dashboard/DropDownBlog';
+
+const contactData = [
+    { image: pic1 , title:'Jordana'},
+    { image: pic1 , title:'Jacob Jack'},
+    { image: pic1 , title:'Gibs Gibsy'},
+    { image: pic1 , title:'Sammy'},
+    { image: pic1 , title:'Core'},
+    { image: pic1 , title:'Jordan Nico'},
+    { image: pic1 , title:'Sodara'},
+    { image: pic1 , title:'Smith'},
+    { image: pic1 , title:'Nico'},
+    { image: pic1, title:'Samantha'},
+    { image: pic1, title:'Adja'},
+    { image: pic1, title:'Johnny'},
+];
 
 const Agent = () => {
-   const drop = (
-      <Dropdown>
-         <Dropdown.Toggle variant="" className="btn btn-primary tp-btn-light sharp i-false">
-            <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-               <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                  <rect x="0" y="0" width="24" height="24"></rect>
-                  <circle fill="#000000" cx="5" cy="12" r="2"></circle>
-                  <circle fill="#000000" cx="12" cy="12" r="2"></circle>
-                  <circle fill="#000000" cx="19" cy="12" r="2"></circle>
-               </g>
-            </svg>
-         </Dropdown.Toggle>
-         <Dropdown.Menu>
-            <Dropdown.Item href="#">Edit</Dropdown.Item>
-            <Dropdown.Item href="#" className="text-danger">
-               Delete
-            </Dropdown.Item>
-         </Dropdown.Menu>
-      </Dropdown>
-   );
-
-   const chackbox = document.querySelectorAll(".customer_shop_single input");
-   const motherChackBox = document.querySelector(".customer_shop input");
-   const chackboxFun = (type) => {
-      for (let i = 0; i < chackbox.length; i++) {
-         const element = chackbox[i];
-         if (type === "all") {
-            if (motherChackBox.checked) {
-               element.checked = true;
-            } else {
-               element.checked = false;
-            }
-         } else {
-            if (!element.checked) {
-               motherChackBox.checked = false;
-               break;
-            } else {
-               motherChackBox.checked = true;
-            }
-         }
-      }
-   };
-
-   const chack = (i) => (
-      <div className={`form-check custom-checkbox ms-2`}>
-         <input
-            type="checkbox"
-            className="form-check-input "
-            id={`checkAll${i}`}
-            required=""
-            onClick={() => chackboxFun()}
-         />
-         <label
-            className="form-check-label"
-            htmlFor={`checkAll${i}`}
-         ></label>
-      </div>
-   );
-
-   const customerList = [1,2,3,4,5,6,7,8]
-
-   return (
-      <Fragment>
-         <PageTitle activeMenu="Shop" motherMenu="Agent" />
-         <div className="row">
-            <div className="col-lg-12">
-               <div className="card">
-                  <div className="card-body">
-                     <div className="table-responsive">
-                        <table className="table mb-0 table-striped">
-                           <thead>
-                              <tr>
-                                 <th className="customer_shop">
-                                    <div className="form-check custom-checkbox mx-2">
-                                       <input
-                                          type="checkbox"
-                                          className="form-check-input"
-                                          id="checkAll"
-                                          onClick={() => chackboxFun("all")}
-                                       />
-                                       <label
-                                          className="form-check-label"
-                                          htmlFor="checkAll"
-                                       ></label>
+    return(
+        <>
+            <div className="row">
+                <div className="col-xl-12">
+                    <div className="row">
+                        <div className="col-xl-12">
+                            <div className="page-titles">
+                                <div className="d-flex align-items-center">
+                                    <h2 className="heading">Agent</h2>
+                                </div>
+                                <div className="right-area folder-layout-tab">
+                                    <button className="btn btn-primary">New Agent <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 3C7.05 3 3 7.05 3 12C3 16.95 7.05 21 12 21C16.95 21 21 16.95 21 12C21 7.05 16.95 3 12 3ZM12 19.125C8.1 19.125 4.875 15.9 4.875 12C4.875 8.1 8.1 4.875 12 4.875C15.9 4.875 19.125 8.1 19.125 12C19.125 15.9 15.9 19.125 12 19.125Z" fill="#FCFCFC"/>
+                                        <path d="M16.3498 11.0251H12.9748V7.65009C12.9748 7.12509 12.5248 6.67509 11.9998 6.67509C11.4748 6.67509 11.0248 7.12509 11.0248 7.65009V11.0251H7.6498C7.1248 11.0251 6.6748 11.4751 6.6748 12.0001C6.6748 12.5251 7.1248 12.9751 7.6498 12.9751H11.0248V16.3501C11.0248 16.8751 11.4748 17.3251 11.9998 17.3251C12.5248 17.3251 12.9748 16.8751 12.9748 16.3501V12.9751H16.3498C16.8748 12.9751 17.3248 12.5251 17.3248 12.0001C17.3248 11.4751 16.8748 11.0251 16.3498 11.0251Z" fill="#FCFCFC"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-xl-12">                                
+                            <div className="row">
+                                {contactData.map((item, ind)=>(
+                                    <div className="col-xl-4 col-md-6" key={ind}>
+                                        <div className="card contact_list ">
+                                            <div className="card-body">
+                                                <div className="user-content">
+                                                    <div className="user-info">
+                                                        <div className="user-img">
+                                                            <img src={item.image} alt="" />
+                                                        </div>
+                                                        <div className="user-details">
+                                                            <h4 className="user-name">{item.title}</h4>
+                                                            <span className="number">+1234567890</span>
+                                                            <span className="mail">jordan@mail.com</span> 
+                                                            <span className="mail">Location : Malaysia</span> 
+                                                        </div>
+                                                    </div>
+                                                    <DropDownBlog  />
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
                                     </div>
-                                 </th>
-                                 <th>Name</th>
-                                 <th>Email</th>
-                                 <th>Phone</th>
-                                 <th className="ps-5 width200" >
-                                    Address
-                                 </th>
-                                 <th>Joined</th>
-                                 <th></th>
-                              </tr>
-                           </thead>
-                           <tbody id="customers">
-                            {customerList?.map((data,key)=>(
-                              <tr className="btn-reveal-trigger" key={key}>
-                                 <td className="customer_shop_single">
-                                    {chack(1)}
-                                 </td>
-                                 <td className="py-3">
-                                    <Link to="/ecom-customers">
-                                       <div className="media d-flex align-items-center">
-                                          <div className="avatar avatar-xl me-2">
-                                             <div className="">
-                                                <img
-                                                   className="rounded-circle img-fluid"
-                                                   src={avartar5}
-                                                   width="30"
-                                                   alt=""
-                                                />
-                                             </div>
-                                          </div>
-                                          <div className="media-body">
-                                             <h5 className="mb-0 fs--1">
-                                                Ricky Antony
-                                             </h5>
-                                          </div>
-                                       </div>
+                                ))}
+                            </div>
+                        </div>       
+                    </div>
+                    <div className="table-pagenation mb-3">
+                        <p className="ms-0">Showing <span>12-24</span>from <span>100</span>data</p>
+                        <nav>
+                            <ul className="pagination pagination-gutter pagination-primary no-bg">
+                                <li className="page-item page-indicator">
+                                    <Link to={"#"} className="page-link">
+                                        <i className="fa-solid fa-angle-left"></i>
                                     </Link>
-                                 </td>
-                                 <td className="py-2">
-                                    <a href="mailto:ricky@example.com">
-                                       info@example.com
-                                    </a>
-                                 </td>
-                                 <td className="py-2">
-                                    {" "}
-                                    <a href="tel:2012001851">9123341851</a>
-                                 </td>
-                                 <td className="py-2 ps-5 wspace-no">
-                                    2392 Main Avenue, Penasauka
-                                 </td>
-                                 <td className="py-2">30/03/2018</td>
-                                 <td className="py-2 text-right">{drop}</td>
-                              </tr>
-                            ))}
-                           </tbody>
-                        </table>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </Fragment>
-   );
-};
+                                </li>
+                                <li className="page-item "><Link to={"#"} className="page-link">1</Link>
+                                </li>
+                                <li className="page-item active"><Link to={"#"} className="page-link">2</Link></li>
+                                <li className="page-item"><Link to={"#"} className="page-link">3</Link></li>
+                                <li className="page-item page-indicator me-0">
+                                    <Link to={"#"} className="page-link">
+                                        <i className="fa-solid fa-angle-right"></i>
+                                    </Link>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>   
 
-export default Agent;
+                </div>
+            </div>         
+        </>
+    )
+}
+export default Agent; 
