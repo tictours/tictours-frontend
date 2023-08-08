@@ -11,7 +11,7 @@ function InputField(props) {
         className="form-control"
         placeholder={placeholder}
         name={name}
-        value={values[name]}
+        value={values ? values[name] : ''}
       />
     </div>
   )

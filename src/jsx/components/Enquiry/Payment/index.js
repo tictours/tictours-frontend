@@ -4,6 +4,7 @@ import {Badge, Dropdown} from 'react-bootstrap';
 
 import InvoiceSlider from '../../Dashboard/InvoiceSlider';
 import QuestionIcon from '../../Dashboard/Ticketing/QuestionIcon';
+import AddModal from './AddModal';
 
 const RightIcon = () =>{
     return(
@@ -264,7 +265,7 @@ const Payment = () =>{
 
                 </div>       
             </div>    
-          
+          <AddModal showModal={showModal} setShowModal={setShowModal}/>
         </>
     )
 }
