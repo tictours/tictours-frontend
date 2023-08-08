@@ -120,8 +120,12 @@ export const MenuList = [
       {
         title: 'Admin Settings',
         to:'settings'
-      }
-      ,{
+      },
+      {
+        title: "Company Settings",
+        to:'company-settings'
+      },
+      {
         title: "User Management",
         //to: './',
         hasMenu: true,

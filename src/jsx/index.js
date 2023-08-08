@@ -153,6 +153,7 @@ import Payment from "./components/Enquiry/Payment";
 import MailToSupplier from "./components/Enquiry/Mail";
 import Agent from "./components/Settings/Agent";
 import SupplierPayment from "./components/Enquiry/SupplierPayment";
+import CompanySettings from "./components/Settings/CompanyManagement/CompanySettings";
 const Markup = () => {
 
   const allRoutes = [
@@ -224,7 +225,8 @@ const Markup = () => {
     {url:'add-hotel',component: <AddHotel/>},
     {url:'user',component: <User/>},
     {url:'user-role',component: <UserRole/>},
-    {url:'agent',component: <Agent/>}
+    {url:'agent',component: <Agent/>},
+    {url:'company-settings',component: <CompanySettings/>},
   ];
   
  
