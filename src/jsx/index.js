@@ -413,7 +413,7 @@ function Layout7(){
     <div id="main-wrapper" className={`show ${sidebariconHover ? "iconhover-toggle": ""} ${ menuToggle ? "menu-toggle" : ""}`}>   
         <Nav />
         <ToastContainer/>
-        <div className="content-body" style={{ minHeight: window.screen.height + 20 }}>
+        <div className="content-body" style={{ minHeight: '100vh' }}>
           <div className="container-fluid">     
               <Outlet />
           </div>

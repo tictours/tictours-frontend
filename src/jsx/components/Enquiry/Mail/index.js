@@ -218,7 +218,7 @@ const MailToSupplier = () => {
 										onChange={handleCheckAll}
 									/>
 								</div>
-					  <PerfectScrollbar className="email-left-box dlab-scroll">
+					  <PerfectScrollbar className="email-left-box dlab-scroll h-auto">
 						{checkboxes?.map((data,key)=>(
 							<div className="d-flex" key={key}>
 								<div>
