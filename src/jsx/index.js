@@ -152,6 +152,7 @@ import SetupModal from "./components/Enquiry/Quotation/SetupModal";
 import Payment from "./components/Enquiry/Payment";
 import MailToSupplier from "./components/Enquiry/Mail";
 import Agent from "./components/Settings/Agent";
+import SupplierPayment from "./components/Enquiry/SupplierPayment";
 const Markup = () => {
 
   const allRoutes = [
@@ -301,6 +302,7 @@ const Markup = () => {
                 <Route path='itinerary' element={<SetupModal/>} />                                          
                 <Route path='payments' element={<Payment/>} />                                          
                 <Route path='mail-to-supplier' element={<MailToSupplier/>} />                                          
+                <Route path='supplier-payments' element={<SupplierPayment/>} />                                          
                 </Route>	                 
               </Route>                     
               <Route element={<Layout7 />}>	                

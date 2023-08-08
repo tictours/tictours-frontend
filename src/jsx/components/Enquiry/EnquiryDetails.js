@@ -8,7 +8,7 @@ function EnquiryDetails() {
     { name: "quotation", path: "/quotation", component: "" },
     { name: "follow ps", path: "", component: "" },
     { name: "mail to supplier", path: "", component: "" },
-    { name: "suplier payments", path: "", component: "" },
+    { name: "supplier payments", path: "", component: "" },
     { name: "tickets", path: "", component: "" },
     { name: "payments", path: "", component: "" },
     { name: "documents", path: "", component: "" },
