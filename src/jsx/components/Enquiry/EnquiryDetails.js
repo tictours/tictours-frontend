@@ -1,6 +1,6 @@
 import React from "react";
 import { Tab, Tabs } from "react-bootstrap";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 function EnquiryDetails() {
   const MENU = [
@@ -14,9 +14,11 @@ function EnquiryDetails() {
     { name: "documents", path: "", component: "" },
   ];
   const navigate = useNavigate();
+  const {pathname} = useLocation()
+  const activePath = pathname.replace('/enquiry/','')
   const handleClick = (path) => {
     // console.log("clicked", path);
-    navigate(path.split(/[\s]+/).join("-"));
+    navigate(path);
   };
   return (
     <>
@@ -28,11 +30,12 @@ function EnquiryDetails() {
             className="mb-3"
             fill
             onSelect={handleClick}
+            activeKey={activePath}
           >
             {MENU.map((menu) => (
               <Tab
                 key={menu.name}
-                eventKey={menu.name}
+                eventKey={menu.name.split(/[\s]+/).join("-")}
                 title={menu.name.toUpperCase()}
               />
             ))}
