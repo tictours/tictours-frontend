@@ -126,6 +126,10 @@ export const MenuList = [
         to:'company-settings'
       },
       {
+        title: "Currency Settings",
+        to:'currency-settings'
+      },
+      {
         title: "User Management",
         //to: './',
         hasMenu: true,
