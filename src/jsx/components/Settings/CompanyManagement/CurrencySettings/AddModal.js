@@ -20,7 +20,7 @@ const AddModal = ({setShowModal,showModal}) => {
     <Formik initialValues={initialValues} 
          onSubmit={(values, { setSubmitting }) => {
             setShowModal(false)
-            notify({message:'Supplier Payment Added Successfully'})
+            notify({message:'Currency Added Successfully'})
           }}>
         {({
     values,
