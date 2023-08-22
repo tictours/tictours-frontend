@@ -1,7 +1,7 @@
 import React from 'react'
 
 function SelectField(props) {
-    const { formClass,label, name, values, options, optionValue,optionLabel,...restProps } = props
+    const { formClass, selectClass, label, name, values,selected, options, optionValue,optionLabel,...restProps } = props
     return (
         <div className={`form-group mb-3 ${formClass}`}>
             {!!label &&<label className="text-label">{label}</label>}
@@ -9,9 +9,9 @@ function SelectField(props) {
                 {...restProps}
                 // defaultValue={"option"}
                 id="inputState"
-                className="form-control"
+                className={`form-control ${selectClass}`}
                 name={name}
-                value={values?values[name]:name}
+                value={values?values[name]:selected}
             >
                 <option value="option" disabled>
                     Choose...

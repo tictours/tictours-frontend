@@ -5,8 +5,11 @@ import {Badge, Dropdown} from 'react-bootstrap';
 import InvoiceSlider from '../../../Dashboard/InvoiceSlider';
 import QuestionIcon from '../../../Dashboard/Ticketing/QuestionIcon';
 import AddRole from './addRole';
-import { useDispatch } from 'react-redux';
-import { RoleAction, setPage } from '../../../../../store/slices/roleSlice';
+import SelectField from '../../../common/SelectField';
+import { useSelector } from 'react-redux';
+import notify from '../../../common/Notify';
+import InputField from '../../../common/InputField';
+import { Formik } from 'formik';
 
 const RightIcon = () =>{
     return(
@@ -19,22 +22,12 @@ const RightIcon = () =>{
     )
 }
 
-const tableBlog = [
-    {  title:'Talan Siphron',  mail:'ahmad@mail.com', icon:'#1EBA62', iconClass:'btn-success', icon2: <RightIcon />, icontext:'Active'},
-    {  title:'Thomas Khun',  mail:'soap@mail.com', icon:'#FF4646', iconClass:'btn-success', icon2: <RightIcon />, icontext:'Active' },
-    {  title:'Marilyn Workman',  mail:'mantha@mail.com',icon:'#FF4646', iconClass:'btn-pink', icon2: <QuestionIcon colorchange="#EB62D0" />, icontext:'Inactive'  },
-    {  title:'Thomas Khun',  mail:'hope@mail.com', icon:'#FF4646', iconClass:'btn-success', icon2: <RightIcon />, icontext:'Active'  },
-    {  title:'Talan Siphron',  mail:'jordan@mail.com' , icon:'#1EBA62', iconClass:'btn-success', icon2: <RightIcon />, icontext:'Active' },
-    {  title:'Marilyn Workman',  mail:'adja@mail.com',icon:'#FF4646', iconClass:'btn-pink', icon2: <QuestionIcon colorchange="#EB62D0" />, icontext:'Inactive'  },
-    {  title:'Thomas Khun',  mail:'soap@mail.com', icon:'#FF4646', iconClass:'btn-success', icon2: <RightIcon />, icontext:'Active'  },
-    {  title:'Talan Siphron',  mail:'kevin@mail.com',icon:'#FF4646', iconClass:'btn-pink', icon2: <QuestionIcon colorchange="#EB62D0" />, icontext:'Inactive'  },
-    // {  title:'Marilyn Workman',  mail:'vita@mail.com' , icon:'#1EBA62', iconClass:'btn-success', icon2: <RightIcon />, icontext:'Active' },
-];
+const tableData = ['dashboard','leads','enquiry','follow ups','tickets','works','finance','mails','settings'];
 
-const Role = () =>{
+const Permission = () =>{
 
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const roleData = useSelector((data)=>data.role)
     const [data, setData] = useState(
 		document.querySelectorAll("#example2_wrapper tbody tr")
 	);
@@ -99,9 +92,17 @@ const Role = () =>{
         {name:'Inactive',value:'2'},
         {name:'Type',value:'6'},
     ]
-    const handleDetail = (id,value) => {
-        navigate(`${id}`)
-        dispatch(RoleAction.setName(value))
+    const capitalizeFirstLetter = (str) => {
+        return str.charAt(0).toUpperCase() + str.slice(1)
+    }
+    const permission = ['read', 'write', 'update', 'delete']
+    const permissionOption = ["No","Yes"]
+    const handleSubmit = () => {
+        notify({message:'User Role Added Successfully'})
+        navigate('/user-role')
+    }
+    const initialValues = {
+        name:roleData.name
     }
     return (
         <>
@@ -111,11 +112,11 @@ const Role = () =>{
                         <div className="col-xl-12">
                             <div className="page-titles">
                                 <div className="d-flex align-items-center">
-                                    <h2 className="heading">User Role</h2>
+                                    <h2 className="heading">Add role</h2>
                                    
                                 </div>
                                 <div className="d-flex flex-wrap my-2 my-sm-0">
-                                    <div className="input-group search-area">
+                                    {/* <div className="input-group search-area">
                                         <input type="text" className="form-control" placeholder="Search here..." />
                                         <span className="input-group-text">
                                             <Link to={"#"}>
@@ -125,9 +126,9 @@ const Role = () =>{
                                                 </svg>
                                             </Link>
                                         </span>
-                                    </div>
+                                    </div> */}
                                     <div className="invoice-btn">
-                                        <button onClick={()=>handleDetail('add','')} className="btn btn-primary">New User Role <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <button onClick={()=>handleSubmit()} className="btn btn-primary">Submit<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M12 3C7.05 3 3 7.05 3 12C3 16.95 7.05 21 12 21C16.95 21 21 16.95 21 12C21 7.05 16.95 3 12 3ZM12 19.125C8.1 19.125 4.875 15.9 4.875 12C4.875 8.1 8.1 4.875 12 4.875C15.9 4.875 19.125 8.1 19.125 12C19.125 15.9 15.9 19.125 12 19.125Z" fill="#FCFCFC"/>
                                             <path d="M16.3498 11.0251H12.9748V7.65009C12.9748 7.12509 12.5248 6.67509 11.9998 6.67509C11.4748 6.67509 11.0248 7.12509 11.0248 7.65009V11.0251H7.6498C7.1248 11.0251 6.6748 11.4751 6.6748 12.0001C6.6748 12.5251 7.1248 12.9751 7.6498 12.9751H11.0248V16.3501C11.0248 16.8751 11.4748 17.3251 11.9998 17.3251C12.5248 17.3251 12.9748 16.8751 12.9748 16.3501V12.9751H16.3498C16.8748 12.9751 17.3248 12.5251 17.3248 12.0001C17.3248 11.4751 16.8748 11.0251 16.3498 11.0251Z" fill="#FCFCFC"/>
                                             </svg>
@@ -138,10 +139,41 @@ const Role = () =>{
                         </div>
                     </div>
                     {/* swiper */}
-                        <InvoiceSlider title='Role' array={sliderArr}/>
+                        {/* <InvoiceSlider title='Permission' array={sliderArr}/> */}
                     {/* swiper end */}
-
+                    <Formik
+          initialValues={initialValues}
+          // validationSchema={loginSchema}
+        //   onSubmit={(values, { setSubmitting }) => {
+        //     setShowModal(false)
+        //     navigate('add')
+        //     // console.log('value',values)
+        //     dispatch(RoleAction.setPage(values.name))
+        //     // notify({message:'User Role Added Successfully'})
+        //   }}
+        >
+          {({
+            values,
+            errors,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+            setFieldValue,
+          }) => (
                     <div className="row">
+                        <div className='col-xl-4'>
+                        <div className="mb-2">
+                  <InputField
+                    label="Name"
+                    name="name"
+                    placeholder='Add User role name'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    values={values}
+                  />
+                </div>
+                        </div>
                         <div className="col-xl-12" >                            
                             <div className="table-responsive  full-data dataTables_wrapper" id="example2_wrapper">
                                 <table className="table-responsive-lg table display mb-4 dataTablesCard  text-black dataTable no-footer" id="example2">
@@ -150,17 +182,17 @@ const Role = () =>{
                                             {/* <th className="sorting_asc ">
                                                 <input type="checkbox" onClick={() => chackboxFun("all")} className="form-check-input" id="checkAll" required="" />
                                             </th> */}
-                                            <th className="text-center">SL No</th>
-                                            <th className="text-center">Name</th>
-                                            {/* <th className="text-center">Permission</th> */}
-                                            <th className="text-center">Created Date</th>
-                                            <th className="text-center">Modified Date</th>
-                                            <th className="text-end">Status</th>
-                                            <th></th>
+                                            <th className="">Module</th>
+                                            {permission.map((data)=>(
+                                            <th className="" key={data}>{capitalizeFirstLetter(data)}</th>
+                                            ))}
+                                           
+                                            {/* <th className="text-end">Status</th> */}
+                                            {/* <th></th> */}
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {tableBlog.map((item, ind)=>(
+                                        {tableData.map((item, ind)=>(
                                             <tr key={ind}>
                                                 {/* <td className="sorting_1">
                                                     <div className="checkbox me-0 align-self-center">
@@ -172,49 +204,19 @@ const Role = () =>{
                                                         </div>
                                                     </div>
                                                 </td> */}
-                                                <td className='text-center'>{ind+1}</td>
-                                                <td className='text-center'>{`role ${ind+1}`}</td>
-                                                {/* <td className='text-center'><button onClick={()=>handleDetail(ind+1,`role ${ind+1}`)} className='btn'><i class="fa-solid fa-eye"></i></button></td> */}
-                                                {/* <td className="whitesp-no p-0">
-                                                    <div className="py-sm-3 py-1 ps-3">
-                                                        <div >
-                                                            <h6 className="font-w500 fs-15 mb-0">Marilyn Workman</h6>
-                                                            <span className="fs-14 font-w400"><Link to={"app-profile"}>marilyn@gmail.com</Link></span>
-                                                        </div>												
-                                                    </div>
-                                                </td> */}
-                                                {/* <td>Manager</td> */}
-                                                {/* <td>Dubai, Qatar</td>
-                                                <td className= "doller">Shanid CA</td> */}
-                                                <td className="whitesp-no fs-14 font-w400 text-center">June 1, 2022</td>
-                                                <td className="whitesp-no fs-14 font-w400 text-center">June 1, 2023</td>
-                                                <td className="text-end">
-                                                    <span className={`btn light fs-14  btn-sm ${item.iconClass}`}>
-                                                        {/* {item.icon2}
-                                                        {" "} */}
-                                                        {item.icontext}
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <Dropdown>
-                                                        <Dropdown.Toggle as="div" className="i-false btn-link btn sharp tp-btn btn-primary pill" >
-                                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M8.33319 9.99985C8.33319 10.9203 9.07938 11.6665 9.99986 11.6665C10.9203 11.6665 11.6665 10.9203 11.6665 9.99986C11.6665 9.07938 10.9203 8.33319 9.99986 8.33319C9.07938 8.33319 8.33319 9.07938 8.33319 9.99985Z" fill="#ffffff"/>
-                                                                <path d="M8.33319 3.33329C8.33319 4.25376 9.07938 4.99995 9.99986 4.99995C10.9203 4.99995 11.6665 4.25376 11.6665 3.33329C11.6665 2.41282 10.9203 1.66663 9.99986 1.66663C9.07938 1.66663 8.33319 2.41282 8.33319 3.33329Z" fill="#ffffff"/>
-                                                                <path d="M8.33319 16.6667C8.33319 17.5871 9.07938 18.3333 9.99986 18.3333C10.9203 18.3333 11.6665 17.5871 11.6665 16.6667C11.6665 15.7462 10.9203 15 9.99986 15C9.07938 15 8.33319 15.7462 8.33319 16.6667Z" fill="#ffffff"/>
-                                                            </svg>
-                                                        </Dropdown.Toggle>
-                                                        <Dropdown.Menu className="dropdown-menu-end">
-                                                            <Dropdown.Item onClick={()=>handleDetail(ind+1,`role ${ind+1}`)}>Edit</Dropdown.Item>
-                                                            <Dropdown.Item>Delete</Dropdown.Item>
-                                                        </Dropdown.Menu>
-                                                    </Dropdown>
-                                                </td>
+                                                <td className=''>{capitalizeFirstLetter(item)}</td>
+                                                {permission.map((data)=>(
+                                                <td key={data}>
+                                                    <SelectField name={'val'}
+                                                     options={permissionOption}
+                                                     formClass='w-50 mb-0' 
+                                                     selectClass='ms-0'/>
+                                                </td>))}
                                             </tr>
                                         ))}
                                     </tbody>
                                 </table>
-                                <div className="d-sm-flex text-center justify-content-between align-items-center mt-3 mb-3">
+                                {/* <div className="d-sm-flex text-center justify-content-between align-items-center mt-3 mb-3">
                                     <div className="dataTables_info">
                                         Showing {activePag.current * sort + 1} to{" "}
                                         {data.length > (activePag.current + 1) * sort
@@ -263,15 +265,17 @@ const Role = () =>{
                                             <i className="fa-solid fa-angle-right"></i>
                                         </Link>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>                
                         </div>
                     </div>
+                    )} 
+                    </Formik> 
 
-                </div>       
+                </div>      
             </div>    
             <AddRole showModal={showModal} setShowModal={setShowModal}/>   
         </>
     )
 }
-export default Role;
+export default Permission;

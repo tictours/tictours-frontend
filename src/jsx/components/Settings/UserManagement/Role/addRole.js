@@ -4,11 +4,16 @@ import  notify  from '../../../common/Notify';
 import { Formik } from 'formik';
 import InputField from '../../../common/InputField';
 import ReactSelect from '../../../common/ReactSelect';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { RoleAction } from '../../../../../store/slices/roleSlice';
 
 
 
 function AddRole({ showModal, setShowModal }) {
   const [formStartDate, setFormStartDate] = useState(new Date());
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const initialValues = {}
   const permissionOptions = [
@@ -30,7 +35,10 @@ function AddRole({ showModal, setShowModal }) {
           // validationSchema={loginSchema}
           onSubmit={(values, { setSubmitting }) => {
             setShowModal(false)
-            notify({message:'User Role Added Successfully'})
+            navigate('add')
+            // console.log('value',values)
+            dispatch(RoleAction.setPage(values.name))
+            // notify({message:'User Role Added Successfully'})
           }}
         >
           {({
@@ -53,7 +61,7 @@ function AddRole({ showModal, setShowModal }) {
                     values={values}
                   />
                 </div>
-              {menuList.map((menu,key)=>(
+              {/* {menuList.map((menu,key)=>(
                 <div className="col-md-6 mb-2" key={key}>
                   <ReactSelect
                     label={menu}
@@ -63,10 +71,10 @@ function AddRole({ showModal, setShowModal }) {
                     }
                     isMulti
                   />
-                </div>))}
+                </div>))} */}
               </div>
               <button type="submit" className="btn btn-primary mt-4">
-                Add Role
+                Submit
               </button>
             </form>
           )}

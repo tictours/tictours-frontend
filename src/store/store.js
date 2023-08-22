@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import { AuthReducer } from './reducers/AuthReducer';
 import todoReducers from './reducers/Reducers';
 import itinerarySlice from './slices/itinerarySlice';
+import roleSlice from './slices/roleSlice';
 //import { reducer as reduxFormReducer } from 'redux-form';
 const middleware = applyMiddleware(thunk);
 
@@ -14,7 +15,8 @@ const reducers = combineReducers({
     posts: PostsReducer,
     auth: AuthReducer,
 		todoReducers,
-    itinerary: itinerarySlice
+    itinerary: itinerarySlice,
+    role: roleSlice
 	//form: reduxFormReducer,	
 	
 });

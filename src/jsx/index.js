@@ -156,6 +156,8 @@ import SupplierPayment from "./components/Enquiry/SupplierPayment";
 import CompanySettings from "./components/Settings/CompanyManagement/CompanySettings";
 import CurrencySettings from "./components/Settings/CompanyManagement/CurrencySettings";
 import Fields from "./components/Settings/CompanyManagement/Fields";
+import Permission from "./components/Settings/UserManagement/Role/Permission";
+
 const Markup = () => {
 
   const allRoutes = [
@@ -227,6 +229,7 @@ const Markup = () => {
     {url:'add-hotel',component: <AddHotel/>},
     {url:'user',component: <User/>},
     {url:'user-role',component: <UserRole/>},
+    {url:'user-role/:id',component: <Permission/>},
     {url:'agent',component: <Agent/>},
     {url:'company-settings',component: <CompanySettings/>},
     {url:'currency-settings',component: <CurrencySettings/>},
