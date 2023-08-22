@@ -201,6 +201,7 @@ const User = () =>{
                                                         <Dropdown.Menu className="dropdown-menu-end">
                                                             <Dropdown.Item>Edit</Dropdown.Item>
                                                             <Dropdown.Item>Delete</Dropdown.Item>
+                                                            <Dropdown.Item>{item.icontext === 'Active' ? 'Inactive' : 'Active'}</Dropdown.Item>
                                                         </Dropdown.Menu>
                                                     </Dropdown>
                                                 </td>

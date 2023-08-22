@@ -96,7 +96,8 @@ const Permission = () =>{
         return str.charAt(0).toUpperCase() + str.slice(1)
     }
     const permission = ['read', 'write', 'update', 'delete']
-    const permissionOption = ["No","Yes"]
+    const permissionOption = ["All","Added","Assigned","Added & Assigned","None"]
+    const readPermissionOption = ["All","Added","None"]
     const handleSubmit = () => {
         notify({message:'User Role Added Successfully'})
         navigate('/user-role')
@@ -208,7 +209,7 @@ const Permission = () =>{
                                                 {permission.map((data)=>(
                                                 <td key={data}>
                                                     <SelectField name={'val'}
-                                                     options={permissionOption}
+                                                     options={data === 'read' ? readPermissionOption : permissionOption}
                                                      formClass='w-50 mb-0' 
                                                      selectClass='ms-0'/>
                                                 </td>))}
