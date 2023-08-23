@@ -6,7 +6,7 @@ function EnquiryDetails() {
   const MENU = [
     { name: "profile", path: "", component: "" },
     { name: "quotation", path: "/quotation", component: "" },
-    { name: "follow ps", path: "", component: "" },
+    { name: "follow ups", path: "", component: "" },
     { name: "mail to supplier", path: "", component: "" },
     { name: "supplier payments", path: "", component: "" },
     { name: "tickets", path: "", component: "" },

@@ -108,3 +108,6 @@
   width: 5rem;
   padding: .5rem 0 .5rem 0.5rem;
 }
+.custom-wrap{
+  white-space: initial !important;
+}

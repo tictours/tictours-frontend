@@ -137,6 +137,8 @@ import { ThemeContext } from "../context/ThemeContext";
 import Enquiry from "./components/Enquiry";
 import EnquiryDetails from "./components/Enquiry/EnquiryDetails";
 import Quotation from "./components/Enquiry/Quotation";
+import FollowUp from "./components/Enquiry/FollowUp";
+
 
 // Leads
 import Leads from "./components/Leads";
@@ -308,6 +310,7 @@ const Markup = () => {
                 <Route path='*' element={null} />
                 <Route path='profile' element={<EditProfile/>} />                                          
                 <Route path='quotation' element={<Quotation/>} />                                          
+                <Route path='follow-ups' element={<FollowUp/>} />                                          
                 <Route path='itinerary' element={<SetupModal/>} />                                          
                 <Route path='payments' element={<Payment/>} />                                          
                 <Route path='mail-to-supplier' element={<MailToSupplier/>} />                                          
