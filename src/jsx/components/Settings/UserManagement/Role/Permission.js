@@ -176,7 +176,7 @@ const Permission = () =>{
                 </div>
                         </div>
                         <div className="col-xl-12" >                            
-                            <div className="table-responsive  full-data dataTables_wrapper" id="example2_wrapper">
+                            <div className="table-responsive  full-data dataTables_wrapper" id="">
                                 <table className="table-responsive-lg table display mb-4 dataTablesCard  text-black dataTable no-footer" id="example2">
                                     <thead>
                                         <tr>
@@ -209,7 +209,7 @@ const Permission = () =>{
                                                 {permission.map((data)=>(
                                                 <td key={data}>
                                                     <SelectField name={'val'}
-                                                     options={data === 'read' ? readPermissionOption : permissionOption}
+                                                     options={permissionOption}
                                                      formClass='w-50 mb-0' 
                                                      selectClass='ms-0'/>
                                                 </td>))}
