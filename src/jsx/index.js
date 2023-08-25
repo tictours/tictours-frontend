@@ -135,7 +135,7 @@ import { ThemeContext } from "../context/ThemeContext";
 
 // Enquiry
 import Enquiry from "./components/Enquiry";
-import EnquiryDetails from "./components/Enquiry/EnquiryDetails";
+import Tabs from "./components/common/Tabs";
 import Quotation from "./components/Enquiry/Quotation";
 import FollowUp from "./components/Enquiry/FollowUp";
 
@@ -159,6 +159,29 @@ import CompanySettings from "./components/Settings/CompanyManagement/CompanySett
 import CurrencySettings from "./components/Settings/CompanyManagement/CurrencySettings";
 import Fields from "./components/Settings/CompanyManagement/Fields";
 import Permission from "./components/Settings/UserManagement/Role/Permission";
+import HotelFields from "./components/Settings/Hotels/Fields";
+
+const enquiryMenu = [
+  { name: "profile", path: "", component: "" },
+  { name: "quotation", path: "/quotation", component: "" },
+  { name: "follow ups", path: "", component: "" },
+  { name: "mail to supplier", path: "", component: "" },
+  { name: "supplier payments", path: "", component: "" },
+  { name: "tickets", path: "", component: "" },
+  { name: "payments", path: "", component: "" },
+  { name: "documents", path: "", component: "" },
+];
+const hotelMenu = [
+  { name: "hotels", path: "", component: "" },
+  { name: "property category", path: "", component: "" },
+  { name: "property types", path: "", component: "" },
+  { name: "room types", path: "", component: "" },
+  { name: "market types", path: "", component: "" },
+  { name: "room amenities", path: "", component: "" },
+  { name: "hotel amenities", path: "", component: "" },
+  { name: "meal plan", path: "", component: "" },
+  
+];
 
 const Markup = () => {
 
@@ -227,7 +250,7 @@ const Markup = () => {
     {url:'leads', component: <Leads/>},
     // Settings
     {url:'settings', component: <Settings/>},
-    {url:'hotels', component: <Hotels/>},
+    // {url:'hotels', component: <Hotels/>},
     {url:'add-hotel',component: <AddHotel/>},
     {url:'user',component: <User/>},
     {url:'user-role',component: <UserRole/>},
@@ -311,7 +334,7 @@ const Markup = () => {
               </Route>
               <Route  element={<Layout7 />}>
                 <Route exact path="/enquiry"  element={<Enquiry/>} />
-                <Route path="/enquiry" element={<EnquiryDetails/>}>
+                <Route path="/enquiry" element={<Tabs menu={enquiryMenu}/>}>
                 <Route path='*' element={null} />
                 <Route path='profile' element={<EditProfile/>} />                                          
                 <Route path='quotation' element={<Quotation/>} />                                          
@@ -320,7 +343,12 @@ const Markup = () => {
                 <Route path='payments' element={<Payment/>} />                                          
                 <Route path='mail-to-supplier' element={<MailToSupplier/>} />                                          
                 <Route path='supplier-payments' element={<SupplierPayment/>} />                                          
-                </Route>	                 
+                </Route>
+                <Route path='' element={<Tabs menu={hotelMenu} mainPath="/"/>}	>
+                <Route path='hotels' element={<Hotels/>} />
+                <Route path='property-category' element={<HotelFields title='Property category' addTitle={'Category'}/>} />
+                
+                </Route>                 
               </Route>                     
               <Route element={<Layout7 />}>	                
                 { allRoutes.map((data, i) => (

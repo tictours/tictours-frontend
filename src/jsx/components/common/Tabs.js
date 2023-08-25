@@ -2,24 +2,16 @@ import React from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
-function EnquiryDetails() {
-  const MENU = [
-    { name: "profile", path: "", component: "" },
-    { name: "quotation", path: "/quotation", component: "" },
-    { name: "follow ups", path: "", component: "" },
-    { name: "mail to supplier", path: "", component: "" },
-    { name: "supplier payments", path: "", component: "" },
-    { name: "tickets", path: "", component: "" },
-    { name: "payments", path: "", component: "" },
-    { name: "documents", path: "", component: "" },
-  ];
+function TabComponent({menu,mainPath='/enquiry/'}) {
   const navigate = useNavigate();
   const {pathname} = useLocation()
-  const activePath = pathname.replace('/enquiry/','')
+  const activePath = pathname.replace(mainPath,'')
+  console.log('act',activePath)
   const handleClick = (path) => {
     // console.log("clicked", path);
     navigate(path);
   };
+  console.log('menu',menu)
   return (
     <>
       <div className="row">
@@ -32,7 +24,7 @@ function EnquiryDetails() {
             onSelect={handleClick}
             activeKey={activePath}
           >
-            {MENU.map((menu) => (
+            {menu.map((menu) => (
               <Tab
                 key={menu.name}
                 eventKey={menu.name.split(/[\s]+/).join("-")}
@@ -47,4 +39,4 @@ function EnquiryDetails() {
   );
 }
 
-export default EnquiryDetails;
+export default TabComponent;
