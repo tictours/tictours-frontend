@@ -252,6 +252,19 @@ const StepTwo = () => {
           </div>
         </div>
               </div>
+              <div className="row mb-3">
+                <div className="col-12">
+                  <h4>Image</h4>
+                </div>
+                <div className="col-lg-6">
+          <div className="form-group">
+          <div className="my-3">
+				  <label htmlFor="formFileMultiple" className="form-label">Multiple files uploader</label>
+				  <input className="form-control" type="file" id="formFileMultiple" multiple />
+				</div>
+          </div>
+        </div>
+              </div>
               <div className="row">
                 <div className="col-12">
                   <h4>Meals Plan</h4>
