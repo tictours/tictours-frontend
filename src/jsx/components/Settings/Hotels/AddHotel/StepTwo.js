@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import InputField from "../../../common/InputField";
 import SelectField from "../../../common/SelectField";
 import ReactSelect from "../../../common/ReactSelect";
-import { Button, Table } from "react-bootstrap";
+import { Button, Dropdown, Table } from "react-bootstrap";
 
 const SelectInputComponent = ({
   label,
@@ -88,20 +88,28 @@ const StepTwo = () => {
     { label: "Lunch", value: "lunch" },
     { label: "Dinner", value: "dinner" },
   ];
+  const amenityData = [1,2,3,4,5]
   const formatDate = (date) => {
     const localDate = new Date(date).toLocaleDateString();
     return localDate;
   };
+  const handleEdit = (id,value,setValue) => {
+    console.log('edit',id)
+  }
+  const handleDelete = (id,value,setValue) => {
+    const filteredVal = value.filter((val,i)=>i !== id)
+    setValue("addRoom", filteredVal)
+  }
   return (
     <section>
       <Formik
         initialValues={initialValues}
         // validationSchema={loginSchema}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+          // setTimeout(() => {
+          //   alert(JSON.stringify(values, null, 2));
+          //   setSubmitting(false);
+          // }, 400);
         }}
       >
         {({
@@ -220,6 +228,29 @@ const StepTwo = () => {
                   onBlur={handleBlur}
                   values={values}
                 />
+              </div>
+              <div className="row mb-3">
+                <div className="col-12">
+                  <h4>Amentities</h4>
+                </div>
+                <div className="col-12">
+          <div className="form-group">
+            {amenityData.map((data,key) => (
+              <div key={key} className="form-check form-check-inline  fw-normal">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    value=""
+                  //   defaultChecked
+                  />
+                  {`Amenity ${key+1}`}
+                </label>
+                {/* <span className="ms-2 amenity-count">{`12${key}`}</span> */}
+              </div>
+            ))}
+          </div>
+        </div>
               </div>
               <div className="row">
                 <div className="col-12">
@@ -379,6 +410,7 @@ const StepTwo = () => {
                           <th>Single Bed</th>
                           <th>Double Bed</th>
                           <th>Triple Bed</th>
+                          <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -394,6 +426,22 @@ const StepTwo = () => {
                               <td>{data.singleBed}</td>
                               <td>{data.doubleBed}</td>
                               <td>{data.tripleBed}</td>
+                              <td>
+                      <div className="d-flex">
+                        <button
+                          className="btn bg-main btn-xs sharp me-1"
+                          onClick={()=>handleEdit(key,values,setFieldValue)}
+                        >
+                          <i className="fas fa-pencil-alt"></i>
+                        </button>
+                        <button
+                          className="btn bg-main btn-xs sharp"
+                          onClick={()=>handleDelete(key,values.addRoom,setFieldValue)}
+                        >
+                          <i className="fa fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>
                             </tr>
                           );
                         })}

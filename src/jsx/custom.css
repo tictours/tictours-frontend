@@ -1,6 +1,9 @@
 .cursor-pointer {
   cursor: pointer;
 }
+.bg-main {
+  background-color: #E6EBEE;
+}
 .text-neutral {
   color: #d5dfe7;
 }

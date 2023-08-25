@@ -1,4 +1,5 @@
 import React from "react";
+import InputField from "../../../common/InputField";
 
 const StepOne = () => {
    return (
@@ -19,6 +20,24 @@ const StepOne = () => {
             <div className="col-lg-6 mb-2">
                <div className="form-group mb-3">
                   <label className="text-label">Destination</label>
+                  <select
+                        defaultValue={"option"}
+                        id="inputState"
+                        className="form-control"
+                      >
+                        <option value="option" disabled>
+                          Choose...
+                        </option>
+                        <option>Sub destination 1</option>
+                        <option>Sub destination 2</option>
+                        <option>Sub destination 3</option>
+                        <option>Sub destination 4</option>
+                      </select>
+               </div>
+            </div>
+            <div className="col-lg-6 mb-2">
+               <div className="form-group mb-3">
+                  <label className="text-label">Sub Destination</label>
                   <select
                         defaultValue={"option"}
                         id="inputState"
@@ -142,16 +161,8 @@ const StepOne = () => {
                   />
                </div>
             </div>
-            <div className="col-lg-12 mb-3">
-               <div className="form-group mb-3">
-                  <label className="text-label">Address*</label>
-                  <input
-                     type="text"
-                     name="place"
-                     className="form-control"
-                     required
-                  />
-               </div>
+            <div className="col-lg-6 mb-2">
+              <InputField isTextarea label='Address' name='address'/>
             </div>
          </div>
       </section>
