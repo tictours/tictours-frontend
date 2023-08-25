@@ -236,6 +236,11 @@ const Markup = () => {
     {url:'company-settings',component: <CompanySettings/>},
     {url:'currency-settings',component: <CurrencySettings/>},
     {url:'fields',component: <Fields/>},
+
+    // finance
+    {url:'follow-ups', component: <FollowUp/>},
+    {url:'quotation', component: <Quotation/>},
+    {url:'supplier-payments', component: <SupplierPayment/>},
   ];
   
  

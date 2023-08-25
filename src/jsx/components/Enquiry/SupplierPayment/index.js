@@ -104,7 +104,7 @@ const SupplierPayment = () =>{
                         <div className="col-xl-12">
                             <div className="page-titles">
                                 <div className="d-flex align-items-center">
-                                    <h2 className="heading">SupplierPayment</h2>
+                                    <h2 className="heading">Supplier Payment</h2>
                                    
                                 </div>
                                 <div className="d-flex flex-wrap my-2 my-sm-0">

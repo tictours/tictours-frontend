@@ -56,7 +56,7 @@ export const MenuList = [
     title: "Follow ups",
     classsChange: "mm-collapse",
     iconStyle: <i className="fa fa-list" aria-hidden="true"></i>,
-    to: "follow",
+    to: "follow-ups",
   },
   {
     title: "Tickets",
@@ -88,11 +88,11 @@ export const MenuList = [
     content: [
       {
         title: "Quotation",
-        to: "quotatiion",
+        to: "quotation",
       },
       {
         title: "Invoice",
-        to: "t-invoice",
+        to: "invoice",
       },
       {
         title: "Credit Invoice",
@@ -100,7 +100,7 @@ export const MenuList = [
       },
       {
         title: "Supplier Payment",
-        to: "supplier-payment",
+        to: "supplier-payments",
       },
       
     ],
