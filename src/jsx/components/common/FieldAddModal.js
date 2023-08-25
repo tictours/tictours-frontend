@@ -8,7 +8,7 @@ import SelectField from './SelectField';
 import notify from './Notify';
 
 
-const AddModal = ({setShowModal,showModal}) => {
+const AddModal = ({setShowModal,showModal,title}) => {
 
   const navigate = useNavigate()
   const date = new Date()
@@ -20,7 +20,7 @@ const AddModal = ({setShowModal,showModal}) => {
     <Formik initialValues={initialValues} 
          onSubmit={(values, { setSubmitting }) => {
             setShowModal(false)
-            notify({message:'Currency Added Successfully'})
+            notify({message:`${title} Added Successfully`})
           }}>
         {({
     values,

@@ -160,6 +160,7 @@ import CurrencySettings from "./components/Settings/CompanyManagement/CurrencySe
 import Fields from "./components/Settings/CompanyManagement/Fields";
 import Permission from "./components/Settings/UserManagement/Role/Permission";
 import HotelFields from "./components/Settings/Hotels/Fields";
+import { HotelAmenities, MarketTypes, PropertyCategory, PropertyTypes, RoomAmenities, RoomTypes } from "./components/Settings/Hotels/Fields/FieldComponents";
 
 const enquiryMenu = [
   { name: "profile", path: "", component: "" },
@@ -346,7 +347,12 @@ const Markup = () => {
                 </Route>
                 <Route path='' element={<Tabs menu={hotelMenu} mainPath="/"/>}	>
                 <Route path='hotels' element={<Hotels/>} />
-                <Route path='property-category' element={<HotelFields title='Property category' addTitle={'Category'}/>} />
+                <Route path='property-category' element={<PropertyCategory/>} />
+                <Route path='property-types' element={<PropertyTypes/>} />
+                <Route path='room-types' element={<RoomTypes/>} />
+                <Route path='market-types' element={<MarketTypes/>} />
+                <Route path='room-amenities' element={<RoomAmenities/>} />
+                <Route path='hotel-amenities' element={<HotelAmenities/>} />
                 
                 </Route>                 
               </Route>                     

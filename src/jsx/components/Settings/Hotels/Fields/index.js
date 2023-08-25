@@ -53,7 +53,7 @@ const MENU = [
     { name: 'status', data: statusData },
     { name: 'category', data: categoryData },
 ]
-const HotelFields = ({title,addTitle,menu}) => {
+const HotelFields = ({title,addTitle,tableData}) => {
 
     const navigate = useNavigate()
     const [data, setData] = useState(
@@ -220,7 +220,7 @@ const HotelFields = ({title,addTitle,menu}) => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {menu?.map((item, ind) => (
+                                        {tableData?.map((item, ind) => (
                                             <tr key={ind}>
                                                 {/* <td className="sorting_1">
                                                     <div className="checkbox me-0 align-self-center">
@@ -325,7 +325,7 @@ const HotelFields = ({title,addTitle,menu}) => {
 
                 </div>
             </div>
-            <AddModal showModal={showModal} setShowModal={setShowModal} />
+            <AddModal showModal={showModal} setShowModal={setShowModal} title={title} />
         </>
     )
 }
