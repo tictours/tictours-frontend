@@ -53,4 +53,11 @@ export const HotelAmenities = () => {
     </>
   )
 }
+export const MealPlan = () => {
+  return (
+    <>
+       <HotelFields title='Meal Plan' addTitle='Plan' tableData={Data}/>
+    </>
+  )
+}
 
