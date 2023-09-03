@@ -36,6 +36,7 @@ const User = () =>{
 		document.querySelectorAll("#example2_wrapper tbody tr")
 	);
     const [showModal,setShowModal]= useState(false)
+    const [editId,setEditId]= useState('')
 	const sort = 8;
 	const activePag = useRef(0);	
 	const chageData = (frist, sec) => {
@@ -97,6 +98,11 @@ const User = () =>{
         {name:'Inactive',value:'2'},
         {name:'Type',value:'6'},
     ]
+
+    const handleEdit = (id)=>{
+        setShowModal(true)
+        setEditId(id)
+    }
     return (
         <>
             <div className="row">
@@ -199,7 +205,7 @@ const User = () =>{
                                                             </svg>
                                                         </Dropdown.Toggle>
                                                         <Dropdown.Menu className="dropdown-menu-end">
-                                                            <Dropdown.Item>Edit</Dropdown.Item>
+                                                            <Dropdown.Item onClick={()=>handleEdit(item.title)}>Edit</Dropdown.Item>
                                                             <Dropdown.Item>Delete</Dropdown.Item>
                                                             <Dropdown.Item>{item.icontext === 'Active' ? 'Inactive' : 'Active'}</Dropdown.Item>
                                                         </Dropdown.Menu>
@@ -265,7 +271,7 @@ const User = () =>{
 
                 </div>       
             </div>
-            <AddUser showModal={showModal} setShowModal={setShowModal}/>    
+            <AddUser showModal={showModal} setShowModal={setShowModal} editId={editId} setEditId={setEditId}/>    
         </>
     )
 }

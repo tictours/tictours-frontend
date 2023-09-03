@@ -9,10 +9,10 @@ import ReactSelect from '../../../common/ReactSelect';
 
 
 
-function AddUser({ showModal, setShowModal }) {
+function AddUser({ showModal, setShowModal, editId, setEditId }) {
 
 
-
+  const isEdit = !!editId
   const initialValues = {}
   const marketTypeOptions = ["Type 1", "Type 2", "Type 3"];
   const countryOptions = [
@@ -33,15 +33,19 @@ function AddUser({ showModal, setShowModal }) {
     <>
       <CustomModal
         showModal={showModal}
-        title={"Add User"}
-        handleModalClose={() => setShowModal(false)}
+        title={`${isEdit ? 'Edit' : 'Add'} User`}
+        handleModalClose={() => {
+          setShowModal(false)
+          setEditId('')
+        }}
       >
         <Formik
           initialValues={initialValues}
           // validationSchema={loginSchema}
           onSubmit={(values, { setSubmitting }) => {
             setShowModal(false)
-            notify({message:'User Added Successfully'})
+            setEditId('')
+            notify({message:`User ${isEdit ? 'Edited' : 'Added'} Successfully`})
           }}
         >
           {({
@@ -168,7 +172,7 @@ function AddUser({ showModal, setShowModal }) {
                 </div>
               </div>
               <button type="submit" className="btn btn-primary mt-4">
-                Add User
+                  {`${isEdit ? 'Edit' : 'Add'} User`}
               </button>
             </form>
           )}
