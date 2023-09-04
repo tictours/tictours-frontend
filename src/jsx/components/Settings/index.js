@@ -9,6 +9,7 @@ import crypto from './../../../images/svg/cryptocurrency.svg';
 import transfer from './../../../images/svg/wire-transfer.svg';
 const smallCard = [
     { image: school, title:'Destinations', path:'/destination' },
+    { image: school, title:'Sub Destinations', path:'/sub-destination' },
     { image: wallet, title:'Suppliers', path:'/supplier' },
     { image: crypto, title:'Hotels', path:'/hotels' },
     { image: transfer, title:'Room Type', path:'/room-type' },
