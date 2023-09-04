@@ -112,7 +112,7 @@ const Leads = () =>{
                                         </span>
                                     </div>
                                     <div className="invoice-btn">
-                                        <button className="btn btn-primary">New Leads <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <button className="btn btn-primary" onClick={()=>navigate('/add-lead')}>New Leads <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M12 3C7.05 3 3 7.05 3 12C3 16.95 7.05 21 12 21C16.95 21 21 16.95 21 12C21 7.05 16.95 3 12 3ZM12 19.125C8.1 19.125 4.875 15.9 4.875 12C4.875 8.1 8.1 4.875 12 4.875C15.9 4.875 19.125 8.1 19.125 12C19.125 15.9 15.9 19.125 12 19.125Z" fill="#FCFCFC"/>
                                             <path d="M16.3498 11.0251H12.9748V7.65009C12.9748 7.12509 12.5248 6.67509 11.9998 6.67509C11.4748 6.67509 11.0248 7.12509 11.0248 7.65009V11.0251H7.6498C7.1248 11.0251 6.6748 11.4751 6.6748 12.0001C6.6748 12.5251 7.1248 12.9751 7.6498 12.9751H11.0248V16.3501C11.0248 16.8751 11.4748 17.3251 11.9998 17.3251C12.5248 17.3251 12.9748 16.8751 12.9748 16.3501V12.9751H16.3498C16.8748 12.9751 17.3248 12.5251 17.3248 12.0001C17.3248 11.4751 16.8748 11.0251 16.3498 11.0251Z" fill="#FCFCFC"/>
                                             </svg>
@@ -190,7 +190,7 @@ const Leads = () =>{
                                                             </svg>
                                                         </Dropdown.Toggle>
                                                         <Dropdown.Menu className="dropdown-menu-end">
-                                                            <Dropdown.Item>Edit</Dropdown.Item>
+                                                            <Dropdown.Item onClick={()=>navigate('/add-lead')}>Edit</Dropdown.Item>
                                                             <Dropdown.Item>Delete</Dropdown.Item>
                                                         </Dropdown.Menu>
                                                     </Dropdown>

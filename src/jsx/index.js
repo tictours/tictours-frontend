@@ -249,6 +249,7 @@ const Markup = () => {
 
     // Leads
     {url:'leads', component: <Leads/>},
+    {url:'add-lead', component: <EditProfile/>},
     // Settings
     {url:'settings', component: <Settings/>},
     // {url:'hotels', component: <Hotels/>},

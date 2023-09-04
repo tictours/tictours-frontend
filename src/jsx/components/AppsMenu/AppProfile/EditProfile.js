@@ -229,7 +229,7 @@ const EditProfile = () => {
                                 </div>
                             </div>
                             <div className="card-footer">
-                                <button className="btn btn-primary">UPDATE</button>
+                                <button className="btn btn-primary" type='button' onClick={()=>console.log('update')}>UPDATE</button>
                                 {/* <Link to={"#"} className="btn-link">Forgot your password?</Link> */}
                             </div>
                         </form>
