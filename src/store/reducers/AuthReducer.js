@@ -11,6 +11,7 @@ const initialState = {
     auth: {
         email: '',
         idToken: '',
+        id: '',
         localId: '',
         expiresIn: '',
         refreshToken: '',

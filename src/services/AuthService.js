@@ -20,18 +20,18 @@ export function signUp(email, password) {
 
 export function login(email, password) {
     const postData = {
-        email,
+        username:email,
         password,
-        returnSecureToken: true,
+        // returnSecureToken: true,
     };
     return axios.post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD3RPAp3nuETDn9OQimqn_YF6zdzqWITII`,
+        process.env.REACT_APP_API_URL+'user/login',
         postData,
     );
 }
 
 export function formatError(errorResponse) {
-    switch (errorResponse.error.message) {
+    switch (errorResponse.status) {
         case 'EMAIL_EXISTS':
             //return 'Email already exists';
             swal("Oops", "Email already exists", "error");
@@ -40,9 +40,9 @@ export function formatError(errorResponse) {
             //return 'Email not found';
            swal("Oops", "Email not found", "error",{ button: "Try Again!",});
            break;
-        case 'INVALID_PASSWORD':
+        case 401:
             //return 'Invalid Password';
-            swal("Oops", "Invalid Password", "error",{ button: "Try Again!",});
+            swal("Oops", "Invalid Username or Password", "error",{ button: "Try Again!",});
             break;
         case 'USER_DISABLED':
             return 'User Disabled';
@@ -54,7 +54,7 @@ export function formatError(errorResponse) {
 
 export function saveTokenInLocalStorage(tokenDetails) {
     tokenDetails.expireDate = new Date(
-        new Date().getTime() + tokenDetails.expiresIn * 1000,
+        new Date().getTime() + process.env.REACT_APP_EXPIRE_IN * 1000,
     );
     localStorage.setItem('userDetails', JSON.stringify(tokenDetails));
 }

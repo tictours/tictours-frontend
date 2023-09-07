@@ -59,7 +59,7 @@ export function loginAction(email, password, navigate) {
                 saveTokenInLocalStorage(response.data);
                 runLogoutTimer(
                     dispatch,
-                    response.data.expiresIn * 1000,
+                    process.env.REACT_APP_EXPIRE_IN * 1000,
                     navigate,
                 );
                dispatch(loginConfirmedAction(response.data));
@@ -74,8 +74,7 @@ export function loginAction(email, password, navigate) {
             })
             .catch((error) => {
 				//console.log('error');
-				//console.log(error);
-                const errorMessage = formatError(error.response.data);
+                const errorMessage = formatError(error.response);
                 dispatch(loginFailedAction(errorMessage));
             });
     };

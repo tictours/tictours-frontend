@@ -8,12 +8,12 @@ import SelectField from './SelectField';
 import notify from './Notify';
 
 
-const AddModal = ({setShowModal,showModal,title,editDetails,setEditDetails}) => {
+const AddModal = ({setShowModal,showModal,title,editId,setEditId}) => {
 
   const navigate = useNavigate()
   const date = new Date()
-  const isEdit = !!Object.keys(editDetails).length
-  console.log('is edit',isEdit,editDetails)
+  const isEdit = !!editId
+  // console.log('is edit',isEdit,editId)
 
   const initialValues = {cancelDate:date,dueDate:date}
   const TypeOptions = ['Transfer','Hotel','Activity']
@@ -23,26 +23,26 @@ const AddModal = ({setShowModal,showModal,title,editDetails,setEditDetails}) => 
     onSubmit: (values) => {
       // Handle form submission here
       setShowModal(false)
-      setEditDetails({})
+      setEditId('')
       notify({message:`${title} ${isEdit ? 'Edited' : 'Added'} Successfully`})
     },
   });
 
-  useEffect(() => {
-    // You can set the field value using setFieldValue
-    if(isEdit){
-      formik.setFieldValue('name', editDetails.name); // Replace 'fieldName' and 'New Value' with your actual field name and value
-    }else{
-      formik.setFieldValue('name', ''); // Replace 'fieldName' and 'New Value' with your actual field name and value
-    }
-  }, [isEdit]);
+  // useEffect(() => {
+  //   // You can set the field value using setFieldValue
+  //   if(isEdit){
+  //     formik.setFieldValue('name', editId.name); // Replace 'fieldName' and 'New Value' with your actual field name and value
+  //   }else{
+  //     formik.setFieldValue('name', ''); // Replace 'fieldName' and 'New Value' with your actual field name and value
+  //   }
+  // }, [isEdit]);
   return (
     <CustomModal
             showModal={showModal}
             title={`${isEdit ? 'Edit' : 'Add'} Fields`}
             handleModalClose={() => {
               setShowModal(false)
-              setEditDetails({})
+              setEditId('')
             //   setFormComponent('setupForm')
             //   navigate('/enquiry/quotation')
             }

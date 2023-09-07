@@ -60,7 +60,7 @@ const HotelFields = ({title,addTitle,tableData}) => {
         document.querySelectorAll("#example2_wrapper tbody tr")
     );
     const [showModal, setShowModal] = useState(false)
-    const [editDetails, setEditDetails] = useState({})
+    const [editId, setEditId] = useState('')
     const [selectBtn, setSelectBtn] = useState(fieldOptions[0])
     const [fieldData, setFieldData] = useState(MENU[0])
     const [activeTab, setActiveTab] = useState(0)
@@ -134,9 +134,9 @@ const HotelFields = ({title,addTitle,tableData}) => {
         console.log('data', data)
     }
 
-    const handleEdit = (data) => {
+    const handleEdit = (id) => {
         setShowModal(true)
-        setEditDetails(data)
+        setEditId(id)
     }
     return (
         <>
@@ -267,7 +267,7 @@ const HotelFields = ({title,addTitle,tableData}) => {
                                                             </svg>
                                                         </Dropdown.Toggle>
                                                         <Dropdown.Menu className="dropdown-menu-end">
-                                                            <Dropdown.Item onClick={()=>handleEdit(item)}>Edit</Dropdown.Item>
+                                                            <Dropdown.Item onClick={()=>handleEdit(item.id)}>Edit</Dropdown.Item>
                                                             <Dropdown.Item>Delete</Dropdown.Item>
                                                         </Dropdown.Menu>
                                                     </Dropdown>
@@ -331,7 +331,7 @@ const HotelFields = ({title,addTitle,tableData}) => {
 
                 </div>
             </div>
-            <AddModal showModal={showModal} setShowModal={setShowModal} title={title} editDetails={editDetails} setEditDetails={setEditDetails} />
+            <AddModal showModal={showModal} setShowModal={setShowModal} title={title} editId={editId} setEditId={setEditId} />
         </>
     )
 }

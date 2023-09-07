@@ -14,7 +14,7 @@ import pol from "../../images/pol.jpg";
 
 function Login (props) {
 	
-  	const [email, setEmail] = useState('demo@example.com');
+  	const [email, setEmail] = useState('testuser');
     let errorsObj = { email: '', password: '' };
     const [errors, setErrors] = useState(errorsObj);
     const [password, setPassword] = useState('123456');
@@ -87,8 +87,8 @@ function Login (props) {
 										)}
 										<form onSubmit={onLogin} className='my-4'>
 											<div className="my-3">
-												<label className="mb-1"><strong>Email</strong></label>												
-													<input type="email" className="form-control"
+												<label className="mb-1"><strong>Username</strong></label>												
+													<input className="form-control"
 														value={email}
 													  	onChange={(e) => setEmail(e.target.value)}
 													   	placeholder="Type Your Email Address"
