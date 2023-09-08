@@ -8,7 +8,7 @@ import SelectField from './SelectField';
 import notify from './Notify';
 
 
-const AddModal = ({setShowModal,showModal,title,editId,setEditId}) => {
+const AddModal = ({btnTitle='Fields',setShowModal,showModal,title,editId,setEditId}) => {
 
   const navigate = useNavigate()
   const date = new Date()
@@ -39,7 +39,7 @@ const AddModal = ({setShowModal,showModal,title,editId,setEditId}) => {
   return (
     <CustomModal
             showModal={showModal}
-            title={`${isEdit ? 'Edit' : 'Add'} Fields`}
+            title={`${isEdit ? 'Edit' : 'Add'} ${title}`}
             handleModalClose={() => {
               setShowModal(false)
               setEditId('')
@@ -66,7 +66,7 @@ const AddModal = ({setShowModal,showModal,title,editId,setEditId}) => {
                    
                   </div>
                   <button type="submit" className="btn btn-primary">
-                    {`${isEdit ? 'Edit' : 'Add'} Fields`}
+                    {`${isEdit ? 'Edit' : 'Add'} ${btnTitle}`}
                   </button>
             </form>
           </div>

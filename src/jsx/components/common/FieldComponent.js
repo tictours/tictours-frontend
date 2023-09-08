@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Badge, Dropdown, Tab, Tabs } from 'react-bootstrap';
 
-import InvoiceSlider from '../../../Dashboard/InvoiceSlider';
-import QuestionIcon from '../../../Dashboard/Ticketing/QuestionIcon';
-import SelectField from '../../../common/SelectField';
-import AddModal from '../../../common/FieldAddModal';
+import InvoiceSlider from '../Dashboard/InvoiceSlider';
+import QuestionIcon from '../Dashboard/Ticketing/QuestionIcon';
+import SelectField from './SelectField';
+import AddModal from './FieldAddModal';
 
 const RightIcon = () => {
     return (
@@ -53,7 +53,7 @@ const MENU = [
     { name: 'status', data: statusData },
     { name: 'category', data: categoryData },
 ]
-const HotelFields = ({title,addTitle,tableData}) => {
+const FieldComponent = ({title,addTitle,tableData}) => {
 
     const navigate = useNavigate()
     const [data, setData] = useState(
@@ -331,8 +331,8 @@ const HotelFields = ({title,addTitle,tableData}) => {
 
                 </div>
             </div>
-            <AddModal showModal={showModal} setShowModal={setShowModal} title={title} editId={editId} setEditId={setEditId} />
+        <AddModal  showModal={showModal} setShowModal={setShowModal} title={title} btnTitle={addTitle} editId={editId} setEditId={setEditId} />
         </>
     )
 }
-export default HotelFields;
+export default FieldComponent;
