@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import DatePicker from "react-datepicker";
 import CustomModal from '../../../../layouts/CustomModal';
 import  notify  from '../../../common/Notify';
-import { Formik } from 'formik';
+import { Formik, useFormik } from 'formik';
 import SelectField from '../../../common/SelectField';
 import InputField from '../../../common/InputField';
 import ReactSelect from '../../../common/ReactSelect';
+import { signUp } from '../../../../../services/AuthService';
 
 
 
@@ -14,6 +15,27 @@ function AddUser({ showModal, setShowModal, editId, setEditId }) {
 
   const isEdit = !!editId
   const initialValues = {}
+  const formik = useFormik({
+    initialValues,
+    onSubmit: (values, { setSubmitting }) => {
+      signUp(values).then((res)=>{
+        console.log('res',res)
+        // setShowModal(false)
+        // setEditId('')
+        // notify({message:`User ${isEdit ? 'Edited' : 'Added'} Successfully`})
+      })
+    }
+  })
+  const {
+    values,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isSubmitting,
+    setFieldValue,
+  } = formik
+  console.log('vall',values)
   const marketTypeOptions = ["Type 1", "Type 2", "Type 3"];
   const countryOptions = [
     { label: 'Country 1', value: 'country1' },
@@ -39,7 +61,7 @@ function AddUser({ showModal, setShowModal, editId, setEditId }) {
           setEditId('')
         }}
       >
-        <Formik
+        {/* <Formik
           initialValues={initialValues}
           // validationSchema={loginSchema}
           onSubmit={(values, { setSubmitting }) => {
@@ -56,7 +78,7 @@ function AddUser({ showModal, setShowModal, editId, setEditId }) {
             handleSubmit,
             isSubmitting,
             setFieldValue,
-          }) => (
+          }) => ( */}
             <form onSubmit={handleSubmit}>
               <div className="row">
                 <div className="col-md-6  mb-2">
@@ -128,7 +150,7 @@ function AddUser({ showModal, setShowModal, editId, setEditId }) {
                 <div className="col-md-6 mb-2">
                   <SelectField
                     label="Role Type"
-                    name="marketType"
+                    name="roleType"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     values={values}
@@ -140,7 +162,7 @@ function AddUser({ showModal, setShowModal, editId, setEditId }) {
                     label='Country'
                     options={countryOptions}
                     onChange={(selected) =>
-                      setFieldValue("mealType", selected)
+                      setFieldValue("country", selected)
                     }
                   />
                 </div>
@@ -149,7 +171,7 @@ function AddUser({ showModal, setShowModal, editId, setEditId }) {
                     label='Language'
                     options={languageOptions}
                     onChange={(selected) =>
-                      setFieldValue("mealType", selected)
+                      setFieldValue("language", selected)
                     }
                   />
                 </div>
@@ -159,7 +181,7 @@ function AddUser({ showModal, setShowModal, editId, setEditId }) {
                   <DatePicker
                     className="form-control"
                     selected={values.roomStartDate}
-                    onChange={(date) => setFieldValue("roomStartDate", date)}
+                    onChange={(date) => setFieldValue("fromDate", date)}
                   />
                 </div>
                 <div className="col-md-6 m-b30">
@@ -167,7 +189,7 @@ function AddUser({ showModal, setShowModal, editId, setEditId }) {
                   <DatePicker
                     className="form-control"
                     selected={values.roomEndDate}
-                    onChange={(date) => setFieldValue("roomEndDate", date)}
+                    onChange={(date) => setFieldValue("toDate", date)}
                   />
                 </div>
               </div>
@@ -175,8 +197,8 @@ function AddUser({ showModal, setShowModal, editId, setEditId }) {
                   {`${isEdit ? 'Edit' : 'Add'} User`}
               </button>
             </form>
-          )}
-        </Formik>
+          {/* )}
+        </Formik> */}
       </CustomModal>
     </>
   )

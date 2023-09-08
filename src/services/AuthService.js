@@ -5,15 +5,25 @@ import {
     Logout,
 } from '../store/actions/AuthActions';
 
-export function signUp(email, password) {
+export function signUp(values) {
     //axios call
     const postData = {
-        email,
-        password,
-        returnSecureToken: true,
+        username:values.username,
+        email:values.email,
+        password:values.password,
+        c_password:values.password,
+        phone:values.phone,
+        first_name:values.firstName,
+        secomd_name:values.secondName,
+        role_id:values.roleId,
+        country:values.country,
+        language:values.language,
+        address:values.address,
+        from_date:values.fromDate,
+        to_date:values.toDate,
     };
     return axios.post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD3RPAp3nuETDn9OQimqn_YF6zdzqWITII`,
+        process.env.REACT_APP_API_URL+'user/register',
         postData,
     );
 }
