@@ -141,6 +141,17 @@ const EditProfile = () => {
                                         />
                                     </div>
                                     <div className="col-sm-6 m-b30">
+                                        <label className="form-label">Sub Destination</label>                                       
+                                        <Select
+                                            // closeMenuOnSelect={false}
+                                            // components={{ ClearIndicator }}
+                                            // styles={{ clearIndicator: ClearIndicatorStyles }}
+                                            // defaultValue={[colourOptions[4], colourOptions[5]]}
+                                            isMulti
+                                            options={destinationOptions}
+                                        />
+                                    </div>
+                                    <div className="col-sm-6 m-b30">
                                         <label className="form-label">Lead Source</label>
                                         
                                         <select defaultValue={"option"} className="form-control">
