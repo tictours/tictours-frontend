@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 //import Multistep from "react-multistep";
 import { Stepper, Step } from 'react-form-stepper';
 
@@ -9,14 +9,28 @@ import StepOne from "./StepOne";
 import PageTitle from "../../../../layouts/PageTitle";
 import { useNavigate } from "react-router-dom";
 import notify from "../../../common/Notify";
+import { useDispatch, useSelector } from "react-redux";
+import { FormAction } from "../../../../../store/slices/formSlice";
 
 const AddHotel = () => {
 	const [goSteps, setGoSteps] = useState(0);
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
+	const formId = useSelector((data)=> data.form)
+	const isEdit = !!formId.editId
+	
 	const handleSubmit = () => {
 		notify({message:'Hotel Added Successfully'})
 		navigate('/hotels')
+        dispatch(FormAction.setEditId(''))
 	}
+	useEffect(() => {
+
+	  return () => {
+        dispatch(FormAction.setEditId(''))
+	  }
+	}, [])
+	
 	
 	return (
 		<Fragment>
@@ -26,7 +40,7 @@ const AddHotel = () => {
 				<div className="col-xl-12 col-xxl-12">
 					<div className="card">
 						<div className="card-header">
-							<h4 className="card-title">Add Hotel</h4>
+							<h4 className="card-title">{`${isEdit ? 'Edit' : 'Add'} Hotel`}</h4>
 						</div>
 						<div className="card-body">
 						

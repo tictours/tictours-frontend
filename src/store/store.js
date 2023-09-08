@@ -5,6 +5,7 @@ import { AuthReducer } from './reducers/AuthReducer';
 import todoReducers from './reducers/Reducers';
 import itinerarySlice from './slices/itinerarySlice';
 import roleSlice from './slices/roleSlice';
+import formSlice from './slices/formSlice';
 //import { reducer as reduxFormReducer } from 'redux-form';
 const middleware = applyMiddleware(thunk);
 
@@ -16,7 +17,8 @@ const reducers = combineReducers({
     auth: AuthReducer,
 		todoReducers,
     itinerary: itinerarySlice,
-    role: roleSlice
+    role: roleSlice,
+    form: formSlice
 	//form: reduxFormReducer,	
 	
 });

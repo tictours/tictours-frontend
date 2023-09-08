@@ -6,6 +6,8 @@ import InvoiceSlider from '../../Dashboard/InvoiceSlider';
 import QuestionIcon from '../../Dashboard/Ticketing/QuestionIcon';
 import course1 from '../../../../images/course/hotel-1.jpg';
 import CourseSlider from '../../Dashboard/CourseSlider';
+import { useDispatch } from 'react-redux';
+import { FormAction } from '../../../../store/slices/formSlice';
 
 
 const RightIcon = () =>{
@@ -42,6 +44,7 @@ const bigCardData = [
 const Hotels = () =>{
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [data, setData] = useState(
 		document.querySelectorAll("#example2_wrapper tbody tr")
 	);
@@ -99,7 +102,11 @@ const Hotels = () =>{
          }
       }
     };
-   
+
+    const handleEdit = (id) => {
+        dispatch(FormAction.setEditId(id))
+        navigate(`/add-hotel`)
+    }
     return (
         <>
             <div className="row">
@@ -181,7 +188,10 @@ const Hotels = () =>{
                                                 {/* <img src={bitcoin} alt="" />{" "} */}
                                                 110+ Booking
                                             </span>
+                                            <div>
+                                            <button className="btn btn-primary btn-sm me-2" onClick={()=>handleEdit(item.id)}>Edit</button>
                                             <Link to={""} className="btn btn-primary btn-sm">View all</Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
