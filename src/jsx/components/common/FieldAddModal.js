@@ -8,7 +8,7 @@ import SelectField from './SelectField';
 import notify from './Notify';
 
 
-const AddModal = ({btnTitle='Fields',setShowModal,showModal,title,editId,setEditId}) => {
+const AddModal = ({btnTitle='Fields',setShowModal,showModal,title,editId,setEditId,parentName,parentData}) => {
 
   const navigate = useNavigate()
   const date = new Date()
@@ -63,6 +63,18 @@ const AddModal = ({btnTitle='Fields',setShowModal,showModal,title,editId,setEdit
                         values={formik.values}
                     />
                     </div>
+                    { !!parentName && <div className="mb-3 col-md-6">
+                    <SelectField
+                            label={parentName}
+                            name={'type'}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            values={formik.values}
+                            options={parentData}
+                            optionValue='id'
+                            optionLabel='name'
+                        />
+                    </div> }
                    
                   </div>
                   <button type="submit" className="btn btn-primary">

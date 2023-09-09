@@ -53,7 +53,7 @@ const MENU = [
     { name: 'status', data: statusData },
     { name: 'category', data: categoryData },
 ]
-const FieldComponent = ({title,addTitle,tableData}) => {
+const FieldComponent = ({title,addTitle,tableData,parentName='',parentValue='',parentData=[]}) => {
 
     const navigate = useNavigate()
     const [data, setData] = useState(
@@ -217,7 +217,9 @@ const FieldComponent = ({title,addTitle,tableData}) => {
                                             </th> */}
                                             <th className="text-center">Sl No</th>
                                             <th className="">Name</th>
+                                            {!!parentName ? <th className="">{parentName}</th> :
                                             <th></th>
+                                            }
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -240,7 +242,9 @@ const FieldComponent = ({title,addTitle,tableData}) => {
                                                 </td> */}
                                                 <td className='text-center'>{`${ind + 1}`}</td>
                                                 <td className=''>{item.name}</td>
-                                                <td></td>
+                                                {!!parentValue ? <td className="">{item[parentValue]}</td> :
+                                                    <td></td>
+                                                }
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -331,7 +335,9 @@ const FieldComponent = ({title,addTitle,tableData}) => {
 
                 </div>
             </div>
-        <AddModal  showModal={showModal} setShowModal={setShowModal} title={title} btnTitle={addTitle} editId={editId} setEditId={setEditId} />
+            <AddModal showModal={showModal} setShowModal={setShowModal} title={title}
+                btnTitle={addTitle} editId={editId} setEditId={setEditId}
+                parentName={parentName} parentData={parentData} />
         </>
     )
 }

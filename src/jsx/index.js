@@ -161,6 +161,7 @@ import Fields from "./components/Settings/CompanyManagement/Fields";
 import Permission from "./components/Settings/UserManagement/Role/Permission";
 import { HotelAmenities, MarketTypes, MealPlan, PropertyCategory, PropertyTypes, RoomAmenities, RoomTypes } from "./components/Settings/Hotels/Fields/HotelFields";
 import Destination from "./components/Settings/Destination";
+import SubDestination from "./components/Settings/SubDestination";
 
 const enquiryMenu = [
   { name: "profile", path: "", component: "" },
@@ -262,6 +263,7 @@ const Markup = () => {
     {url:'currency-settings',component: <CurrencySettings/>},
     {url:'fields',component: <Fields/>},
     {url:'destination',component: <Destination/>},
+    {url:'sub-destination',component: <SubDestination/>},
 
     // finance
     {url:'follow-ups', component: <FollowUp/>},
