@@ -53,7 +53,8 @@ const MENU = [
     { name: 'status', data: statusData },
     { name: 'category', data: categoryData },
 ]
-const FieldComponent = ({title,addTitle,tableData,parentName='',parentValue='',parentData=[]}) => {
+const FieldComponent = (props) => {
+    const {title,addTitle,tableData,parentName='',parentValue='',parentData=[],url} = props
 
     const navigate = useNavigate()
     const [data, setData] = useState(
@@ -337,7 +338,7 @@ const FieldComponent = ({title,addTitle,tableData,parentName='',parentValue='',p
             </div>
             <AddModal showModal={showModal} setShowModal={setShowModal} title={title}
                 btnTitle={addTitle} editId={editId} setEditId={setEditId}
-                parentName={parentName} parentData={parentData} />
+                parentName={parentName} parentData={parentData} url={url} />
         </>
     )
 }

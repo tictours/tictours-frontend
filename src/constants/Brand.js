@@ -1,5 +1,3 @@
-const BRAND = {
+export const BRAND = {
     NAME:'TIC'
   }
-
-export default BRAND;

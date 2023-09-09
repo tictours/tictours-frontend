@@ -6,25 +6,44 @@ import { Formik, useFormik } from 'formik';
 import InputField from './InputField';
 import SelectField from './SelectField';
 import notify from './Notify';
+import { axiosPost } from '../../../services/AxiosInstance';
+import { useDispatch } from 'react-redux';
+import { FormAction } from '../../../store/slices/formSlice';
 
 
-const AddModal = ({btnTitle='Fields',setShowModal,showModal,title,editId,setEditId,parentName,parentData}) => {
+const AddModal = (props) => {
+  const {btnTitle='Fields',setShowModal,showModal,
+         title,editId,setEditId,parentName,parentData,url} = props
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const date = new Date()
   const isEdit = !!editId
   // console.log('is edit',isEdit,editId)
 
-  const initialValues = {cancelDate:date,dueDate:date}
+  const initialValues = {name:''}
   const TypeOptions = ['Transfer','Hotel','Activity']
 
   const formik = useFormik({
     initialValues: initialValues,
-    onSubmit: (values) => {
+    onSubmit: async(values) => {
       // Handle form submission here
-      setShowModal(false)
-      setEditId('')
-      notify({message:`${title} ${isEdit ? 'Edited' : 'Added'} Successfully`})
+      try {
+        
+        const response = await axiosPost(url,values)
+        if(response.success){
+          dispatch(FormAction.setRefresh())
+          formik.setFieldValue('name','')
+          setShowModal(false)
+          if(isEdit){
+            setEditId('')
+          }
+          notify({message:`${title} ${isEdit ? 'Edited' : 'Added'} Successfully`})
+        }
+        // console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
     },
   });
 

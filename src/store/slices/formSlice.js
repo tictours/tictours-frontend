@@ -1,14 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    editId : ''
+    editId : '',
+    refresh : false
 }
 
 const Form = createSlice({
     name:'form',
     initialState,
     reducers:{
-        setEditId(state,action){state.editId = action.payload}
+        setEditId(state,action){state.editId = action.payload},
+        setRefresh(state,action){state.refresh = !state.refresh}
     }
 })
 

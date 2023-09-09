@@ -1,5 +1,7 @@
 import React from 'react'
 import FieldComponent from '../../common/FieldComponent'
+import { useAsync } from '../../../utilis/useAsync'
+import { URLS } from '../../../../constants'
 
 const Destination = () => {
     const Data  = [
@@ -9,9 +11,12 @@ const Destination = () => {
         { id: 4, name: 'Destination 4' },
         { id: 5, name: 'Destination 5' },
       ]
+      const url = URLS.DESTINATION_URL
+      const destinationData = useAsync(url)
         return (
           <>
-             <FieldComponent title='Destination' addTitle='Destination' tableData={Data} />
+             <FieldComponent title='Destination' addTitle='Destination' 
+              tableData={destinationData?.data?.data} url={url}/>
           </>
         )
 }

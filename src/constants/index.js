@@ -1,3 +1,3 @@
-import BRAND from "./Brand";
+export { BRAND } from "./Brand";
+export { URLS } from './Urls'
 
-export {BRAND}

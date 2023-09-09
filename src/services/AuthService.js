@@ -4,6 +4,7 @@ import {
     loginConfirmedAction,
     Logout,
 } from '../store/actions/AuthActions';
+import { URLS } from '../constants';
 
 export function signUp(values) {
     //axios call
@@ -35,7 +36,7 @@ export function login(email, password) {
         // returnSecureToken: true,
     };
     return axios.post(
-        process.env.REACT_APP_API_URL+'user/login',
+        process.env.REACT_APP_API_URL+URLS.LOGIN_URL,
         postData,
     );
 }
