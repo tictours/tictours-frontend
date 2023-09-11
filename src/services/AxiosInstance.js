@@ -26,5 +26,6 @@ axiosInstance.interceptors.request.use((config) => {
 const responseBody = (response) => response.data
 export const axiosPost = (url, data) => axiosInstance.post(url, data).then(responseBody)
 export const axiosPut = (url, data) => axiosInstance.put(url, data).then(responseBody)
+export const axiosDelete = (url, data) => axiosInstance.delete(url).then(responseBody)
 
 export default axiosInstance;

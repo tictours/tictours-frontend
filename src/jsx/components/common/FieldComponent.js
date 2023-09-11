@@ -6,6 +6,10 @@ import InvoiceSlider from '../Dashboard/InvoiceSlider';
 import QuestionIcon from '../Dashboard/Ticketing/QuestionIcon';
 import SelectField from './SelectField';
 import AddModal from './FieldAddModal';
+import notify from './Notify';
+import { axiosDelete } from '../../../services/AxiosInstance';
+import { useDispatch } from 'react-redux';
+import { FormAction } from '../../../store/slices/formSlice';
 
 const RightIcon = () => {
     return (
@@ -54,9 +58,10 @@ const MENU = [
     { name: 'category', data: categoryData },
 ]
 const FieldComponent = (props) => {
-    const {title,addTitle,tableData,parentName='',parentValue='',parentData=[],url} = props
+    const { title, addTitle, tableData, parentName = '', parentValue = '', parentData = [], url } = props
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [data, setData] = useState(
         document.querySelectorAll("#example2_wrapper tbody tr")
     );
@@ -139,6 +144,18 @@ const FieldComponent = (props) => {
         setShowModal(true)
         setEditId(id)
     }
+    const handleDelete = async (id, name) => {
+        const deleteUrl = `${url}/${id}`
+        try {
+            const response = await axiosDelete(deleteUrl)
+            if (response.success) {
+                dispatch(FormAction.setRefresh())
+                notify({ type: 'warning', message: `Deleted Successfully` })
+            }
+        } catch (error) {
+            notify({ type: 'error', message: 'Something went wrong !' })
+        }
+    }
     return (
         <>
             <div className="row">
@@ -219,7 +236,7 @@ const FieldComponent = (props) => {
                                             <th className="text-center">Sl No</th>
                                             <th className="">Name</th>
                                             {!!parentName ? <th className="">{parentName}</th> :
-                                            <th></th>
+                                                <th></th>
                                             }
                                             <th></th>
                                             <th></th>
@@ -272,8 +289,8 @@ const FieldComponent = (props) => {
                                                             </svg>
                                                         </Dropdown.Toggle>
                                                         <Dropdown.Menu className="dropdown-menu-end">
-                                                            <Dropdown.Item onClick={()=>handleEdit(item.id)}>Edit</Dropdown.Item>
-                                                            <Dropdown.Item>Delete</Dropdown.Item>
+                                                            <Dropdown.Item onClick={() => handleEdit(item.id)}>Edit</Dropdown.Item>
+                                                            <Dropdown.Item onClick={() => handleDelete(item.id)}>Delete</Dropdown.Item>
                                                         </Dropdown.Menu>
                                                     </Dropdown>
                                                 </td>
