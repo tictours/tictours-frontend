@@ -3,11 +3,11 @@ import axios from 'axios';
 import axiosInstance from '../../services/AxiosInstance';
 import { useSelector } from 'react-redux';
 
-export const useAsync = (initialUrl,condition=true) => {
+export const useAsync = (url, condition = true) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [url, setUrl] = useState(initialUrl);
+  //   const [url, setUrl] = useState(initialUrl);
   const refresh = useSelector(state => state.form.refresh)
 
   useEffect(() => {
@@ -28,8 +28,8 @@ export const useAsync = (initialUrl,condition=true) => {
     if (url && condition) {
       fetchData();
     }
-  }, [url,condition,refresh]);
+  }, [url, condition, refresh]);
 
-  return { data, error, loading, setUrl };
+  return { data, error, loading };
 };
 
