@@ -10,6 +10,7 @@ import notify from './Notify';
 import { axiosDelete } from '../../../services/AxiosInstance';
 import { useDispatch } from 'react-redux';
 import { FormAction } from '../../../store/slices/formSlice';
+import { useAsync } from '../../utilis/useAsync';
 
 const RightIcon = () => {
     return (
@@ -58,10 +59,12 @@ const MENU = [
     { name: 'category', data: categoryData },
 ]
 const FieldComponent = (props) => {
-    const { title, addTitle, tableData, parentName = '', parentValue = '', parentData = [], url } = props
+    const { title, addTitle, parentName = '', parentValue = '', parentData = [], url } = props
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const asyncData = useAsync(url)
+    const tableData = asyncData?.data?.data
     const [data, setData] = useState(
         document.querySelectorAll("#example2_wrapper tbody tr")
     );
