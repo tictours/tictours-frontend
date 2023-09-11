@@ -11,6 +11,7 @@ import { axiosDelete } from '../../../services/AxiosInstance';
 import { useDispatch } from 'react-redux';
 import { FormAction } from '../../../store/slices/formSlice';
 import { useAsync } from '../../utilis/useAsync';
+import NoData from './NoData';
 
 const RightIcon = () => {
     return (
@@ -209,33 +210,11 @@ const FieldComponent = (props) => {
                     {/* swiper end */}
 
                     <div className="row">
-                        {/* <div className='col-xl-12'>
-                            <Tabs
-                                defaultActiveKey="source"
-                                // id="fill-tab-example"
-                                className="mb-3"
-                                // fill
-                                onSelect={handleMenu}
-                                activeKey={activeTab}
-                            >
-                                {MENU.map((menu, key) => (
-                                    <Tab
-                                        key={menu.name}
-                                        eventKey={key}
-                                        title={menu.name.toUpperCase()}
-                                    // onClick={}
-                                    />
-                                ))}
-                            </Tabs>
-                        </div> */}
                         <div className="col-xl-12" >
                             <div className="table-responsive  full-data dataTables_wrapper" id="example2_wrapper">
                                 <table className="table-responsive-lg table display mb-4 dataTablesCard  text-black dataTable no-footer" id="example2">
                                     <thead>
                                         <tr>
-                                            {/* <th className="sorting_asc ">
-                                                <input type="checkbox" onClick={() => chackboxFun("all")} className="form-check-input" id="checkAll" required="" />
-                                            </th> */}
                                             <th className="text-center">Sl No</th>
                                             <th className="">Name</th>
                                             {!!parentName ? <th className="">{parentName}</th> :
@@ -249,39 +228,13 @@ const FieldComponent = (props) => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {tableData?.map((item, ind) => (
+                                        {tableData?.length > 0 ? tableData.map((item, ind) => (
                                             <tr key={ind}>
-                                                {/* <td className="sorting_1">
-                                                    <div className="checkbox me-0 align-self-center">
-                                                        <div className="custom-control custom-checkbox ">
-                                                            <input type="checkbox" className="form-check-input" id={"customCheckBox2"+ ind} required="" 
-                                                                onClick={() => chackboxFun()} 
-                                                            />
-                                                            <label className="custom-control-label" htmlFor={"customCheckBox2"+ ind} ></label>
-                                                        </div>
-                                                    </div>
-                                                </td> */}
                                                 <td className='text-center'>{`${ind + 1}`}</td>
-                                                <td className=''>{item.name}</td>
+                                                <td className='' colSpan={'5'}>{item.name}</td>
                                                 {!!parentValue ? <td className="">{item[parentValue]}</td> :
                                                     <td></td>
                                                 }
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                {/* <td className="whitesp-no p-0">
-                                                    <div className="py-sm-3 py-1 ps-3">
-                                                        <div >
-                                                            <h6 className="font-w500 fs-15 mb-0">Marilyn Workman</h6>
-                                                            <span className="fs-14 font-w400"><Link to={"app-profile"}>marilyn@gmail.com</Link></span>
-                                                        </div>												
-                                                    </div>
-                                                </td> */}
-                                                {/* <td>Manager</td> */}
-                                                {/* <td>Dubai, Qatar</td>
-                                                <td className= "doller">Shanid CA</td> */}
-                                                {/* <td className="whitesp-no font-w400 text-center">20000</td> */}
                                                 <td>
                                                     <Dropdown>
                                                         <Dropdown.Toggle as="div" className="i-false btn-link btn sharp tp-btn btn-primary pill" >
@@ -298,7 +251,9 @@ const FieldComponent = (props) => {
                                                     </Dropdown>
                                                 </td>
                                             </tr>
-                                        ))}
+                                        )) :
+                                            <NoData />
+                                        }
                                     </tbody>
                                 </table>
                                 <div className="d-sm-flex text-center justify-content-between align-items-center mt-3 mb-3">
