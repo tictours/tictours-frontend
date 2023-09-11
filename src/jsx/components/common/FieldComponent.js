@@ -60,7 +60,8 @@ const MENU = [
     { name: 'category', data: categoryData },
 ]
 const FieldComponent = (props) => {
-    const { title, addTitle, parentName = '', parentValue = '', parentData = [], url } = props
+    const { title, addTitle, parentName = '', parentValue = '',
+    url } = props
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -215,15 +216,10 @@ const FieldComponent = (props) => {
                                 <table className="table-responsive-lg table display mb-4 dataTablesCard  text-black dataTable no-footer" id="example2">
                                     <thead>
                                         <tr>
-                                            <th className="text-center">Sl No</th>
+                                            <th className="text-center custom-first-cell">Sl No</th>
                                             <th className="">Name</th>
-                                            {!!parentName ? <th className="">{parentName}</th> :
-                                                <th></th>
+                                            {!!parentName && <th className="">{parentName}</th>
                                             }
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -231,9 +227,8 @@ const FieldComponent = (props) => {
                                         {tableData?.length > 0 ? tableData.map((item, ind) => (
                                             <tr key={ind}>
                                                 <td className='text-center'>{`${ind + 1}`}</td>
-                                                <td className='' colSpan={'5'}>{item.name}</td>
-                                                {!!parentValue ? <td className="">{item[parentValue]}</td> :
-                                                    <td></td>
+                                                <td className=''>{item.name}</td>
+                                                {!!parentValue && <td className="">{item[parentValue]}</td> 
                                                 }
                                                 <td>
                                                     <Dropdown>
@@ -311,9 +306,9 @@ const FieldComponent = (props) => {
 
                 </div>
             </div>
-            <AddModal showModal={showModal} setShowModal={setShowModal} title={title}
+            <AddModal showModal={showModal} setShowModal={setShowModal}
                 btnTitle={addTitle} editId={editId} setEditId={setEditId}
-                parentName={parentName} parentData={parentData} url={url} />
+                parentName={parentName} {...props} />
         </>
     )
 }

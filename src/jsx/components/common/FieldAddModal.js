@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import DatePicker from "react-datepicker";
 import CustomModal from '../../layouts/CustomModal';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +14,7 @@ import { useAsync } from '../../utilis/useAsync';
 
 const AddModal = (props) => {
   const { btnTitle = 'Fields', setShowModal, showModal,
-    title, editId, setEditId, parentName, parentData, url } = props
+    title, editId, setEditId, parentName, parentId, url, parentUrl } = props
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -22,8 +22,23 @@ const AddModal = (props) => {
   const isEdit = !!editId
   const editUrl = `${url}/${editId}`
   const editData = useAsync(editUrl, isEdit)
+  const isParent = !!parentName
+  const asyncParentData = useAsync(parentUrl, isParent)
+  const parentData = asyncParentData?.data?.data
 
   const initialValues = { name: '' }
+
+  useEffect(() => {
+    // add check for isEdit if needed
+    if(showModal && isParent && !!parentData?.length){
+      formik.setFieldValue(parentId, parentData[0].id)
+    }
+    return () =>{
+    }
+    
+  }, [showModal])
+  
+  
   const TypeOptions = ['Transfer', 'Hotel', 'Activity']
 
   const formik = useFormik({
@@ -55,11 +70,18 @@ const AddModal = (props) => {
 
   useEffect(() => {
     const value = editData.data?.data?.name
+    const parentValue = editData.data?.data[parentId]
     if (isEdit && value) {
       formik.setFieldValue('name', value)
+      if(isParent && parentValue){
+        formik.setFieldValue(parentId, parentValue)
+      }
     }
     return (() => {
       formik.setFieldValue('name', '')
+      if(isParent){
+        formik.setFieldValue(parentId, '')
+      }
     })
   }, [editId, editData.loading])
 
@@ -90,10 +112,10 @@ const AddModal = (props) => {
                   values={formik.values}
                 />
               </div>
-              {!!parentName && <div className="mb-3 col-md-6">
+              {isParent && <div className="mb-3 col-md-6">
                 <SelectField
                   label={parentName}
-                  name={'type'}
+                  name={parentId}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   values={formik.values}

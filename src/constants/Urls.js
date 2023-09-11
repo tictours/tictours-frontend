@@ -1,6 +1,7 @@
 export const URLS = {
     LOGIN_URL : '/user/login',
     DESTINATION_URL : '/destinations',
+    SUB_DESTINATION_URL : '/sub-destinations',
     PROPERTY_CATEGORY_URL : '/categories',
     PROPERTY_TYPE_URL : '/property-types',
     ROOM_TYPE_URL : 'room-types',

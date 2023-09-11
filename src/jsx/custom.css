@@ -149,3 +149,6 @@
   font-size: 1.2rem;
   font-weight: 600;
 }
+.custom-first-cell {
+  max-width: 2rem;
+}
