@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { Formik, useFormik } from "formik";
 import InputField from "./InputField";
 import SelectField from "./SelectField";
-import notify from "./Notify";
 import { axiosPost, axiosPut } from "../../../services/AxiosInstance";
 import { useDispatch } from "react-redux";
 import { FormAction } from "../../../store/slices/formSlice";
 import { useAsync } from "../../utilis/useAsync";
+import { notifyCreate, notifyError } from "../../utilis/notifyMessage";
 
 const AddModal = (props) => {
   const {
@@ -42,7 +42,7 @@ const AddModal = (props) => {
     if (showModal && isParent && !!parentData?.length) {
       formik.setFieldValue(parentId, parentData[0].id);
     }
-    return () => {};
+    return () => { };
   }, [showModal]);
 
   const TypeOptions = ["Transfer", "Hotel", "Activity"];
@@ -65,12 +65,11 @@ const AddModal = (props) => {
           if (isEdit) {
             setEditId("");
           }
-          notify({
-            message: `${title} ${isEdit ? "Edited" : "Added"} Successfully`,
-          });
+          notifyCreate(title, isEdit)
         }
       } catch (error) {
         console.log(error);
+        notifyError('Something went wrong')
       }
     },
   });

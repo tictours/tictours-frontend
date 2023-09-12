@@ -6,12 +6,12 @@ import InvoiceSlider from "../Dashboard/InvoiceSlider";
 import QuestionIcon from "../Dashboard/Ticketing/QuestionIcon";
 import SelectField from "./SelectField";
 import AddModal from "./FieldAddModal";
-import notify from "./Notify";
 import { axiosDelete } from "../../../services/AxiosInstance";
 import { useDispatch } from "react-redux";
 import { FormAction } from "../../../store/slices/formSlice";
 import { useAsync } from "../../utilis/useAsync";
 import NoData from "./NoData";
+import { notifyDelete, notifyError } from "../../utilis/notifyMessage";
 
 const RightIcon = () => {
   return (
@@ -220,10 +220,10 @@ const FieldComponent = (props) => {
       const response = await axiosDelete(deleteUrl);
       if (response.success) {
         dispatch(FormAction.setRefresh());
-        notify({ type: "warning", message: `Deleted Successfully` });
+        notifyDelete(name);
       }
     } catch (error) {
-      notify({ type: "error", message: "Something went wrong !" });
+      notifyError("Something went wrong !");
     }
   };
   return (
@@ -369,7 +369,7 @@ const FieldComponent = (props) => {
                                   Edit
                                 </Dropdown.Item>
                                 <Dropdown.Item
-                                  onClick={() => handleDelete(item.id)}
+                                  onClick={() => handleDelete(item.id, item.name)}
                                 >
                                   Delete
                                 </Dropdown.Item>
@@ -409,9 +409,8 @@ const FieldComponent = (props) => {
                         <Link
                           key={i}
                           to="/invoice"
-                          className={`paginate_button  ${
-                            activePag.current === i ? "current" : ""
-                          } `}
+                          className={`paginate_button  ${activePag.current === i ? "current" : ""
+                            } `}
                           onClick={() => onClick(i)}
                         >
                           {number}
