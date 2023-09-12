@@ -1,42 +1,51 @@
 import React, { Fragment, useState } from "react";
-import {Link} from 'react-scroll';
+import { Link } from "react-scroll";
 import Highlight from "react-highlight";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import { Row, Col, Card, Button, Dropdown, ButtonGroup, Tab, Nav } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Card,
+  Button,
+  Dropdown,
+  ButtonGroup,
+  Tab,
+  Nav,
+} from "react-bootstrap";
 //import PageTitle from "../../layouts/PageTitle";
 import Footer from "../../layouts/Footer";
 
 const sidebarLink = [
-  {title:'Default Button', to:'default-button' },
-  {title:'Buttons With Icon', to:'button-with-icon' },
-  {title:'Button Light', to:'button-light' },
-  {title:'Default Outline Button', to:'default-outline-button' },
-  {title:'Button Sizes', to:'button-sizes' },
-  {title:'Button Sizes Icon', to:'button-size-icon' },
-  {title:'Outline Button Sizes', to:'outline-button-sizes' },
-  {title:'Rounded Buttons', to:'rounded-buttons' },
-  {title:'Rounded Outline Buttons', to:'rounded-outline-buttons' },
-  {title:'Button Right Icons', to:'button-right-icons' },
-  {title:'Button Left Icons', to:'button-left-icons' },
-  {title:'Square Buttons', to:'square-buttons' },
-  {title:'Square Outline Buttons', to:'square-outline-buttons' },
-  {title:'Rounded Button', to:'rounded-button' },  
-  {title:'Buttons Transparent', to:'buttons-transparent' },
-  {title:'Buttons Transparent Light', to:'buttons-transparent-light' },
-  {title:'Disabled Button', to:'disabled-button' },
-  {title:'Socia icon Buttons with Name', to:'socia-icon-buttons' },
+  { title: "Default Button", to: "default-button" },
+  { title: "Buttons With Icon", to: "button-with-icon" },
+  { title: "Button Light", to: "button-light" },
+  { title: "Default Outline Button", to: "default-outline-button" },
+  { title: "Button Sizes", to: "button-sizes" },
+  { title: "Button Sizes Icon", to: "button-size-icon" },
+  { title: "Outline Button Sizes", to: "outline-button-sizes" },
+  { title: "Rounded Buttons", to: "rounded-buttons" },
+  { title: "Rounded Outline Buttons", to: "rounded-outline-buttons" },
+  { title: "Button Right Icons", to: "button-right-icons" },
+  { title: "Button Left Icons", to: "button-left-icons" },
+  { title: "Square Buttons", to: "square-buttons" },
+  { title: "Square Outline Buttons", to: "square-outline-buttons" },
+  { title: "Rounded Button", to: "rounded-button" },
+  { title: "Buttons Transparent", to: "buttons-transparent" },
+  { title: "Buttons Transparent Light", to: "buttons-transparent-light" },
+  { title: "Disabled Button", to: "disabled-button" },
+  { title: "Socia icon Buttons with Name", to: "socia-icon-buttons" },
 ];
 
 const UiButton = () => {
-  const [activeLink ,setActiveLink] = useState(0);
+  const [activeLink, setActiveLink] = useState(0);
   return (
-    <Fragment>     
+    <Fragment>
       <div className="row ">
         <div className="col-xl-12">
           <div className="page-titles">
-              <div className="d-flex align-items-center">
-                  <h2 className="heading">Button</h2>
-              </div>
+            <div className="d-flex align-items-center">
+              <h2 className="heading">Button</h2>
+            </div>
           </div>
         </div>
       </div>
@@ -46,7 +55,7 @@ const UiButton = () => {
             <div className="btn-page">
               <Row>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="default-button" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
@@ -55,16 +64,33 @@ const UiButton = () => {
                             Default button style
                           </Card.Text>
                         </div>
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                          <Nav.Item as="li" className="nav-item" role="presentation">
-                            <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
                           </Nav.Item>
-                          <Nav.Item as="li" className="nav-item" >
-                            <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
                           </Nav.Item>
-                      </Nav>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
                             <Button className="me-2" variant="primary">
@@ -92,10 +118,11 @@ const UiButton = () => {
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Button className="me-2" variant="primary">
         Primary
@@ -121,16 +148,17 @@ const UiButton = () => {
       <Button variant="dark">Dark</Button>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-                      </Tab.Content>    
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="button-with-icon" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
@@ -139,47 +167,72 @@ const UiButton = () => {
                             Button Icon style
                           </Card.Text>
                         </div>
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                          <Nav.Item as="li" className="nav-item" role="presentation">
-                            <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
                           </Nav.Item>
-                          <Nav.Item as="li" className="nav-item" >
-                            <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
                           </Nav.Item>
-                      </Nav>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
                             <Button className="me-2" variant="primary">
-                            <i className="fa-brands fa-accusoft me-2" />Primary
+                              <i className="fa-brands fa-accusoft me-2" />
+                              Primary
                             </Button>
                             <Button className="me-2" variant="secondary">
-                            <i className="fa-solid fa-table-cells-large me-2"></i>Secondary
+                              <i className="fa-solid fa-table-cells-large me-2"></i>
+                              Secondary
                             </Button>
                             <Button className="me-2" variant="success">
-                            <i className="fa-solid fa-gear me-2"></i>Success
+                              <i className="fa-solid fa-gear me-2"></i>Success
                             </Button>
                             <Button className="me-2" variant="danger">
-                            <i className="fa-solid fa-circle-exclamation me-2"></i>Danger
+                              <i className="fa-solid fa-circle-exclamation me-2"></i>
+                              Danger
                             </Button>
                             <Button className="me-2" variant="warning">
-                            <i className="fa-solid fa-image me-2"></i> Warning
+                              <i className="fa-solid fa-image me-2"></i> Warning
                             </Button>
                             <Button className="me-2" variant="info">
-                            <i className="fa-solid fa-phone-volume me-2"></i>Info
+                              <i className="fa-solid fa-phone-volume me-2"></i>
+                              Info
                             </Button>
                             <Button className="me-2" variant="light">
-                            <i className="fa-solid fa-lock me-2"></i> Light
+                              <i className="fa-solid fa-lock me-2"></i> Light
                             </Button>
-                            <Button variant="dark"><i className="fa-solid fa-circle-play me-2"></i>Dark</Button>
+                            <Button variant="dark">
+                              <i className="fa-solid fa-circle-play me-2"></i>
+                              Dark
+                            </Button>
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Button className="me-2" variant="primary">
         <i className="fa-brands fa-accusoft me-2" />Primary
@@ -205,37 +258,53 @@ const UiButton = () => {
       <Button variant="dark"><i className="fa-solid fa-circle-play me-2"></i>Dark</Button>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-                      </Tab.Content>    
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
 
-
-
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="button-light" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
-                        <div>  
+                        <div>
                           <Card.Title>Buttons</Card.Title>
                           <Card.Text className="mb-0 subtitle">
                             Button Light style
                           </Card.Text>
-                        </div> 
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                            <Nav.Item as="li" className="nav-item" role="presentation">
-                              <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item as="li" className="nav-item" >
-                              <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                            </Nav.Item>
+                        </div>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
                         </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
                             <Button className="me-2" variant="primary light">
@@ -261,12 +330,13 @@ const UiButton = () => {
                             </Button>
                             <Button variant="dark light">Dark</Button>
                           </div>
-                        </Tab.Pane>  
-                        <Tab.Pane  eventKey="Code">  
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                        </Tab.Pane>
+                        <Tab.Pane eventKey="Code">
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Button className="me-2" variant="primary light">
         Primary
@@ -292,16 +362,17 @@ const UiButton = () => {
       <Button variant="dark light">Dark</Button>
       </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
-                        </Tab.Pane>  
-                      </Tab.Content>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
+                        </Tab.Pane>
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="default-outline-button" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
@@ -309,23 +380,43 @@ const UiButton = () => {
                           <Card.Text className="mb-0 subtitle">
                             Default outline button style
                           </Card.Text>
-                        </div>  
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav>
+                        </div>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
-                        <Tab.Pane eventKey="Preview"> 
+                      <Tab.Content>
+                        <Tab.Pane eventKey="Preview">
                           <div className="card-body">
                             <Button className="me-2" variant="outline-primary">
                               Primary
                             </Button>
-                            <Button className="me-2" variant="outline-secondary">
+                            <Button
+                              className="me-2"
+                              variant="outline-secondary"
+                            >
                               Secondary
                             </Button>
                             <Button className="me-2" variant="outline-success">
@@ -347,10 +438,11 @@ const UiButton = () => {
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Button className="me-2" variant="outline-primary">
         Primary
@@ -376,56 +468,78 @@ const UiButton = () => {
       <Button variant="outline-dark">Dark</Button>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-                      </Tab.Content> 
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="button-sizes" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
                           <Card.Title>Button Sizes</Card.Title>
                           <Card.Text className="mb-0 subtitle">
-                            add <code>.btn-lg .btn-sm .btn-xs</code> to change the style
+                            add <code>.btn-lg .btn-sm .btn-xs</code> to change
+                            the style
                           </Card.Text>
                         </div>
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
-                          <Button className="me-2" variant="primary btn-lg">
-                            Large Button
-                          </Button>
-                          <Button className="me-2" variant="primary">
-                            Default Button
-                          </Button>
-                          <Button className="me-2" variant="primary btn-sm">
-                            Small Button
-                          </Button>
-                          <Button className="me-2" variant="primary btn-xs">
-                            Extra Small Button
-                          </Button>
-                          <Button variant="primary btn-xxs">Extra Small Button</Button>
+                            <Button className="me-2" variant="primary btn-lg">
+                              Large Button
+                            </Button>
+                            <Button className="me-2" variant="primary">
+                              Default Button
+                            </Button>
+                            <Button className="me-2" variant="primary btn-sm">
+                              Small Button
+                            </Button>
+                            <Button className="me-2" variant="primary btn-xs">
+                              Extra Small Button
+                            </Button>
+                            <Button variant="primary btn-xxs">
+                              Extra Small Button
+                            </Button>
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Button className="me-2" variant="primary btn-lg">
         Large Button
@@ -442,56 +556,90 @@ const UiButton = () => {
       <Button variant="primary btn-xxs">Extra Small Button</Button>
       </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-                      </Tab.Content>    
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="button-size-icon" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
                           <Card.Title>Button Sizes Icon</Card.Title>
                           <Card.Text className="mb-0 subtitle">
-                            add <code>.btn-lg .btn-sm .btn-xs</code> to change the style
+                            add <code>.btn-lg .btn-sm .btn-xs</code> to change
+                            the style
                           </Card.Text>
                         </div>
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
-                            <Button className="me-2" variant="primary btn-icon-lg">
-                            <i className="fa-solid fa-house-chimney" />
-                            </Button>
-                            <Button className="me-2" variant="primary btn-icon-md">
-                            <i className="fa-solid fa-house-chimney" />
-                            </Button>
-                            <Button className="me-2" variant="primary btn-icon-sm">
+                            <Button
+                              className="me-2"
+                              variant="primary btn-icon-lg"
+                            >
                               <i className="fa-solid fa-house-chimney" />
                             </Button>
-                            <Button className="me-2" variant="primary btn-icon-xs">
-                                <i className="fa-solid fa-house-chimney" />
+                            <Button
+                              className="me-2"
+                              variant="primary btn-icon-md"
+                            >
+                              <i className="fa-solid fa-house-chimney" />
                             </Button>
-                            <Button variant="primary btn-icon-xxs"><i className="fa-solid fa-house-chimney" /></Button>
+                            <Button
+                              className="me-2"
+                              variant="primary btn-icon-sm"
+                            >
+                              <i className="fa-solid fa-house-chimney" />
+                            </Button>
+                            <Button
+                              className="me-2"
+                              variant="primary btn-icon-xs"
+                            >
+                              <i className="fa-solid fa-house-chimney" />
+                            </Button>
+                            <Button variant="primary btn-icon-xxs">
+                              <i className="fa-solid fa-house-chimney" />
+                            </Button>
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Button className="me-2" variant="primary btn-icon-lg">
         <i className="fa-solid fa-house-chimney" />
@@ -508,46 +656,74 @@ const UiButton = () => {
       <Button variant="primary btn-icon-xxs"><i className="fa-solid fa-house-chimney" /></Button>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-                      </Tab.Content>    
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="outline-button-sizes" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
                           <Card.Title>Outline Button Sizes</Card.Title>
                           <Card.Text className="mb-0 subtitle">
-                            add <code>.btn-lg .btn-sm .btn-xs</code> to change the style
+                            add <code>.btn-lg .btn-sm .btn-xs</code> to change
+                            the style
                           </Card.Text>
                         </div>
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
-                            <Button className="me-2" variant="outline-primary btn-lg">
+                            <Button
+                              className="me-2"
+                              variant="outline-primary btn-lg"
+                            >
                               Large button
                             </Button>
                             <Button className="me-2" variant="outline-primary">
                               Default button
                             </Button>
-                            <Button className="me-2" variant="outline-primary btn-md">
+                            <Button
+                              className="me-2"
+                              variant="outline-primary btn-md"
+                            >
                               Small button
                             </Button>
-                            <Button className="me-2" variant="outline-primary btn-sm">
+                            <Button
+                              className="me-2"
+                              variant="outline-primary btn-sm"
+                            >
                               Small button
                             </Button>
                             <Button variant="outline-primary btn-xs">
@@ -556,10 +732,11 @@ const UiButton = () => {
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Button className="me-2" variant="outline-primary btn-lg">
         Large button
@@ -578,16 +755,17 @@ const UiButton = () => {
       </Button>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-                      </Tab.Content>    
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="rounded-buttons" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
@@ -596,48 +774,84 @@ const UiButton = () => {
                             add <code>.btn-rounded</code> to change the style
                           </Card.Text>
                         </div>
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
                             <Card.Title></Card.Title>
-                            <Button className="me-2" variant="primary btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="primary btn-rounded"
+                            >
                               Primary
                             </Button>
-                            <Button className="me-2" variant="secondary btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="secondary btn-rounded"
+                            >
                               Secondary
                             </Button>
-                            <Button className="me-2" variant="success btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="success btn-rounded"
+                            >
                               Success
                             </Button>
-                            <Button className="me-2" variant="danger btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="danger btn-rounded"
+                            >
                               Danger
                             </Button>
-                            <Button className="me-2" variant="warning btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="warning btn-rounded"
+                            >
                               Warning
                             </Button>
                             <Button className="me-2" variant="info btn-rounded">
                               Info
                             </Button>
-                            <Button className="me-2" variant="light btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="light btn-rounded"
+                            >
                               Light
                             </Button>
                             <Button variant="dark btn-rounded">Dark</Button>
                           </div>
                         </Tab.Pane>
-                        <Tab.Pane eventKey="Code">  
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                        <Tab.Pane eventKey="Code">
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Card.Title></Card.Title>
       <Button className="me-2" variant="primary btn-rounded">
@@ -664,16 +878,17 @@ const UiButton = () => {
       <Button variant="dark btn-rounded">Dark</Button>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
-                        </Tab.Pane>  
-                      </Tab.Content>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
+                        </Tab.Pane>
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="rounded-outline-buttons" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
@@ -682,16 +897,33 @@ const UiButton = () => {
                             add <code>.btn-rounded</code> to change the style
                           </Card.Text>
                         </div>
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
                             <div className="rounded-button">
@@ -713,7 +945,10 @@ const UiButton = () => {
                               >
                                 Success
                               </Button>
-                              <Button className="me-2" variant="outline-danger btn-rounded">
+                              <Button
+                                className="me-2"
+                                variant="outline-danger btn-rounded"
+                              >
                                 Danger
                               </Button>
                               <Button
@@ -722,21 +957,30 @@ const UiButton = () => {
                               >
                                 Warning
                               </Button>
-                              <Button className="me-2" variant="outline-info btn-rounded">
+                              <Button
+                                className="me-2"
+                                variant="outline-info btn-rounded"
+                              >
                                 Info
                               </Button>
-                              <Button className="me-2" variant="outline-light btn-rounded">
+                              <Button
+                                className="me-2"
+                                variant="outline-light btn-rounded"
+                              >
                                 Light
                               </Button>
-                              <Button variant="outline-dark btn-rounded">Dark</Button>
+                              <Button variant="outline-dark btn-rounded">
+                                Dark
+                              </Button>
                             </div>
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <div className="rounded-button">
         <Button
@@ -776,16 +1020,17 @@ const UiButton = () => {
       </div>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-                      </Tab.Content>    
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="button-right-icons" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
@@ -793,17 +1038,34 @@ const UiButton = () => {
                           <Card.Text className="mb-0 subtitle">
                             add <code>.btn-icon-end</code> to change the style
                           </Card.Text>
-                        </div>  
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav>
+                        </div>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
                             <Button className="me-2" variant="primary">
@@ -845,10 +1107,11 @@ const UiButton = () => {
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Button className="me-2" variant="primary">
         Add to cart{" "}
@@ -888,39 +1151,58 @@ const UiButton = () => {
       </Button>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-
-                      </Tab.Content>    
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="button-left-icons" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
-                          
                           <Card.Title>Button Left icons</Card.Title>
                           <Card.Text className="mb-0 subtitle">
                             add <code>.btn-icon-start</code> to change the style
                           </Card.Text>
                         </div>
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
-                            <Button className="me-2" variant="primary btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="primary btn-rounded"
+                            >
                               <span className="btn-icon-start text-primary">
                                 <i className="fa fa-shopping-cart" />
                               </span>
@@ -932,19 +1214,28 @@ const UiButton = () => {
                               </span>
                               Add
                             </Button>
-                            <Button className="me-2" variant="danger btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="danger btn-rounded"
+                            >
                               <span className="btn-icon-start text-danger">
                                 <i className="fa fa-envelope color-danger" />
                               </span>
                               Email
                             </Button>
-                            <Button className="me-2" variant="secondary btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="secondary btn-rounded"
+                            >
                               <span className="btn-icon-start text-secondary">
                                 <i className="fa fa-share-alt color-secondary" />{" "}
                               </span>
                               Share
                             </Button>
-                            <Button className="me-2" variant="warning btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="warning btn-rounded"
+                            >
                               <span className="btn-icon-start text-warning">
                                 <i className="fa fa-download color-warning" />
                               </span>
@@ -959,10 +1250,11 @@ const UiButton = () => {
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Button className="me-2" variant="primary btn-rounded">
         <span className="btn-icon-start text-primary">
@@ -1002,17 +1294,17 @@ const UiButton = () => {
       </Button>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-
-                      </Tab.Content>    
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="square-buttons" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
@@ -1020,32 +1312,64 @@ const UiButton = () => {
                           <Card.Text className="mb-0 subtitle">
                             add <code>.btn-square</code> to change the style
                           </Card.Text>
-                        </div>  
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav> 
+                        </div>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
-                            <Button className="me-2" variant="primary btn-square">
+                            <Button
+                              className="me-2"
+                              variant="primary btn-square"
+                            >
                               Primary
                             </Button>
-                            <Button className="me-2" variant="secondary btn-square">
+                            <Button
+                              className="me-2"
+                              variant="secondary btn-square"
+                            >
                               Secondary
                             </Button>
-                            <Button className="me-2" variant="success btn-square">
+                            <Button
+                              className="me-2"
+                              variant="success btn-square"
+                            >
                               Success
                             </Button>
-                            <Button className="me-2" variant="danger btn-square">
+                            <Button
+                              className="me-2"
+                              variant="danger btn-square"
+                            >
                               Danger
                             </Button>
-                            <Button className="me-2" variant="warning btn-square">
+                            <Button
+                              className="me-2"
+                              variant="warning btn-square"
+                            >
                               Warning
                             </Button>
                             <Button className="me-2" variant="info btn-square">
@@ -1058,10 +1382,11 @@ const UiButton = () => {
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Button className="me-2" variant="primary btn-square">
         Primary
@@ -1087,16 +1412,17 @@ const UiButton = () => {
       <Button variant="dark btn-square">Dark</Button>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-                      </Tab.Content>    
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="square-outline-buttons" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
@@ -1105,47 +1431,88 @@ const UiButton = () => {
                             add <code>.btn-square</code> to change the style
                           </Card.Text>
                         </div>
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
-                            <Button className="me-2" variant="outline-primary btn-square">
+                            <Button
+                              className="me-2"
+                              variant="outline-primary btn-square"
+                            >
                               Primary
                             </Button>
-                            <Button className="me-2" variant="outline-secondary btn-square">
+                            <Button
+                              className="me-2"
+                              variant="outline-secondary btn-square"
+                            >
                               Secondary
                             </Button>
-                            <Button className="me-2" variant="outline-success btn-square">
+                            <Button
+                              className="me-2"
+                              variant="outline-success btn-square"
+                            >
                               Success
                             </Button>
-                            <Button className="me-2" variant="outline-danger btn-square">
+                            <Button
+                              className="me-2"
+                              variant="outline-danger btn-square"
+                            >
                               Danger
                             </Button>
-                            <Button className="me-2" variant="outline-warning btn-square">
+                            <Button
+                              className="me-2"
+                              variant="outline-warning btn-square"
+                            >
                               Warning
                             </Button>
-                            <Button className="me-2" variant="outline-info btn-square">
+                            <Button
+                              className="me-2"
+                              variant="outline-info btn-square"
+                            >
                               Info
                             </Button>
-                            <Button className="me-2" variant="outline-light btn-square">
+                            <Button
+                              className="me-2"
+                              variant="outline-light btn-square"
+                            >
                               Light
                             </Button>
-                            <Button variant="outline-dark btn-square">Dark</Button>
+                            <Button variant="outline-dark btn-square">
+                              Dark
+                            </Button>
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Button className="me-2" variant="outline-primary btn-square">
         Primary
@@ -1171,67 +1538,102 @@ const UiButton = () => {
       <Button variant="outline-dark btn-square">Dark</Button>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-
-                      </Tab.Content>    
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="rounded-button" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
-
                           <Card.Title>Rounded Button</Card.Title>
                           <Card.Text className="mb-0 subtitle">
                             add <code>.btn-rounded</code> to change the style
                           </Card.Text>
                         </div>
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
-                            <Button className="me-2" variant="primary btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="primary btn-rounded"
+                            >
                               Primary
                             </Button>
-                            <Button className="me-2" variant="secondary btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="secondary btn-rounded"
+                            >
                               Secondary
                             </Button>
-                            <Button className="me-2" variant="success btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="success btn-rounded"
+                            >
                               Success
                             </Button>
-                            <Button className="me-2" variant="danger btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="danger btn-rounded"
+                            >
                               Danger
                             </Button>
-                            <Button className="me-2" variant="warning btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="warning btn-rounded"
+                            >
                               Warning
                             </Button>
                             <Button className="me-2" variant="info btn-rounded">
                               Info
                             </Button>
-                            <Button className="me-2" variant="light btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="light btn-rounded"
+                            >
                               Light
                             </Button>
                             <Button variant="dark btn-rounded">Dark</Button>
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Button className="me-2" variant="primary btn-rounded">
         Primary
@@ -1257,39 +1659,58 @@ const UiButton = () => {
       <Button variant="dark btn-rounded">Dark</Button>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-
-                      </Tab.Content>    
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="rounded-outline-buttons" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
-                          
                           <Card.Title>Rounded outline Buttons</Card.Title>
                           <Card.Text className="mb-0 subtitle">
                             add <code>.btn-rounded</code> to change the style
                           </Card.Text>
                         </div>
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
-                            <Button className="me-2" variant="outline-primary btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="outline-primary btn-rounded"
+                            >
                               Primary
                             </Button>
                             <Button
@@ -1298,29 +1719,47 @@ const UiButton = () => {
                             >
                               Secondary
                             </Button>
-                            <Button className="me-2" variant="outline-success btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="outline-success btn-rounded"
+                            >
                               Success
                             </Button>
-                            <Button className="me-2" variant="outline-danger btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="outline-danger btn-rounded"
+                            >
                               Danger
                             </Button>
-                            <Button className="me-2" variant="outline-warning btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="outline-warning btn-rounded"
+                            >
                               Warning
                             </Button>
-                            <Button className="me-2" variant="outline-info btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="outline-info btn-rounded"
+                            >
                               Info
                             </Button>
-                            <Button className="me-2" variant="outline-light btn-rounded">
+                            <Button
+                              className="me-2"
+                              variant="outline-light btn-rounded"
+                            >
                               Light
                             </Button>
-                            <Button variant="outline-dark btn-rounded">Dark</Button>
+                            <Button variant="outline-dark btn-rounded">
+                              Dark
+                            </Button>
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Button className="me-2" variant="outline-primary btn-rounded">
         Primary
@@ -1349,16 +1788,17 @@ const UiButton = () => {
       <Button variant="outline-dark btn-rounded">Dark</Button>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-                      </Tab.Content>    
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="dropdown-button" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
@@ -1367,79 +1807,131 @@ const UiButton = () => {
                             Default dropdown button style
                           </Card.Text>
                         </div>
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
                             <ButtonGroup>
                               <Dropdown>
-                                <Dropdown.Toggle className="me-2" variant="primary">
+                                <Dropdown.Toggle
+                                  className="me-2"
+                                  variant="primary"
+                                >
                                   Primary
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                  <Dropdown.Item to="#">Dropdown link</Dropdown.Item>
-                                  <Dropdown.Item to="#">Dropdown link</Dropdown.Item>
+                                  <Dropdown.Item to="#">
+                                    Dropdown link
+                                  </Dropdown.Item>
+                                  <Dropdown.Item to="#">
+                                    Dropdown link
+                                  </Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
                             </ButtonGroup>
                             <ButtonGroup>
                               <Dropdown>
-                                <Dropdown.Toggle className="me-2" variant="secondary">
+                                <Dropdown.Toggle
+                                  className="me-2"
+                                  variant="secondary"
+                                >
                                   Secondary
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                  <Dropdown.Item to="#">Dropdown link</Dropdown.Item>
-                                  <Dropdown.Item to="#">Dropdown link</Dropdown.Item>
+                                  <Dropdown.Item to="#">
+                                    Dropdown link
+                                  </Dropdown.Item>
+                                  <Dropdown.Item to="#">
+                                    Dropdown link
+                                  </Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
                             </ButtonGroup>
                             <ButtonGroup>
                               <Dropdown>
-                                <Dropdown.Toggle className="me-2" variant="success">
+                                <Dropdown.Toggle
+                                  className="me-2"
+                                  variant="success"
+                                >
                                   Success
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                  <Dropdown.Item to="#">Dropdown link</Dropdown.Item>
-                                  <Dropdown.Item to="#">Dropdown link</Dropdown.Item>
+                                  <Dropdown.Item to="#">
+                                    Dropdown link
+                                  </Dropdown.Item>
+                                  <Dropdown.Item to="#">
+                                    Dropdown link
+                                  </Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
                             </ButtonGroup>
                             <ButtonGroup>
                               <Dropdown>
-                                <Dropdown.Toggle className="me-2" variant="warning">
+                                <Dropdown.Toggle
+                                  className="me-2"
+                                  variant="warning"
+                                >
                                   Warning
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                  <Dropdown.Item to="#">Dropdown link</Dropdown.Item>
-                                  <Dropdown.Item to="#">Dropdown link</Dropdown.Item>
+                                  <Dropdown.Item to="#">
+                                    Dropdown link
+                                  </Dropdown.Item>
+                                  <Dropdown.Item to="#">
+                                    Dropdown link
+                                  </Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
                             </ButtonGroup>
 
                             <ButtonGroup>
                               <Dropdown>
-                                <Dropdown.Toggle variant="danger">Danger</Dropdown.Toggle>
+                                <Dropdown.Toggle variant="danger">
+                                  Danger
+                                </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                  <Dropdown.Item to="#">Dropdown link</Dropdown.Item>
-                                  <Dropdown.Item to="#">Dropdown link</Dropdown.Item>
+                                  <Dropdown.Item to="#">
+                                    Dropdown link
+                                  </Dropdown.Item>
+                                  <Dropdown.Item to="#">
+                                    Dropdown link
+                                  </Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
                             </ButtonGroup>
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
       <div className="card-body">
       <ButtonGroup>
         <Dropdown>
@@ -1497,39 +1989,58 @@ const UiButton = () => {
       </ButtonGroup>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-                      </Tab.Content>    
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="buttons-transparent" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
-                          
                           <Card.Title>Buttons Transparent</Card.Title>
                           <Card.Text className="mb-0 subtitle">
                             Button transparent style
                           </Card.Text>
                         </div>
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
                             <Button variant="primary tp-btn">Primary</Button>
-                            <Button variant="secondary tp-btn">Secondary</Button>
+                            <Button variant="secondary tp-btn">
+                              Secondary
+                            </Button>
                             <Button variant="success tp-btn">Success</Button>
                             <Button variant="danger tp-btn">Danger</Button>
                             <Button variant="warning tp-btn">Warning</Button>
@@ -1539,10 +2050,11 @@ const UiButton = () => {
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Button variant="primary tp-btn">Primary</Button>
       <Button variant="secondary tp-btn">Secondary</Button>
@@ -1554,52 +2066,82 @@ const UiButton = () => {
       <Button variant="dark tp-btn">Dark</Button>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-                      </Tab.Content>  
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container> 
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="buttons-transparent-light" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
-
                           <Card.Title>Buttons Transparent Light</Card.Title>
                           <Card.Text className="mb-0 subtitle">
                             Button transparent light style
                           </Card.Text>
                         </div>
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
-                            <Button variant="primary tp-btn-light">Primary</Button>
-                            <Button variant="secondary tp-btn-light">Secondary</Button>
-                            <Button variant="success tp-btn-light">Success</Button>
-                            <Button variant="danger tp-btn-light">Danger</Button>
-                            <Button variant="warning tp-btn-light">Warning</Button>
+                            <Button variant="primary tp-btn-light">
+                              Primary
+                            </Button>
+                            <Button variant="secondary tp-btn-light">
+                              Secondary
+                            </Button>
+                            <Button variant="success tp-btn-light">
+                              Success
+                            </Button>
+                            <Button variant="danger tp-btn-light">
+                              Danger
+                            </Button>
+                            <Button variant="warning tp-btn-light">
+                              Warning
+                            </Button>
                             <Button variant="info tp-btn-light">Info</Button>
-                            <Button variant="tp-btn-light text-black">Light</Button>
+                            <Button variant="tp-btn-light text-black">
+                              Light
+                            </Button>
                             <Button variant="dark tp-btn-light">Dark</Button>
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Button variant="primary tp-btn-light">Primary</Button>
       <Button variant="secondary tp-btn-light">Secondary</Button>
@@ -1611,36 +2153,53 @@ const UiButton = () => {
       <Button variant="dark tp-btn-light">Dark</Button>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-
-                      </Tab.Content>    
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview">   
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="disabled-button" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
-
                           <Card.Title>Disabled Button</Card.Title>
                           <Card.Text className="mb-0 subtitle">
-                            add <code>disabled="disabled"</code> to change the style
+                            add <code>disabled="disabled"</code> to change the
+                            style
                           </Card.Text>
                         </div>
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
                             <Button
@@ -1678,16 +2237,20 @@ const UiButton = () => {
                             >
                               Warning
                             </Button>
-                            <Button variant="info btn-rounded" disabled="disabled">
+                            <Button
+                              variant="info btn-rounded"
+                              disabled="disabled"
+                            >
                               Info
                             </Button>
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
     <div className="card-body">
       <Button
         className="me-2"
@@ -1729,36 +2292,56 @@ const UiButton = () => {
       </Button>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-
-                      </Tab.Content>    
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
                 <Col lg="12">
-                  <Tab.Container defaultActiveKey="Preview"> 
+                  <Tab.Container defaultActiveKey="Preview">
                     <Card name="socia-icon-buttons" className="dz-card">
                       <Card.Header className="d-flex justify-content-between flex-wrap">
                         <div>
                           <Card.Title>Socia icon Buttons with Name</Card.Title>
                           <Card.Text className="mb-0 subtitle">
-                            add <code>.btn-facebook, .btn-twitter, .btn-youtube...</code>{" "}
+                            add{" "}
+                            <code>
+                              .btn-facebook, .btn-twitter, .btn-youtube...
+                            </code>{" "}
                             to change the style
                           </Card.Text>
                         </div>
-                        <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                              <Nav.Item as="li" className="nav-item" role="presentation">
-                                <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item as="li" className="nav-item" >
-                                <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                              </Nav.Item>
-                          </Nav>
+                        <Nav
+                          as="ul"
+                          className="nav nav-tabs dzm-tabs"
+                          id="myTab"
+                          role="tablist"
+                        >
+                          <Nav.Item
+                            as="li"
+                            className="nav-item"
+                            role="presentation"
+                          >
+                            <Nav.Link
+                              as="button"
+                              type="button"
+                              eventKey="Preview"
+                            >
+                              Preview
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item as="li" className="nav-item">
+                            <Nav.Link as="button" type="button" eventKey="Code">
+                              React
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
                       </Card.Header>
-                      <Tab.Content> 
+                      <Tab.Content>
                         <Tab.Pane eventKey="Preview">
                           <div className="card-body">
                             <Button className="me-2" variant="facebook">
@@ -1872,10 +2455,11 @@ const UiButton = () => {
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Code">
-                        <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-    {`
+                          <div className="card-body pt-0 p-0 code-area">
+                            <pre className="mb-0">
+                              <code className="language-html">
+                                <Highlight>
+                                  {`
       <div className="card-body">
       <Button className="me-2" variant="facebook">
         Facebook{" "}
@@ -1987,40 +2571,44 @@ const UiButton = () => {
       </Button>
     </div>
     `}
-  </Highlight>
-  </code></pre>
-  </div>  
+                                </Highlight>
+                              </code>
+                            </pre>
+                          </div>
                         </Tab.Pane>
-                      </Tab.Content>    
+                      </Tab.Content>
                     </Card>
-                  </Tab.Container>  
+                  </Tab.Container>
                 </Col>
               </Row>
               <Footer />
-            </div>  
+            </div>
           </div>
-        </div> 
-          <div className="demo-right ">
-            <PerfectScrollbar className="demo-right-inner dlab-scroll " id="right-sidebar">
-              <h4 className="title">Examples For Button</h4>
-              <ul className="navbar-nav" id="menu-bar">
-                  {sidebarLink.map((item, ind)=>(
-                    <li key={ind}
-                    >
-                      <Link to={item.to} 
-                        className={`scroll ${ind === activeLink ? 'active' :  ''} `}
-                        activeClass="active"
-                        spy={true}
-                        smooth={true}
-                        onClick={()=>setActiveLink(ind)}
-                      > 
-                        {item.title}
-                      </Link>
-                    </li>
-                  ))}
-              </ul>	
-            </PerfectScrollbar>
-          </div>   
+        </div>
+        <div className="demo-right ">
+          <PerfectScrollbar
+            className="demo-right-inner dlab-scroll "
+            id="right-sidebar"
+          >
+            <h4 className="title">Examples For Button</h4>
+            <ul className="navbar-nav" id="menu-bar">
+              {sidebarLink.map((item, ind) => (
+                <li key={ind}>
+                  <Link
+                    to={item.to}
+                    className={`scroll ${ind === activeLink ? "active" : ""} `}
+                    activeClass="active"
+                    spy={true}
+                    smooth={true}
+                    onClick={() => setActiveLink(ind)}
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </PerfectScrollbar>
+        </div>
       </div>
     </Fragment>
   );

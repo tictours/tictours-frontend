@@ -47,7 +47,6 @@ const Element = () => {
                   <div className="form-check custom-checkbox mb-3">
                     <input
                       type="checkbox"
-                      
                       className="form-check-input"
                       id="customCheckBox1"
                       required
@@ -311,7 +310,6 @@ const Element = () => {
                     </select>
                   </div>
                   <div className="form-group">
-                    
                     <div id="multiselect">
                       <DropdownMultiselect
                         options={["1", "2", "3", "4", "5", "6"]}
@@ -342,7 +340,7 @@ const Element = () => {
                     </div>
                     <div className="form-group mb-3 col-md-6">
                       <label>Email</label>
-                       <input
+                      <input
                         type="text"
                         className="form-control"
                         placeholder="1234 Main St"
@@ -881,8 +879,8 @@ const Element = () => {
                     <div className="col-auto">
                       <label className="sr-only">Username</label>
                       <div className="input-group mb-2">
-                         <div className="input-group-text">@</div>
-                        
+                        <div className="input-group-text">@</div>
+
                         <input
                           type="text"
                           className="form-control"
@@ -990,9 +988,8 @@ const Element = () => {
               <div className="basic-form">
                 <form action="#">
                   <div className="input-group mb-3 input-warning-o">
-                    
-                      <span className="input-group-text">@</span>
-                    
+                    <span className="input-group-text">@</span>
+
                     <input
                       type="text"
                       className="form-control"
@@ -1000,9 +997,8 @@ const Element = () => {
                     />
                   </div>
                   <div className="input-group mb-3 input-success-o">
-                    
-                      <span className="input-group-text">@</span>
-                    
+                    <span className="input-group-text">@</span>
+
                     <input
                       type="text"
                       className="form-control"
@@ -1015,35 +1011,30 @@ const Element = () => {
                       className="form-control"
                       placeholder="Recipient's username"
                     />
-                   
-                      <span className="input-group-text">@example.com</span>
-                    
+
+                    <span className="input-group-text">@example.com</span>
                   </div>
 
                   <label>Your vanity URL</label>
                   <div className="input-group mb-3  input-success">
-                   
-                      <span className="input-group-text">
-                        https://example.com
-                      </span>
-                    
+                    <span className="input-group-text">
+                      https://example.com
+                    </span>
+
                     <input type="text" className="form-control" />
                   </div>
 
                   <div className="input-group mb-3  input-info">
-                    
-                      <span className="input-group-text">$</span>
-                    
+                    <span className="input-group-text">$</span>
+
                     <input type="text" className="form-control" />
-                   
-                      <span className="input-group-text">.00</span>
-                   
+
+                    <span className="input-group-text">.00</span>
                   </div>
 
                   <div className="input-group   input-danger">
-                   
-                      <span className="input-group-text">With textarea</span>
-                    
+                    <span className="input-group-text">With textarea</span>
+
                     <textarea className="form-control"></textarea>
                   </div>
                 </form>
@@ -1060,24 +1051,27 @@ const Element = () => {
               <div className="basic-form">
                 <form action="#">
                   <div className="input-group input-group-sm mb-3">
-                 
-                      <span className="input-group-text">Small</span>
-                   
-                    <input type="text" className="form-control form-control-sm " />
+                    <span className="input-group-text">Small</span>
+
+                    <input
+                      type="text"
+                      className="form-control form-control-sm "
+                    />
                   </div>
 
                   <div className="input-group mb-3">
-                    
-                      <span className="input-group-text">Default</span>
-                    
+                    <span className="input-group-text">Default</span>
+
                     <input type="text" className="form-control" />
                   </div>
 
                   <div className="input-group input-group-lg">
-                   
-                      <span className="input-group-text">Large</span>
-                    
-                    <input type="text" className="form-control form-control-lg" />
+                    <span className="input-group-text">Large</span>
+
+                    <input
+                      type="text"
+                      className="form-control form-control-lg"
+                    />
                   </div>
                 </form>
               </div>
@@ -1093,20 +1087,18 @@ const Element = () => {
               <div className="basic-form">
                 <form action="#">
                   <div className="input-group mb-3">
-                   
-                      <div className="input-group-text">
-                        <input type="checkbox" />
-                      </div>
-                   
+                    <div className="input-group-text">
+                      <input type="checkbox" />
+                    </div>
+
                     <input type="text" className="form-control" />
                   </div>
 
                   <div className="input-group">
-                   
-                      <div className="input-group-text">
-                        <input type="radio" />
-                      </div>
-                   
+                    <div className="input-group-text">
+                      <input type="radio" />
+                    </div>
+
                     <input type="text" className="form-control" />
                   </div>
                 </form>
@@ -1123,11 +1115,10 @@ const Element = () => {
               <div className="basic-form">
                 <form action="#">
                   <div className="input-group">
-                   
-                      <span className="input-group-text">
-                        First and last name
-                      </span>
-                    
+                    <span className="input-group-text">
+                      First and last name
+                    </span>
+
                     <input type="text" className="form-control" />
                     <input type="text" className="form-control" />
                   </div>
@@ -1145,19 +1136,17 @@ const Element = () => {
               <div className="basic-form">
                 <form action="#">
                   <div className="input-group mb-3">
-                 
-                      <span className="input-group-text">$</span>
-                      <span className="input-group-text">0.00</span>
-                    
+                    <span className="input-group-text">$</span>
+                    <span className="input-group-text">0.00</span>
+
                     <input type="text" className="form-control" />
                   </div>
 
                   <div className="input-group">
                     <input type="text" className="form-control" />
-                   
-                      <span className="input-group-text">$</span>
-                      <span className="input-group-text">0.00</span>
-                    
+
+                    <span className="input-group-text">$</span>
+                    <span className="input-group-text">0.00</span>
                   </div>
                 </form>
               </div>
@@ -1173,43 +1162,41 @@ const Element = () => {
               <div className="basic-form">
                 <form action="#">
                   <div className="input-group mb-3">
-                      <button className="btn btn-primary" type="button">
-                        Button
-                      </button>
-                   
+                    <button className="btn btn-primary" type="button">
+                      Button
+                    </button>
+
                     <input type="text" className="form-control" />
                   </div>
 
                   <div className="input-group mb-3">
                     <input type="text" className="form-control" />
-                    
-                      <button className="btn btn-primary" type="button">
-                        Button
-                      </button>
-                    
+
+                    <button className="btn btn-primary" type="button">
+                      Button
+                    </button>
                   </div>
 
                   <div className="input-group mb-3">
-                      <button className="btn btn-primary" type="button">
-                        Button
-                      </button>
-                      <button className="btn btn-primary" type="button">
-                        Button
-                      </button>
-                    
+                    <button className="btn btn-primary" type="button">
+                      Button
+                    </button>
+                    <button className="btn btn-primary" type="button">
+                      Button
+                    </button>
+
                     <input type="text" className="form-control" />
                   </div>
 
                   <div className="input-group">
                     <input type="text" className="form-control" />
-                   
-                      <button className="btn btn-primary" type="button">
-                        Button
-                      </button>
-                      <button className="btn btn-primary" type="button">
-                        Button
-                      </button>
-                    
+
+                    <button className="btn btn-primary" type="button">
+                      Button
+                    </button>
+                    <button className="btn btn-primary" type="button">
+                      Button
+                    </button>
                   </div>
                 </form>
               </div>
@@ -1367,9 +1354,8 @@ const Element = () => {
               <div className="basic-form">
                 <form action="#">
                   <div className="input-group mb-3" style={{ width: "270px" }}>
-                    
-                      <label className="input-group-text mb-0">Options</label>
-                    
+                    <label className="input-group-text mb-0">Options</label>
+
                     <select
                       defaultValue={"option"}
                       className="form-control wide"
@@ -1395,17 +1381,15 @@ const Element = () => {
                       <option value="2">Two</option>
                       <option value="3">Three</option>
                     </select>
-                    
-                      <label className="input-group-text mb-0">Options</label>
-                    
+
+                    <label className="input-group-text mb-0">Options</label>
                   </div>
 
                   <div className="input-group mb-3" style={{ width: "270px" }}>
-                    
-                      <button className="btn btn-primary" type="button">
-                        Button
-                      </button>
-                   
+                    <button className="btn btn-primary" type="button">
+                      Button
+                    </button>
+
                     <select
                       defaultValue={"option"}
                       className="form-control form-control-lg"
@@ -1431,11 +1415,10 @@ const Element = () => {
                       <option value="2">Two</option>
                       <option value="3">Three</option>
                     </select>
-                   
-                      <button className="btn btn-primary" type="button">
-                        Button
-                      </button>
-                    
+
+                    <button className="btn btn-primary" type="button">
+                      Button
+                    </button>
                   </div>
                 </form>
               </div>
@@ -1448,26 +1431,54 @@ const Element = () => {
               <h4 className="card-title">Custom file input</h4>
             </div>
             <div className="card-body">
-				<div className="mb-3">
-				  <label htmlFor="formFile" className="form-label">Default file input example</label>
-				  <input className="form-control" type="file" id="formFile" />
-				</div>
-				<div className="mb-3">
-				  <label htmlFor="formFileMultiple" className="form-label">Multiple files input example</label>
-				  <input className="form-control" type="file" id="formFileMultiple" multiple />
-				</div>
-				<div className="mb-3">
-					<label htmlFor="formFileDisabled" className="form-label">Disabled file input example</label>
-					<input className="form-control" type="file" id="formFileDisabled" disabled />
-				</div>
-				<div className="mb-3">
-				  <label htmlFor="formFileSm" className="form-label">Small file input example</label>
-				  <input className="form-control form-control-sm" id="formFileSm" type="file" />
-				</div>
-				<div className="mb-3">
-					<label htmlFor="formFileLg" className="form-label">Large file input example</label>
-					<input className="form-control form-control-lg" id="formFileLg" type="file" />
-				</div>
+              <div className="mb-3">
+                <label htmlFor="formFile" className="form-label">
+                  Default file input example
+                </label>
+                <input className="form-control" type="file" id="formFile" />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="formFileMultiple" className="form-label">
+                  Multiple files input example
+                </label>
+                <input
+                  className="form-control"
+                  type="file"
+                  id="formFileMultiple"
+                  multiple
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="formFileDisabled" className="form-label">
+                  Disabled file input example
+                </label>
+                <input
+                  className="form-control"
+                  type="file"
+                  id="formFileDisabled"
+                  disabled
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="formFileSm" className="form-label">
+                  Small file input example
+                </label>
+                <input
+                  className="form-control form-control-sm"
+                  id="formFileSm"
+                  type="file"
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="formFileLg" className="form-label">
+                  Large file input example
+                </label>
+                <input
+                  className="form-control form-control-lg"
+                  id="formFileLg"
+                  type="file"
+                />
+              </div>
             </div>
           </div>
         </div>

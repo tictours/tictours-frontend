@@ -40,12 +40,12 @@ class ApexBar2 extends React.Component {
           offsetX: -6,
           style: {
             fontSize: "12px",
-             colors: ["#fff"],
+            colors: ["#fff"],
           },
         },
-		grid:{
-			 borderColor: '#ffffff1a',
-		},
+        grid: {
+          borderColor: "#ffffff1a",
+        },
         stroke: {
           show: false,
         },
@@ -54,16 +54,19 @@ class ApexBar2 extends React.Component {
             show: false,
           },
         },
-		
+
         xaxis: {
           show: false,
-          categories: [2001, 2002, 2003, 2004, 2005, 2006, 2007,2008,2009,2010,2011,2012],
-		   axisBorder: {
-			   show: false,
-		   },
-		    axisTicks: {
-				show: false,
-			},
+          categories: [
+            2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011,
+            2012,
+          ],
+          axisBorder: {
+            show: false,
+          },
+          axisTicks: {
+            show: false,
+          },
         },
       },
     };

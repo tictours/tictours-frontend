@@ -22,7 +22,7 @@ function ChartChartjs() {
     <>
       <PageTitle motherMenu="Charts" activeMenu="ChartJs" />
       <Row>
-	   <Col xl={6} lg={6}>
+        <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
               <h4 className="card-title">Bar chart</h4>
@@ -32,7 +32,7 @@ function ChartChartjs() {
             </Card.Body>
           </Card>
         </Col>
-       <Col xl={6} lg={6}>
+        <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
               <h4 className="card-title">Bar chart</h4>
@@ -52,16 +52,16 @@ function ChartChartjs() {
             </Card.Body>
           </Card>
         </Col>
-		 <Col xl={6} lg={6}>
+        <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
-				<h4 className="card-title">Line chart</h4>
+              <h4 className="card-title">Line chart</h4>
             </Card.Header>
             <Card.Body>
               <LineChart1 />
             </Card.Body>
           </Card>
-        </Col> 
+        </Col>
         <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
@@ -85,7 +85,7 @@ function ChartChartjs() {
         <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
-               <h4 className="card-title">Gradinet Area Chart</h4>
+              <h4 className="card-title">Gradinet Area Chart</h4>
             </Card.Header>
             <Card.Body>
               <GradientArea />
@@ -95,7 +95,7 @@ function ChartChartjs() {
         <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
-               <h4 className="card-title">Dual Area Chart</h4>
+              <h4 className="card-title">Dual Area Chart</h4>
             </Card.Header>
             <Card.Body>
               <DualArea />
@@ -106,7 +106,7 @@ function ChartChartjs() {
         <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
-               <h4 className="card-title">Pie</h4>
+              <h4 className="card-title">Pie</h4>
             </Card.Header>
             <Card.Body>
               <ChartPie />
@@ -117,13 +117,13 @@ function ChartChartjs() {
         <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
-                <h4 className="card-title">Polar Chart</h4>
+              <h4 className="card-title">Polar Chart</h4>
             </Card.Header>
             <Card.Body>
               <PolarChart />
             </Card.Body>
           </Card>
-		</Col>  
+        </Col>
       </Row>
     </>
   );

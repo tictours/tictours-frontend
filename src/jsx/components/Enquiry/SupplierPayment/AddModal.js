@@ -1,131 +1,125 @@
-import React from 'react'
+import React from "react";
 import DatePicker from "react-datepicker";
-import CustomModal from '../../../layouts/CustomModal';
-import { useNavigate } from 'react-router-dom';
-import { Formik } from 'formik';
-import InputField from '../../common/InputField';
-import SelectField from '../../common/SelectField';
-import notify from '../../common/Notify';
+import CustomModal from "../../../layouts/CustomModal";
+import { useNavigate } from "react-router-dom";
+import { Formik } from "formik";
+import InputField from "../../common/InputField";
+import SelectField from "../../common/SelectField";
+import notify from "../../common/Notify";
 
+const AddModal = ({ setShowModal, showModal }) => {
+  const navigate = useNavigate();
+  const date = new Date();
 
-const AddModal = ({setShowModal,showModal}) => {
-
-  const navigate = useNavigate()
-  const date = new Date()
-
-  const initialValues = {cancelDate:date,dueDate:date}
-  const TypeOptions = ['Transfer','Hotel','Activity']
+  const initialValues = { cancelDate: date, dueDate: date };
+  const TypeOptions = ["Transfer", "Hotel", "Activity"];
   return (
     <>
-    <Formik initialValues={initialValues} 
-         onSubmit={(values, { setSubmitting }) => {
-            setShowModal(false)
-            notify({message:'Supplier Payment Added Successfully'})
-          }}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(values, { setSubmitting }) => {
+          setShowModal(false);
+          notify({ message: "Supplier Payment Added Successfully" });
+        }}
+      >
         {({
-    values,
-    errors,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    isSubmitting,
-    setFieldValue,
-  })=>(
-
-    <CustomModal
+          values,
+          errors,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+          setFieldValue,
+        }) => (
+          <CustomModal
             showModal={showModal}
             title={"Add Supplier Payment"}
             handleModalClose={() => {
-              setShowModal(false)
-            //   setFormComponent('setupForm')
-            //   navigate('/enquiry/quotation')
-            }
-            }
+              setShowModal(false);
+              //   setFormComponent('setupForm')
+              //   navigate('/enquiry/quotation')
+            }}
           >
             <div className="card-body">
               <div className="basic-form">
-            <form
-              onSubmit={handleSubmit}
-            >
+                <form onSubmit={handleSubmit}>
                   <div className="row">
                     <div className="mb-3 col-md-4">
-                        <InputField
+                      <InputField
                         label="Name"
                         name="name"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         values={values}
-                    />
+                      />
                     </div>
                     <div className="form-group mb-3 col-md-4">
-                        <SelectField
-                            label='Type'
-                            name={'type'}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            values={values}
-                            options={TypeOptions}
-                        />
+                      <SelectField
+                        label="Type"
+                        name={"type"}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
+                        options={TypeOptions}
+                      />
                     </div>
                     <div className="mb-3 col-md-4">
-                        <InputField
+                      <InputField
                         label="Supplier name"
                         name="supplierName"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         values={values}
-                    />
+                      />
                     </div>
                     <div className="mb-3 col-md-4">
-                        <InputField
+                      <InputField
                         label="Amount"
                         name="amount"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         values={values}
-                        type='number'
-                    />
-                 </div>
+                        type="number"
+                      />
+                    </div>
                     <div className="mb-3 col-md-4">
-                        <InputField
+                      <InputField
                         label="Paid Amount"
                         name="paidAmount"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         values={values}
-                        type='number'
-                    />
-                 </div>
-                 <div className="form-group mb-3 col-md-4">
+                        type="number"
+                      />
+                    </div>
+                    <div className="form-group mb-3 col-md-4">
                       <label>Cancellation Date</label>
-                      <DatePicker  className="form-control"
+                      <DatePicker
+                        className="form-control"
                         selected={values?.cancelDate}
-                        onChange={(date) => setFieldValue('cancelDate',date)}
-                        />
+                        onChange={(date) => setFieldValue("cancelDate", date)}
+                      />
                     </div>
-                 <div className="form-group mb-3 col-md-4">
+                    <div className="form-group mb-3 col-md-4">
                       <label>Due Date</label>
-                      <DatePicker  className="form-control"
+                      <DatePicker
+                        className="form-control"
                         selected={values?.dueDate}
-                        onChange={(date) => setFieldValue('dueDate',date)}
-                        />
+                        onChange={(date) => setFieldValue("dueDate", date)}
+                      />
                     </div>
-                  
-                  
-                   
-                    
-                    </div>
+                  </div>
                   <button type="submit" className="btn btn-primary">
                     Add Payment
                   </button>
-            </form>
-          </div>
-        </div>
-      </CustomModal>
-  )}
-    </Formik>
+                </form>
+              </div>
+            </div>
+          </CustomModal>
+        )}
+      </Formik>
     </>
-  )
-}
+  );
+};
 
-export default AddModal
+export default AddModal;

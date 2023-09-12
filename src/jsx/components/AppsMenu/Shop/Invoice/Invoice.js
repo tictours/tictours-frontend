@@ -47,8 +47,18 @@ const Invoice = () => {
                   <div className="row align-items-center">
                     <div className="col-sm-9">
                       <div className="brand-logo mb-3">
-                          <img className="logo-abbr me-2 dark-logo" width="150" src={logo} alt="" />
-													<img className="logo-abbr me-2 light-logo" width="150" src={logoWhite} alt="" />
+                        <img
+                          className="logo-abbr me-2 dark-logo"
+                          width="150"
+                          src={logo}
+                          alt=""
+                        />
+                        <img
+                          className="logo-abbr me-2 light-logo"
+                          width="150"
+                          src={logoWhite}
+                          alt=""
+                        />
                       </div>
                       <span>
                         Please send exact amount:{" "}

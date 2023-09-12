@@ -66,9 +66,9 @@ class ApexBar3 extends React.Component {
             },
           },
         },
-		grid:{
-			 borderColor: '#ffffff1a',
-		},
+        grid: {
+          borderColor: "#ffffff1a",
+        },
         stroke: {
           show: true,
           width: 2,
@@ -76,12 +76,12 @@ class ApexBar3 extends React.Component {
         },
         xaxis: {
           categories: ["06", "07", "08", "09", "10"],
-			axisBorder: {
-			   show: false,
-			},
-		    axisTicks: {
-				show: false,
-			},
+          axisBorder: {
+            show: false,
+          },
+          axisTicks: {
+            show: false,
+          },
         },
         fill: {
           colors: ["#1c9ef9", "#709fba"],

@@ -4,41 +4,43 @@ export const MenuList = [
     title: "Dashboard",
     classsChange: "mm-collapse",
     iconStyle: <i className="material-icons-outlined">dashboard</i>,
-    ...(process.env.NODE_ENV !== 'development' && {to:'dashboard'}),
-    ...(process.env.NODE_ENV === "development" && {content: [
-      {
-        title: "Dashboard Light",
-        to: "dashboard",
-      },
-      {
-        title: "Dashboard Dark",
-        to: "dashboard-dark",
-      },
-      {
-        title: "Banking",
-        to: "banking",
-      },
-      {
-        title: "Ticketing",
-        to: "ticketing",
-      },
-      {
-        title: "Crypto",
-        to: "crypto",
-      },
-      {
-        title: "Invoice",
-        to: "invoice",
-      },
-      {
-        title: "Contact",
-        to: "contact",
-      },
-      {
-        title: "Kanban",
-        to: "kanban",
-      },
-    ]}),
+    ...(process.env.NODE_ENV !== "development" && { to: "dashboard" }),
+    ...(process.env.NODE_ENV === "development" && {
+      content: [
+        {
+          title: "Dashboard Light",
+          to: "dashboard",
+        },
+        {
+          title: "Dashboard Dark",
+          to: "dashboard-dark",
+        },
+        {
+          title: "Banking",
+          to: "banking",
+        },
+        {
+          title: "Ticketing",
+          to: "ticketing",
+        },
+        {
+          title: "Crypto",
+          to: "crypto",
+        },
+        {
+          title: "Invoice",
+          to: "invoice",
+        },
+        {
+          title: "Contact",
+          to: "contact",
+        },
+        {
+          title: "Kanban",
+          to: "kanban",
+        },
+      ],
+    }),
   },
   {
     title: "Leads",
@@ -102,7 +104,6 @@ export const MenuList = [
         title: "Supplier Payment",
         to: "supplier-payments",
       },
-      
     ],
   },
   {
@@ -116,22 +117,22 @@ export const MenuList = [
     classsChange: "mm-collapse",
     iconStyle: <i className="material-icons">settings</i>,
     // to: "settings",
-    content:[
+    content: [
       {
-        title: 'Admin Settings',
-        to:'settings'
+        title: "Admin Settings",
+        to: "settings",
       },
       {
         title: "Company Settings",
-        to:'company-settings'
+        to: "company-settings",
       },
       {
         title: "Fields",
-        to:'fields'
+        to: "fields",
       },
       {
         title: "Currency Settings",
-        to:'currency-settings'
+        to: "currency-settings",
       },
       {
         title: "User Management",
@@ -148,7 +149,7 @@ export const MenuList = [
           },
         ],
       },
-    ]
+    ],
   },
   ...(process.env.NODE_ENV === "development"
     ? [

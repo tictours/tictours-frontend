@@ -92,7 +92,9 @@ const BootstrapTable = () => {
                     <td>Dr. Jackson</td>
                     <td>01 August 2022</td>
                     <td>
-                      <Badge bg="" className="light badge-success">Successful</Badge>
+                      <Badge bg="" className="light badge-success">
+                        Successful
+                      </Badge>
                     </td>
                     <td>$21.56</td>
                     <td>
@@ -118,7 +120,9 @@ const BootstrapTable = () => {
                     <td>Dr. Jackson</td>
                     <td>01 August 2022</td>
                     <td>
-                      <Badge bg="" className="light badge-danger" >Canceled</Badge>
+                      <Badge bg="" className="light badge-danger">
+                        Canceled
+                      </Badge>
                     </td>
                     <td>$21.56</td>
                     <td>
@@ -144,7 +148,9 @@ const BootstrapTable = () => {
                     <td>Dr. Jackson</td>
                     <td>01 August 2022</td>
                     <td>
-                      <Badge  bg="" className="light badge-warning">Pending</Badge>
+                      <Badge bg="" className="light badge-warning">
+                        Pending
+                      </Badge>
                     </td>
                     <td>$21.56</td>
                     <td>
@@ -401,7 +407,9 @@ const BootstrapTable = () => {
                     <th>1</th>
                     <td>Kolor Tea Shirt For Man</td>
                     <td>
-                      <Badge bg="" className="badge-primary light">Sale</Badge>
+                      <Badge bg="" className="badge-primary light">
+                        Sale
+                      </Badge>
                     </td>
                     <td>January 22</td>
                     <td className="color-primary">$21.56</td>
@@ -450,7 +458,9 @@ const BootstrapTable = () => {
                     <th>1</th>
                     <td>Color Tea Shirt For Man</td>
                     <td>
-                      <Badge bg="" className="badge-primary light">Sale</Badge>
+                      <Badge bg="" className="badge-primary light">
+                        Sale
+                      </Badge>
                     </td>
                     <td>January 22</td>
                     <td className="color-primary">$21.56</td>
@@ -508,7 +518,7 @@ const BootstrapTable = () => {
                     <th>2</th>
                     <td>Kolor Tea Shirt For Women</td>
                     <td>
-                      <Badge bg="success" >Tax</Badge>
+                      <Badge bg="success">Tax</Badge>
                     </td>
                     <td>January 30</td>
                     <td className="color-success">$55.32</td>
@@ -548,7 +558,9 @@ const BootstrapTable = () => {
                     <th>1</th>
                     <td>Kolor Tea Shirt For Man</td>
                     <td>
-                      <Badge bg="" className="badge-primary light">Sale</Badge>
+                      <Badge bg="" className="badge-primary light">
+                        Sale
+                      </Badge>
                     </td>
                     <td>January 22</td>
                     <td className="color-primary">$21.56</td>
@@ -566,7 +578,9 @@ const BootstrapTable = () => {
                     <th>3</th>
                     <td>Blue Backpack For Baby</td>
                     <td>
-                      <Badge bg="" className="badge-danger light">Extended</Badge>
+                      <Badge bg="" className="badge-danger light">
+                        Extended
+                      </Badge>
                     </td>
                     <td>January 25</td>
                     <td className="color-danger">$14.85</td>
@@ -589,7 +603,9 @@ const BootstrapTable = () => {
                     <th scope="col">#</th>
                     <th scope="col">Product</th>
                     <th scope="col">Popularity</th>
-                    <th scope="col" className="text-end">Sales</th>
+                    <th scope="col" className="text-end">
+                      Sales
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -600,7 +616,9 @@ const BootstrapTable = () => {
                       <ProgressBar now={70} variant="primary" />
                     </td>
                     <td className="text-end">
-                      <Badge bg="" className="badge-primary light">70%</Badge>
+                      <Badge bg="" className="badge-primary light">
+                        70%
+                      </Badge>
                     </td>
                   </tr>
                   <tr>
@@ -620,7 +638,9 @@ const BootstrapTable = () => {
                       <ProgressBar variant="dark" now="70" />
                     </td>
                     <td className="text-end">
-                      <Badge bg="" className="badge-dark light">70%</Badge>
+                      <Badge bg="" className="badge-dark light">
+                        70%
+                      </Badge>
                     </td>
                   </tr>
                   <tr>
@@ -683,7 +703,11 @@ const BootstrapTable = () => {
                         >
                           <i className="fas fa-pencil-alt color-muted"></i>{" "}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -699,7 +723,7 @@ const BootstrapTable = () => {
                       <Badge variant="success">70%</Badge>
                     </td>
                     <td className="text-end">
-                    <span className="d-flex justify-content-end">
+                      <span className="d-flex justify-content-end">
                         <Link
                           to="/table-bootstrap-basic"
                           className="me-2 btn btn-primary shadow btn-xs sharp"
@@ -707,7 +731,11 @@ const BootstrapTable = () => {
                         >
                           <i className="fas fa-pencil-alt color-muted"></i>{" "}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -731,7 +759,11 @@ const BootstrapTable = () => {
                         >
                           <i className="fas fa-pencil-alt color-muted"></i>{" "}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -755,7 +787,11 @@ const BootstrapTable = () => {
                         >
                           <i className="fas fa-pencil-alt color-muted"></i>{" "}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -779,7 +815,11 @@ const BootstrapTable = () => {
                         >
                           <i className="fas fa-pencil-alt color-muted"></i>{" "}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -817,7 +857,7 @@ const BootstrapTable = () => {
                       <Badge bg="primary light">70%</Badge>
                     </td>
                     <td>
-                       <span className="d-flex justify-content-end">
+                      <span className="d-flex justify-content-end">
                         <Link
                           to="/table-bootstrap-basic"
                           className="me-2 btn btn-primary shadow btn-xs sharp"
@@ -825,7 +865,11 @@ const BootstrapTable = () => {
                         >
                           <i className="fas fa-pencil-alt color-muted"></i>{" "}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -849,7 +893,11 @@ const BootstrapTable = () => {
                         >
                           <i className="fas fa-pencil-alt color-muted"></i>{" "}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -873,7 +921,11 @@ const BootstrapTable = () => {
                         >
                           <i className="fas fa-pencil-alt color-muted"></i>{" "}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -897,7 +949,11 @@ const BootstrapTable = () => {
                         >
                           <i className="fas fa-pencil-alt color-muted"></i>{" "}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -921,7 +977,11 @@ const BootstrapTable = () => {
                         >
                           <i className="fas fa-pencil-alt color-muted"></i>{" "}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>

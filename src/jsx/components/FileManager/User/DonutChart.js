@@ -4,23 +4,23 @@ import { Doughnut } from "react-chartjs-2";
 class DonutChart extends Component {
   render() {
     const data = {
-		weight: 0,
-		defaultFontFamily: "Poppins",
-		datasets: [
-			{
-				data: [this.props.value, 100 - this.props.value],
-				borderWidth: 0,
-				backgroundColor: [
-					this.props.backgroundColor,
-					this.props.backgroundColor2,
-				],
-			},
-		],
+      weight: 0,
+      defaultFontFamily: "Poppins",
+      datasets: [
+        {
+          data: [this.props.value, 100 - this.props.value],
+          borderWidth: 0,
+          backgroundColor: [
+            this.props.backgroundColor,
+            this.props.backgroundColor2,
+          ],
+        },
+      ],
     };
 
     const options = {
       width: 100,
-      cutout: '80%',
+      cutout: "80%",
       responsive: false,
       maintainAspectRatio: true,
       tooltips: { enabled: false },

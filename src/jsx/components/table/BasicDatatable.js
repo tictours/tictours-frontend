@@ -2,16 +2,15 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const BasicDatatable = () => {
-
   const inputEl = useRef(null);
 
   const [data, setData] = useState(
-    document.querySelectorAll("#job_data tbody tr")
+    document.querySelectorAll("#job_data tbody tr"),
   );
 
-  console.log('data');
+  console.log("data");
   console.log(data);
-  
+
   const sort = 5;
   const activePag = useRef(0);
   //const [test, settest] = useState(0);
@@ -30,10 +29,10 @@ const BasicDatatable = () => {
   useEffect(() => {
     setData(document.querySelectorAll("#job_data tbody tr"));
 
-    console.log('data2');
+    console.log("data2");
     console.log(data);
 
-   // chackboxFun();
+    // chackboxFun();
   }, []);
 
   // Active pagginarion
@@ -49,7 +48,6 @@ const BasicDatatable = () => {
     chageData(activePag.current * sort, (activePag.current + 1) * sort);
     //settest(i);
   };
- 
 
   return (
     <div className="col-12">
@@ -171,7 +169,6 @@ const BasicDatatable = () => {
                     <td>$433,060</td>
                   </tr>
                 </tbody>
-               
               </table>
               <div className="d-sm-flex text-center justify-content-between align-items-center mt-3 mb-md-0 mb-2">
                 <div className="dataTables_info">

@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import {  Dropdown } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 // import data from "./tableData.js";
 
 const PatientTable = () => {
   const [data, setData] = useState(
-    document.querySelectorAll("#patientTable_basic_table tbody tr")
+    document.querySelectorAll("#patientTable_basic_table tbody tr"),
   );
   const sort = 5;
   const activePag = useRef(0);
@@ -25,7 +25,7 @@ const PatientTable = () => {
   // use effect
   useEffect(() => {
     setData(document.querySelectorAll("#patientTable_basic_table tbody tr"));
-   // chackboxFun();
+    // chackboxFun();
   }, []);
 
   // Active pagginarion

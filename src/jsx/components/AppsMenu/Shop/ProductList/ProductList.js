@@ -1,4 +1,4 @@
-import React, { Fragment, useState,useReducer } from "react";
+import React, { Fragment, useState, useReducer } from "react";
 import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 
@@ -14,16 +14,16 @@ import product6 from "../../../../../images/product/6.jpg";
 import product7 from "../../../../../images/product/7.jpg";
 
 const init = false;
-const reducer = (state, action) =>{
-	if(action.type==='reviewModal'){
-		return { ...state, reviewModal: !state.reviewModal}
-	}
-	return state;
-}
+const reducer = (state, action) => {
+  if (action.type === "reviewModal") {
+    return { ...state, reviewModal: !state.reviewModal };
+  }
+  return state;
+};
 
 const ProductList = () => {
-	const [state, dispatch] = useReducer(reducer ,init);	
-	//const [reviewModal, setReviewModal] = useState(false);
+  const [state, dispatch] = useReducer(reducer, init);
+  //const [reviewModal, setReviewModal] = useState(false);
   return (
     <Fragment>
       <PageTitle activeMenu="Blank" motherMenu="Layout" />
@@ -71,7 +71,7 @@ const ProductList = () => {
                         className="product-review"
                         to="/ecom-product-list"
                         data-toggle="modal"
-                        onClick={() => dispatch({type:'reviewModal'})}
+                        onClick={() => dispatch({ type: "reviewModal" })}
                         data-target="#reviewModal"
                       >
                         Write a review?
@@ -145,7 +145,7 @@ const ProductList = () => {
                         className="product-review"
                         to="/ecom-product-list"
                         data-toggle="modal"
-                        onClick={() => dispatch({type:'reviewModal'})}
+                        onClick={() => dispatch({ type: "reviewModal" })}
                         data-target="#reviewModal"
                       >
                         Write a review?
@@ -219,7 +219,7 @@ const ProductList = () => {
                         className="product-review"
                         to="/ecom-product-list"
                         data-toggle="modal"
-                        onClick={() => dispatch({type:'reviewModal'})}
+                        onClick={() => dispatch({ type: "reviewModal" })}
                         data-target="#reviewModal"
                       >
                         Write a review?
@@ -293,7 +293,7 @@ const ProductList = () => {
                         className="product-review"
                         to="/ecom-product-list"
                         data-toggle="modal"
-                        onClick={() => dispatch({type:'reviewModal'})}
+                        onClick={() => dispatch({ type: "reviewModal" })}
                         data-target="#reviewModal"
                       >
                         Write a review?
@@ -367,7 +367,7 @@ const ProductList = () => {
                         className="product-review"
                         to="/ecom-product-list"
                         data-toggle="modal"
-                        onClick={() => dispatch({type:'reviewModal'})}
+                        onClick={() => dispatch({ type: "reviewModal" })}
                         data-target="#reviewModal"
                       >
                         Write a review?
@@ -441,7 +441,7 @@ const ProductList = () => {
                         className="product-review"
                         to="/ecom-product-list"
                         data-toggle="modal"
-                        onClick={() => dispatch({type:'reviewModal'})}
+                        onClick={() => dispatch({ type: "reviewModal" })}
                         data-target="#reviewModal"
                       >
                         Write a review?
@@ -474,7 +474,12 @@ const ProductList = () => {
           </div>
         </div>
         {/* review */}
-        <Modal show={state.reviewModal} onHide={() => dispatch({type:'reviewModal'})} className="modal fade" id="reviewModal">
+        <Modal
+          show={state.reviewModal}
+          onHide={() => dispatch({ type: "reviewModal" })}
+          className="modal fade"
+          id="reviewModal"
+        >
           <>
             <div className="modal-content">
               <div className="modal-header">
@@ -483,16 +488,15 @@ const ProductList = () => {
                   type="button"
                   className="btn-close"
                   data-dismiss="modal"
-                  onClick={() => dispatch({type:'reviewModal'})}
-                >
-                </button>
+                  onClick={() => dispatch({ type: "reviewModal" })}
+                ></button>
               </div>
               <div className="modal-body">
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
-                    
-					 dispatch({type:'reviewModal'})
+
+                    dispatch({ type: "reviewModal" });
                   }}
                 >
                   <div className="text-center mb-4">
@@ -510,22 +514,22 @@ const ProductList = () => {
                         <ul
                           id="stars"
                           className="d-flex justify-content-center align-items-center"
-                        >	
-						  <li>
-							  <i className="fa fa-star me-1" />
-							</li>{" "}
-							<li>
-							  <i className="fa fa-star me-1" />
-							</li>{" "}
-							<li>
-							  <i className="fa fa-star me-1" />
-							</li>{" "}
-							<li>
-							  <i className="fa fa-star me-1" />
-							</li>{" "}
-							<li>
-							  <i className="fa fa-star" />
-							</li>
+                        >
+                          <li>
+                            <i className="fa fa-star me-1" />
+                          </li>{" "}
+                          <li>
+                            <i className="fa fa-star me-1" />
+                          </li>{" "}
+                          <li>
+                            <i className="fa fa-star me-1" />
+                          </li>{" "}
+                          <li>
+                            <i className="fa fa-star me-1" />
+                          </li>{" "}
+                          <li>
+                            <i className="fa fa-star" />
+                          </li>
                         </ul>
                       </div>
                     </div>

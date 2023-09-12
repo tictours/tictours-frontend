@@ -7,14 +7,14 @@ const UiGrid = () => {
     <Fragment>
       {/* <PageTitle activeMenu="Grid" pageContent="Grid" motherMenu="Bootstrap" /> */}
       <div className="row ">
-				<div className="col-xl-12">
-					<div className="page-titles">
-						<div className="d-flex align-items-center">
-							<h2 className="heading">Grid</h2>
-						</div>
-					</div>
-				</div>
-			</div>
+        <div className="col-xl-12">
+          <div className="page-titles">
+            <div className="d-flex align-items-center">
+              <h2 className="heading">Grid</h2>
+            </div>
+          </div>
+        </div>
+      </div>
       <Row>
         <Col lg={12}>
           <Card>

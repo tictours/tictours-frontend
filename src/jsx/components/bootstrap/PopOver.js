@@ -13,16 +13,16 @@ import {
 const UiPopOver = () => {
   let width = window.innerWidth;
   return (
-    <div className="h-80">      
+    <div className="h-80">
       <div className="row ">
-				<div className="col-xl-12">
-					<div className="page-titles">
-						<div className="d-flex align-items-center">
-							<h2 className="heading">Popover</h2>
-						</div>
-					</div>
-				</div>
-			</div>
+        <div className="col-xl-12">
+          <div className="page-titles">
+            <div className="d-flex align-items-center">
+              <h2 className="heading">Popover</h2>
+            </div>
+          </div>
+        </div>
+      </div>
       <Row>
         <Col>
           <Card>
@@ -73,17 +73,23 @@ const UiPopOver = () => {
                       }
                       responsive={true}
                       overlay={
-                        <Tooltip className='toltip-popover'
-                            id={`popover-positioned-${placement.toLowerCase()}`}
-                          >
-                          <h3 className='popover-header'>{`Popover on ${placement}`}</h3> 
+                        <Tooltip
+                          className="toltip-popover"
+                          id={`popover-positioned-${placement.toLowerCase()}`}
+                        >
+                          <h3 className="popover-header">{`Popover on ${placement}`}</h3>
                           <strong>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit, sed do eiusmod tempor.
                           </strong>
-                        </Tooltip>  
+                        </Tooltip>
                       }
                     >
-                      <Button variant="primary" size="sm" className="me-2 mt-3 px-4">
+                      <Button
+                        variant="primary"
+                        size="sm"
+                        className="me-2 mt-3 px-4"
+                      >
                         {placement}
                       </Button>
                     </OverlayTrigger>

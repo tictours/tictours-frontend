@@ -1,13 +1,12 @@
-import React from 'react'
+import React from "react";
 import DatePicker from "react-datepicker";
-import SelectField from '../../common/SelectField';
-import Img1 from '../../../../images/course/hotel-1.jpg'
-import DropDownBlog from '../../Dashboard/DropDownBlog';
-import { useNavigate } from 'react-router-dom';
-import notify from '../../common/Notify';
+import SelectField from "../../common/SelectField";
+import Img1 from "../../../../images/course/hotel-1.jpg";
+import DropDownBlog from "../../Dashboard/DropDownBlog";
+import { useNavigate } from "react-router-dom";
+import notify from "../../common/Notify";
 
-
-const PackageForm = ({formik,setFormComponent,setShowModal}) => {
+const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const {
     values,
     errors,
@@ -16,100 +15,105 @@ const PackageForm = ({formik,setFormComponent,setShowModal}) => {
     handleSubmit,
     isSubmitting,
     setFieldValue,
-  } = formik
-  const navigation = useNavigate()
-  const dayList = [1,2,3,4]
-  const scheduleData = [1,2]
+  } = formik;
+  const navigation = useNavigate();
+  const dayList = [1, 2, 3, 4];
+  const scheduleData = [1, 2];
   const destinationOptions = ["Destination 1", "Destination 2"];
-  const categoryOptions = ['Hotel','Activity','Transfer']
-  const dataList = [1,2,3,4]
+  const categoryOptions = ["Hotel", "Activity", "Transfer"];
+  const dataList = [1, 2, 3, 4];
 
-   // Step 1: Parse the date strings into Date objects
-   const startDate = new Date(values.formStartDate);
-   const endDate = new Date(values.formEndDate);
- 
-   // Step 2 and Step 3: Generate all dates between the two dates and store in an array
-   const datesArray = [];
-   let currentDate = startDate;
-   while (currentDate <= endDate) {
-     datesArray.push(new Date(currentDate));
-     currentDate.setDate(currentDate.getDate() + 1);
-   }
+  // Step 1: Parse the date strings into Date objects
+  const startDate = new Date(values.formStartDate);
+  const endDate = new Date(values.formEndDate);
 
-  const handleAddCategory = ()=>{
-    if(values.categoryOptions === 'Hotel'){
-        navigation('/add-hotel')
-    }
+  // Step 2 and Step 3: Generate all dates between the two dates and store in an array
+  const datesArray = [];
+  let currentDate = startDate;
+  while (currentDate <= endDate) {
+    datesArray.push(new Date(currentDate));
+    currentDate.setDate(currentDate.getDate() + 1);
   }
+
+  const handleAddCategory = () => {
+    if (values.categoryOptions === "Hotel") {
+      navigation("/add-hotel");
+    }
+  };
   const formSubmit = () => {
     // setShowModal(false)
-    setFormComponent('paymentForm')
+    setFormComponent("paymentForm");
     // notify({message:'Itinary Created Successfully'})
-  }
+  };
   return (
     <>
-    <form 
-    // onSubmit={formSubmit}
-    >
-                  <div className="row package">
-                    <div className='col-3'>
-                        {datesArray?.map((date,key)=>(
-                        <div className='row border-bottom' key={key}>
-                            <div className='col-md-3 align-self-center'>
-                            <div className=' day-circle bg-primary d-flex align-items-center justify-content-center m-0 rounded-circle'>
-                                <h6 className='text-white m-0'>{key+1}</h6>
+      <form
+      // onSubmit={formSubmit}
+      >
+        <div className="row package">
+          <div className="col-3">
+            {datesArray?.map((date, key) => (
+              <div className="row border-bottom" key={key}>
+                <div className="col-md-3 align-self-center">
+                  <div className=" day-circle bg-primary d-flex align-items-center justify-content-center m-0 rounded-circle">
+                    <h6 className="text-white m-0">{key + 1}</h6>
+                  </div>
+                </div>
+                <div className="col-md-9">
+                  <p className="text-center mb-1">
+                    {date.toLocaleDateString("en-GB")}
+                  </p>
+                  <SelectField
+                    name={`${key + 1}marketType`}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    values={values}
+                    options={destinationOptions}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="col-5 px-1">
+            <div className="schedule-box">
+              <div className="p-3">
+                <h6>Day 1 - 21/02/2023</h6>
+              </div>
+              <div className="">
+                {scheduleData.map((item, ind) => (
+                  <div className="d-flex justify-content-center" key={ind}>
+                    <div className="card contact_list schedule-card">
+                      <div className="card-body">
+                        <div className="user-content">
+                          <div className="user-info">
+                            <div className="user-img">
+                              <img src={Img1} alt="" />
                             </div>
+                            <div className="user-details">
+                              <h6 className="user-name">Hotel: Marriott</h6>
+                              <span className="number">10am to 2pm</span>
+                              <span className="mail">Room type : Deluxe</span>
+                              <span className="mail">No of guest : 02</span>
+                              <div className="d-flex justify-content-between mt-1">
+                                <div className="me-1">
+                                  <span className="mail">
+                                    Check in Date & Time
+                                  </span>
+                                  <span className="mail">26-05-2023 11am</span>
+                                </div>
+                                <div>
+                                  <span className="mail">
+                                    Check out Date & Time
+                                  </span>
+                                  <span className="mail">27-05-2023 11am</span>
+                                </div>
+                              </div>
+                              {/* <span className="mail">jordan@mail.com</span>  */}
                             </div>
-                            <div className='col-md-9'>
-                                <p className='text-center mb-1'>{date.toLocaleDateString('en-GB')}</p>
-                                    <SelectField
-                                        name={`${key+1}marketType`}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        values={values}
-                                        options={destinationOptions}
-                                    />
-                            </div>
+                          </div>
+                          <DropDownBlog />
                         </div>
-
-                        ))}
-                    </div>
-                    <div className='col-5 px-1'>
-                        <div className='schedule-box'>
-                            <div className='p-3'>
-                                <h6>Day 1 - 21/02/2023</h6>
-                            </div>
-                            <div className=''>
-                            {scheduleData.map((item, ind)=>(
-                                    <div className="d-flex justify-content-center" key={ind}>
-                                        <div className="card contact_list schedule-card">
-                                            <div className="card-body">
-                                                <div className="user-content">
-                                                    <div className="user-info">
-                                                        <div className="user-img">
-                                                            <img src={Img1} alt="" />
-                                                        </div>
-                                                        <div className="user-details">
-                                                            <h6 className="user-name">Hotel: Marriott</h6>
-                                                            <span className="number">10am to 2pm</span>
-                                                                    <span className="mail">Room type : Deluxe</span>
-                                                                    <span className="mail">No of guest : 02</span>
-                                                            <div className='d-flex justify-content-between mt-1'>
-                                                                <div className='me-1'>
-                                                                <span className="mail">Check in Date & Time</span>
-                                                                <span className="mail">26-05-2023 11am</span>
-                                                                </div>
-                                                                <div>
-                                                                <span className="mail">Check out Date & Time</span>
-                                                                <span className="mail">27-05-2023 11am</span>
-                                                                </div>
-                                                            </div>
-                                                            {/* <span className="mail">jordan@mail.com</span>  */}
-                                                        </div>
-                                                    </div>
-                                                    <DropDownBlog  />
-                                                </div>
-                                                {/* <div className="contact-icon">
+                        {/* <div className="contact-icon">
                                                     <div className="icon">
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M19.973 14.7709C19.9394 14.6283 19.8749 14.4949 19.784 14.3799C19.6931 14.265 19.578 14.1715 19.447 14.1059L15.447 12.1059C15.2592 12.0122 15.0468 11.98 14.8397 12.0137C14.6325 12.0475 14.4413 12.1455 14.293 12.2939L12.618 13.9689C10.211 13.5819 6.418 9.78994 6.032 7.38294L7.707 5.70694C7.85545 5.55864 7.95349 5.36739 7.98723 5.16028C8.02097 4.95317 7.9887 4.7407 7.895 4.55294L5.895 0.552942C5.82953 0.421827 5.73604 0.306705 5.62115 0.215724C5.50625 0.124744 5.37277 0.0601275 5.23014 0.0264496C5.08751 -0.00722831 4.93922 -0.00914485 4.79577 0.0208356C4.65231 0.050816 4.5172 0.111961 4.4 0.199942L0.4 3.19994C0.275804 3.29309 0.175 3.41387 0.105573 3.55273C0.036145 3.69158 0 3.8447 0 3.99994C0 13.5699 6.43 19.9999 16 19.9999C16.1552 19.9999 16.3084 19.9638 16.4472 19.8944C16.5861 19.8249 16.7069 19.7241 16.8 19.5999L19.8 15.5999C19.8877 15.4828 19.9487 15.3479 19.9786 15.2047C20.0085 15.0614 20.0066 14.9134 19.973 14.7709ZM15.5 17.9929C7.569 17.7799 2.22 12.4309 2.007 4.49994L4.642 2.51894L5.783 4.79994L4.293 6.28994C4.19978 6.38314 4.1259 6.49384 4.07561 6.61569C4.02533 6.73754 3.99963 6.86813 4 6.99994C4 10.5329 9.467 15.9999 13 15.9999C13.2652 15.9999 13.5195 15.8945 13.707 15.7069L15.197 14.2169L17.481 15.3589L15.5 17.9929Z" fill="#01A3FF"/>
@@ -133,66 +137,80 @@ const PackageForm = ({formik,setFormComponent,setShowModal}) => {
                                                         </svg>
                                                     </div>
                                                 </div> */}
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                      </div>
                     </div>
-                    <div className='col-4'>
-                        <div className='d-flex'>
-                        <div className="input-group search-area flex-1">
-					<input type="text" 
-						className={`form-control ${false ? "active" : ""} border-0`}
-						placeholder="Search here..." 
-					/>
-					{/* <span className="input-group-text">
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="col-4">
+            <div className="d-flex">
+              <div className="input-group search-area flex-1">
+                <input
+                  type="text"
+                  className={`form-control ${false ? "active" : ""} border-0`}
+                  placeholder="Search here..."
+                />
+                {/* <span className="input-group-text">
 						<Link to={"#"}>
 							<svg width="15" height="15" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M17.5605 15.4395L13.7527 11.6317C14.5395 10.446 15 9.02625 15 7.5C15 3.3645 11.6355 0 7.5 0C3.3645 0 0 3.3645 0 7.5C0 11.6355 3.3645 15 7.5 15C9.02625 15 10.446 14.5395 11.6317 13.7527L15.4395 17.5605C16.0245 18.1462 16.9755 18.1462 17.5605 17.5605C18.1462 16.9747 18.1462 16.0252 17.5605 15.4395V15.4395ZM2.25 7.5C2.25 4.605 4.605 2.25 7.5 2.25C10.395 2.25 12.75 4.605 12.75 7.5C12.75 10.395 10.395 12.75 7.5 12.75C4.605 12.75 2.25 10.395 2.25 7.5V7.5Z" fill="#01A3FF"/>
 							</svg>
 						</Link>
 					</span> */}
-				</div>
-                <div className='flex-1 ms-2'>
+              </div>
+              <div className="flex-1 ms-2">
                 <SelectField
-                   name={`categoryOptions`}
-                   onChange={handleChange}
-                   onBlur={handleBlur}
-                   values={values}
-                   options={categoryOptions}
-                                    />
-                </div>	
-                        </div>
-                        <div className='mt-4'>
-                            {dataList.map((list,key)=>(
-                                <div className='d-flex justify-content-between mb-3 ps-2' key={key}>
-                                    <div className='d-flex align-item-center'>
-                                        <div className='custom-img-container'>
-                                     <img src={Img1} alt="" className='custom-img'/>
-                                        </div>
-                                     <h6 className='m-2'>{`${values.categoryOptions} ${key+1}`}</h6>
-                                    </div>
-                                    <div>
-                                        <button type='button' className='btn btn-white p-0 mt-2'>
-                                        <i className="fa-solid fa-plus text-primary"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            ))}
-                            <div>
-                                <button type="button" className="btn btn-primary mt-5" onClick={handleAddCategory}>{`Add ${values.categoryOptions}`}</button>
-                            </div>
-                        </div>
+                  name={`categoryOptions`}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  values={values}
+                  options={categoryOptions}
+                />
+              </div>
+            </div>
+            <div className="mt-4">
+              {dataList.map((list, key) => (
+                <div
+                  className="d-flex justify-content-between mb-3 ps-2"
+                  key={key}
+                >
+                  <div className="d-flex align-item-center">
+                    <div className="custom-img-container">
+                      <img src={Img1} alt="" className="custom-img" />
                     </div>
-                   </div>
-                  <button type="button" className="btn btn-primary mt-4" onClick={formSubmit}>
-                    Schedule itinerary
-                  </button>
-                </form>
+                    <h6 className="m-2">{`${values.categoryOptions} ${
+                      key + 1
+                    }`}</h6>
+                  </div>
+                  <div>
+                    <button type="button" className="btn btn-white p-0 mt-2">
+                      <i className="fa-solid fa-plus text-primary"></i>
+                    </button>
+                  </div>
+                </div>
+              ))}
+              <div>
+                <button
+                  type="button"
+                  className="btn btn-primary mt-5"
+                  onClick={handleAddCategory}
+                >{`Add ${values.categoryOptions}`}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          type="button"
+          className="btn btn-primary mt-4"
+          onClick={formSubmit}
+        >
+          Schedule itinerary
+        </button>
+      </form>
     </>
-  )
-}
+  );
+};
 
-export default PackageForm
+export default PackageForm;

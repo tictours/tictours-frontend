@@ -2,16 +2,16 @@ import React from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
-function TabComponent({menu,mainPath='/enquiry/'}) {
+function TabComponent({ menu, mainPath = "/enquiry/" }) {
   const navigate = useNavigate();
-  const {pathname} = useLocation()
-  const activePath = pathname.replace(mainPath,'')
-  console.log('act',activePath)
+  const { pathname } = useLocation();
+  const activePath = pathname.replace(mainPath, "");
+  console.log("act", activePath);
   const handleClick = (path) => {
     // console.log("clicked", path);
     navigate(path);
   };
-  console.log('menu',menu)
+  console.log("menu", menu);
   return (
     <>
       <div className="row">

@@ -1,75 +1,81 @@
-import React, { useState } from 'react'
-import {Link, useNavigate} from 'react-router-dom';
-import ModalVideo from 'react-modal-video'
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import ModalVideo from "react-modal-video";
 
-import bitcoin from './../../../images/svg/bitcoin.svg';
-import school from './../../../images/svg/school.svg';
-import wallet from './../../../images/svg/cryptowallet.svg';
-import crypto from './../../../images/svg/cryptocurrency.svg';
-import transfer from './../../../images/svg/wire-transfer.svg';
+import bitcoin from "./../../../images/svg/bitcoin.svg";
+import school from "./../../../images/svg/school.svg";
+import wallet from "./../../../images/svg/cryptowallet.svg";
+import crypto from "./../../../images/svg/cryptocurrency.svg";
+import transfer from "./../../../images/svg/wire-transfer.svg";
 const smallCard = [
-    { image: school, title:'Destinations', path:'/destination' },
-    { image: school, title:'Sub Destinations', path:'/sub-destination' },
-    { image: wallet, title:'Suppliers', path:'/supplier' },
-    { image: crypto, title:'Hotels', path:'/hotels' },
-    { image: transfer, title:'Room Type', path:'/room-type' },
-    { image: school, title:'Meal Plan', path:'/meal-plan' },
-    { image: wallet, title:'Activity', path:'/activity' },
-    { image: transfer, title:'Transfer', path:'/transfer' },
-    { image: crypto, title:'Day Itinerary', path:'/day-itinerary' },
-    { image: school, title:'Lead Source', path:'/lead-source' },
-    { image: wallet, title:'Mail Settings', path:'/mail-settings' },
-    { image: crypto, title:'Currency', path:'/currency' },
-    { image: transfer, title:'Agents', path:'/agent' },
+  { image: school, title: "Destinations", path: "/destination" },
+  { image: school, title: "Sub Destinations", path: "/sub-destination" },
+  { image: wallet, title: "Suppliers", path: "/supplier" },
+  { image: crypto, title: "Hotels", path: "/hotels" },
+  { image: transfer, title: "Room Type", path: "/room-type" },
+  { image: school, title: "Meal Plan", path: "/meal-plan" },
+  { image: wallet, title: "Activity", path: "/activity" },
+  { image: transfer, title: "Transfer", path: "/transfer" },
+  { image: crypto, title: "Day Itinerary", path: "/day-itinerary" },
+  { image: school, title: "Lead Source", path: "/lead-source" },
+  { image: wallet, title: "Mail Settings", path: "/mail-settings" },
+  { image: crypto, title: "Currency", path: "/currency" },
+  { image: transfer, title: "Agents", path: "/agent" },
 ];
 
-
 function Settings() {
-    const [isOpen, setOpen] = useState();  
-    const navigate = useNavigate() 
-    
-    const onClick = (item) => {
-        console.log('item',item)
-        if(item == 'Hotels'){
-            navigate('/hotels')
-        }
+  const [isOpen, setOpen] = useState();
+  const navigate = useNavigate();
+
+  const onClick = (item) => {
+    console.log("item", item);
+    if (item == "Hotels") {
+      navigate("/hotels");
     }
+  };
   return (
     <>
-        {/* <div className="widget-heading d-flex justify-content-between align-items-center">
+      {/* <div className="widget-heading d-flex justify-content-between align-items-center">
             <h3 className="m-0 heading">Popular This Week</h3>
             <Link to={"#"} className="btn btn-primary btn-sm">View all</Link>
         </div>
         <div className="row">            
            <CourseSlider />
         </div>	 */}
-        <div className="widget-heading d-flex justify-content-between align-items-center">
-            <h3 className="heading mb-4">Admin Settings</h3>
-            <Link to={"#"} className="btn btn-primary btn-sm">View all</Link>
-        </div>
-        <div className="row">
-            {smallCard.map((item, index)=>(
-                <div className="col-xl-3 col-xxl-3 col-md-4 col-sm-6  mb-4" key={index}>
-                    <Link to={item.path}>
-                    <div className="card h-100">
-                        <div className="card-body">
-                            <div className="widget-courses align-items-center d-flex justify-content-between flex-wrap">
-                                <div className="d-flex align-items-center flex-wrap">
-                                    {/* <img src={item.image} alt="" /> */}
-                                    <div className="flex-1 ms-3">
-                                        <h4>{item.title}</h4>
-                                        {/* <span>Lorem ipsum dolor</span> */}
-                                    </div>	
-                                </div>	
-                                <Link to={"#"}><i className="las la-angle-right text-primary"></i></Link>
-                            </div>
-                        </div>
+      <div className="widget-heading d-flex justify-content-between align-items-center">
+        <h3 className="heading mb-4">Admin Settings</h3>
+        <Link to={"#"} className="btn btn-primary btn-sm">
+          View all
+        </Link>
+      </div>
+      <div className="row">
+        {smallCard.map((item, index) => (
+          <div
+            className="col-xl-3 col-xxl-3 col-md-4 col-sm-6  mb-4"
+            key={index}
+          >
+            <Link to={item.path}>
+              <div className="card h-100">
+                <div className="card-body">
+                  <div className="widget-courses align-items-center d-flex justify-content-between flex-wrap">
+                    <div className="d-flex align-items-center flex-wrap">
+                      {/* <img src={item.image} alt="" /> */}
+                      <div className="flex-1 ms-3">
+                        <h4>{item.title}</h4>
+                        {/* <span>Lorem ipsum dolor</span> */}
+                      </div>
                     </div>
+                    <Link to={"#"}>
+                      <i className="las la-angle-right text-primary"></i>
                     </Link>
-                </div>	
-            ))}
-        </div>	
-        {/* <div className="table-pagenation mb-3">
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
+      {/* <div className="table-pagenation mb-3">
             <p className="ms-0">Showing <span>1-8</span>from <span>20</span>data</p>
             <nav>
                 <ul className="pagination pagination-gutter pagination-primary no-bg">
@@ -90,12 +96,15 @@ function Settings() {
                 </ul>
             </nav>
         </div> */}
-        <ModalVideo channel='youtube' autoplay 
-            isOpen={isOpen} videoId="e6MhFghdQps"
-            onClose={() => setOpen(false)} 
-        />
+      <ModalVideo
+        channel="youtube"
+        autoplay
+        isOpen={isOpen}
+        videoId="e6MhFghdQps"
+        onClose={() => setOpen(false)}
+      />
     </>
-  )
+  );
 }
 
-export default Settings
+export default Settings;

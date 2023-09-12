@@ -1,10 +1,9 @@
-import React from 'react'
+import React from "react";
 import DatePicker from "react-datepicker";
-import CustomModal from '../../../layouts/CustomModal';
-import { useNavigate } from 'react-router-dom';
+import CustomModal from "../../../layouts/CustomModal";
+import { useNavigate } from "react-router-dom";
 
-
-const SetupForm = ({formik,setFormComponent,setShowModal,showModal}) => {
+const SetupForm = ({ formik, setFormComponent, setShowModal, showModal }) => {
   const {
     values,
     errors,
@@ -13,95 +12,95 @@ const SetupForm = ({formik,setFormComponent,setShowModal,showModal}) => {
     handleSubmit,
     isSubmitting,
     setFieldValue,
-  } = formik
+  } = formik;
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const formSubmit = (e) => {
-    e.preventDefault()
-    setShowModal(false)
-    setFormComponent('packageForm')
-  }
+    e.preventDefault();
+    setShowModal(false);
+    setFormComponent("packageForm");
+  };
   return (
     <>
-    <CustomModal
-            showModal={showModal}
-            title={"Create itinerary"}
-            handleModalClose={() => {
-              setShowModal(false)
-              setFormComponent('setupForm')
-              navigate('/enquiry/quotation')
-            }
-            }
-          >
-            <div className="card-body">
-              <div className="basic-form">
-            <form
-              onSubmit={formSubmit}
-            >
-                  <div className="row">
-                    <div className="form-group mb-3 col-md-4">
-                      <label>Package Name</label>
-                      <input
-                        type="text"
-                        className="form-control custom-input"
-                        placeholder="Package 1"
-                      />
-                    </div>
-                    <div className="form-group mb-3 col-md-4">
-                      <label>Start Date</label>
-                      <DatePicker  className="form-control custom-input"
-                        selected={values.formStartDate}
-                        onChange={(date) => setFieldValue('formStartDate',date)}
-                        />
-                    </div>
-                    <div className="form-group mb-3 col-md-4">
-                      <label>End Date</label>
-                      <DatePicker  className="form-control custom-input"
-                        selected={values.formEndDate}
-                        onChange={(date) => setFieldValue('formEndDate',date)}
-                        />
-                    </div>
-                    <div className="form-group mb-3 col-md-4">
-                      <label>Adult</label>
-                      <input
-                        type="text"
-                        className="form-control custom-input"
-                        // placeholder="Package 1"
-                      />
-                    </div>
-                    <div className="form-group mb-3 col-md-4">
-                      <label>Child</label>
-                      <input
-                        type="text"
-                        className="form-control custom-input"
-                        // placeholder="Package 1"
-                      />
-                    </div>
-                    <div className="form-group mb-3 col-md-3">
-                      <label>Destination</label>
-                      <select
-                        defaultValue={"option"}
-                        id="inputState"
-                        className="form-control custom-input"
-                      >
-                        <option value="option" disabled>
-                          Choose...
-                        </option>
-                        <option>Dubai</option>
-                        <option>Sharjah</option>
-                        <option>Qatar</option>
-                      </select>
-                    </div>
-                    <div className="form-group mb-3 col-md-4">
-                      <label>Validity</label>
-                      <DatePicker  className="form-control custom-input"
-                        selected={values.formValidityDate}
-                        onChange={(date) => setFieldValue('formValidityDate',date)}
-                        />
-                    </div>
-                    </div>
-                  {/* <div className="row">
+      <CustomModal
+        showModal={showModal}
+        title={"Create itinerary"}
+        handleModalClose={() => {
+          setShowModal(false);
+          setFormComponent("setupForm");
+          navigate("/enquiry/quotation");
+        }}
+      >
+        <div className="card-body">
+          <div className="basic-form">
+            <form onSubmit={formSubmit}>
+              <div className="row">
+                <div className="form-group mb-3 col-md-4">
+                  <label>Package Name</label>
+                  <input
+                    type="text"
+                    className="form-control custom-input"
+                    placeholder="Package 1"
+                  />
+                </div>
+                <div className="form-group mb-3 col-md-4">
+                  <label>Start Date</label>
+                  <DatePicker
+                    className="form-control custom-input"
+                    selected={values.formStartDate}
+                    onChange={(date) => setFieldValue("formStartDate", date)}
+                  />
+                </div>
+                <div className="form-group mb-3 col-md-4">
+                  <label>End Date</label>
+                  <DatePicker
+                    className="form-control custom-input"
+                    selected={values.formEndDate}
+                    onChange={(date) => setFieldValue("formEndDate", date)}
+                  />
+                </div>
+                <div className="form-group mb-3 col-md-4">
+                  <label>Adult</label>
+                  <input
+                    type="text"
+                    className="form-control custom-input"
+                    // placeholder="Package 1"
+                  />
+                </div>
+                <div className="form-group mb-3 col-md-4">
+                  <label>Child</label>
+                  <input
+                    type="text"
+                    className="form-control custom-input"
+                    // placeholder="Package 1"
+                  />
+                </div>
+                <div className="form-group mb-3 col-md-3">
+                  <label>Destination</label>
+                  <select
+                    defaultValue={"option"}
+                    id="inputState"
+                    className="form-control custom-input"
+                  >
+                    <option value="option" disabled>
+                      Choose...
+                    </option>
+                    <option>Dubai</option>
+                    <option>Sharjah</option>
+                    <option>Qatar</option>
+                  </select>
+                </div>
+                <div className="form-group mb-3 col-md-4">
+                  <label>Validity</label>
+                  <DatePicker
+                    className="form-control custom-input"
+                    selected={values.formValidityDate}
+                    onChange={(date) => setFieldValue("formValidityDate", date)}
+                  />
+                </div>
+              </div>
+              {/* <div className="row">
                     <div className="form-group mb-3 col-md-4">
                       <label>State</label>
                       <select
@@ -128,15 +127,15 @@ const SetupForm = ({formik,setFormComponent,setShowModal,showModal}) => {
                       <label className="form-check-label">Check me out</label>
                     </div>
                   </div> */}
-                  <button type="submit" className="btn btn-primary">
-                    Setup itinerary
-                  </button>
+              <button type="submit" className="btn btn-primary">
+                Setup itinerary
+              </button>
             </form>
           </div>
         </div>
       </CustomModal>
     </>
-  )
-}
+  );
+};
 
-export default SetupForm
+export default SetupForm;

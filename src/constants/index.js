@@ -1,3 +1,2 @@
 export { BRAND } from "./Brand";
-export { URLS } from './Urls'
-
+export { URLS } from "./Urls";

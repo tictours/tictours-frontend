@@ -30,7 +30,6 @@ class ApexLine5 extends React.Component {
         },
         dataLabels: {
           enabled: false,
-		  
         },
         stroke: {
           width: [2, 2],
@@ -46,30 +45,44 @@ class ApexLine5 extends React.Component {
               ""
             );
           },
-			labels: {
-				colors: "#787878",
-			},          
+          labels: {
+            colors: "#787878",
+          },
         },
         markers: {
           size: 6,
           border: 0,
-		   //strokeColor: "#fff",
+          //strokeColor: "#fff",
           colors: ["#1c9ef9", "#709fba"],
           hover: {
             size: 6,
           },
         },
-		
+
         xaxis: {
-			axisBorder: {
-			   show: false,
-			},
-		    axisTicks: {
-				show: false,
-			},
-			categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul",
-				"Aug","Sep","Oct","Nov","Dec","10 Jan","11 Jan","12 Jan",
-			],
+          axisBorder: {
+            show: false,
+          },
+          axisTicks: {
+            show: false,
+          },
+          categories: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+            "10 Jan",
+            "11 Jan",
+            "12 Jan",
+          ],
         },
         yaxis: {
           labels: {
@@ -86,9 +99,9 @@ class ApexLine5 extends React.Component {
           type: "solid",
           opacity: 0.07,
         },
-        grid:{
-			borderColor: '#ffffff1a',
-		},
+        grid: {
+          borderColor: "#ffffff1a",
+        },
       },
     };
   }

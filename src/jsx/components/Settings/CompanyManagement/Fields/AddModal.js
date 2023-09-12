@@ -1,75 +1,70 @@
-import React from 'react'
+import React from "react";
 import DatePicker from "react-datepicker";
-import CustomModal from '../../../../layouts/CustomModal';
-import { useNavigate } from 'react-router-dom';
-import { Formik } from 'formik';
-import InputField from '../../../common/InputField';
-import SelectField from '../../../common/SelectField';
-import notify from '../../../common/Notify';
+import CustomModal from "../../../../layouts/CustomModal";
+import { useNavigate } from "react-router-dom";
+import { Formik } from "formik";
+import InputField from "../../../common/InputField";
+import SelectField from "../../../common/SelectField";
+import notify from "../../../common/Notify";
 
+const AddModal = ({ setShowModal, showModal }) => {
+  const navigate = useNavigate();
+  const date = new Date();
 
-const AddModal = ({setShowModal,showModal}) => {
-
-  const navigate = useNavigate()
-  const date = new Date()
-
-  const initialValues = {cancelDate:date,dueDate:date}
-  const TypeOptions = ['Transfer','Hotel','Activity']
+  const initialValues = { cancelDate: date, dueDate: date };
+  const TypeOptions = ["Transfer", "Hotel", "Activity"];
   return (
     <>
-    <Formik initialValues={initialValues} 
-         onSubmit={(values, { setSubmitting }) => {
-            setShowModal(false)
-            notify({message:'Currency Added Successfully'})
-          }}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(values, { setSubmitting }) => {
+          setShowModal(false);
+          notify({ message: "Currency Added Successfully" });
+        }}
+      >
         {({
-    values,
-    errors,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    isSubmitting,
-    setFieldValue,
-  })=>(
-
-    <CustomModal
+          values,
+          errors,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+          setFieldValue,
+        }) => (
+          <CustomModal
             showModal={showModal}
             title={"Add Fields"}
             handleModalClose={() => {
-              setShowModal(false)
-            //   setFormComponent('setupForm')
-            //   navigate('/enquiry/quotation')
-            }
-            }
+              setShowModal(false);
+              //   setFormComponent('setupForm')
+              //   navigate('/enquiry/quotation')
+            }}
           >
             <div className="card-body">
               <div className="basic-form">
-            <form
-              onSubmit={handleSubmit}
-            >
+                <form onSubmit={handleSubmit}>
                   <div className="row">
                     <div className="mb-3 col-md-6">
-                        <InputField
+                      <InputField
                         label="Name"
                         name="name"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         values={values}
-                    />
+                      />
                     </div>
-                   
                   </div>
                   <button type="submit" className="btn btn-primary">
                     Add Fields
                   </button>
-            </form>
-          </div>
-        </div>
-      </CustomModal>
-  )}
-    </Formik>
+                </form>
+              </div>
+            </div>
+          </CustomModal>
+        )}
+      </Formik>
     </>
-  )
-}
+  );
+};
 
-export default AddModal
+export default AddModal;

@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from "react";
 import Highlight from "react-highlight";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import {Link} from 'react-scroll';
+import { Link } from "react-scroll";
 //import PageTitle from "../../layouts/PageTitle";
-import Footer from '../../layouts/Footer'
+import Footer from "../../layouts/Footer";
 import {
   Row,
   Col,
@@ -12,36 +12,37 @@ import {
   DropdownButton,
   ButtonGroup,
   SplitButton,
-  Tab, Nav
+  Tab,
+  Nav,
 } from "react-bootstrap";
 
 const sidebarLink = [
-  {to:'basic-dropdown', title:'Basic Dropdown'},
-  {to:'dropdown-divider', title:'Dropdown Divider'},
-  {to:'dropdown-header', title:'Dropdown Header'},
-  {to:'disable-active', title:'Dropdown Disable'},
-  {to:'align-right', title:'Align Right'},
-  {to:'dropup', title:'Dropup'},
-  {to:'dropright', title:'Dropright'},
-  {to:'dropstart', title:'Dropstart'},
-  {to:'button-dropdowns', title:'Button Dropdowns'},
-  {to:'sizing', title:'Sizing'},
-  {to:'custom-style', title:'Custom Style'},
+  { to: "basic-dropdown", title: "Basic Dropdown" },
+  { to: "dropdown-divider", title: "Dropdown Divider" },
+  { to: "dropdown-header", title: "Dropdown Header" },
+  { to: "disable-active", title: "Dropdown Disable" },
+  { to: "align-right", title: "Align Right" },
+  { to: "dropup", title: "Dropup" },
+  { to: "dropright", title: "Dropright" },
+  { to: "dropstart", title: "Dropstart" },
+  { to: "button-dropdowns", title: "Button Dropdowns" },
+  { to: "sizing", title: "Sizing" },
+  { to: "custom-style", title: "Custom Style" },
 ];
 
 const UiDropDown = () => {
-  const [activeLink ,setActiveLink] = useState(0);
+  const [activeLink, setActiveLink] = useState(0);
   return (
-    <Fragment>      
+    <Fragment>
       <div className="row ">
-				<div className="col-xl-12">
-					<div className="page-titles">
-						<div className="d-flex align-items-center">
-							<h2 className="heading">DropDown</h2>
-						</div>
-					</div>
-				</div>
-			</div>
+        <div className="col-xl-12">
+          <div className="page-titles">
+            <div className="d-flex align-items-center">
+              <h2 className="heading">DropDown</h2>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="element-area">
         <div className="demo-view">
           <div className="container-fluid pt-0 ps-0 pe-lg-4 pe-0">
@@ -53,41 +54,59 @@ const UiDropDown = () => {
                       <div>
                         <Card.Title>Basic Dropdown</Card.Title>
                         <Card.Text className="m-0 subtitle">
-                          A dropdown menu is a toggleable menu that allows the user to
-                          choose one value from a predefined list
+                          A dropdown menu is a toggleable menu that allows the
+                          user to choose one value from a predefined list
                         </Card.Text>
                       </div>
-                      <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                        <Nav.Item as="li" className="nav-item" role="presentation">
-                          <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
+                      <Nav
+                        as="ul"
+                        className="nav nav-tabs dzm-tabs"
+                        id="myTab"
+                        role="tablist"
+                      >
+                        <Nav.Item
+                          as="li"
+                          className="nav-item"
+                          role="presentation"
+                        >
+                          <Nav.Link
+                            as="button"
+                            type="button"
+                            eventKey="Preview"
+                          >
+                            Preview
+                          </Nav.Link>
                         </Nav.Item>
-                        <Nav.Item as="li" className="nav-item" >
-                          <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
+                        <Nav.Item as="li" className="nav-item">
+                          <Nav.Link as="button" type="button" eventKey="Code">
+                            React
+                          </Nav.Link>
                         </Nav.Item>
-                      </Nav>  
+                      </Nav>
                     </Card.Header>
                     <Tab.Content>
                       <Tab.Pane eventKey="Preview">
                         <Card.Body>
                           <div className="basic-dropdown">
                             <Dropdown>
-                              <Dropdown.Toggle variant="primary" >
+                              <Dropdown.Toggle variant="primary">
                                 Dropdown button
                               </Dropdown.Toggle>
                               <Dropdown.Menu>
-                                <Dropdown.Item >Link 1</Dropdown.Item>
-                                <Dropdown.Item >Link 2</Dropdown.Item>
-                                <Dropdown.Item >Link 3</Dropdown.Item>
+                                <Dropdown.Item>Link 1</Dropdown.Item>
+                                <Dropdown.Item>Link 2</Dropdown.Item>
+                                <Dropdown.Item>Link 3</Dropdown.Item>
                               </Dropdown.Menu>
                             </Dropdown>
                           </div>
                         </Card.Body>
                       </Tab.Pane>
                       <Tab.Pane eventKey="Code">
-                      <div className="card-body pt-0 p-0 code-area">
-<pre className="mb-0"><code className="language-html">
-<Highlight>
-{`
+                        <div className="card-body pt-0 p-0 code-area">
+                          <pre className="mb-0">
+                            <code className="language-html">
+                              <Highlight>
+                                {`
 <div className="basic-dropdown">
   <Dropdown>
     <Dropdown.Toggle variant="primary">
@@ -101,13 +120,14 @@ const UiDropDown = () => {
   </Dropdown>
 </div>
 `}
-</Highlight>
-</code></pre>
-</div>
+                              </Highlight>
+                            </code>
+                          </pre>
+                        </div>
                       </Tab.Pane>
-                    </Tab.Content>  
+                    </Tab.Content>
                   </Card>
-                </Tab.Container>  
+                </Tab.Container>
               </Col>
 
               <Col xl={12}>
@@ -117,43 +137,62 @@ const UiDropDown = () => {
                       <div>
                         <Card.Title>Dropdown Divider</Card.Title>
                         <Card.Text className="m-0 subtitle">
-                          The <code>.dropdown-divider</code> class is used to separate
-                          links inside the dropdown menu with a thin horizontal border
+                          The <code>.dropdown-divider</code> class is used to
+                          separate links inside the dropdown menu with a thin
+                          horizontal border
                         </Card.Text>
                       </div>
-                      <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                        <Nav.Item as="li" className="nav-item" role="presentation">
-                          <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
+                      <Nav
+                        as="ul"
+                        className="nav nav-tabs dzm-tabs"
+                        id="myTab"
+                        role="tablist"
+                      >
+                        <Nav.Item
+                          as="li"
+                          className="nav-item"
+                          role="presentation"
+                        >
+                          <Nav.Link
+                            as="button"
+                            type="button"
+                            eventKey="Preview"
+                          >
+                            Preview
+                          </Nav.Link>
                         </Nav.Item>
-                        <Nav.Item as="li" className="nav-item" >
-                          <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
+                        <Nav.Item as="li" className="nav-item">
+                          <Nav.Link as="button" type="button" eventKey="Code">
+                            React
+                          </Nav.Link>
                         </Nav.Item>
-                      </Nav>  
+                      </Nav>
                     </Card.Header>
                     <Tab.Content>
                       <Tab.Pane eventKey="Preview">
                         <Card.Body>
                           <div className="basic-dropdown">
                             <Dropdown>
-                              <Dropdown.Toggle variant="primary" >
+                              <Dropdown.Toggle variant="primary">
                                 Dropdown button
                               </Dropdown.Toggle>
                               <Dropdown.Menu>
-                                <Dropdown.Item >Link 1</Dropdown.Item>
-                                <Dropdown.Item >Link 2</Dropdown.Item>
-                                <Dropdown.Item >Link 3</Dropdown.Item>
+                                <Dropdown.Item>Link 1</Dropdown.Item>
+                                <Dropdown.Item>Link 2</Dropdown.Item>
+                                <Dropdown.Item>Link 3</Dropdown.Item>
                                 <div className="dropdown-divider"></div>
-                                <Dropdown.Item >Another link</Dropdown.Item>
+                                <Dropdown.Item>Another link</Dropdown.Item>
                               </Dropdown.Menu>
                             </Dropdown>
                           </div>
                         </Card.Body>
                       </Tab.Pane>
                       <Tab.Pane eventKey="Code">
-                      <div className="card-body pt-0 p-0 code-area">
-<pre className="mb-0"><code className="language-html">
-<Highlight>
-{`
+                        <div className="card-body pt-0 p-0 code-area">
+                          <pre className="mb-0">
+                            <code className="language-html">
+                              <Highlight>
+                                {`
 <div className="basic-dropdown">
   <Dropdown>
     <Dropdown.Toggle variant="primary">
@@ -169,13 +208,14 @@ const UiDropDown = () => {
   </Dropdown>
 </div>
 `}
-</Highlight>
-</code></pre>
-</div>
+                              </Highlight>
+                            </code>
+                          </pre>
+                        </div>
                       </Tab.Pane>
-                    </Tab.Content>    
+                    </Tab.Content>
                   </Card>
-                </Tab.Container>  
+                </Tab.Container>
               </Col>
 
               <Col xl={12}>
@@ -183,47 +223,68 @@ const UiDropDown = () => {
                   <Card name="dropdown-header" className="dz-card">
                     <Card.Header className="flex-wrap">
                       <div>
-
                         <Card.Title>Dropdown Header</Card.Title>
                         <Card.Text className="m-0 subtitle">
-                          The <code>.dropdown-header</code> class is used to add headers
-                          inside the dropdown menu
+                          The <code>.dropdown-header</code> class is used to add
+                          headers inside the dropdown menu
                         </Card.Text>
                       </div>
-                      <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                        <Nav.Item as="li" className="nav-item" role="presentation">
-                          <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
+                      <Nav
+                        as="ul"
+                        className="nav nav-tabs dzm-tabs"
+                        id="myTab"
+                        role="tablist"
+                      >
+                        <Nav.Item
+                          as="li"
+                          className="nav-item"
+                          role="presentation"
+                        >
+                          <Nav.Link
+                            as="button"
+                            type="button"
+                            eventKey="Preview"
+                          >
+                            Preview
+                          </Nav.Link>
                         </Nav.Item>
-                        <Nav.Item as="li" className="nav-item" >
-                          <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
+                        <Nav.Item as="li" className="nav-item">
+                          <Nav.Link as="button" type="button" eventKey="Code">
+                            React
+                          </Nav.Link>
                         </Nav.Item>
-                      </Nav>  
+                      </Nav>
                     </Card.Header>
                     <Tab.Content>
                       <Tab.Pane eventKey="Preview">
                         <Card.Body>
                           <div className="basic-dropdown">
                             <Dropdown>
-                              <Dropdown.Toggle variant="primary" >
+                              <Dropdown.Toggle variant="primary">
                                 Dropdown button
                               </Dropdown.Toggle>
                               <Dropdown.Menu>
-                                <h5 className="dropdown-header">Dropdown header</h5>
-                                <Dropdown.Item >Link 1</Dropdown.Item>
-                                <Dropdown.Item >Link 2</Dropdown.Item>
-                                <Dropdown.Item >Link 3</Dropdown.Item>
-                                <h5 className="dropdown-header">Dropdown header</h5>
-                                <Dropdown.Item >Another link</Dropdown.Item>
+                                <h5 className="dropdown-header">
+                                  Dropdown header
+                                </h5>
+                                <Dropdown.Item>Link 1</Dropdown.Item>
+                                <Dropdown.Item>Link 2</Dropdown.Item>
+                                <Dropdown.Item>Link 3</Dropdown.Item>
+                                <h5 className="dropdown-header">
+                                  Dropdown header
+                                </h5>
+                                <Dropdown.Item>Another link</Dropdown.Item>
                               </Dropdown.Menu>
                             </Dropdown>
                           </div>
                         </Card.Body>
                       </Tab.Pane>
                       <Tab.Pane eventKey="Code">
-                      <div className="card-body pt-0 p-0 code-area">
-<pre className="mb-0"><code className="language-html">
-<Highlight>
-{`
+                        <div className="card-body pt-0 p-0 code-area">
+                          <pre className="mb-0">
+                            <code className="language-html">
+                              <Highlight>
+                                {`
 <div className="basic-dropdown">
   <Dropdown>
     <Dropdown.Toggle variant="primary">
@@ -240,14 +301,14 @@ const UiDropDown = () => {
   </Dropdown>
 </div>
 `}
-</Highlight>
-</code></pre>
-</div>
+                              </Highlight>
+                            </code>
+                          </pre>
+                        </div>
                       </Tab.Pane>
-                     </Tab.Content>
-                        
+                    </Tab.Content>
                   </Card>
-                </Tab.Container>  
+                </Tab.Container>
               </Col>
               <Col xl={12}>
                 <Tab.Container defaultActiveKey="Preview">
@@ -256,33 +317,53 @@ const UiDropDown = () => {
                       <div>
                         <Card.Title>Disable and Active items</Card.Title>
                         <Card.Text className="m-0 subtitle">
-                          The <code>.dropdown-header</code> class is used to add headers
-                          inside the dropdown menu
+                          The <code>.dropdown-header</code> class is used to add
+                          headers inside the dropdown menu
                         </Card.Text>
                       </div>
-                      <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                        <Nav.Item as="li" className="nav-item" role="presentation">
-                          <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
+                      <Nav
+                        as="ul"
+                        className="nav nav-tabs dzm-tabs"
+                        id="myTab"
+                        role="tablist"
+                      >
+                        <Nav.Item
+                          as="li"
+                          className="nav-item"
+                          role="presentation"
+                        >
+                          <Nav.Link
+                            as="button"
+                            type="button"
+                            eventKey="Preview"
+                          >
+                            Preview
+                          </Nav.Link>
                         </Nav.Item>
-                        <Nav.Item as="li" className="nav-item" >
-                          <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
+                        <Nav.Item as="li" className="nav-item">
+                          <Nav.Link as="button" type="button" eventKey="Code">
+                            React
+                          </Nav.Link>
                         </Nav.Item>
-                      </Nav>  
+                      </Nav>
                     </Card.Header>
                     <Tab.Content>
                       <Tab.Pane eventKey="Preview">
                         <Card.Body>
                           <div className="basic-dropdown">
                             <Dropdown>
-                              <Dropdown.Toggle variant="primary" >
+                              <Dropdown.Toggle variant="primary">
                                 Dropdown button
                               </Dropdown.Toggle>
                               <Dropdown.Menu>
-                                <Dropdown.Item >Normal</Dropdown.Item>
+                                <Dropdown.Item>Normal</Dropdown.Item>
                                 <Link to={"#"} className="dropdown-item active">
                                   Active
                                 </Link>
-                                <Link to={"#"} className="dropdown-item disabled">
+                                <Link
+                                  to={"#"}
+                                  className="dropdown-item disabled"
+                                >
                                   Disabled
                                 </Link>
                               </Dropdown.Menu>
@@ -291,10 +372,11 @@ const UiDropDown = () => {
                         </Card.Body>
                       </Tab.Pane>
                       <Tab.Pane eventKey="Code">
-                      <div className="card-body pt-0 p-0 code-area">
-<pre className="mb-0"><code className="language-html">
-<Highlight>
-{`
+                        <div className="card-body pt-0 p-0 code-area">
+                          <pre className="mb-0">
+                            <code className="language-html">
+                              <Highlight>
+                                {`
 <div className="basic-dropdown">
   <Dropdown>
     <Dropdown.Toggle variant="primary">
@@ -312,13 +394,14 @@ const UiDropDown = () => {
   </Dropdown>
 </div>
 `}
-</Highlight>
-</code></pre>
-</div>
+                              </Highlight>
+                            </code>
+                          </pre>
+                        </div>
                       </Tab.Pane>
-                    </Tab.Content>    
+                    </Tab.Content>
                   </Card>
-                </Tab.Container>  
+                </Tab.Container>
               </Col>
 
               <Col xl={12}>
@@ -326,45 +409,62 @@ const UiDropDown = () => {
                   <Card name="align-right" className="dz-card">
                     <Card.Header className="flex-wrap">
                       <div>
-
                         <Card.Title>Align Right</Card.Title>
                         <Card.Text className="m-0 subtitle">
                           To right-align the dropdown, add the{" "}
-                          <code>.dropdown-menu-end</code> class to the element with
-                          .dropdown-menu
+                          <code>.dropdown-menu-end</code> class to the element
+                          with .dropdown-menu
                         </Card.Text>
                       </div>
-                      <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                        <Nav.Item as="li" className="nav-item" role="presentation">
-                          <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
+                      <Nav
+                        as="ul"
+                        className="nav nav-tabs dzm-tabs"
+                        id="myTab"
+                        role="tablist"
+                      >
+                        <Nav.Item
+                          as="li"
+                          className="nav-item"
+                          role="presentation"
+                        >
+                          <Nav.Link
+                            as="button"
+                            type="button"
+                            eventKey="Preview"
+                          >
+                            Preview
+                          </Nav.Link>
                         </Nav.Item>
-                        <Nav.Item as="li" className="nav-item" >
-                          <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
+                        <Nav.Item as="li" className="nav-item">
+                          <Nav.Link as="button" type="button" eventKey="Code">
+                            React
+                          </Nav.Link>
                         </Nav.Item>
-                      </Nav>  
+                      </Nav>
                     </Card.Header>
                     <Tab.Content>
-                        <Tab.Pane eventKey="Preview">
+                      <Tab.Pane eventKey="Preview">
                         <Card.Body>
                           <div className="basic-dropdown">
                             <Dropdown>
-                              <Dropdown.Toggle variant="primary" >
+                              <Dropdown.Toggle variant="primary">
                                 Dropdown button
                               </Dropdown.Toggle>
                               <Dropdown.Menu className="dropdown-menu-right">
-                                <Dropdown.Item >Link 1</Dropdown.Item>
-                                <Dropdown.Item >Link 2</Dropdown.Item>
-                                <Dropdown.Item >Link 3</Dropdown.Item>
+                                <Dropdown.Item>Link 1</Dropdown.Item>
+                                <Dropdown.Item>Link 2</Dropdown.Item>
+                                <Dropdown.Item>Link 3</Dropdown.Item>
                               </Dropdown.Menu>
                             </Dropdown>
                           </div>
                         </Card.Body>
                       </Tab.Pane>
                       <Tab.Pane eventKey="Code">
-                      <div className="card-body pt-0 p-0 code-area">
-<pre className="mb-0"><code className="language-html">
-<Highlight>
-{`
+                        <div className="card-body pt-0 p-0 code-area">
+                          <pre className="mb-0">
+                            <code className="language-html">
+                              <Highlight>
+                                {`
  <div className="basic-dropdown">
   <Dropdown>
     <Dropdown.Toggle variant="primary">
@@ -378,34 +478,52 @@ const UiDropDown = () => {
   </Dropdown>
 </div>
 `}
-</Highlight>
-</code></pre>
-</div>
+                              </Highlight>
+                            </code>
+                          </pre>
+                        </div>
                       </Tab.Pane>
-                    </Tab.Content>    
+                    </Tab.Content>
                   </Card>
-                </Tab.Container>  
+                </Tab.Container>
               </Col>
 
-              <Col xl={12} >
+              <Col xl={12}>
                 <Tab.Container defaultActiveKey="Preview">
                   <Card name="dropup" className="dz-card">
                     <Card.Header className="flex-wrap">
                       <div>
                         <Card.Title>Dropup</Card.Title>
                         <Card.Text className="m-0 subtitle">
-                          The <code>.dropup</code> class makes the dropdown menu expand
-                          upwards instead of downwards
+                          The <code>.dropup</code> class makes the dropdown menu
+                          expand upwards instead of downwards
                         </Card.Text>
                       </div>
-                      <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                        <Nav.Item as="li" className="nav-item" role="presentation">
-                          <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
+                      <Nav
+                        as="ul"
+                        className="nav nav-tabs dzm-tabs"
+                        id="myTab"
+                        role="tablist"
+                      >
+                        <Nav.Item
+                          as="li"
+                          className="nav-item"
+                          role="presentation"
+                        >
+                          <Nav.Link
+                            as="button"
+                            type="button"
+                            eventKey="Preview"
+                          >
+                            Preview
+                          </Nav.Link>
                         </Nav.Item>
-                        <Nav.Item as="li" className="nav-item" >
-                          <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
+                        <Nav.Item as="li" className="nav-item">
+                          <Nav.Link as="button" type="button" eventKey="Code">
+                            React
+                          </Nav.Link>
                         </Nav.Item>
-                      </Nav>  
+                      </Nav>
                     </Card.Header>
                     <Tab.Content>
                       <Tab.Pane eventKey="Preview">
@@ -420,9 +538,9 @@ const UiDropDown = () => {
                               title="Dropup"
                               className="me-1 mt-1"
                             >
-                              <Dropdown.Item >Link 1</Dropdown.Item>
-                              <Dropdown.Item >Link 2</Dropdown.Item>
-                              <Dropdown.Item >Link 3</Dropdown.Item>
+                              <Dropdown.Item>Link 1</Dropdown.Item>
+                              <Dropdown.Item>Link 2</Dropdown.Item>
+                              <Dropdown.Item>Link 3</Dropdown.Item>
                             </DropdownButton>
 
                             {/* <!-- Split dropup button --> */}
@@ -434,18 +552,19 @@ const UiDropDown = () => {
                               drop="up"
                               title="Split dropup"
                             >
-                              <Dropdown.Item >Link 1</Dropdown.Item>
-                              <Dropdown.Item >Link 2</Dropdown.Item>
-                              <Dropdown.Item >Link 3</Dropdown.Item>
+                              <Dropdown.Item>Link 1</Dropdown.Item>
+                              <Dropdown.Item>Link 2</Dropdown.Item>
+                              <Dropdown.Item>Link 3</Dropdown.Item>
                             </SplitButton>
                           </div>
                         </Card.Body>
                       </Tab.Pane>
                       <Tab.Pane eventKey="Code">
-                      <div className="card-body pt-0 p-0 code-area">
-<pre className="mb-0"><code className="language-html">
-<Highlight>
-{`
+                        <div className="card-body pt-0 p-0 code-area">
+                          <pre className="mb-0">
+                            <code className="language-html">
+                              <Highlight>
+                                {`
 <div className="basic-dropdown">  
   <DropdownButton
     as={ButtonGroup}
@@ -473,34 +592,52 @@ const UiDropDown = () => {
   </SplitButton>
 </div>
 `}
-</Highlight>
-</code></pre>
-</div>
+                              </Highlight>
+                            </code>
+                          </pre>
+                        </div>
                       </Tab.Pane>
                     </Tab.Content>
                   </Card>
-                </Tab.Container>  
+                </Tab.Container>
               </Col>
 
-              <Col xl={12} >
+              <Col xl={12}>
                 <Tab.Container defaultActiveKey="Preview">
                   <Card name="dropright" className="dz-card">
                     <Card.Header className="flex-wrap">
                       <div>
                         <Card.Title>Dropright </Card.Title>
                         <Card.Text className="m-0 subtitle">
-                          Trigger dropdown menus at the right of the elements by adding{" "}
-                          <code>.dropend</code> to the parent element
+                          Trigger dropdown menus at the right of the elements by
+                          adding <code>.dropend</code> to the parent element
                         </Card.Text>
                       </div>
-                      <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                        <Nav.Item as="li" className="nav-item" role="presentation">
-                          <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
+                      <Nav
+                        as="ul"
+                        className="nav nav-tabs dzm-tabs"
+                        id="myTab"
+                        role="tablist"
+                      >
+                        <Nav.Item
+                          as="li"
+                          className="nav-item"
+                          role="presentation"
+                        >
+                          <Nav.Link
+                            as="button"
+                            type="button"
+                            eventKey="Preview"
+                          >
+                            Preview
+                          </Nav.Link>
                         </Nav.Item>
-                        <Nav.Item as="li" className="nav-item" >
-                          <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
+                        <Nav.Item as="li" className="nav-item">
+                          <Nav.Link as="button" type="button" eventKey="Code">
+                            React
+                          </Nav.Link>
                         </Nav.Item>
-                      </Nav>  
+                      </Nav>
                     </Card.Header>
                     <Tab.Content>
                       <Tab.Pane eventKey="Preview">
@@ -516,9 +653,9 @@ const UiDropDown = () => {
                                 title=" Dropright"
                                 className="me-1 mb-1"
                               >
-                                <Dropdown.Item >Link 1</Dropdown.Item>
-                                <Dropdown.Item >Link 2</Dropdown.Item>
-                                <Dropdown.Item >Link 3</Dropdown.Item>
+                                <Dropdown.Item>Link 1</Dropdown.Item>
+                                <Dropdown.Item>Link 2</Dropdown.Item>
+                                <Dropdown.Item>Link 3</Dropdown.Item>
                               </DropdownButton>
                             </div>
 
@@ -532,19 +669,20 @@ const UiDropDown = () => {
                                 drop="end"
                                 title="Split dropright"
                               >
-                                <Dropdown.Item >Link 1</Dropdown.Item>
-                                <Dropdown.Item >Link 2</Dropdown.Item>
-                                <Dropdown.Item >Link 3</Dropdown.Item>
+                                <Dropdown.Item>Link 1</Dropdown.Item>
+                                <Dropdown.Item>Link 2</Dropdown.Item>
+                                <Dropdown.Item>Link 3</Dropdown.Item>
                               </SplitButton>
                             </div>
                           </div>
                         </Card.Body>
                       </Tab.Pane>
                       <Tab.Pane eventKey="Code">
-                      <div className="card-body pt-0 p-0 code-area">
-<pre className="mb-0"><code className="language-html">
-<Highlight>
-{`
+                        <div className="card-body pt-0 p-0 code-area">
+                          <pre className="mb-0">
+                            <code className="language-html">
+                              <Highlight>
+                                {`
 <div className="basic-dropdown"> 
   <div className="btn-group dropright ">
     <DropdownButton
@@ -576,13 +714,14 @@ const UiDropDown = () => {
   </div>
 </div>
 `}
-</Highlight>
-</code></pre>
-</div>
+                              </Highlight>
+                            </code>
+                          </pre>
+                        </div>
                       </Tab.Pane>
-                    </Tab.Content>    
+                    </Tab.Content>
                   </Card>
-                </Tab.Container>  
+                </Tab.Container>
               </Col>
 
               <Col xl={12}>
@@ -590,26 +729,42 @@ const UiDropDown = () => {
                   <Card name="dropstart" className="dz-card">
                     <Card.Header className="flex-wrap">
                       <div>
-
                         <Card.Title>Dropstart </Card.Title>
                         <Card.Text className="m-0 subtitle">
-                          Trigger dropdown menus at the right of the elements by adding{" "}
-                          <code>.dropstart </code> to the parent element
+                          Trigger dropdown menus at the right of the elements by
+                          adding <code>.dropstart </code> to the parent element
                         </Card.Text>
                       </div>
-                      <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                        <Nav.Item as="li" className="nav-item" role="presentation">
-                          <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
+                      <Nav
+                        as="ul"
+                        className="nav nav-tabs dzm-tabs"
+                        id="myTab"
+                        role="tablist"
+                      >
+                        <Nav.Item
+                          as="li"
+                          className="nav-item"
+                          role="presentation"
+                        >
+                          <Nav.Link
+                            as="button"
+                            type="button"
+                            eventKey="Preview"
+                          >
+                            Preview
+                          </Nav.Link>
                         </Nav.Item>
-                        <Nav.Item as="li" className="nav-item" >
-                          <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
+                        <Nav.Item as="li" className="nav-item">
+                          <Nav.Link as="button" type="button" eventKey="Code">
+                            React
+                          </Nav.Link>
                         </Nav.Item>
-                      </Nav>  
+                      </Nav>
                     </Card.Header>
                     <Tab.Content>
                       <Tab.Pane eventKey="Preview">
                         <Card.Body>
-                          <div className="basic-dropdown">                        
+                          <div className="basic-dropdown">
                             <DropdownButton
                               as={ButtonGroup}
                               id="dropdown-button-drop-start"
@@ -618,9 +773,9 @@ const UiDropDown = () => {
                               className="dropstart me-1 mt-1"
                               title="dropstart"
                             >
-                              <Dropdown.Item >Link 1</Dropdown.Item>
-                              <Dropdown.Item >Link 2</Dropdown.Item>
-                              <Dropdown.Item >Link 3</Dropdown.Item>
+                              <Dropdown.Item>Link 1</Dropdown.Item>
+                              <Dropdown.Item>Link 2</Dropdown.Item>
+                              <Dropdown.Item>Link 3</Dropdown.Item>
                             </DropdownButton>
 
                             {/* <!-- Split dropleft button --> */}
@@ -633,19 +788,20 @@ const UiDropDown = () => {
                                 drop="start"
                                 title="Split dropstart"
                               >
-                                <Dropdown.Item >Link 1</Dropdown.Item>
-                                <Dropdown.Item >Link 2</Dropdown.Item>
-                                <Dropdown.Item >Link 3</Dropdown.Item>
+                                <Dropdown.Item>Link 1</Dropdown.Item>
+                                <Dropdown.Item>Link 2</Dropdown.Item>
+                                <Dropdown.Item>Link 3</Dropdown.Item>
                               </SplitButton>
                             </div>
                           </div>
                         </Card.Body>
                       </Tab.Pane>
                       <Tab.Pane eventKey="Code">
-                      <div className="card-body pt-0 p-0 code-area">
-  <pre className="mb-0"><code className="language-html">
-  <Highlight>
-  {`
+                        <div className="card-body pt-0 p-0 code-area">
+                          <pre className="mb-0">
+                            <code className="language-html">
+                              <Highlight>
+                                {`
 <div className="basic-dropdown">                        
   <DropdownButton
     as={ButtonGroup}
@@ -677,18 +833,16 @@ const UiDropDown = () => {
   </div>
 </div>
   `}
-  </Highlight>
-  </code></pre>
-  </div>
+                              </Highlight>
+                            </code>
+                          </pre>
+                        </div>
                       </Tab.Pane>
                     </Tab.Content>
-
                   </Card>
-                </Tab.Container>  
+                </Tab.Container>
               </Col>
-            
 
-            
               <Col xl={12}>
                 <Tab.Container defaultActiveKey="Preview">
                   <Card name="button-dropdowns" className="dz-card">
@@ -696,14 +850,31 @@ const UiDropDown = () => {
                       <div>
                         <Card.Title>Button Dropdowns</Card.Title>
                       </div>
-                      <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                        <Nav.Item as="li" className="nav-item" role="presentation">
-                          <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
+                      <Nav
+                        as="ul"
+                        className="nav nav-tabs dzm-tabs"
+                        id="myTab"
+                        role="tablist"
+                      >
+                        <Nav.Item
+                          as="li"
+                          className="nav-item"
+                          role="presentation"
+                        >
+                          <Nav.Link
+                            as="button"
+                            type="button"
+                            eventKey="Preview"
+                          >
+                            Preview
+                          </Nav.Link>
                         </Nav.Item>
-                        <Nav.Item as="li" className="nav-item" >
-                          <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
+                        <Nav.Item as="li" className="nav-item">
+                          <Nav.Link as="button" type="button" eventKey="Code">
+                            React
+                          </Nav.Link>
                         </Nav.Item>
-                      </Nav>  
+                      </Nav>
                     </Card.Header>
                     <Tab.Content>
                       <Tab.Pane eventKey="Preview">
@@ -726,19 +897,20 @@ const UiDropDown = () => {
                                 drop="down"
                                 title={` ${variant}`}
                               >
-                                <Dropdown.Item >Link 1</Dropdown.Item>
-                                <Dropdown.Item >Link 2</Dropdown.Item>
-                                <Dropdown.Item >Link 3</Dropdown.Item>
+                                <Dropdown.Item>Link 1</Dropdown.Item>
+                                <Dropdown.Item>Link 2</Dropdown.Item>
+                                <Dropdown.Item>Link 3</Dropdown.Item>
                               </SplitButton>
                             ))}
                           </div>
                         </Card.Body>
-                      </Tab.Pane>  
+                      </Tab.Pane>
                       <Tab.Pane eventKey="Code">
-                      <div className="card-body pt-0 p-0 code-area">
-<pre className="mb-0"><code className="language-html">
-<Highlight>
-{`
+                        <div className="card-body pt-0 p-0 code-area">
+                          <pre className="mb-0">
+                            <code className="language-html">
+                              <Highlight>
+                                {`
 <div className="button-dropdown">
   {[
     "Primary",
@@ -764,37 +936,52 @@ const UiDropDown = () => {
   ))}
 </div>
 `}
-</Highlight>
-</code></pre>
-</div>
-                      </Tab.Pane>  
+                              </Highlight>
+                            </code>
+                          </pre>
+                        </div>
+                      </Tab.Pane>
                     </Tab.Content>
-
                   </Card>
-                </Tab.Container>  
+                </Tab.Container>
               </Col>
-            
 
-            
               <Col xl={12}>
-                <Tab.Container defaultActiveKey="Preview">            
+                <Tab.Container defaultActiveKey="Preview">
                   <Card name="sizing" className="dz-card">
                     <Card.Header className="flex-wrap">
                       <div>
                         <Card.Title>Sizing</Card.Title>
                         <Card.Text className="m-0 subtitle">
-                          Button dropdowns work with buttons of all sizes, including
-                          default and split dropdown buttons.
+                          Button dropdowns work with buttons of all sizes,
+                          including default and split dropdown buttons.
                         </Card.Text>
                       </div>
-                      <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                          <Nav.Item as="li" className="nav-item" role="presentation">
-                            <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
-                          </Nav.Item>
-                          <Nav.Item as="li" className="nav-item" >
-                            <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
-                          </Nav.Item>
-                        </Nav>  
+                      <Nav
+                        as="ul"
+                        className="nav nav-tabs dzm-tabs"
+                        id="myTab"
+                        role="tablist"
+                      >
+                        <Nav.Item
+                          as="li"
+                          className="nav-item"
+                          role="presentation"
+                        >
+                          <Nav.Link
+                            as="button"
+                            type="button"
+                            eventKey="Preview"
+                          >
+                            Preview
+                          </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item as="li" className="nav-item">
+                          <Nav.Link as="button" type="button" eventKey="Code">
+                            React
+                          </Nav.Link>
+                        </Nav.Item>
+                      </Nav>
                     </Card.Header>
                     <Tab.Content>
                       <Tab.Pane eventKey="Preview">
@@ -810,11 +997,11 @@ const UiDropDown = () => {
                               title=" Large button"
                               className="me-1 mb-1"
                             >
-                              <Dropdown.Item >Action</Dropdown.Item>
-                              <Dropdown.Item >Another action</Dropdown.Item>
-                              <Dropdown.Item >Something else here</Dropdown.Item>
+                              <Dropdown.Item>Action</Dropdown.Item>
+                              <Dropdown.Item>Another action</Dropdown.Item>
+                              <Dropdown.Item>Something else here</Dropdown.Item>
                               <div className="dropdown-divider"></div>
-                              <Dropdown.Item >Separated link</Dropdown.Item>
+                              <Dropdown.Item>Separated link</Dropdown.Item>
                             </DropdownButton>
 
                             <SplitButton
@@ -826,11 +1013,11 @@ const UiDropDown = () => {
                               title=" Large split button"
                               className="me-1"
                             >
-                              <Dropdown.Item >Action</Dropdown.Item>
-                              <Dropdown.Item >Another action</Dropdown.Item>
-                              <Dropdown.Item >Something else here</Dropdown.Item>
+                              <Dropdown.Item>Action</Dropdown.Item>
+                              <Dropdown.Item>Another action</Dropdown.Item>
+                              <Dropdown.Item>Something else here</Dropdown.Item>
                               <div className="dropdown-divider"></div>
-                              <Dropdown.Item >Separated link</Dropdown.Item>
+                              <Dropdown.Item>Separated link</Dropdown.Item>
                             </SplitButton>
 
                             {/* <!-- Small button groups (default and split) --> */}
@@ -844,11 +1031,11 @@ const UiDropDown = () => {
                               className="mt-1 me-1"
                               title=" Large button"
                             >
-                              <Dropdown.Item >Action</Dropdown.Item>
-                              <Dropdown.Item >Another action</Dropdown.Item>
-                              <Dropdown.Item >Something else here</Dropdown.Item>
+                              <Dropdown.Item>Action</Dropdown.Item>
+                              <Dropdown.Item>Another action</Dropdown.Item>
+                              <Dropdown.Item>Something else here</Dropdown.Item>
                               <div className="dropdown-divider"></div>
-                              <Dropdown.Item >Separated link</Dropdown.Item>
+                              <Dropdown.Item>Separated link</Dropdown.Item>
                             </DropdownButton>
 
                             <SplitButton
@@ -860,20 +1047,21 @@ const UiDropDown = () => {
                               title=" Large split button"
                               className="mt-1 me-1"
                             >
-                              <Dropdown.Item >Action</Dropdown.Item>
-                              <Dropdown.Item >Another action</Dropdown.Item>
-                              <Dropdown.Item >Something else here</Dropdown.Item>
+                              <Dropdown.Item>Action</Dropdown.Item>
+                              <Dropdown.Item>Another action</Dropdown.Item>
+                              <Dropdown.Item>Something else here</Dropdown.Item>
                               <div className="dropdown-divider"></div>
-                              <Dropdown.Item >Separated link</Dropdown.Item>
+                              <Dropdown.Item>Separated link</Dropdown.Item>
                             </SplitButton>
                           </div>
                         </Card.Body>
                       </Tab.Pane>
                       <Tab.Pane eventKey="Code">
-                      <div className="card-body pt-0 p-0 code-area">
-<pre className="mb-0"><code className="language-html">
-<Highlight>
-{`
+                        <div className="card-body pt-0 p-0 code-area">
+                          <pre className="mb-0">
+                            <code className="language-html">
+                              <Highlight>
+                                {`
 <div className="dropdown-size">
   <DropdownButton
     as={ButtonGroup}
@@ -940,18 +1128,16 @@ const UiDropDown = () => {
   </SplitButton>
 </div>
 `}
-</Highlight>
-</code></pre>
-</div>
+                              </Highlight>
+                            </code>
+                          </pre>
+                        </div>
                       </Tab.Pane>
                     </Tab.Content>
-
                   </Card>
-                </Tab.Container>  
+                </Tab.Container>
               </Col>
-            
 
-            
               <Col lg={12}>
                 <Tab.Container defaultActiveKey="Preview">
                   <Card id="custom-style" className="dz-card">
@@ -959,31 +1145,52 @@ const UiDropDown = () => {
                       <div>
                         <Card.Title>Custom style</Card.Title>
                         <Card.Text className="m-0 subtitle">
-                          Use <code>.custom-dropdown</code> this class for this style
+                          Use <code>.custom-dropdown</code> this class for this
+                          style
                         </Card.Text>
                       </div>
-                      <Nav as="ul" className="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                        <Nav.Item as="li" className="nav-item" role="presentation">
-                          <Nav.Link as="button"  type="button" eventKey="Preview">Preview</Nav.Link>
+                      <Nav
+                        as="ul"
+                        className="nav nav-tabs dzm-tabs"
+                        id="myTab"
+                        role="tablist"
+                      >
+                        <Nav.Item
+                          as="li"
+                          className="nav-item"
+                          role="presentation"
+                        >
+                          <Nav.Link
+                            as="button"
+                            type="button"
+                            eventKey="Preview"
+                          >
+                            Preview
+                          </Nav.Link>
                         </Nav.Item>
-                        <Nav.Item as="li" className="nav-item" >
-                          <Nav.Link as="button"  type="button" eventKey="Code">React</Nav.Link>
+                        <Nav.Item as="li" className="nav-item">
+                          <Nav.Link as="button" type="button" eventKey="Code">
+                            React
+                          </Nav.Link>
                         </Nav.Item>
-                      </Nav>  
+                      </Nav>
                     </Card.Header>
                     <Tab.Content>
-                        <Tab.Pane eventKey="Preview">
+                      <Tab.Pane eventKey="Preview">
                         <Card.Body>
                           <Row>
                             <Col xl={3}>
                               <Dropdown>
-                                <Dropdown.Toggle variant="" className="ps-0 mt-1 mb-2">
+                                <Dropdown.Toggle
+                                  variant=""
+                                  className="ps-0 mt-1 mb-2"
+                                >
                                   Last 7 days
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                  <Dropdown.Item >Last 1 Month</Dropdown.Item>
-                                  <Dropdown.Item >Last 6 Month</Dropdown.Item>
-                                  <Dropdown.Item >Last 10 Month</Dropdown.Item>
+                                  <Dropdown.Item>Last 1 Month</Dropdown.Item>
+                                  <Dropdown.Item>Last 6 Month</Dropdown.Item>
+                                  <Dropdown.Item>Last 10 Month</Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
                             </Col>
@@ -998,9 +1205,9 @@ const UiDropDown = () => {
                                   Last 7 days
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                  <Dropdown.Item >Last 1 Month</Dropdown.Item>
-                                  <Dropdown.Item >Last 6 Month</Dropdown.Item>
-                                  <Dropdown.Item >Last 10 Month</Dropdown.Item>
+                                  <Dropdown.Item>Last 1 Month</Dropdown.Item>
+                                  <Dropdown.Item>Last 6 Month</Dropdown.Item>
+                                  <Dropdown.Item>Last 10 Month</Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
                             </Col>
@@ -1015,9 +1222,9 @@ const UiDropDown = () => {
                                   Last 1 Hour
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                  <Dropdown.Item >Last 1 hour</Dropdown.Item>
-                                  <Dropdown.Item >Last 2 hour</Dropdown.Item>
-                                  <Dropdown.Item >Last 3 hour</Dropdown.Item>
+                                  <Dropdown.Item>Last 1 hour</Dropdown.Item>
+                                  <Dropdown.Item>Last 2 hour</Dropdown.Item>
+                                  <Dropdown.Item>Last 3 hour</Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
                             </Col>
@@ -1032,9 +1239,9 @@ const UiDropDown = () => {
                                   Last 1 Hour
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                  <Dropdown.Item >Last 1 hour</Dropdown.Item>
-                                  <Dropdown.Item >Last 2 hour</Dropdown.Item>
-                                  <Dropdown.Item >Last 3 hour</Dropdown.Item>
+                                  <Dropdown.Item>Last 1 hour</Dropdown.Item>
+                                  <Dropdown.Item>Last 2 hour</Dropdown.Item>
+                                  <Dropdown.Item>Last 3 hour</Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
                             </Col>
@@ -1047,12 +1254,12 @@ const UiDropDown = () => {
                                   data-toggle="dropdown"
                                 >
                                   <i className="ti-search me-2 mt-1"></i> 3 AM
-																	<i className="fa fa-angle-down ms-3"></i>
+                                  <i className="fa fa-angle-down ms-3"></i>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                  <Dropdown.Item >6 AM</Dropdown.Item>
-                                  <Dropdown.Item >9 AM</Dropdown.Item>
-                                  <Dropdown.Item >12 AM</Dropdown.Item>
+                                  <Dropdown.Item>6 AM</Dropdown.Item>
+                                  <Dropdown.Item>9 AM</Dropdown.Item>
+                                  <Dropdown.Item>12 AM</Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
                             </Col>
@@ -1065,16 +1272,17 @@ const UiDropDown = () => {
                                   id="whiteSpace"
                                   className="btn btn-sm btn-primary text-nowrap i-false"
                                 >
-                                  <i className="ti-calendar me-3"></i> March 20, 2018 &nbsp; To &nbsp;April
-																	20, 2018
-																	<i className="fa fa-angle-down ms-3"></i>
+                                  <i className="ti-calendar me-3"></i> March 20,
+                                  2018 &nbsp; To &nbsp;April 20, 2018
+                                  <i className="fa fa-angle-down ms-3"></i>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                  <Dropdown.Item >
+                                  <Dropdown.Item>
                                     May 20, 2018 &nbsp; To &nbsp; June 20, 2018
                                   </Dropdown.Item>
-                                  <Dropdown.Item >
-                                    July 20, 2018 &nbsp; To &nbsp; August 20, 2018
+                                  <Dropdown.Item>
+                                    July 20, 2018 &nbsp; To &nbsp; August 20,
+                                    2018
                                   </Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
@@ -1101,17 +1309,37 @@ const UiDropDown = () => {
                                       fill="none"
                                       fillRule="evenodd"
                                     >
-                                      <rect x="0" y="0" width="24" height="24" />
-                                      <circle fill="#000000" cx="12" cy="5" r="2" />
-                                      <circle fill="#000000" cx="12" cy="12" r="2" />
-                                      <circle fill="#000000" cx="12" cy="19" r="2" />
+                                      <rect
+                                        x="0"
+                                        y="0"
+                                        width="24"
+                                        height="24"
+                                      />
+                                      <circle
+                                        fill="#000000"
+                                        cx="12"
+                                        cy="5"
+                                        r="2"
+                                      />
+                                      <circle
+                                        fill="#000000"
+                                        cx="12"
+                                        cy="12"
+                                        r="2"
+                                      />
+                                      <circle
+                                        fill="#000000"
+                                        cx="12"
+                                        cy="19"
+                                        r="2"
+                                      />
                                     </g>
                                   </svg>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                  <Dropdown.Item >Option 1</Dropdown.Item>
-                                  <Dropdown.Item >Option 2</Dropdown.Item>
-                                  <Dropdown.Item >Option 3</Dropdown.Item>
+                                  <Dropdown.Item>Option 1</Dropdown.Item>
+                                  <Dropdown.Item>Option 2</Dropdown.Item>
+                                  <Dropdown.Item>Option 3</Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
                             </Col>
@@ -1138,17 +1366,37 @@ const UiDropDown = () => {
                                       fill="none"
                                       fillRule="evenodd"
                                     >
-                                      <rect x="0" y="0" width="24" height="24" />
-                                      <circle fill="#000000" cx="12" cy="5" r="2" />
-                                      <circle fill="#000000" cx="12" cy="12" r="2" />
-                                      <circle fill="#000000" cx="12" cy="19" r="2" />
+                                      <rect
+                                        x="0"
+                                        y="0"
+                                        width="24"
+                                        height="24"
+                                      />
+                                      <circle
+                                        fill="#000000"
+                                        cx="12"
+                                        cy="5"
+                                        r="2"
+                                      />
+                                      <circle
+                                        fill="#000000"
+                                        cx="12"
+                                        cy="12"
+                                        r="2"
+                                      />
+                                      <circle
+                                        fill="#000000"
+                                        cx="12"
+                                        cy="19"
+                                        r="2"
+                                      />
                                     </g>
                                   </svg>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                  <Dropdown.Item >Option 1</Dropdown.Item>
-                                  <Dropdown.Item >Option 2</Dropdown.Item>
-                                  <Dropdown.Item >Option 3</Dropdown.Item>
+                                  <Dropdown.Item>Option 1</Dropdown.Item>
+                                  <Dropdown.Item>Option 2</Dropdown.Item>
+                                  <Dropdown.Item>Option 3</Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
                             </Col>
@@ -1156,10 +1404,11 @@ const UiDropDown = () => {
                         </Card.Body>
                       </Tab.Pane>
                       <Tab.Pane eventKey="Code">
-                      <div className="card-body pt-0 p-0 code-area">
-<pre className="mb-0"><code className="language-html">
-<Highlight>
-{`
+                        <div className="card-body pt-0 p-0 code-area">
+                          <pre className="mb-0">
+                            <code className="language-html">
+                              <Highlight>
+                                {`
 <Row>
   <Col xl={3}>
     <Dropdown>
@@ -1338,41 +1587,44 @@ const UiDropDown = () => {
   </Col>
 </Row>
 `}
-</Highlight>
-</code></pre>
-</div>
+                              </Highlight>
+                            </code>
+                          </pre>
+                        </div>
                       </Tab.Pane>
-                    </Tab.Content>    
+                    </Tab.Content>
                   </Card>
-                </Tab.Container>  
+                </Tab.Container>
               </Col>
             </Row>
             <Footer />
           </div>
         </div>
         <div className="demo-right ">
-          <PerfectScrollbar className="demo-right-inner dlab-scroll " id="right-sidebar">
-              <h4 className="title">Examples For Dropdown</h4>
-              <ul className="navbar-nav" id="menu-bar">
-                  {sidebarLink.map((item, ind)=>(
-                    <li key={ind}                        
-                    >
-                      <Link to={item.to} 
-                        className={`scroll ${ind === activeLink ? 'active' :  ''} `}
-                        activeClass="active"
-                        spy={true}                          
-                        smooth={true}
-                        onClick={()=>setActiveLink(ind)}
-                      > 
-                        {item.title}
-                      </Link>
-                    </li>
-                  ))} 
-              </ul>	
+          <PerfectScrollbar
+            className="demo-right-inner dlab-scroll "
+            id="right-sidebar"
+          >
+            <h4 className="title">Examples For Dropdown</h4>
+            <ul className="navbar-nav" id="menu-bar">
+              {sidebarLink.map((item, ind) => (
+                <li key={ind}>
+                  <Link
+                    to={item.to}
+                    className={`scroll ${ind === activeLink ? "active" : ""} `}
+                    activeClass="active"
+                    spy={true}
+                    smooth={true}
+                    onClick={() => setActiveLink(ind)}
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </PerfectScrollbar>
         </div>
       </div>
-
     </Fragment>
   );
 };

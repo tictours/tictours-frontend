@@ -27,7 +27,7 @@ const SelectInputComponent = ({
         onChange={(e) =>
           setFieldValue(
             `${name}Select`,
-            e.target.value == "true" ? true : false
+            e.target.value == "true" ? true : false,
           )
         }
         onBlur={handleBlur}
@@ -88,18 +88,18 @@ const StepTwo = () => {
     { label: "Lunch", value: "lunch" },
     { label: "Dinner", value: "dinner" },
   ];
-  const amenityData = [1,2,3,4,5]
+  const amenityData = [1, 2, 3, 4, 5];
   const formatDate = (date) => {
     const localDate = new Date(date).toLocaleDateString();
     return localDate;
   };
-  const handleEdit = (id,value,setValue) => {
-    console.log('edit',id)
-  }
-  const handleDelete = (id,value,setValue) => {
-    const filteredVal = value.filter((val,i)=>i !== id)
-    setValue("addRoom", filteredVal)
-  }
+  const handleEdit = (id, value, setValue) => {
+    console.log("edit", id);
+  };
+  const handleDelete = (id, value, setValue) => {
+    const filteredVal = value.filter((val, i) => i !== id);
+    setValue("addRoom", filteredVal);
+  };
   return (
     <section>
       <Formik
@@ -234,36 +234,46 @@ const StepTwo = () => {
                   <h4>Amentities</h4>
                 </div>
                 <div className="col-12">
-          <div className="form-group">
-            {amenityData.map((data,key) => (
-              <div key={key} className="form-check form-check-inline  fw-normal">
-                <label className="form-check-label">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    value=""
-                  //   defaultChecked
-                  />
-                  {`Amenity ${key+1}`}
-                </label>
-                {/* <span className="ms-2 amenity-count">{`12${key}`}</span> */}
-              </div>
-            ))}
-          </div>
-        </div>
+                  <div className="form-group">
+                    {amenityData.map((data, key) => (
+                      <div
+                        key={key}
+                        className="form-check form-check-inline  fw-normal"
+                      >
+                        <label className="form-check-label">
+                          <input
+                            type="checkbox"
+                            className="form-check-input"
+                            value=""
+                            //   defaultChecked
+                          />
+                          {`Amenity ${key + 1}`}
+                        </label>
+                        {/* <span className="ms-2 amenity-count">{`12${key}`}</span> */}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
               <div className="row mb-3">
                 <div className="col-12">
                   <h4>Image</h4>
                 </div>
                 <div className="col-lg-6">
-          <div className="form-group">
-          <div className="my-3">
-				  <label htmlFor="formFileMultiple" className="form-label">Multiple files uploader</label>
-				  <input className="form-control" type="file" id="formFileMultiple" multiple />
-				</div>
-          </div>
-        </div>
+                  <div className="form-group">
+                    <div className="my-3">
+                      <label htmlFor="formFileMultiple" className="form-label">
+                        Multiple files uploader
+                      </label>
+                      <input
+                        className="form-control"
+                        type="file"
+                        id="formFileMultiple"
+                        multiple
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="row">
                 <div className="col-12">
@@ -440,21 +450,29 @@ const StepTwo = () => {
                               <td>{data.doubleBed}</td>
                               <td>{data.tripleBed}</td>
                               <td>
-                      <div className="d-flex">
-                        <button
-                          className="btn bg-main btn-xs sharp me-1"
-                          onClick={()=>handleEdit(key,values,setFieldValue)}
-                        >
-                          <i className="fas fa-pencil-alt"></i>
-                        </button>
-                        <button
-                          className="btn bg-main btn-xs sharp"
-                          onClick={()=>handleDelete(key,values.addRoom,setFieldValue)}
-                        >
-                          <i className="fa fa-trash"></i>
-                        </button>
-                      </div>
-                    </td>
+                                <div className="d-flex">
+                                  <button
+                                    className="btn bg-main btn-xs sharp me-1"
+                                    onClick={() =>
+                                      handleEdit(key, values, setFieldValue)
+                                    }
+                                  >
+                                    <i className="fas fa-pencil-alt"></i>
+                                  </button>
+                                  <button
+                                    className="btn bg-main btn-xs sharp"
+                                    onClick={() =>
+                                      handleDelete(
+                                        key,
+                                        values.addRoom,
+                                        setFieldValue,
+                                      )
+                                    }
+                                  >
+                                    <i className="fa fa-trash"></i>
+                                  </button>
+                                </div>
+                              </td>
                             </tr>
                           );
                         })}

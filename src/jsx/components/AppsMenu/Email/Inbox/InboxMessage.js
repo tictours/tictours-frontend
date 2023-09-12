@@ -3,11 +3,10 @@ import { Link } from "react-router-dom";
 
 const InboxMessage = () => {
   const [data, setData] = useState(
-    document.querySelectorAll("#patientTable_basic_table tbody tr")
+    document.querySelectorAll("#patientTable_basic_table tbody tr"),
   );
   const sort = 5;
   const activePag = useRef(0);
-  
 
   // Active data
   const chageData = (frist, sec) => {
@@ -36,7 +35,6 @@ const InboxMessage = () => {
   const onClick = (i) => {
     activePag.current = i;
     chageData(activePag.current * sort, (activePag.current + 1) * sort);
-    
   };
   const chackbox = document.querySelectorAll(".sorting_1 input");
   const motherChackBox = document.querySelector(".sorting_asc input");

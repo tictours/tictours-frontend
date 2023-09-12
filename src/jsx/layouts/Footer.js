@@ -1,6 +1,6 @@
- import React from "react";
+import React from "react";
 
-const Footer = ({changeFooter}) => {
+const Footer = ({ changeFooter }) => {
   let d = new Date();
   return (
     <div className={`footer ${changeFooter}`}>

@@ -34,7 +34,7 @@ function ApexChart() {
         <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
-               <h4 className="card-title">Bar Chart</h4>
+              <h4 className="card-title">Bar Chart</h4>
             </Card.Header>
             <Card.Body>
               <ApexBar3 />
@@ -45,7 +45,7 @@ function ApexChart() {
         <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
-               <h4 className="card-title">Line</h4>
+              <h4 className="card-title">Line</h4>
             </Card.Header>
             <Card.Body>
               <ApexLine />
@@ -54,8 +54,8 @@ function ApexChart() {
         </Col>
         <Col xl={6} lg={6}>
           <Card>
-            <Card.Header> 
-               <h4 className="card-title">Line</h4>
+            <Card.Header>
+              <h4 className="card-title">Line</h4>
             </Card.Header>
             <Card.Body>
               <ApexLine3 />
@@ -65,7 +65,7 @@ function ApexChart() {
         <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
-               <h4 className="card-title">Line</h4>
+              <h4 className="card-title">Line</h4>
             </Card.Header>
             <Card.Body>
               <ApexLine4 />
@@ -85,7 +85,7 @@ function ApexChart() {
         <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
-               <h4 className="card-title">Pie</h4>
+              <h4 className="card-title">Pie</h4>
             </Card.Header>
             <Card.Body>
               <ApexPie5 />
@@ -95,7 +95,7 @@ function ApexChart() {
         <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
-               <h4 className="card-title">Redial Bar</h4>
+              <h4 className="card-title">Redial Bar</h4>
             </Card.Header>
             <Card.Body>
               <ApexRedialBar />

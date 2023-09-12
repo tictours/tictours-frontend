@@ -17,7 +17,7 @@ function RechartJs() {
         <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
-				<h4 className="card-title">Bar</h4>
+              <h4 className="card-title">Bar</h4>
             </Card.Header>
             <Card.Body>
               <BarChartNoPadding />

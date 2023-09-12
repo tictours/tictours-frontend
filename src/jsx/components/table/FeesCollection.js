@@ -1,5 +1,5 @@
-import React, {  useRef } from "react";
-import {  Badge } from "react-bootstrap";
+import React, { useRef } from "react";
+import { Badge } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 import data from "./tableData.js";
@@ -14,8 +14,8 @@ const FeesCollection = () => {
   const jobData = useRef(
     data.feeTable.data.slice(
       activePag.current * sort,
-      (activePag.current + 1) * sort
-    )
+      (activePag.current + 1) * sort,
+    ),
   );
   //const [demo, setdemo] = useState();
   const onClick = (i) => {
@@ -23,7 +23,7 @@ const FeesCollection = () => {
 
     jobData.current = data.feeTable.data.slice(
       activePag.current * sort,
-      (activePag.current + 1) * sort
+      (activePag.current + 1) * sort,
     );
     /* setdemo(
       data.feeTable.data.slice(
@@ -68,7 +68,6 @@ const FeesCollection = () => {
                     </tr>
                   ))}
                 </tbody>
-                
               </table>
               <div className="d-sm-flex text-center justify-content-between align-items-center mt-3 mb-2">
                 <div className="dataTables_info">

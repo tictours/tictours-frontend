@@ -254,7 +254,7 @@ const Widget = () => {
                   <li>
                     <div className="timeline-panel">
                       <div className="media me-2">
-                        <img  alt="" width="50" src={avatar1} />
+                        <img alt="" width="50" src={avatar1} />
                       </div>
                       <div className="media-body">
                         <h5 className="mb-1">Dr sultads Send you Photo</h5>
@@ -408,7 +408,7 @@ const Widget = () => {
                   <li>
                     <div className="timeline-panel">
                       <div className="media me-2">
-                        <img  alt="" width="50" src={avatar1} />
+                        <img alt="" width="50" src={avatar1} />
                       </div>
                       <div className="media-body">
                         <h5 className="mb-1">Dr sultads Send you Photo</h5>
@@ -580,7 +580,7 @@ const Widget = () => {
                   <li>
                     <div className="timeline-panel">
                       <div className="media me-2">
-                        <img  alt="" width="50" src={avatar1} />
+                        <img alt="" width="50" src={avatar1} />
                       </div>
                       <div className="media-body">
                         <h5 className="mb-1">Dr sultads Send you Photo</h5>
@@ -737,7 +737,7 @@ const Widget = () => {
                   <li>
                     <div className="timeline-panel">
                       <div className="media me-2">
-                        <img  alt="" width="50" src={avatar1} />
+                        <img alt="" width="50" src={avatar1} />
                       </div>
                       <div className="media-body">
                         <h5 className="mb-1">
@@ -923,7 +923,7 @@ const Widget = () => {
                   <li>
                     <div className="timeline-panel">
                       <div className="media me-2">
-                        <img  alt="" width="50" src={avatar1} />
+                        <img alt="" width="50" src={avatar1} />
                       </div>
                       <div className="media-body">
                         <h5 className="mb-1">
@@ -1055,7 +1055,7 @@ const Widget = () => {
                   <li>
                     <div className="timeline-panel">
                       <div className="media me-2 media-success">
-                        <img  alt="" width="50" src={avatar2} />
+                        <img alt="" width="50" src={avatar2} />
                       </div>
                       <div className="media-body">
                         <h5 className="mb-1">
@@ -1122,7 +1122,7 @@ const Widget = () => {
                   <li>
                     <div className="timeline-panel">
                       <div className="media me-2">
-                        <img  alt="" width="50" src={avatar1} />
+                        <img alt="" width="50" src={avatar1} />
                       </div>
                       <div className="media-body">
                         <h5 className="mb-1">
@@ -1254,7 +1254,7 @@ const Widget = () => {
                   <li>
                     <div className="timeline-panel">
                       <div className="media me-2 media-primary">
-                        <img  alt="" width="50" src={avatar3} />
+                        <img alt="" width="50" src={avatar3} />
                       </div>
                       <div className="media-body">
                         <h5 className="mb-1">
@@ -2321,7 +2321,7 @@ const Widget = () => {
                 <span className="mb-0">Years Old</span>{" "}
                 <strong className="text-muted">Age: 24 </strong>
               </li>
-			  <li className="list-group-item d-flex justify-content-between">
+              <li className="list-group-item d-flex justify-content-between">
                 <span className="mb-0">Patient Height</span>{" "}
                 <strong className="text-muted">1.5 M </strong>
               </li>
@@ -2754,7 +2754,7 @@ const Widget = () => {
                   </div>
                 </div>
                 <div className="card-body text-center">
-					<GlucoseRate />
+                  <GlucoseRate />
                 </div>
               </div>
             </div>
@@ -3036,7 +3036,7 @@ const Widget = () => {
                   <li>
                     <div className="timeline-panel">
                       <div className="media me-2">
-                        <img  alt="" width="50" src={avatar1} />
+                        <img alt="" width="50" src={avatar1} />
                       </div>
                       <div className="media-body">
                         <h5 className="mb-1">Dr sultads Send you Photo</h5>
@@ -3046,8 +3046,15 @@ const Widget = () => {
                       </div>
                       <Dropdown className="dropdown">
                         <Dropdown.Toggle
-                          variant="primary light" className=" i-false p-0 sharp">
-                          <svg width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
+                          variant="primary light"
+                          className=" i-false p-0 sharp"
+                        >
+                          <svg
+                            width="18px"
+                            height="18px"
+                            viewBox="0 0 24 24"
+                            version="1.1"
+                          >
                             <g
                               stroke="none"
                               strokeWidth="1"
@@ -3200,7 +3207,7 @@ const Widget = () => {
                   <li>
                     <div className="timeline-panel">
                       <div className="media me-2">
-                        <img  alt="" width="50" src={avatar4} />
+                        <img alt="" width="50" src={avatar4} />
                       </div>
                       <div className="media-body">
                         <h5 className="mb-1">Dr sultads Send you Photo</h5>
@@ -3252,7 +3259,7 @@ const Widget = () => {
                   <li>
                     <div className="timeline-panel">
                       <div className="media me-2 media-info">
-                        <img  width="50" alt="" src={avatar2} />
+                        <img width="50" alt="" src={avatar2} />
                       </div>
                       <div className="media-body">
                         <h5 className="mb-1">Resport created successfully</h5>
@@ -3304,7 +3311,7 @@ const Widget = () => {
                   <li>
                     <div className="timeline-panel">
                       <div className="media me-2 media-success">
-                        <img  width="50" alt="" src={avatar3} />
+                        <img width="50" alt="" src={avatar3} />
                       </div>
                       <div className="media-body">
                         <h5 className="mb-1">Reminder : Treatment Time!</h5>

@@ -94,15 +94,15 @@ const MainNouiSlider = () => {
               <h4 className="card-title">Slider Range (Left To Right)</h4>
             </div>
             <div className="card-body pb-5">
-				<div className="combined">
-					<div id="combined">
-					  <Nouislider
-						range={{ min: 0, max: 100 }}
-						start={[0]}
-						connect
-					  />
-					</div>
-				</div>
+              <div className="combined">
+                <div id="combined">
+                  <Nouislider
+                    range={{ min: 0, max: 100 }}
+                    start={[0]}
+                    connect
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

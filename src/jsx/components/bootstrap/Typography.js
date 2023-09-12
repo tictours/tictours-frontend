@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import PageTitle from "../../layouts/PageTitle";
 import { Row, Col, Card } from "react-bootstrap";
 
@@ -8,14 +8,14 @@ const UiTypography = () => {
     <Fragment>
       {/* <PageTitle activeMenu="Typography" pageContent="ui-typography" motherMenu="Bootstrap"/> */}
       <div className="row ">
-				<div className="col-xl-12">
-					<div className="page-titles">
-						<div className="d-flex align-items-center">
-							<h2 className="heading">Typography</h2>
-						</div>
-					</div>
-				</div>
-			</div>
+        <div className="col-xl-12">
+          <div className="page-titles">
+            <div className="d-flex align-items-center">
+              <h2 className="heading">Typography</h2>
+            </div>
+          </div>
+        </div>
+      </div>
       <Row>
         <Col xs={12}>
           <Card>
@@ -92,7 +92,10 @@ const UiTypography = () => {
                     </h4>
                     <p>
                       Use tags{" "}
-                      <code>text-sm-start, text-md-start, text-lg-start, text-xl-start</code>{" "}
+                      <code>
+                        text-sm-start, text-md-start, text-lg-start,
+                        text-xl-start
+                      </code>{" "}
                       for get desire text.
                     </p>
                   </div>
@@ -118,9 +121,8 @@ const UiTypography = () => {
                       Font weight and italics
                     </h4>
                     <p>
-                      Use tags{" "}
-                      <code> fw-normal, fw-italic</code> for
-                      get desire text.
+                      Use tags <code> fw-normal, fw-italic</code> for get desire
+                      text.
                     </p>
                   </div>
                   <div className="card-content">

@@ -29,16 +29,16 @@ class ApexLine3 extends React.Component {
           colors: ["#e23428"],
           curve: "straight",
         },
-		grid:{
-			 borderColor: '#ffffff1a',
-		},
+        grid: {
+          borderColor: "#ffffff1a",
+        },
         xaxis: {
-			axisBorder: {
-			   show: false,
-			},
-		    axisTicks: {
-				show: false,
-			},
+          axisBorder: {
+            show: false,
+          },
+          axisTicks: {
+            show: false,
+          },
           type: "text",
           categories: [
             "Jan",

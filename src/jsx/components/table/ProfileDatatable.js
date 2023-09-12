@@ -1,4 +1,4 @@
-import React, { Fragment,  useRef } from "react";
+import React, { Fragment, useRef } from "react";
 // import { Table, Pagination } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
@@ -14,8 +14,8 @@ const ProfileDatatable = () => {
   const jobData = useRef(
     data.profileTable.data.slice(
       activePag.current * sort,
-      (activePag.current + 1) * sort
-    )
+      (activePag.current + 1) * sort,
+    ),
   );
   //const [demo, setdemo] = useState();
   const onClick = (i) => {
@@ -23,7 +23,7 @@ const ProfileDatatable = () => {
 
     jobData.current = data.profileTable.data.slice(
       activePag.current * sort,
-      (activePag.current + 1) * sort
+      (activePag.current + 1) * sort,
     );
     /* setdemo(
       data.profileTable.data.slice(
@@ -89,7 +89,6 @@ const ProfileDatatable = () => {
                     </tr>
                   ))}
                 </tbody>
-                
               </table>
 
               <div className="d-sm-flex text-center justify-content-between align-items-center mt-3 mb-2">

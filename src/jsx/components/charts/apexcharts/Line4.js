@@ -31,9 +31,9 @@ class ApexLine4 extends React.Component {
         dataLabels: {
           enabled: false,
         },
-		grid:{
-			 borderColor: '#ffffff1a',
-		},
+        grid: {
+          borderColor: "#ffffff1a",
+        },
         stroke: {
           width: [4, 4, 4],
           colors: ["#e23428", "#1EA7C5", "#FF9432"],
@@ -43,12 +43,12 @@ class ApexLine4 extends React.Component {
           show: false,
         },
         xaxis: {
-			axisBorder: {
-			   show: false,
-			},
-		    axisTicks: {
-				show: false,
-			},
+          axisBorder: {
+            show: false,
+          },
+          axisTicks: {
+            show: false,
+          },
           type: "text",
           categories: [
             "Jan",

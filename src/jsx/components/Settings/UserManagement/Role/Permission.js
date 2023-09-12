@@ -1,123 +1,147 @@
-import React,{useState, useEffect, useRef} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
-import {Badge, Dropdown} from 'react-bootstrap';
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Badge, Dropdown } from "react-bootstrap";
 
-import InvoiceSlider from '../../../Dashboard/InvoiceSlider';
-import QuestionIcon from '../../../Dashboard/Ticketing/QuestionIcon';
-import AddRole from './addRole';
-import SelectField from '../../../common/SelectField';
-import { useSelector } from 'react-redux';
-import notify from '../../../common/Notify';
-import InputField from '../../../common/InputField';
-import { Formik } from 'formik';
+import InvoiceSlider from "../../../Dashboard/InvoiceSlider";
+import QuestionIcon from "../../../Dashboard/Ticketing/QuestionIcon";
+import AddRole from "./addRole";
+import SelectField from "../../../common/SelectField";
+import { useSelector } from "react-redux";
+import notify from "../../../common/Notify";
+import InputField from "../../../common/InputField";
+import { Formik } from "formik";
 
-const RightIcon = () =>{
-    return(
-        <>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"  xmlns="http://www.w3.org/2000/svg">
-                <path d="M5.50912 14.5C5.25012 14.5 4.99413 14.4005 4.80013 14.2065L1.79362 11.2C1.40213 10.809 1.40213 10.174 1.79362 9.78302C2.18512 9.39152 2.81913 9.39152 3.21063 9.78302L5.62812 12.2005L12.9306 7.18802C13.3866 6.87502 14.0106 6.99102 14.3236 7.44702C14.6371 7.90352 14.5211 8.52702 14.0646 8.84052L6.07613 14.324C5.90363 14.442 5.70612 14.5 5.50912 14.5Z" fill="#1EBA62"/>
-                <path d="M5.50912 8.98807C5.25012 8.98807 4.99413 8.88857 4.80013 8.69457L1.79362 5.68807C1.40213 5.29657 1.40213 4.66207 1.79362 4.27107C2.18512 3.87957 2.81913 3.87957 3.21063 4.27107L5.62812 6.68857L12.9306 1.67607C13.3866 1.36307 14.0106 1.47907 14.3236 1.93507C14.6371 2.39157 14.5211 3.01507 14.0646 3.32857L6.07613 8.81257C5.90363 8.93057 5.70612 8.98807 5.50912 8.98807Z" fill="#1EBA62"/>
-            </svg>
-        </>
-    )
-}
+const RightIcon = () => {
+  return (
+    <>
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M5.50912 14.5C5.25012 14.5 4.99413 14.4005 4.80013 14.2065L1.79362 11.2C1.40213 10.809 1.40213 10.174 1.79362 9.78302C2.18512 9.39152 2.81913 9.39152 3.21063 9.78302L5.62812 12.2005L12.9306 7.18802C13.3866 6.87502 14.0106 6.99102 14.3236 7.44702C14.6371 7.90352 14.5211 8.52702 14.0646 8.84052L6.07613 14.324C5.90363 14.442 5.70612 14.5 5.50912 14.5Z"
+          fill="#1EBA62"
+        />
+        <path
+          d="M5.50912 8.98807C5.25012 8.98807 4.99413 8.88857 4.80013 8.69457L1.79362 5.68807C1.40213 5.29657 1.40213 4.66207 1.79362 4.27107C2.18512 3.87957 2.81913 3.87957 3.21063 4.27107L5.62812 6.68857L12.9306 1.67607C13.3866 1.36307 14.0106 1.47907 14.3236 1.93507C14.6371 2.39157 14.5211 3.01507 14.0646 3.32857L6.07613 8.81257C5.90363 8.93057 5.70612 8.98807 5.50912 8.98807Z"
+          fill="#1EBA62"
+        />
+      </svg>
+    </>
+  );
+};
 
-const tableData = ['dashboard','leads','enquiry','follow ups','tickets','works','finance','mails','settings'];
+const tableData = [
+  "dashboard",
+  "leads",
+  "enquiry",
+  "follow ups",
+  "tickets",
+  "works",
+  "finance",
+  "mails",
+  "settings",
+];
 
-const Permission = () =>{
-
-    const navigate = useNavigate()
-    const roleData = useSelector((data)=>data.role)
-    const [data, setData] = useState(
-		document.querySelectorAll("#example2_wrapper tbody tr")
-	);
-    const [showModal,setShowModal]= useState(false)
-	const sort = 8;
-	const activePag = useRef(0);	
-	const chageData = (frist, sec) => {
-		for (var i = 0; i < data.length; ++i) {
-			if (i >= frist && i < sec) {
-				data[i].classList.remove("d-none");
-			} else {
-				data[i].classList.add("d-none");
-			}
-		}
-	};
-   // use effect
-   useEffect(() => {
-      setData(document.querySelectorAll("#example2_wrapper tbody tr"));
-      //chackboxFun();
-	}, []);
-
-  
-   // Active pagginarion
-   activePag.current === 0 && chageData(0, sort);
-   // paggination
-   let paggination = Array(Math.ceil(data.length / sort))
-      .fill()
-      .map((_, i) => i + 1);
-
-   // Active paggination & chage data
-	const onClick = (i) => {
-		activePag.current = i;
-		chageData(activePag.current * sort, (activePag.current + 1) * sort);
-		//settest(i);
-	};
-
-   
-	const chackbox = document.querySelectorAll(".sorting_1 input");
-	const motherChackBox = document.querySelector(".sorting_asc input");
-	const chackboxFun = (type) => {
-      for (let i = 0; i < chackbox.length; i++) {
-         const element = chackbox[i];
-         if (type === "all") {
-            if (motherChackBox.checked) {
-               element.checked = true;
-            } else {
-               element.checked = false;
-            }
-         } else {
-            if (!element.checked) {
-               motherChackBox.checked = false;
-               break;
-            } else {
-               motherChackBox.checked = true;
-            }
-         }
+const Permission = () => {
+  const navigate = useNavigate();
+  const roleData = useSelector((data) => data.role);
+  const [data, setData] = useState(
+    document.querySelectorAll("#example2_wrapper tbody tr"),
+  );
+  const [showModal, setShowModal] = useState(false);
+  const sort = 8;
+  const activePag = useRef(0);
+  const chageData = (frist, sec) => {
+    for (var i = 0; i < data.length; ++i) {
+      if (i >= frist && i < sec) {
+        data[i].classList.remove("d-none");
+      } else {
+        data[i].classList.add("d-none");
       }
-    };
-    const sliderArr = [
-        {name:'Total',value:'8'},
-        {name:'Active',value:'6'},
-        {name:'Inactive',value:'2'},
-        {name:'Type',value:'6'},
-    ]
-    const capitalizeFirstLetter = (str) => {
-        return str.charAt(0).toUpperCase() + str.slice(1)
     }
-    const permission = ['read', 'write', 'update', 'delete']
-    const permissionOption = ["All","Added","Assigned","Added & Assigned","None"]
-    const readPermissionOption = ["All","Added","None"]
-    const handleSubmit = () => {
-        notify({message:'User Role Added Successfully'})
-        navigate('/user-role')
+  };
+  // use effect
+  useEffect(() => {
+    setData(document.querySelectorAll("#example2_wrapper tbody tr"));
+    //chackboxFun();
+  }, []);
+
+  // Active pagginarion
+  activePag.current === 0 && chageData(0, sort);
+  // paggination
+  let paggination = Array(Math.ceil(data.length / sort))
+    .fill()
+    .map((_, i) => i + 1);
+
+  // Active paggination & chage data
+  const onClick = (i) => {
+    activePag.current = i;
+    chageData(activePag.current * sort, (activePag.current + 1) * sort);
+    //settest(i);
+  };
+
+  const chackbox = document.querySelectorAll(".sorting_1 input");
+  const motherChackBox = document.querySelector(".sorting_asc input");
+  const chackboxFun = (type) => {
+    for (let i = 0; i < chackbox.length; i++) {
+      const element = chackbox[i];
+      if (type === "all") {
+        if (motherChackBox.checked) {
+          element.checked = true;
+        } else {
+          element.checked = false;
+        }
+      } else {
+        if (!element.checked) {
+          motherChackBox.checked = false;
+          break;
+        } else {
+          motherChackBox.checked = true;
+        }
+      }
     }
-    const initialValues = {
-        name:roleData.name
-    }
-    return (
-        <>
-            <div className="row">
-                <div className="col-xl-12">
-                    <div className="row">
-                        <div className="col-xl-12">
-                            <div className="page-titles">
-                                <div className="d-flex align-items-center">
-                                    <h2 className="heading">Add role</h2>
-                                   
-                                </div>
-                                <div className="d-flex flex-wrap my-2 my-sm-0">
-                                    {/* <div className="input-group search-area">
+  };
+  const sliderArr = [
+    { name: "Total", value: "8" },
+    { name: "Active", value: "6" },
+    { name: "Inactive", value: "2" },
+    { name: "Type", value: "6" },
+  ];
+  const capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+  const permission = ["read", "write", "update", "delete"];
+  const permissionOption = [
+    "All",
+    "Added",
+    "Assigned",
+    "Added & Assigned",
+    "None",
+  ];
+  const readPermissionOption = ["All", "Added", "None"];
+  const handleSubmit = () => {
+    notify({ message: "User Role Added Successfully" });
+    navigate("/user-role");
+  };
+  const initialValues = {
+    name: roleData.name,
+  };
+  return (
+    <>
+      <div className="row">
+        <div className="col-xl-12">
+          <div className="row">
+            <div className="col-xl-12">
+              <div className="page-titles">
+                <div className="d-flex align-items-center">
+                  <h2 className="heading">Add role</h2>
+                </div>
+                <div className="d-flex flex-wrap my-2 my-sm-0">
+                  {/* <div className="input-group search-area">
                                         <input type="text" className="form-control" placeholder="Search here..." />
                                         <span className="input-group-text">
                                             <Link to={"#"}>
@@ -128,74 +152,99 @@ const Permission = () =>{
                                             </Link>
                                         </span>
                                     </div> */}
-                                    <div className="invoice-btn">
-                                        <button onClick={()=>handleSubmit()} className="btn btn-primary">Submit<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12 3C7.05 3 3 7.05 3 12C3 16.95 7.05 21 12 21C16.95 21 21 16.95 21 12C21 7.05 16.95 3 12 3ZM12 19.125C8.1 19.125 4.875 15.9 4.875 12C4.875 8.1 8.1 4.875 12 4.875C15.9 4.875 19.125 8.1 19.125 12C19.125 15.9 15.9 19.125 12 19.125Z" fill="#FCFCFC"/>
-                                            <path d="M16.3498 11.0251H12.9748V7.65009C12.9748 7.12509 12.5248 6.67509 11.9998 6.67509C11.4748 6.67509 11.0248 7.12509 11.0248 7.65009V11.0251H7.6498C7.1248 11.0251 6.6748 11.4751 6.6748 12.0001C6.6748 12.5251 7.1248 12.9751 7.6498 12.9751H11.0248V16.3501C11.0248 16.8751 11.4748 17.3251 11.9998 17.3251C12.5248 17.3251 12.9748 16.8751 12.9748 16.3501V12.9751H16.3498C16.8748 12.9751 17.3248 12.5251 17.3248 12.0001C17.3248 11.4751 16.8748 11.0251 16.3498 11.0251Z" fill="#FCFCFC"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {/* swiper */}
-                        {/* <InvoiceSlider title='Permission' array={sliderArr}/> */}
-                    {/* swiper end */}
-                    <Formik
-          initialValues={initialValues}
-          // validationSchema={loginSchema}
-        //   onSubmit={(values, { setSubmitting }) => {
-        //     setShowModal(false)
-        //     navigate('add')
-        //     // console.log('value',values)
-        //     dispatch(RoleAction.setPage(values.name))
-        //     // notify({message:'User Role Added Successfully'})
-        //   }}
-        >
-          {({
-            values,
-            errors,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-            setFieldValue,
-          }) => (
-                    <div className="row">
-                        <div className='col-xl-4'>
-                        <div className="mb-2">
-                  <InputField
-                    label="Name"
-                    name="name"
-                    placeholder='Add User role name'
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    values={values}
-                  />
+                  <div className="invoice-btn">
+                    <button
+                      onClick={() => handleSubmit()}
+                      className="btn btn-primary"
+                    >
+                      Submit
+                      <svg
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12 3C7.05 3 3 7.05 3 12C3 16.95 7.05 21 12 21C16.95 21 21 16.95 21 12C21 7.05 16.95 3 12 3ZM12 19.125C8.1 19.125 4.875 15.9 4.875 12C4.875 8.1 8.1 4.875 12 4.875C15.9 4.875 19.125 8.1 19.125 12C19.125 15.9 15.9 19.125 12 19.125Z"
+                          fill="#FCFCFC"
+                        />
+                        <path
+                          d="M16.3498 11.0251H12.9748V7.65009C12.9748 7.12509 12.5248 6.67509 11.9998 6.67509C11.4748 6.67509 11.0248 7.12509 11.0248 7.65009V11.0251H7.6498C7.1248 11.0251 6.6748 11.4751 6.6748 12.0001C6.6748 12.5251 7.1248 12.9751 7.6498 12.9751H11.0248V16.3501C11.0248 16.8751 11.4748 17.3251 11.9998 17.3251C12.5248 17.3251 12.9748 16.8751 12.9748 16.3501V12.9751H16.3498C16.8748 12.9751 17.3248 12.5251 17.3248 12.0001C17.3248 11.4751 16.8748 11.0251 16.3498 11.0251Z"
+                          fill="#FCFCFC"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-                        </div>
-                        <div className="col-xl-12" >                            
-                            <div className="table-responsive  full-data dataTables_wrapper" id="">
-                                <table className="table-responsive-lg table display mb-4 dataTablesCard  text-black dataTable no-footer" id="example2">
-                                    <thead>
-                                        <tr>
-                                            {/* <th className="sorting_asc ">
+              </div>
+            </div>
+          </div>
+          {/* swiper */}
+          {/* <InvoiceSlider title='Permission' array={sliderArr}/> */}
+          {/* swiper end */}
+          <Formik
+            initialValues={initialValues}
+            // validationSchema={loginSchema}
+            //   onSubmit={(values, { setSubmitting }) => {
+            //     setShowModal(false)
+            //     navigate('add')
+            //     // console.log('value',values)
+            //     dispatch(RoleAction.setPage(values.name))
+            //     // notify({message:'User Role Added Successfully'})
+            //   }}
+          >
+            {({
+              values,
+              errors,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              isSubmitting,
+              setFieldValue,
+            }) => (
+              <div className="row">
+                <div className="col-xl-4">
+                  <div className="mb-2">
+                    <InputField
+                      label="Name"
+                      name="name"
+                      placeholder="Add User role name"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      values={values}
+                    />
+                  </div>
+                </div>
+                <div className="col-xl-12">
+                  <div
+                    className="table-responsive  full-data dataTables_wrapper"
+                    id=""
+                  >
+                    <table
+                      className="table-responsive-lg table display mb-4 dataTablesCard  text-black dataTable no-footer"
+                      id="example2"
+                    >
+                      <thead>
+                        <tr>
+                          {/* <th className="sorting_asc ">
                                                 <input type="checkbox" onClick={() => chackboxFun("all")} className="form-check-input" id="checkAll" required="" />
                                             </th> */}
-                                            <th className="">Module</th>
-                                            {permission.map((data)=>(
-                                            <th className="" key={data}>{capitalizeFirstLetter(data)}</th>
-                                            ))}
-                                           
-                                            {/* <th className="text-end">Status</th> */}
-                                            {/* <th></th> */}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {tableData.map((item, ind)=>(
-                                            <tr key={ind}>
-                                                {/* <td className="sorting_1">
+                          <th className="">Module</th>
+                          {permission.map((data) => (
+                            <th className="" key={data}>
+                              {capitalizeFirstLetter(data)}
+                            </th>
+                          ))}
+
+                          {/* <th className="text-end">Status</th> */}
+                          {/* <th></th> */}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {tableData.map((item, ind) => (
+                          <tr key={ind}>
+                            {/* <td className="sorting_1">
                                                     <div className="checkbox me-0 align-self-center">
                                                         <div className="custom-control custom-checkbox ">
                                                             <input type="checkbox" className="form-check-input" id={"customCheckBox2"+ ind} required="" 
@@ -205,19 +254,22 @@ const Permission = () =>{
                                                         </div>
                                                     </div>
                                                 </td> */}
-                                                <td className=''>{capitalizeFirstLetter(item)}</td>
-                                                {permission.map((data)=>(
-                                                <td key={data}>
-                                                    <SelectField name={'val'}
-                                                     options={permissionOption}
-                                                     formClass='w-50 mb-0' 
-                                                     selectClass='ms-0'/>
-                                                </td>))}
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                                {/* <div className="d-sm-flex text-center justify-content-between align-items-center mt-3 mb-3">
+                            <td className="">{capitalizeFirstLetter(item)}</td>
+                            {permission.map((data) => (
+                              <td key={data}>
+                                <SelectField
+                                  name={"val"}
+                                  options={permissionOption}
+                                  formClass="w-50 mb-0"
+                                  selectClass="ms-0"
+                                />
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    {/* <div className="d-sm-flex text-center justify-content-between align-items-center mt-3 mb-3">
                                     <div className="dataTables_info">
                                         Showing {activePag.current * sort + 1} to{" "}
                                         {data.length > (activePag.current + 1) * sort
@@ -267,16 +319,15 @@ const Permission = () =>{
                                         </Link>
                                     </div>
                                 </div> */}
-                            </div>                
-                        </div>
-                    </div>
-                    )} 
-                    </Formik> 
-
-                </div>      
-            </div>    
-            <AddRole showModal={showModal} setShowModal={setShowModal}/>   
-        </>
-    )
-}
+                  </div>
+                </div>
+              </div>
+            )}
+          </Formik>
+        </div>
+      </div>
+      <AddRole showModal={showModal} setShowModal={setShowModal} />
+    </>
+  );
+};
 export default Permission;

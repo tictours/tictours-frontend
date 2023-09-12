@@ -1,7 +1,13 @@
 import React from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
-const CustomModal = ({ showModal, handleModalClose, title, children, modalClass='' }) => {
+const CustomModal = ({
+  showModal,
+  handleModalClose,
+  title,
+  children,
+  modalClass = "",
+}) => {
   return (
     <>
       <Modal

@@ -1,28 +1,33 @@
-import React, { useState } from 'react'
-import CustomModal from '../../../../layouts/CustomModal';
-import  notify  from '../../../common/Notify';
-import { Formik } from 'formik';
-import InputField from '../../../common/InputField';
-import ReactSelect from '../../../common/ReactSelect';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { RoleAction } from '../../../../../store/slices/roleSlice';
-
-
+import React, { useState } from "react";
+import CustomModal from "../../../../layouts/CustomModal";
+import notify from "../../../common/Notify";
+import { Formik } from "formik";
+import InputField from "../../../common/InputField";
+import ReactSelect from "../../../common/ReactSelect";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { RoleAction } from "../../../../../store/slices/roleSlice";
 
 function AddRole({ showModal, setShowModal }) {
   const [formStartDate, setFormStartDate] = useState(new Date());
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const initialValues = {}
+  const initialValues = {};
   const permissionOptions = [
-    { label: 'Read', value: 'read' },
-    { label: 'Write', value: 'write' },
-    { label: 'Edit', value: 'edit' },
-    { label: 'Delete', value: 'delete' },
-  ]
-  const menuList = ['Dashboard','Enquiry','Leads','Admin setting','User','User Role']
+    { label: "Read", value: "read" },
+    { label: "Write", value: "write" },
+    { label: "Edit", value: "edit" },
+    { label: "Delete", value: "delete" },
+  ];
+  const menuList = [
+    "Dashboard",
+    "Enquiry",
+    "Leads",
+    "Admin setting",
+    "User",
+    "User Role",
+  ];
   return (
     <>
       <CustomModal
@@ -34,10 +39,10 @@ function AddRole({ showModal, setShowModal }) {
           initialValues={initialValues}
           // validationSchema={loginSchema}
           onSubmit={(values, { setSubmitting }) => {
-            setShowModal(false)
-            navigate('add')
+            setShowModal(false);
+            navigate("add");
             // console.log('value',values)
-            dispatch(RoleAction.setPage(values.name))
+            dispatch(RoleAction.setPage(values.name));
             // notify({message:'User Role Added Successfully'})
           }}
         >
@@ -61,7 +66,7 @@ function AddRole({ showModal, setShowModal }) {
                     values={values}
                   />
                 </div>
-              {/* {menuList.map((menu,key)=>(
+                {/* {menuList.map((menu,key)=>(
                 <div className="col-md-6 mb-2" key={key}>
                   <ReactSelect
                     label={menu}
@@ -81,7 +86,7 @@ function AddRole({ showModal, setShowModal }) {
         </Formik>
       </CustomModal>
     </>
-  )
+  );
 }
 
 export default AddRole;

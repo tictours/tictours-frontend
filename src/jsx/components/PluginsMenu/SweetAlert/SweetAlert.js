@@ -6,9 +6,8 @@ import PageTitle from "../../../layouts/PageTitle";
 const MainSweetAlert = () => {
   return (
     <Fragment>
-		
       <PageTitle activeMenu="Sweet Alert" motherMenu="Components" />
-	
+
       <div className="row">
         <div className="col-xl-3 col-xxl-4 col-lg-4 col-md-6">
           <div className="card">
@@ -35,7 +34,7 @@ const MainSweetAlert = () => {
               <h4 className="card-title">Sweet Message</h4>
               <div className="card-content">
                 <div className="sweetalert mt-5">
-				{/* <button
+                  {/* <button
                     onClick={() =>
                       swalMessage(
                         <div>
@@ -47,15 +46,12 @@ const MainSweetAlert = () => {
                   >
                     Sweet Message
 				</button> */}
-				<button
-                    onClick={() =>
-                      swal("Hey, Here's a message !!", "")
-                    }
+                  <button
+                    onClick={() => swal("Hey, Here's a message !!", "")}
                     className="btn btn-info btn sweet-message"
                   >
                     Sweet Message
-                 </button>
-				
+                  </button>
                 </div>
               </div>
             </div>
@@ -67,7 +63,7 @@ const MainSweetAlert = () => {
               <h4 className="card-title">Sweet Text</h4>
               <div className="card-content">
                 <div className="sweetalert mt-5">
-				{/* <button
+                  {/* <button
                     onClick={() =>
                       swalMessage(
                         <div>
@@ -80,7 +76,7 @@ const MainSweetAlert = () => {
                   >
                     Sweet Text
 				</button> */}
-				 <button
+                  <button
                     onClick={() =>
                       swal("Hey, Here's a message !!", "It's pretty, isn't it?")
                     }
@@ -123,8 +119,7 @@ const MainSweetAlert = () => {
                     onClick={() =>
                       swal({
                         title: "Are you sure?",
-                        text:
-                          "Once deleted, you will not be able to recover this imaginary file!",
+                        text: "Once deleted, you will not be able to recover this imaginary file!",
                         icon: "warning",
                         buttons: true,
                         dangerMode: true,
@@ -157,8 +152,7 @@ const MainSweetAlert = () => {
                     onClick={() =>
                       swal({
                         title: "Are you sure?",
-                        text:
-                          "Once deleted, you will not be able to recover this imaginary file!",
+                        text: "Once deleted, you will not be able to recover this imaginary file!",
                         icon: "warning",
                         buttons: true,
                         dangerMode: true,
@@ -187,7 +181,7 @@ const MainSweetAlert = () => {
               <h4 className="card-title">Sweet Image Message</h4>
               <div className="card-content">
                 <div className="sweetalert mt-5">
-				{/* <button
+                  {/* <button
                     onClick={() =>
                       swalMessage(
                         <div>
@@ -199,15 +193,17 @@ const MainSweetAlert = () => {
                   >
                     Sweet Image Message
 				</button> */}
-				 <button
+                  <button
                     onClick={() =>
-                      swal("Hey, Here's a message !!", "Hey, Here's a custom image !!")
+                      swal(
+                        "Hey, Here's a message !!",
+                        "Hey, Here's a custom image !!",
+                      )
                     }
                     className="btn btn-info btn sweet-image-message"
                   >
                     Sweet Image Message
                   </button>
-				
                 </div>
               </div>
             </div>
@@ -219,7 +215,7 @@ const MainSweetAlert = () => {
               <h4 className="card-title">Sweet HTML</h4>
               <div className="card-content">
                 <div className="sweetalert mt-5">
-				{/* <button
+                  {/* <button
                     onClick={() =>
                       swalMessage(
                         <div>
@@ -232,10 +228,8 @@ const MainSweetAlert = () => {
                   >
                     Sweet HTML
 				</button> */}
-				 <button
-                    onClick={() =>
-                      swal("Sweet !!", "true")
-                    }
+                  <button
+                    onClick={() => swal("Sweet !!", "true")}
                     className="btn btn-primary btn sweet-html"
                   >
                     Sweet HTML
@@ -255,7 +249,7 @@ const MainSweetAlert = () => {
                   <button
                     onClick={() =>
                       swal(
-                        "Click on either the button or outside the modal."
+                        "Click on either the button or outside the modal.",
                       ).then((value) => {
                         swal(`The returned value is: ${value}`);
                       })
@@ -300,8 +294,7 @@ const MainSweetAlert = () => {
                   onClick={() =>
                     swal({
                       title: "Are you sure?",
-                      text:
-                        "Once deleted, you will not be able to recover this imaginary file!",
+                      text: "Once deleted, you will not be able to recover this imaginary file!",
                       icon: "warning",
                       buttons: true,
                       dangerMode: true,

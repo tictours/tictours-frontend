@@ -4,9 +4,8 @@ import React from "react";
 //import World from "@svg-maps/world";
 //import { SVGMap } from "react-svg-map";
 //import "react-svg-map/lib/index.css";
-import MapChart from './MapChart';
-import WorldMap from './WorldMap';
-
+import MapChart from "./MapChart";
+import WorldMap from "./WorldMap";
 
 import PageTitle from "../../../layouts/PageTitle";
 
@@ -22,11 +21,10 @@ import PageTitle from "../../../layouts/PageTitle";
 //     {country: 'ru', 	value: 141944641}, // russia
 //     {country: 'mx', 	value: 127318112}, // mexico
 //  ];
- 
 
 const JqvMap = () => {
-	//const [selected, onSelect] = useState(null);
-	
+  //const [selected, onSelect] = useState(null);
+
   return (
     <div className="h-80">
       <PageTitle activeMenu="JqvMap" pageContent="JqvMap" motherMenu="Map" />
@@ -37,12 +35,12 @@ const JqvMap = () => {
             <div className="card-header">
               <h4 className="card-title">World Map</h4>
             </div>
-            <div className="card-body mb-2" style={{ height: "100%" }}>            
-                <div id="world-map" style={{ height: "100%" }}>
-                  {/* <SVGMap map={World} /> */}
-                  {/* <WorldMapUsa selected={selected} onSelect={onSelect} />		 */}
-                  <WorldMap />
-                </div>
+            <div className="card-body mb-2" style={{ height: "100%" }}>
+              <div id="world-map" style={{ height: "100%" }}>
+                {/* <SVGMap map={World} /> */}
+                {/* <WorldMapUsa selected={selected} onSelect={onSelect} />		 */}
+                <WorldMap />
+              </div>
             </div>
           </div>
         </div>
@@ -52,9 +50,9 @@ const JqvMap = () => {
               <h4 className="card-title">USA</h4>
             </div>
             <div className="card-body mb-2" style={{ height: "100%" }}>
-			  <div id="usa" style={{ height: "100%" }}>				  
-				  <MapChart />
-			  </div>
+              <div id="usa" style={{ height: "100%" }}>
+                <MapChart />
+              </div>
             </div>
           </div>
         </div>

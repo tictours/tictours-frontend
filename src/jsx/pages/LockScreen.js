@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../images/logo-full.png";
 import logolight from "../../images/logo-full-light.png";
 
-
 const LockScreen = ({ history }) => {
   const nav = useNavigate();
   const submitHandler = (e) => {
@@ -20,12 +19,22 @@ const LockScreen = ({ history }) => {
               <div className="row no-gutters">
                 <div className="col-xl-12">
                   <div className="auth-form">
-                      <div className="text-center mb-3">
-                        <Link to="/dashboard">                          
-                          <img className="logo-abbr dark-logo" width="200" src={logo} alt="" />
-										      <img className="logo-abbr light-logo text-center m-auto" width="200" src={logolight} alt="" />
-                        </Link>
-                      </div>
+                    <div className="text-center mb-3">
+                      <Link to="/dashboard">
+                        <img
+                          className="logo-abbr dark-logo"
+                          width="200"
+                          src={logo}
+                          alt=""
+                        />
+                        <img
+                          className="logo-abbr light-logo text-center m-auto"
+                          width="200"
+                          src={logolight}
+                          alt=""
+                        />
+                      </Link>
+                    </div>
                     <h4 className="text-center mb-4 ">Account Locked</h4>
                     <form onSubmit={(e) => submitHandler(e)}>
                       <div className="form-group mb-3">
@@ -33,17 +42,17 @@ const LockScreen = ({ history }) => {
                           <strong>Password</strong>
                         </label>
                         <input
-                            type="password"
-                            className="form-control"
-                            defaultValue="Password"
+                          type="password"
+                          className="form-control"
+                          defaultValue="Password"
                         />
                       </div>
                       <div className="text-center">
                         <button
-                            type="submit"
-                            className="btn btn-primary btn-block"
+                          type="submit"
+                          className="btn btn-primary btn-block"
                         >
-                           Unlock
+                          Unlock
                         </button>
                       </div>
                     </form>

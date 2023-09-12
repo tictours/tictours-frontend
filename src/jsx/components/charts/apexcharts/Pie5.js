@@ -32,9 +32,7 @@ class ApexRedialBar2 extends React.Component {
               opacity: 1,
               margin: 18, // margin is in pixels
             },
-			
           },
-		
         },
         responsive: [
           {
@@ -129,13 +127,12 @@ class ApexRedialBar2 extends React.Component {
         colors: ["#1c9ef9", "#1c9ef9", "#1c9ef9"],
         labels: ["Ticket A", "Ticket B", "Ticket C"],
         legend: {
-			fontSize: "14px",
-			show: true,
-			position: "bottom",
-			labels: {
-				colors: "#787878",
-			},
-		  
+          fontSize: "14px",
+          show: true,
+          position: "bottom",
+          labels: {
+            colors: "#787878",
+          },
         },
       },
     };

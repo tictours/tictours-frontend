@@ -12,7 +12,7 @@ const data = {
       borderWidth: "2",
       backgroundColor: "rgba(28,158,249,1)",
       pointBackgroundColor: "rgba(28,158,249, 1)",
-	  tension:0.4
+      tension: 0.4,
     },
     {
       label: "My Second dataset",
@@ -21,43 +21,40 @@ const data = {
       borderWidth: "2",
       backgroundColor: "transparent",
       pointBackgroundColor: "rgba(255,97,117,0.6)",
-	  tension:0.4
+      tension: 0.4,
     },
   ],
 };
 
 const options = {
-  plugins:{
-	  legend: false,
-	  tooltips: {
-		intersect: false,
-	  },
-	  hover: {
-		// mode: "nearest",
-		intersect: true,
-	  }
+  plugins: {
+    legend: false,
+    tooltips: {
+      intersect: false,
+    },
+    hover: {
+      // mode: "nearest",
+      intersect: true,
+    },
   },
   scales: {
-    y: 
-      {
-        ticks: {
-			color: "#fff",
-          beginAtZero: true,
-          max: 100,
-          min: 0,
-          stepSize: 20,
-          padding: 10,
-        },
+    y: {
+      ticks: {
+        color: "#fff",
+        beginAtZero: true,
+        max: 100,
+        min: 0,
+        stepSize: 20,
+        padding: 10,
       },
-    
-    x: 
-      {
-        ticks: {
-		color:"#fff",
-          padding: 5,
-        },
+    },
+
+    x: {
+      ticks: {
+        color: "#fff",
+        padding: 5,
       },
-    
+    },
   },
 };
 class DualLine extends Component {

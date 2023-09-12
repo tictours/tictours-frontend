@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 
 /// React router dom
-import {  Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 
 /// Css
 import "./index.css";
@@ -13,8 +13,8 @@ import Nav from "./layouts/nav";
 import Nav2 from "./layouts/nav/index2";
 import Footer from "./layouts/Footer";
 import ScrollToTop from "./layouts/ScrollToTop";
-import Main from './layouts/Main';
-import WalletBar from './layouts/WalletBar';
+import Main from "./layouts/Main";
+import WalletBar from "./layouts/WalletBar";
 /// Dashboard
 import Home from "./components/Dashboard/Home";
 import DashboardDark from "./components/Dashboard/DashboardDark";
@@ -34,27 +34,27 @@ import Theme5 from "./components/Dashboard/Demo/Theme5";
 import Theme6 from "./components/Dashboard/Demo/Theme6";
 
 //Course
-import CourseList from './components/Dashboard/CourseList'
-import CourseDetails from './components/Dashboard/CourseDetails'
+import CourseList from "./components/Dashboard/CourseList";
+import CourseDetails from "./components/Dashboard/CourseDetails";
 
 /// File Manager
-import FileManager from './components/FileManager/FileManager';
-import FUser from './components/FileManager/User';
-import HomeCalendar from './components/FileManager/HomeCalendar';
-import Activity from './components/FileManager/Activity';
-import ToDoList from './components/FileManager/ToDoList';
-import FileChat from './components/FileManager/FileChat';
+import FileManager from "./components/FileManager/FileManager";
+import FUser from "./components/FileManager/User";
+import HomeCalendar from "./components/FileManager/HomeCalendar";
+import Activity from "./components/FileManager/Activity";
+import ToDoList from "./components/FileManager/ToDoList";
+import FileChat from "./components/FileManager/FileChat";
 
 //CMS
-import Content from './components/Cms/Content';
-import Menu from './components/Cms/Menu';
-import EmailTemplate from './components/Cms/EmailTemplate';
-import Blog from './components/Cms/Blog';
+import Content from "./components/Cms/Content";
+import Menu from "./components/Cms/Menu";
+import EmailTemplate from "./components/Cms/EmailTemplate";
+import Blog from "./components/Cms/Blog";
 //CMS Linking Pages
-import ContentAdd from './components/Cms/ContentAdd';
-import AddMail from './components/Cms/AddMail';
-import AddBlog from './components/Cms/AddBlog';
-import BlogCategory from './components/Cms/BlogCategory';
+import ContentAdd from "./components/Cms/ContentAdd";
+import AddMail from "./components/Cms/AddMail";
+import AddBlog from "./components/Cms/AddBlog";
+import BlogCategory from "./components/Cms/BlogCategory";
 
 /// App
 import AppProfile from "./components/AppsMenu/AppProfile/AppProfile";
@@ -106,7 +106,6 @@ import Toastr from "./components/PluginsMenu/Toastr/Toastr";
 import JqvMap from "./components/PluginsMenu/JqvMap/JqvMap";
 import Lightgallery from "./components/PluginsMenu/Lightgallery/Lightgallery";
 
-
 /// Widget
 import Widget from "./pages/Widget";
 
@@ -139,7 +138,6 @@ import Tabs from "./components/common/Tabs";
 import Quotation from "./components/Enquiry/Quotation";
 import FollowUp from "./components/Enquiry/FollowUp";
 
-
 // Leads
 import Leads from "./components/Leads";
 
@@ -159,7 +157,15 @@ import CompanySettings from "./components/Settings/CompanyManagement/CompanySett
 import CurrencySettings from "./components/Settings/CompanyManagement/CurrencySettings";
 import Fields from "./components/Settings/CompanyManagement/Fields";
 import Permission from "./components/Settings/UserManagement/Role/Permission";
-import { HotelAmenities, MarketTypes, MealPlan, PropertyCategory, PropertyTypes, RoomAmenities, RoomTypes } from "./components/Settings/Hotels/Fields/HotelFields";
+import {
+  HotelAmenities,
+  MarketTypes,
+  MealPlan,
+  PropertyCategory,
+  PropertyTypes,
+  RoomAmenities,
+  RoomTypes,
+} from "./components/Settings/Hotels/Fields/HotelFields";
 import Destination from "./components/Settings/Destination";
 import SubDestination from "./components/Settings/SubDestination";
 
@@ -182,300 +188,345 @@ const hotelMenu = [
   { name: "room amenities", path: "", component: "" },
   { name: "hotel amenities", path: "", component: "" },
   { name: "meal plan", path: "", component: "" },
-  
 ];
 
 const Markup = () => {
-
   const allRoutes = [
-    { url: "banking", component: <Banking/> },
-    { url: "ticketing", component: <Ticketing/> },
-    { url: "crypto", component: <Crypto/> },
-    { url: "contact", component: <Contact/> },
-    { url: "invoice", component: <DashInvoice/> },
-    { url: "kanban", component: <Kanban/>},
-   
-    //File Manager
-    {url:'users', component: <FUser/> },
-    {url:'calendar', component: <HomeCalendar/> }, 
-     //Cms
-	  { url: 'content', component: <Content/> },
-	  { url: 'menu', component: <Menu/> },
-	  { url: 'email-template', component: <EmailTemplate/> },
-	  { url: 'blog', component: <Blog/> },
-	  { url: 'add-content', component: <ContentAdd/> },
-	  { url: 'add-email', component: <AddMail/> },
-	  { url: 'add-blog', component: <AddBlog/> },
-	  { url: 'blog-category', component: <BlogCategory/> },
-	
-	/// Apps
-    { url: "app-profile", component: <AppProfile/> },    
-    { url: "app-calender", component: <Calendar/> },
-    { url: "post-details", component: <PostDetails/> },
+    { url: "banking", component: <Banking /> },
+    { url: "ticketing", component: <Ticketing /> },
+    { url: "crypto", component: <Crypto /> },
+    { url: "contact", component: <Contact /> },
+    { url: "invoice", component: <DashInvoice /> },
+    { url: "kanban", component: <Kanban /> },
 
-     /// Shop
-     { url: "ecom-product-grid", component: <ProductGrid/> },
-     { url: "ecom-product-list", component: <ProductList /> },
-    
-     { url: "ecom-product-order", component: <ProductOrder/> },
-     { url: "ecom-checkout", component: <Checkout/> },
-     { url: "ecom-product-detail", component: <ProductDetail/> },
-     { url: "ecom-customers", component: <Customers/> },
+    //File Manager
+    { url: "users", component: <FUser /> },
+    { url: "calendar", component: <HomeCalendar /> },
+    //Cms
+    { url: "content", component: <Content /> },
+    { url: "menu", component: <Menu /> },
+    { url: "email-template", component: <EmailTemplate /> },
+    { url: "blog", component: <Blog /> },
+    { url: "add-content", component: <ContentAdd /> },
+    { url: "add-email", component: <AddMail /> },
+    { url: "add-blog", component: <AddBlog /> },
+    { url: "blog-category", component: <BlogCategory /> },
+
+    /// Apps
+    { url: "app-profile", component: <AppProfile /> },
+    { url: "app-calender", component: <Calendar /> },
+    { url: "post-details", component: <PostDetails /> },
+
+    /// Shop
+    { url: "ecom-product-grid", component: <ProductGrid /> },
+    { url: "ecom-product-list", component: <ProductList /> },
+
+    { url: "ecom-product-order", component: <ProductOrder /> },
+    { url: "ecom-checkout", component: <Checkout /> },
+    { url: "ecom-product-detail", component: <ProductDetail /> },
+    { url: "ecom-customers", component: <Customers /> },
 
     /// Chart
-    { url: "chart-sparkline", component: <SparklineChart/> },
-    { url: "chart-chartjs", component: <ChartJs/> },
-    { url: "chart-apexchart", component: <ApexChart/> },
-    { url: "chart-rechart", component: <RechartJs/> },
-   
-    { url: "ui-typography", component: <UiTypography/> },
-    { url: "ui-grid", component: <UiGrid/> },
-	
+    { url: "chart-sparkline", component: <SparklineChart /> },
+    { url: "chart-chartjs", component: <ChartJs /> },
+    { url: "chart-apexchart", component: <ApexChart /> },
+    { url: "chart-rechart", component: <RechartJs /> },
+
+    { url: "ui-typography", component: <UiTypography /> },
+    { url: "ui-grid", component: <UiGrid /> },
+
     /// Plugin
-    { url: "uc-select2", component: <Select2/> },
-   
-    { url: "uc-noui-slider", component: <MainNouiSlider/> },
-    { url: "map-jqvmap", component: <JqvMap/> },	
+    { url: "uc-select2", component: <Select2 /> },
+
+    { url: "uc-noui-slider", component: <MainNouiSlider /> },
+    { url: "map-jqvmap", component: <JqvMap /> },
     /// Widget
-    { url: "widget", component: <Widget/> },  
+    { url: "widget", component: <Widget /> },
 
     /// Form
-    { url: "form-element", component: <Element/> },
-    { url: "form-validation", component: <FormValidation/> },
+    { url: "form-element", component: <Element /> },
+    { url: "form-validation", component: <FormValidation /> },
 
     /// table
-	  { url: 'table-filtering', component: <FilteringTable/> },
-    { url: 'table-sorting', component: <SortingTable/> },
-    { url: "table-bootstrap-basic", component: <BootstrapTable/> },  
+    { url: "table-filtering", component: <FilteringTable /> },
+    { url: "table-sorting", component: <SortingTable /> },
+    { url: "table-bootstrap-basic", component: <BootstrapTable /> },
 
     // Leads
-    {url:'leads', component: <Leads/>},
-    {url:'add-lead', component: <EditProfile/>},
+    { url: "leads", component: <Leads /> },
+    { url: "add-lead", component: <EditProfile /> },
     // Settings
-    {url:'settings', component: <Settings/>},
+    { url: "settings", component: <Settings /> },
     // {url:'hotels', component: <Hotels/>},
-    {url:'add-hotel',component: <AddHotel/>},
-    {url:'user',component: <User/>},
-    {url:'user-role',component: <UserRole/>},
-    {url:'user-role/:id',component: <Permission/>},
-    {url:'agent',component: <Agent/>},
-    {url:'company-settings',component: <CompanySettings/>},
-    {url:'currency-settings',component: <CurrencySettings/>},
-    {url:'fields',component: <Fields/>},
-    {url:'destination',component: <Destination/>},
-    {url:'sub-destination',component: <SubDestination/>},
+    { url: "add-hotel", component: <AddHotel /> },
+    { url: "user", component: <User /> },
+    { url: "user-role", component: <UserRole /> },
+    { url: "user-role/:id", component: <Permission /> },
+    { url: "agent", component: <Agent /> },
+    { url: "company-settings", component: <CompanySettings /> },
+    { url: "currency-settings", component: <CurrencySettings /> },
+    { url: "fields", component: <Fields /> },
+    { url: "destination", component: <Destination /> },
+    { url: "sub-destination", component: <SubDestination /> },
 
     // finance
-    {url:'follow-ups', component: <FollowUp/>},
-    {url:'quotation', component: <Quotation/>},
-    {url:'supplier-payments', component: <SupplierPayment/>},
+    { url: "follow-ups", component: <FollowUp /> },
+    { url: "quotation", component: <Quotation /> },
+    { url: "supplier-payments", component: <SupplierPayment /> },
   ];
-  
- 
-  
+
   return (
     <>
-      <Routes>                    
-          <Route path='*' element={<Layout7 />} />
-          <Route path='/page-error-400' element={<Error400 />} />
-          <Route path='/page-error-403' element={<Error403 />} />
-          <Route path='/page-error-404' element={<Error404 />} />
-          <Route path='/page-error-500' element={<Error500 />} />
-          <Route path='/page-error-503' element={<Error503 />} />     
-          <Route path='/page-lock-screen' element={<LockScreen />} />     
-            <Route element={<Layout7 />}>
-              <Route path='/' exact element={<Home/>} />
-              <Route path='/dashboard' exact element={<Home/>} />
-              <Route path='/dashboard-dark' exact element={<DashboardDark/>} />
-              <Route path='/header-theme' exact element={<Theme1/>} />
-              <Route path='/sidebar-compact' exact element={<Theme3/>} /> 
-              <Route path='/horizontal-sidebar' exact element={<Theme4/>} /> 
-              <Route path='/horizontal-theme' exact element={<Theme5/>} /> 
-              <Route path='/sidebar-mini' exact element={<Theme6/>} />
-            </Route>           
-              <Route element={<Layout2 />}>							        
-                <Route path='/container-boxed' exact element={<Theme2 />} />			
-                <Route path='/course-details' exact element={<CourseDetails />} />			                
-                <Route path='/course-listing' exact element={<CourseList />} />
-              </Route>  
-            <Route element={<Layout3 />}>	
-                <Route path='/form-ckeditor' exact element={<CkEditor/>} />     
-                <Route path='/form-pickers' exact element={<Pickers/>} /> 
-                <Route path='/form-wizard' exact element={<Wizard/>} /> 
-                <Route path='/map-jqvmap' exact element={<JqvMap/>} />
-                <Route path='/uc-lightgallery' exact element={<Lightgallery/>} />
-                <Route path='/edit-profile' exact element={<EditProfile/>} />
-                <Route path='/ecom-invoice' exact element={<Invoice/>} />
-                <Route path='/ecom-product-detail' exact element={<ProductDetail/>} />
-                <Route path='/uc-sweetalert' exact element={<MainSweetAlert/>} />
-                <Route path='/uc-toastr' exact element={<Toastr/>} /> 
-            </Route>                  
-              <Route element={<Layout4 />}>	                 
-                <Route path='/activity' exact element={<Activity/>} />
-                <Route path='/to-do-list' exact element={<ToDoList/>} />                         
-                <Route path='/ui-modal' exact element={<UiModal/>} />
-                <Route path='/ui-popover' exact element={<UiPopOver/>} />                                           
-              </Route>                  
-            <Route element={<Layout5 />}>	                       
-                <Route path='/file-manager' exact element={<FileManager/>} />
-                <Route path='/chat' exact element={<FileChat/>} />
-                <Route path='/email-compose' exact element={<Compose/>} />
-                <Route path='/email-inbox' exact element={<Inbox/>} />
-                <Route path='/email-read' exact element={<Read/>} />  
-            </Route> 
-              <Route element={<Layout6 />}>	                      
-                <Route path='/ui-accordion' exact element={<UiAccordion/>} />                           
-                <Route path='/ui-alert' exact element={<UiAlert/>} />                           
-                <Route path='/ui-badge' exact element={<UiBadge/>} />                           
-                <Route path='/ui-button' exact element={<UiButton/>} />                           
-                <Route path='/ui-button-group' exact element={<UiButtonGroup/>} />                           
-                <Route path='/ui-list-group' exact element={<UiListGroup/>} />                           
-                <Route path='/ui-card' exact element={<UiCards/>} />                           
-                <Route path='/ui-carousel' exact element={<UiCarousel/>} />                           
-                <Route path='/ui-dropdown' exact element={<UiDropDown/>} />                           
-                <Route path='/ui-progressbar' exact element={<UiProgressBar/>} />   
-                <Route path='/ui-tab' exact element={<UiTab/>} />   
-                <Route path='/ui-pagination' exact element={<UiPagination/>} />                       
-              </Route>
-              <Route  element={<Layout7 />}>
-                <Route exact path="/enquiry"  element={<Enquiry/>} />
-                <Route path="/enquiry" element={<Tabs menu={enquiryMenu}/>}>
-                <Route path='*' element={null} />
-                <Route path='profile' element={<EditProfile/>} />                                          
-                <Route path='quotation' element={<Quotation/>} />                                          
-                <Route path='follow-ups' element={<FollowUp/>} />                                          
-                <Route path='itinerary' element={<SetupModal/>} />                                          
-                <Route path='payments' element={<Payment/>} />                                          
-                <Route path='mail-to-supplier' element={<MailToSupplier/>} />                                          
-                <Route path='supplier-payments' element={<SupplierPayment/>} />                                          
-                </Route>
-                <Route path='' element={<Tabs menu={hotelMenu} mainPath="/"/>}	>
-                <Route path='hotels' element={<Hotels/>} />
-                <Route path='property-category' element={<PropertyCategory/>} />
-                <Route path='property-types' element={<PropertyTypes/>} />
-                <Route path='room-types' element={<RoomTypes/>} />
-                <Route path='market-types' element={<MarketTypes/>} />
-                <Route path='room-amenities' element={<RoomAmenities/>} />
-                <Route path='hotel-amenities' element={<HotelAmenities/>} />
-                <Route path='meal-plan' element={<MealPlan/>} />
-                
-                </Route>                 
-              </Route>                     
-              <Route element={<Layout7 />}>	                
-                { allRoutes.map((data, i) => (
-                  <Route key={i} exact path={`/${data.url}`} element={data.component} />
-                ))}     
-              </Route>   
-				</Routes>
-        <Setting/>
-	    <ScrollToTop />
+      <Routes>
+        <Route path="*" element={<Layout7 />} />
+        <Route path="/page-error-400" element={<Error400 />} />
+        <Route path="/page-error-403" element={<Error403 />} />
+        <Route path="/page-error-404" element={<Error404 />} />
+        <Route path="/page-error-500" element={<Error500 />} />
+        <Route path="/page-error-503" element={<Error503 />} />
+        <Route path="/page-lock-screen" element={<LockScreen />} />
+        <Route element={<Layout7 />}>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/dashboard" exact element={<Home />} />
+          <Route path="/dashboard-dark" exact element={<DashboardDark />} />
+          <Route path="/header-theme" exact element={<Theme1 />} />
+          <Route path="/sidebar-compact" exact element={<Theme3 />} />
+          <Route path="/horizontal-sidebar" exact element={<Theme4 />} />
+          <Route path="/horizontal-theme" exact element={<Theme5 />} />
+          <Route path="/sidebar-mini" exact element={<Theme6 />} />
+        </Route>
+        <Route element={<Layout2 />}>
+          <Route path="/container-boxed" exact element={<Theme2 />} />
+          <Route path="/course-details" exact element={<CourseDetails />} />
+          <Route path="/course-listing" exact element={<CourseList />} />
+        </Route>
+        <Route element={<Layout3 />}>
+          <Route path="/form-ckeditor" exact element={<CkEditor />} />
+          <Route path="/form-pickers" exact element={<Pickers />} />
+          <Route path="/form-wizard" exact element={<Wizard />} />
+          <Route path="/map-jqvmap" exact element={<JqvMap />} />
+          <Route path="/uc-lightgallery" exact element={<Lightgallery />} />
+          <Route path="/edit-profile" exact element={<EditProfile />} />
+          <Route path="/ecom-invoice" exact element={<Invoice />} />
+          <Route
+            path="/ecom-product-detail"
+            exact
+            element={<ProductDetail />}
+          />
+          <Route path="/uc-sweetalert" exact element={<MainSweetAlert />} />
+          <Route path="/uc-toastr" exact element={<Toastr />} />
+        </Route>
+        <Route element={<Layout4 />}>
+          <Route path="/activity" exact element={<Activity />} />
+          <Route path="/to-do-list" exact element={<ToDoList />} />
+          <Route path="/ui-modal" exact element={<UiModal />} />
+          <Route path="/ui-popover" exact element={<UiPopOver />} />
+        </Route>
+        <Route element={<Layout5 />}>
+          <Route path="/file-manager" exact element={<FileManager />} />
+          <Route path="/chat" exact element={<FileChat />} />
+          <Route path="/email-compose" exact element={<Compose />} />
+          <Route path="/email-inbox" exact element={<Inbox />} />
+          <Route path="/email-read" exact element={<Read />} />
+        </Route>
+        <Route element={<Layout6 />}>
+          <Route path="/ui-accordion" exact element={<UiAccordion />} />
+          <Route path="/ui-alert" exact element={<UiAlert />} />
+          <Route path="/ui-badge" exact element={<UiBadge />} />
+          <Route path="/ui-button" exact element={<UiButton />} />
+          <Route path="/ui-button-group" exact element={<UiButtonGroup />} />
+          <Route path="/ui-list-group" exact element={<UiListGroup />} />
+          <Route path="/ui-card" exact element={<UiCards />} />
+          <Route path="/ui-carousel" exact element={<UiCarousel />} />
+          <Route path="/ui-dropdown" exact element={<UiDropDown />} />
+          <Route path="/ui-progressbar" exact element={<UiProgressBar />} />
+          <Route path="/ui-tab" exact element={<UiTab />} />
+          <Route path="/ui-pagination" exact element={<UiPagination />} />
+        </Route>
+        <Route element={<Layout7 />}>
+          <Route exact path="/enquiry" element={<Enquiry />} />
+          <Route path="/enquiry" element={<Tabs menu={enquiryMenu} />}>
+            <Route path="*" element={null} />
+            <Route path="profile" element={<EditProfile />} />
+            <Route path="quotation" element={<Quotation />} />
+            <Route path="follow-ups" element={<FollowUp />} />
+            <Route path="itinerary" element={<SetupModal />} />
+            <Route path="payments" element={<Payment />} />
+            <Route path="mail-to-supplier" element={<MailToSupplier />} />
+            <Route path="supplier-payments" element={<SupplierPayment />} />
+          </Route>
+          <Route path="" element={<Tabs menu={hotelMenu} mainPath="/" />}>
+            <Route path="hotels" element={<Hotels />} />
+            <Route path="property-category" element={<PropertyCategory />} />
+            <Route path="property-types" element={<PropertyTypes />} />
+            <Route path="room-types" element={<RoomTypes />} />
+            <Route path="market-types" element={<MarketTypes />} />
+            <Route path="room-amenities" element={<RoomAmenities />} />
+            <Route path="hotel-amenities" element={<HotelAmenities />} />
+            <Route path="meal-plan" element={<MealPlan />} />
+          </Route>
+        </Route>
+        <Route element={<Layout7 />}>
+          {allRoutes.map((data, i) => (
+            <Route
+              key={i}
+              exact
+              path={`/${data.url}`}
+              element={data.component}
+            />
+          ))}
+        </Route>
+      </Routes>
+      <Setting />
+      <ScrollToTop />
     </>
   );
 };
 
-function Layout1(){
+function Layout1() {
   const { menuToggle, sidebariconHover } = useContext(ThemeContext);
-  return(
-    
-      <div id="main-wrapper" className={`wallet-open active show ${sidebariconHover ? "iconhover-toggle": ""} ${ menuToggle ? "menu-toggle" : ""}`}>                
-          <Nav2 />
-            <div className="content-body" style={{ minHeight: window.screen.height + 20 }}>
-              <div className="container-fluid"> 
-                <Outlet />
-                <Footer /> 
-              </div>  
-            </div> 
-            <WalletBar /> 
-          <div className="wallet-bar-close"></div>
-      </div>            
-    
-  )
-}
-
-function Layout2(){
-  const { menuToggle, sidebariconHover } = useContext(ThemeContext);
-  return(    
-    <div id="main-wrapper" className={`show ${sidebariconHover ? "iconhover-toggle": ""} ${ menuToggle ? "menu-toggle" : ""}`}>           
-        <Nav />
-        <div className="content-body" style={{ minHeight: window.screen.height + 20 }}>
-          <div className="container-fluid">							        
-            <Outlet />							        
-          </div>                        
-        </div>  
-        <Footer  changeFooter="out-footer"/>           
-    </div>  
-    
-  )
-}
-
-function Layout3(){
-  const { menuToggle, sidebariconHover } = useContext(ThemeContext);
-  return(    
-    <div id="main-wrapper" className={`show ${sidebariconHover ? "iconhover-toggle": ""} ${ menuToggle ? "menu-toggle" : ""}`}>       
-        <Nav />
-        <div className="content-body" style={{ minHeight: window.screen.height + 20 }}>
-          <div className="container-fluid">    
-            <Outlet />
-          </div> 
+  return (
+    <div
+      id="main-wrapper"
+      className={`wallet-open active show ${
+        sidebariconHover ? "iconhover-toggle" : ""
+      } ${menuToggle ? "menu-toggle" : ""}`}
+    >
+      <Nav2 />
+      <div
+        className="content-body"
+        style={{ minHeight: window.screen.height + 20 }}
+      >
+        <div className="container-fluid">
+          <Outlet />
+          <Footer />
         </div>
-      </div>     
-  )
-}
-
-function Layout4(){
-  const { menuToggle, sidebariconHover } = useContext(ThemeContext);
-  return(
-    <div id="main-wrapper" className={`show ${sidebariconHover ? "iconhover-toggle": ""} ${ menuToggle ? "menu-toggle" : ""}`}>  	
-        <Nav />
-        <div className="content-body">
-          <div className="container-fluid">                    
-            <Outlet />                     
-          </div>
-        </div> 	  	
-      </div> 
-  )
-}
-
-function Layout5(){
-  const { menuToggle, sidebariconHover } = useContext(ThemeContext);
-  return(
-    <div id="main-wrapper" className={`show ${sidebariconHover ? "iconhover-toggle": ""} ${ menuToggle ? "menu-toggle" : ""}`}>  	      
-          <Nav />
-          <div className="content-body message-body mh-auto">
-            <div className="container-fluid mh-auto p-0">   
-              <Outlet />
-            </div>
-          </div>
+      </div>
+      <WalletBar />
+      <div className="wallet-bar-close"></div>
     </div>
-  )
-}
-function Layout6(){
-  const { menuToggle, sidebariconHover } = useContext(ThemeContext);
-  return(
-    <div id="main-wrapper" className={`show ${sidebariconHover ? "iconhover-toggle": ""} ${ menuToggle ? "menu-toggle" : ""}`}>  
-        <Nav />
-        <div className="content-body">
-          <div className="container-fluid">       
-            <Outlet />
-          </div>
-        </div>
-      </div>
-  )
+  );
 }
 
-function Layout7(){
+function Layout2() {
   const { menuToggle, sidebariconHover } = useContext(ThemeContext);
-  return(
-    <div id="main-wrapper" className={`show ${sidebariconHover ? "iconhover-toggle": ""} ${ menuToggle ? "menu-toggle" : ""}`}>   
-        <Nav />
-        <ToastContainer/>
-        <div className="content-body" style={{ minHeight: '100vh' }}>
-          <div className="container-fluid">     
-              <Outlet />
-          </div>
+  return (
+    <div
+      id="main-wrapper"
+      className={`show ${sidebariconHover ? "iconhover-toggle" : ""} ${
+        menuToggle ? "menu-toggle" : ""
+      }`}
+    >
+      <Nav />
+      <div
+        className="content-body"
+        style={{ minHeight: window.screen.height + 20 }}
+      >
+        <div className="container-fluid">
+          <Outlet />
         </div>
       </div>
-  )
+      <Footer changeFooter="out-footer" />
+    </div>
+  );
+}
+
+function Layout3() {
+  const { menuToggle, sidebariconHover } = useContext(ThemeContext);
+  return (
+    <div
+      id="main-wrapper"
+      className={`show ${sidebariconHover ? "iconhover-toggle" : ""} ${
+        menuToggle ? "menu-toggle" : ""
+      }`}
+    >
+      <Nav />
+      <div
+        className="content-body"
+        style={{ minHeight: window.screen.height + 20 }}
+      >
+        <div className="container-fluid">
+          <Outlet />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Layout4() {
+  const { menuToggle, sidebariconHover } = useContext(ThemeContext);
+  return (
+    <div
+      id="main-wrapper"
+      className={`show ${sidebariconHover ? "iconhover-toggle" : ""} ${
+        menuToggle ? "menu-toggle" : ""
+      }`}
+    >
+      <Nav />
+      <div className="content-body">
+        <div className="container-fluid">
+          <Outlet />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Layout5() {
+  const { menuToggle, sidebariconHover } = useContext(ThemeContext);
+  return (
+    <div
+      id="main-wrapper"
+      className={`show ${sidebariconHover ? "iconhover-toggle" : ""} ${
+        menuToggle ? "menu-toggle" : ""
+      }`}
+    >
+      <Nav />
+      <div className="content-body message-body mh-auto">
+        <div className="container-fluid mh-auto p-0">
+          <Outlet />
+        </div>
+      </div>
+    </div>
+  );
+}
+function Layout6() {
+  const { menuToggle, sidebariconHover } = useContext(ThemeContext);
+  return (
+    <div
+      id="main-wrapper"
+      className={`show ${sidebariconHover ? "iconhover-toggle" : ""} ${
+        menuToggle ? "menu-toggle" : ""
+      }`}
+    >
+      <Nav />
+      <div className="content-body">
+        <div className="container-fluid">
+          <Outlet />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Layout7() {
+  const { menuToggle, sidebariconHover } = useContext(ThemeContext);
+  return (
+    <div
+      id="main-wrapper"
+      className={`show ${sidebariconHover ? "iconhover-toggle" : ""} ${
+        menuToggle ? "menu-toggle" : ""
+      }`}
+    >
+      <Nav />
+      <ToastContainer />
+      <div className="content-body" style={{ minHeight: "100vh" }}>
+        <div className="container-fluid">
+          <Outlet />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Markup;
