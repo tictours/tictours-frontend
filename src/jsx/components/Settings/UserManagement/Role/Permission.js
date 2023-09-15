@@ -9,7 +9,9 @@ import SelectField from "../../../common/SelectField";
 import { useSelector } from "react-redux";
 import notify from "../../../common/Notify";
 import InputField from "../../../common/InputField";
-import { Formik } from "formik";
+import { Formik, useFormik } from "formik";
+import { useAsync } from "../../../../utilis/useAsync";
+import { URLS } from "../../../../../constants";
 
 const RightIcon = () => {
   return (
@@ -34,7 +36,7 @@ const RightIcon = () => {
   );
 };
 
-const tableData = [
+const tableData1 = [
   "dashboard",
   "leads",
   "enquiry",
@@ -47,12 +49,25 @@ const tableData = [
 ];
 
 const Permission = () => {
+
+  const asyncData = useAsync(URLS.PERMISSION_URL)
+  const tableData = asyncData?.data?.data
+  // console.log('dat', tableData)
   const navigate = useNavigate();
   const roleData = useSelector((data) => data.role);
   const [data, setData] = useState(
     document.querySelectorAll("#example2_wrapper tbody tr"),
   );
   const [showModal, setShowModal] = useState(false);
+  const [myObject, setMyObject] = useState({});
+
+  const initialValues = {
+    name: roleData.name,
+    permissions: [],
+    permissionObj: {}
+  };
+  const formik = useFormik({ initialValues: initialValues })
+
   const sort = 8;
   const activePag = useRef(0);
   const chageData = (frist, sec) => {
@@ -116,20 +131,46 @@ const Permission = () => {
   };
   const permission = ["read", "write", "update", "delete"];
   const permissionOption = [
+    "None",
     "All",
     "Added",
     "Assigned",
-    "Added & Assigned",
-    "None",
+    "Added and Assigned",
   ];
   const readPermissionOption = ["All", "Added", "None"];
   const handleSubmit = () => {
     notify({ message: "User Role Added Successfully" });
     navigate("/user-role");
   };
-  const initialValues = {
-    name: roleData.name,
-  };
+
+
+
+  const onChange = (e, name) => {
+    const val = e.target.value
+    const prev = formik.values.permissions
+    // setMyObject((prevState) => ({
+    //   ...prevState,
+    //   [name]: val,
+    // }));
+    let permissionObj = {
+      ...formik.values.permissionObj,
+      [name]: val
+    }
+
+  }
+
+
+  const orderPermission = (data) => {
+
+    const order = permissionOption.map((option => data.find(item => item.name === option)))
+    const orderedArr = permissionOption.map((name) => {
+      const matchingItem = data.find((item) => item.name === name);
+      return matchingItem ? { ...matchingItem } : { id: 'none', name: 'None' };
+    });
+
+    // console.log('order', orderedArr)
+    return orderedArr
+  }
   return (
     <>
       <div className="row">
@@ -183,68 +224,48 @@ const Permission = () => {
           {/* swiper */}
           {/* <InvoiceSlider title='Permission' array={sliderArr}/> */}
           {/* swiper end */}
-          <Formik
-            initialValues={initialValues}
-            // validationSchema={loginSchema}
-            //   onSubmit={(values, { setSubmitting }) => {
-            //     setShowModal(false)
-            //     navigate('add')
-            //     // console.log('value',values)
-            //     dispatch(RoleAction.setPage(values.name))
-            //     // notify({message:'User Role Added Successfully'})
-            //   }}
-          >
-            {({
-              values,
-              errors,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              isSubmitting,
-              setFieldValue,
-            }) => (
-              <div className="row">
-                <div className="col-xl-4">
-                  <div className="mb-2">
-                    <InputField
-                      label="Name"
-                      name="name"
-                      placeholder="Add User role name"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      values={values}
-                    />
-                  </div>
-                </div>
-                <div className="col-xl-12">
-                  <div
-                    className="table-responsive  full-data dataTables_wrapper"
-                    id=""
-                  >
-                    <table
-                      className="table-responsive-lg table display mb-4 dataTablesCard  text-black dataTable no-footer"
-                      id="example2"
-                    >
-                      <thead>
-                        <tr>
-                          {/* <th className="sorting_asc ">
+          <div className="row">
+            <div className="col-xl-4">
+              <div className="mb-2">
+                <InputField
+                  label="Name"
+                  name="name"
+                  placeholder="Add User role name"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  values={formik.values}
+                />
+              </div>
+            </div>
+            <div className="col-xl-12">
+              <div
+                className="table-responsive  full-data dataTables_wrapper"
+                id=""
+              >
+                <table
+                  className="table-responsive-lg table display mb-4 dataTablesCard  text-black dataTable no-footer"
+                  id="example2"
+                >
+                  <thead>
+                    <tr>
+                      {/* <th className="sorting_asc ">
                                                 <input type="checkbox" onClick={() => chackboxFun("all")} className="form-check-input" id="checkAll" required="" />
                                             </th> */}
-                          <th className="">Module</th>
-                          {permission.map((data) => (
-                            <th className="" key={data}>
-                              {capitalizeFirstLetter(data)}
-                            </th>
-                          ))}
+                      <th className="">Module</th>
+                      {permission.map((data) => (
+                        <th className="" key={data}>
+                          {data}
+                        </th>
+                      ))}
 
-                          {/* <th className="text-end">Status</th> */}
-                          {/* <th></th> */}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {tableData.map((item, ind) => (
-                          <tr key={ind}>
-                            {/* <td className="sorting_1">
+                      {/* <th className="text-end">Status</th> */}
+                      {/* <th></th> */}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {tableData?.map((item, ind) => (
+                      <tr key={ind}>
+                        {/* <td className="sorting_1">
                                                     <div className="checkbox me-0 align-self-center">
                                                         <div className="custom-control custom-checkbox ">
                                                             <input type="checkbox" className="form-check-input" id={"customCheckBox2"+ ind} required="" 
@@ -254,22 +275,66 @@ const Permission = () => {
                                                         </div>
                                                     </div>
                                                 </td> */}
-                            <td className="">{capitalizeFirstLetter(item)}</td>
-                            {permission.map((data) => (
-                              <td key={data}>
-                                <SelectField
-                                  name={"val"}
-                                  options={permissionOption}
-                                  formClass="w-50 mb-0"
-                                  selectClass="ms-0"
-                                />
-                              </td>
-                            ))}
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                    {/* <div className="d-sm-flex text-center justify-content-between align-items-center mt-3 mb-3">
+                        <td className="">{capitalizeFirstLetter(item?.name)}</td>
+                        {/* {permission.map((data) => ( */}
+                        <td>
+                          <SelectField
+                            // key={`${item.name}-${ind}-`}
+                            // values={formik.values}
+                            name={`${item?.name}-read`}
+                            options={orderPermission(item?.permissions?.read)}
+                            optionValue='id'
+                            optionLabel='name'
+                            formClass="w-50 mb-0"
+                            selectClass="ms-0"
+                            onChange={(e) => onChange(e, `${item?.name}-read`)}
+                          />
+                        </td>
+                        <td>
+                          <SelectField
+                            // key={`${item.name}-${ind}-`}
+                            // values={formik.values}
+                            name={`${item?.name}-write`}
+                            options={orderPermission(item?.permissions?.write)}
+                            optionValue='id'
+                            optionLabel='name'
+                            formClass="w-50 mb-0"
+                            selectClass="ms-0"
+                            onChange={(e) => onChange(e, `${item?.name}-write`)}
+                          />
+                        </td>
+                        <td>
+                          <SelectField
+                            // key={`${item.name}-${ind}-`}
+                            // values={formik.values}
+                            name={`${item?.name}-update`}
+                            options={orderPermission(item?.permissions?.update)}
+                            optionValue='id'
+                            optionLabel='name'
+                            formClass="w-50 mb-0"
+                            selectClass="ms-0"
+                            onChange={(e) => onChange(e, `${item?.name}-update`)}
+                          />
+                        </td>
+                        <td>
+                          <SelectField
+                            // key={`${item.name}-${ind}-`}
+                            // values={formik.values}
+                            name={`${item?.name}-delete`}
+                            options={orderPermission(item?.permissions?.delete)}
+                            optionValue='id'
+                            optionLabel='name'
+                            formClass="w-50 mb-0"
+                            selectClass="ms-0"
+                            onChange={(e) => onChange(e, `${item?.name}-delete`)}
+                          />
+                        </td>
+                        {/* ))} */}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {/* <div className="d-sm-flex text-center justify-content-between align-items-center mt-3 mb-3">
                                     <div className="dataTables_info">
                                         Showing {activePag.current * sort + 1} to{" "}
                                         {data.length > (activePag.current + 1) * sort
@@ -319,11 +384,9 @@ const Permission = () => {
                                         </Link>
                                     </div>
                                 </div> */}
-                  </div>
-                </div>
               </div>
-            )}
-          </Formik>
+            </div>
+          </div>
         </div>
       </div>
       <AddRole showModal={showModal} setShowModal={setShowModal} />

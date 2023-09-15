@@ -9,4 +9,5 @@ export const URLS = {
   ROOM_AMENITIES_URL: "room-amenities",
   HOTEL_AMENITIES_URL: "hotel-amenities",
   MEAL_PLAN_URL: "meal-plans",
+  PERMISSION_URL: "permissions",
 };
