@@ -8,28 +8,33 @@ function InputField(props) {
     placeholder = "",
     name,
     values,
-    inputValue,
+    inputValue = '',
+    className = '',
+    labelClassName = '',
+    inputClassName = '',
     ...restProps
   } = props;
+
+  const isRequired = restProps.required
   return (
-    <div className="form-group mb-3">
-      {label && <label className="text-label">{label}</label>}
+    <div className={`form-group mb-3 ${className}`}>
+      {label && <label className={`text-label ${labelClassName}`}>{label} {isRequired && <span>*</span>}</label>}
       {isTextarea ? (
         <textarea
           {...restProps}
-          className="form-control"
+          className={`form-control ${inputClassName}`}
           placeholder={placeholder}
           name={name}
-          value={values ? values[name] : inputValue}
+          value={values && !!values[name] ? values[name] : inputValue}
         />
       ) : (
         <input
           {...restProps}
           type={type}
-          className="form-control"
+          className={`form-control ${inputClassName}`}
           placeholder={placeholder}
           name={name}
-          value={values ? values[name] : inputValue}
+          value={values && values[name] ? values[name] : inputValue}
         />
       )}
     </div>
