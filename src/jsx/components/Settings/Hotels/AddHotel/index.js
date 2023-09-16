@@ -15,7 +15,10 @@ import { useFormik } from "formik";
 
 const AddHotel = () => {
   const [goSteps, setGoSteps] = useState(0);
-  const initialValues = {}
+  const initialValues = {
+    addRoom: [],
+    hotelImg: [],
+  }
   const formik = useFormik({ initialValues })
   // console.log('hotel formik', formik.values)
   const navigate = useNavigate();
@@ -72,7 +75,7 @@ const AddHotel = () => {
                 )}
                 {goSteps === 1 && (
                   <>
-                    <StepTwo />
+                    <StepTwo formik={formik} />
                     <div className="text-end toolbar toolbar-bottom p-2">
                       <button
                         className="btn btn-secondary sw-btn-prev me-1"

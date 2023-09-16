@@ -6,6 +6,10 @@ import InputField from "../../../common/InputField";
 import SelectField from "../../../common/SelectField";
 import ReactSelect from "../../../common/ReactSelect";
 import { Button, Dropdown, Table } from "react-bootstrap";
+import { SETUP, URLS } from "../../../../../constants";
+import { useAsync } from "../../../../utilis/useAsync";
+import { CheckBoxField } from "../../../common/CheckBoxField";
+import { FileUploader } from "../../../common/FileUploader";
 
 const SelectInputComponent = ({
   label,
@@ -52,19 +56,24 @@ const SelectInputComponent = ({
     </div>
   );
 };
-const StepTwo = () => {
-  const [roomStartDate, setRoomStartDate] = useState(new Date());
-  const [roomEndDate, setRoomEndDate] = useState(new Date());
+const StepTwo = ({ formik: parentFormik }) => {
+
+  const tableData = parentFormik?.values?.addRoom
+  const marketTypeData = useAsync(URLS.MARKET_TYPE_URL)
+  const roomTypeData = useAsync(URLS.ROOM_TYPE_URL)
+  const mealTypeData = useAsync(URLS.MEAL_PLAN_URL)
+  const roomAmenityData = useAsync(URLS.ROOM_AMENITIES_URL)
+
   const showPassword = true;
-  const TodayDate = new Date();
   const initialValues = {
     marketType: "",
     roomType: "",
+    roomImg: [],
     mealPlan: [],
     alloment: false,
     cutOff: 0,
-    roomStartDate: TodayDate,
-    roomEndDate: TodayDate,
+    roomStartDate: SETUP.TODAY_DATE,
+    roomEndDate: SETUP.TODAY_DATE,
     singleBed: 0,
     doubleBed: 0,
     tripleBedSelect: false,
@@ -78,9 +87,8 @@ const StepTwo = () => {
     occupancy: "0",
     mealType: [],
     mealAmount: 0,
-    availableFrom: TodayDate,
-    availableTo: TodayDate,
-    addRoom: [],
+    availableFrom: SETUP.TODAY_DATE,
+    availableTo: SETUP.TODAY_DATE,
   };
   const marketTypeOptions = ["Type 1", "Type 2", "Type 3"];
   const mealOptions = [
@@ -93,12 +101,12 @@ const StepTwo = () => {
     const localDate = new Date(date).toLocaleDateString();
     return localDate;
   };
-  const handleEdit = (id, value, setValue) => {
+  const handleEdit = (id, value, setValue, name = 'addRoom') => {
     console.log("edit", id);
   };
-  const handleDelete = (id, value, setValue) => {
+  const handleDelete = (id, value, setValue, name = 'addRoom') => {
     const filteredVal = value.filter((val, i) => i !== id);
-    setValue("addRoom", filteredVal);
+    setValue(name, filteredVal);
   };
   return (
     <section>
@@ -120,6 +128,7 @@ const StepTwo = () => {
           handleSubmit,
           isSubmitting,
           setFieldValue,
+          resetForm
         }) => (
           <form onSubmit={handleSubmit}>
             <div className="row">
@@ -133,7 +142,9 @@ const StepTwo = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   values={values}
-                  options={marketTypeOptions}
+                  options={marketTypeData?.data?.data}
+                  optionValue="id"
+                  optionLabel="name"
                 />
               </div>
               <div className="col-6 col-sm-4 col-md-3 col-lg-2 m-b30">
@@ -160,7 +171,9 @@ const StepTwo = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     values={values}
-                    options={marketTypeOptions}
+                    options={roomTypeData?.data?.data}
+                    optionValue="id"
+                    optionLabel="name"
                   />
                 </div>
               </div>
@@ -235,22 +248,30 @@ const StepTwo = () => {
                 </div>
                 <div className="col-12">
                   <div className="form-group">
-                    {amenityData.map((data, key) => (
-                      <div
+                    {roomAmenityData?.data?.data?.map((data, key) => (
+                      // <div
+                      //   key={key}
+                      //   className="form-check form-check-inline  fw-normal"
+                      // >
+                      //   <label className="form-check-label">
+                      //     <input
+                      //       type="checkbox"
+                      //       className="form-check-input"
+                      //       value=""
+                      //     //   defaultChecked
+                      //     />
+                      //     {data.name}
+                      //   </label>
+                      //   {/* <span className="ms-2 amenity-count">{`12${key}`}</span> */}
+                      // </div>
+                      <CheckBoxField
                         key={key}
-                        className="form-check form-check-inline  fw-normal"
-                      >
-                        <label className="form-check-label">
-                          <input
-                            type="checkbox"
-                            className="form-check-input"
-                            value=""
-                            //   defaultChecked
-                          />
-                          {`Amenity ${key + 1}`}
-                        </label>
-                        {/* <span className="ms-2 amenity-count">{`12${key}`}</span> */}
-                      </div>
+                        name='roomAmentity'
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={data.id}
+                        inputValue={data.name}
+                      />
                     ))}
                   </div>
                 </div>
@@ -260,7 +281,7 @@ const StepTwo = () => {
                   <h4>Image</h4>
                 </div>
                 <div className="col-lg-6">
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <div className="my-3">
                       <label htmlFor="formFileMultiple" className="form-label">
                         Multiple files uploader
@@ -272,7 +293,16 @@ const StepTwo = () => {
                         multiple
                       />
                     </div>
-                  </div>
+                  </div> */}
+                  <FileUploader
+                    label='Room image'
+                    name="roomImg"
+                    // onChange={onChange}
+                    onBlur={handleBlur}
+                    values={values}
+                    setFieldValue={setFieldValue}
+                    isMulti
+                  />
                 </div>
               </div>
               <div className="row">
@@ -283,11 +313,13 @@ const StepTwo = () => {
                   <div className="row">
                     <div className="col-6">
                       <ReactSelect
-                        options={mealOptions}
-                        isMulti
+                        options={mealTypeData?.data?.data}
+                        // isMulti
                         onChange={(selected) =>
                           setFieldValue("mealType", selected)
                         }
+                        optionValue="id"
+                        optionLabel="name"
                       />
                     </div>
                     <div className="col-3">
@@ -328,6 +360,7 @@ const StepTwo = () => {
                             <th>#</th>
                             <th>Type</th>
                             <th>Amount</th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -335,11 +368,37 @@ const StepTwo = () => {
                             <tr key={key}>
                               <th>{key + 1}</th>
                               <td>
-                                {plan.type
+                                {/* {plan.type
                                   ?.map((type) => type.label)
-                                  .join(" - ")}
+                                  .join(" - ")} */}
+                                {plan.type.label}
                               </td>
                               <td>{plan.amount}</td>
+                              <td>
+                                <div className="d-flex">
+                                  <button
+                                    className="btn bg-main btn-xs sharp me-1"
+                                    onClick={() =>
+                                      handleEdit(key, values.mealPlan, setFieldValue, 'mealPlan')
+                                    }
+                                  >
+                                    <i className="fas fa-pencil-alt"></i>
+                                  </button>
+                                  <button
+                                    className="btn bg-main btn-xs sharp"
+                                    onClick={() =>
+                                      handleDelete(
+                                        key,
+                                        values.mealPlan,
+                                        setFieldValue,
+                                        'mealPlan'
+                                      )
+                                    }
+                                  >
+                                    <i className="fa fa-trash"></i>
+                                  </button>
+                                </div>
+                              </td>
                             </tr>
                           ))}
                         </tbody>
@@ -407,11 +466,13 @@ const StepTwo = () => {
                       <Button
                         className="me-0"
                         variant="primary"
-                        onClick={() =>
-                          setFieldValue("addRoom", [
-                            ...values.addRoom,
+                        onClick={() => {
+                          parentFormik.setFieldValue("addRoom", [
+                            ...tableData,
                             { ...values },
                           ])
+                          resetForm()
+                        }
                         }
                       >
                         Add Room Details
@@ -419,7 +480,7 @@ const StepTwo = () => {
                     </div>
                   </div>
                 </div>
-                {values.addRoom.length !== 0 && (
+                {!!tableData?.length && (
                   <div className="col-12 mt-4">
                     <Table responsive className="custom-table-bordered">
                       <thead className="thead-table">
@@ -437,7 +498,7 @@ const StepTwo = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {values.addRoom.map((data, key) => {
+                        {tableData.map((data, key) => {
                           return (
                             <tr key={key}>
                               <th>{key + 1}</th>
@@ -464,8 +525,8 @@ const StepTwo = () => {
                                     onClick={() =>
                                       handleDelete(
                                         key,
-                                        values.addRoom,
-                                        setFieldValue,
+                                        tableData,
+                                        parentFormik.setFieldValue,
                                       )
                                     }
                                   >
