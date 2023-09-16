@@ -1,10 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { FileUploader } from "../../../common/FileUploader";
 
-const StepFour = () => {
+const StepFour = ({ formik }) => {
+
+  // This function will be triggered when the file field change
+  const onChange = (e, name) => {
+    if (e.target.files && e.target.files.length > 0) {
+      formik.setFieldValues(name, [...formik.values[name], e.target.files[0]]);
+    }
+  };
   return (
     <section>
-      <div className="row emial-setup">
+      {/* <div className="row emial-setup">
         <div className="col-lg-3 col-sm-6 col-6">
           <div className="form-group">
             <label
@@ -92,7 +99,16 @@ const StepFour = () => {
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
+      <FileUploader
+        label='Hotel image'
+        name="hotelImg"
+        // onChange={onChange}
+        onBlur={formik.handleBlur}
+        values={formik.values}
+        setFieldValue={formik.setFieldValue}
+        isMulti
+      />
     </section>
   );
 };

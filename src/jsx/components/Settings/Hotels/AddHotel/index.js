@@ -113,7 +113,7 @@ const AddHotel = () => {
                 )}
                 {goSteps === 3 && (
                   <>
-                    <StepFour />
+                    <StepFour formik={formik} />
                     <div className="text-end toolbar toolbar-bottom p-2">
                       <button
                         className="btn btn-secondary sw-btn-prev me-1"

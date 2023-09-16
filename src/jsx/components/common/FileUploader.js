@@ -20,7 +20,7 @@ export function FileUploader(props) {
 
     // This function will be triggered when the file field change
     const onFileChange = (e) => {
-        console.log('set', setFieldValue)
+        // console.log('set', setFieldValue)
         if (e.target.files && e.target.files.length > 0) {
             setFieldValue(name, [e.target.files[0], ...fileData,]);
         }
