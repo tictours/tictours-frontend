@@ -10,4 +10,5 @@ export const URLS = {
   HOTEL_AMENITIES_URL: "hotel-amenities",
   MEAL_PLAN_URL: "meal-plans",
   PERMISSION_URL: "permissions",
+  HOTEL_URL: '/hotels'
 };

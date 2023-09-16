@@ -12,24 +12,56 @@ import notify from "../../../common/Notify";
 import { useDispatch, useSelector } from "react-redux";
 import { FormAction } from "../../../../../store/slices/formSlice";
 import { useFormik } from "formik";
+import { URLS } from "../../../../../constants";
+import { axiosPost, axiosPut } from "../../../../../services/AxiosInstance";
+import { notifyCreate, notifyError } from "../../../../utilis/notifyMessage";
 
 const AddHotel = () => {
   const [goSteps, setGoSteps] = useState(0);
-  const initialValues = {
-    addRoom: [],
-    hotelImg: [],
-  }
-  const formik = useFormik({ initialValues })
-  // console.log('hotel formik', formik.values)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const formId = useSelector((data) => data.form);
   const isEdit = !!formId.editId;
+  const initialValues = {
+    addRoom: [],
+    hotelAmentity: [],
+    hotelImg: [],
+  }
+  const url = URLS.HOTEL_URL
+  const editUrl = `${URLS.HOTEL_URL}/${formId.editId}`
+  const formik = useFormik({
+    initialValues,
+    onSubmit: async (values) => {
+      // Handle form submission here
+      try {
+        let response;
+        if (isEdit) {
+          response = await axiosPut(editUrl, values);
+        } else {
+          response = await axiosPost(url, values);
+        }
+        if (response.success) {
+          dispatch(FormAction.setRefresh());
+          // formik.setFieldValue("name", "");
+          // setShowModal(false);
+          if (isEdit) {
+            dispatch(FormAction.setEditId())
+          }
+          notifyCreate('Hotel', isEdit)
+        }
+      } catch (error) {
+        console.log(error);
+        notifyError('Something went wrong')
+      }
+    },
+  })
+  console.log('hotel formik', formik.values)
 
   const handleSubmit = () => {
-    notify({ message: "Hotel Added Successfully" });
-    navigate("/hotels");
-    dispatch(FormAction.setEditId(""));
+
+    // notify({ message: "Hotel Added Successfully" });
+    // navigate("/hotels");
+    // dispatch(FormAction.setEditId(""));
   };
   useEffect(() => {
     return () => {
