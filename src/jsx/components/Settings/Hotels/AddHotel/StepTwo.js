@@ -84,7 +84,7 @@ const StepTwo = ({ formik: parentFormik }) => {
     childWBed: 0,
     childNBedSelect: false,
     childNBed: 0,
-    occupancy: "0",
+    occupancy: 0,
     mealType: [],
     mealAmount: 0,
     availableFrom: SETUP.TODAY_DATE,
@@ -237,6 +237,7 @@ const StepTwo = ({ formik: parentFormik }) => {
                 <InputField
                   label="Occupancy"
                   name="occupancy"
+                  type="number"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   values={values}

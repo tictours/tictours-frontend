@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FormAction } from "../../../../../store/slices/formSlice";
 import { useFormik } from "formik";
 import { URLS } from "../../../../../constants";
-import { axiosPost, axiosPut } from "../../../../../services/AxiosInstance";
+import { axiosPost, axiosPut, filePost } from "../../../../../services/AxiosInstance";
 import { notifyCreate, notifyError } from "../../../../utilis/notifyMessage";
 
 const AddHotel = () => {
@@ -34,12 +34,64 @@ const AddHotel = () => {
     onSubmit: async (values) => {
       // Handle form submission here
       try {
+       // console.log('onpress',values)
+        const formData = new FormData();
+        formData.append('name', values.name);
+        formData.append('destination_id', values.destination);
+        formData.append('sub_destination_id', values.subDestination);
+        formData.append('place', values.place);
+        formData.append('category_id', values.category);
+        formData.append('property_type_id', values.propertyType);
+        formData.append('sales_email', values.salesEmail);
+        formData.append('sales_no', values.salesNumber);
+        formData.append('reservation_email', values.reservationEmail);
+        formData.append('reservation_no', values.reservationNumber);
+        formData.append('phone_number', values.phoneNumber);
+        formData.append('address', values.address);
+        values.addRoom.forEach((item,ind)=>{
+          formData.append(`rooms[${ind}][market_type_id]`, item.marketType);
+          formData.append(`rooms[${ind}][from_date]`, item.roomStartDate.toLocaleDateString('en-CA'));
+          formData.append(`rooms[${ind}][to_date]`, item.roomEndDate.toLocaleDateString('en-CA'));
+          formData.append(`rooms[${ind}][room_type_id]`, item.roomType);
+          formData.append(`rooms[${ind}][single_bed_amount]`, item.singleBed);
+          formData.append(`rooms[${ind}][double_bed_amount]`, item.doubleBed);
+          formData.append(`rooms[${ind}][triple_bed_amount]`, item.tripleBed);
+          formData.append(`rooms[${ind}][is_triple_bed_available]`, item.tripleBedSelect ? 1 : 0);
+          formData.append(`rooms[${ind}][extra_bed_amount]`, item.extraBed);
+          formData.append(`rooms[${ind}][is_extra_bed_available]`, item.extraBedSelect ? 1 : 0);
+          formData.append(`rooms[${ind}][child_w_bed_amount]`, item.childWBed);
+          formData.append(`rooms[${ind}][is_child_w_bed_available]`, item.childWBedSelect ? 1 : 0);
+          formData.append(`rooms[${ind}][child_n_bed_amount]`, item.childNBed);
+          formData.append(`rooms[${ind}][is_child_n_bed_available]`, item.childNBedSelect ? 1 : 0);
+          formData.append(`rooms[${ind}][occupancy]`, item.occupancy);
+          item.roomAmentity.forEach((item,i)=>{
+            formData.append(`rooms[${ind}][amenities][${i}]`, item);
+          })
+          item.roomImg.forEach((item,i)=>{
+            formData.append(`rooms[${ind}][images][${i}]`, item);
+          })
+          item.mealPlan.forEach((item,i)=>{
+            formData.append(`rooms[${ind}][meal_plans][${i}][id]`, item.type.value);
+            formData.append(`rooms[${ind}][meal_plans][${i}][amount]`, item.amount);
+          })
+          formData.append(`rooms[${ind}][is_allotted]`, item.alloment ? 1 : 0);
+          // formData.append(`rooms[${ind}][]`, item.availableFrom);
+          // formData.append(`rooms[${ind}][]`, item.availableTo);
+          formData.append(`rooms[${ind}][allotted_cut_off_days]`, item.cutOff);
+        })
+        values.hotelAmentity.forEach((item,ind)=>{
+          formData.append(`amenities[${ind}]`, item);
+        })
+        values.hotelImg.forEach((item,ind)=>{
+          formData.append(`document_2[${ind}]`, item);
+        })
         let response;
         if (isEdit) {
-          response = await axiosPut(editUrl, values);
+          response = await axiosPut(editUrl, formData);
         } else {
-          response = await axiosPost(url, values);
+          response = await filePost(url, formData);
         }
+        // console.log('response',response)
         if (response.success) {
           dispatch(FormAction.setRefresh());
           // formik.setFieldValue("name", "");
@@ -155,7 +207,8 @@ const AddHotel = () => {
                       </button>
                       <button
                         className="btn btn-primary sw-btn-next ms-1"
-                        onClick={() => handleSubmit()}
+                        type="submit"
+                        onClick={() => formik.handleSubmit()}
                       >
                         Submit
                       </button>

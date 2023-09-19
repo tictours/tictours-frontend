@@ -16,7 +16,7 @@ export const useAsync = (url, condition = true) => {
       setError(null);
 
       try {
-        const response = await axiosInstance.get(url);
+        const response = await axiosInstance().get(url);
         setData(response.data);
       } catch (error) {
         setError(error);

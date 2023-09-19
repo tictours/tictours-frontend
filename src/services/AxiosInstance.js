@@ -1,10 +1,11 @@
 import axios from "axios";
 import { store } from "../store/store";
 
+const  createCustomInstance = (type="application/json") => {
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": type,
     // 'Authorization': `Bearer ${authToken}`, // Include the token in the "Authorization" header
   },
 });
@@ -22,13 +23,17 @@ axiosInstance.interceptors.request.use((config) => {
 
   return config;
 });
-
+return axiosInstance
+}
+const formDataType =  "multipart/form-data"
 const responseBody = (response) => response.data;
 export const axiosPost = (url, data) =>
-  axiosInstance.post(url, data).then(responseBody);
+  createCustomInstance().post(url, data).then(responseBody);
+export const filePost = (url, data) =>
+  createCustomInstance(formDataType).post(url, data).then(responseBody);
 export const axiosPut = (url, data) =>
-  axiosInstance.put(url, data).then(responseBody);
+  createCustomInstance().put(url, data).then(responseBody);
 export const axiosDelete = (url, data) =>
-  axiosInstance.delete(url).then(responseBody);
+  createCustomInstance().delete(url).then(responseBody);
 
-export default axiosInstance;
+export default createCustomInstance;
