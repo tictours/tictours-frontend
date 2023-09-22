@@ -34,12 +34,14 @@ const StepThree = ({ formik }) => {
               //   <span className="ms-2 amenity-count">{`12${key}`}</span>
               // </div>
               <CheckBoxField
-                key={key}
+                index={key}
                 name='hotelAmentity'
-                onChange={formik.handleChange}
+                // onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                setValue={formik.setFieldValue}
                 value={data.id}
                 inputValue={data.name}
+                selectedValues={formik.values.hotelAmentity}
               />
             ))}
           </div>

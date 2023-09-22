@@ -89,6 +89,7 @@ const StepTwo = ({ formik: parentFormik }) => {
     mealAmount: 0,
     availableFrom: SETUP.TODAY_DATE,
     availableTo: SETUP.TODAY_DATE,
+    editRoom:-1
   };
   const marketTypeOptions = ["Type 1", "Type 2", "Type 3"];
   const mealOptions = [
@@ -102,7 +103,8 @@ const StepTwo = ({ formik: parentFormik }) => {
     return localDate;
   };
   const handleEdit = (id, value, setValue, name = 'addRoom') => {
-    console.log("edit", id);
+    const filteredVal = value.filter((val, i) => i == id);
+    setValue({...filteredVal[0],editRoom:id});
   };
   const handleDelete = (id, value, setValue, name = 'addRoom') => {
     const filteredVal = value.filter((val, i) => i !== id);
@@ -128,6 +130,7 @@ const StepTwo = ({ formik: parentFormik }) => {
           handleSubmit,
           isSubmitting,
           setFieldValue,
+          setValues,
           resetForm
         }) => (
           <form onSubmit={handleSubmit}>
@@ -142,24 +145,28 @@ const StepTwo = ({ formik: parentFormik }) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   values={values}
+                  setValue={setFieldValue}
                   options={marketTypeData?.data?.data}
                   optionValue="id"
                   optionLabel="name"
+                  showLabelValue
                 />
               </div>
               <div className="col-6 col-sm-4 col-md-3 col-lg-2 m-b30">
                 <label>From Date</label>
                 <DatePicker
+                dateFormat="yyyy-MM-dd"
                   className="form-control"
-                  selected={values.roomStartDate}
+                  selected={new Date(values.roomStartDate)}
                   onChange={(date) => setFieldValue("roomStartDate", date)}
                 />
               </div>
               <div className="col-6 col-sm-4 col-md-3 col-lg-2 m-b30">
                 <label>To Date</label>
                 <DatePicker
+                dateFormat="yyyy-MM-dd"
                   className="form-control"
-                  selected={values.roomEndDate}
+                  selected={new Date(values.roomEndDate)}
                   onChange={(date) => setFieldValue("roomEndDate", date)}
                 />
               </div>
@@ -170,10 +177,12 @@ const StepTwo = ({ formik: parentFormik }) => {
                     name="roomType"
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    setValue={setFieldValue}
                     values={values}
                     options={roomTypeData?.data?.data}
                     optionValue="id"
                     optionLabel="name"
+                    showLabelValue
                   />
                 </div>
               </div>
@@ -265,14 +274,19 @@ const StepTwo = ({ formik: parentFormik }) => {
                       //   </label>
                       //   {/* <span className="ms-2 amenity-count">{`12${key}`}</span> */}
                       // </div>
+                      <>
                       <CheckBoxField
-                        key={key}
+                        index={key}
                         name='roomAmentity'
-                        onChange={handleChange}
+                        // onChange={handleChange}
+                        setValue={setFieldValue}
+                        selectedValues={values.roomAmentity}
                         onBlur={handleBlur}
                         value={data.id}
                         inputValue={data.name}
+                        checkValue={values.roomAmentity}
                       />
+                      </>
                     ))}
                   </div>
                 </div>
@@ -342,7 +356,8 @@ const StepTwo = ({ formik: parentFormik }) => {
                           setFieldValue("mealPlan", [
                             ...values.mealPlan,
                             {
-                              type: values.mealType,
+                              id: values.mealType.value,
+                              name: values.mealType.label,
                               amount: values.mealAmount,
                             },
                           ])
@@ -353,7 +368,7 @@ const StepTwo = ({ formik: parentFormik }) => {
                       </Button>
                     </div>
                   </div>
-                  {values.mealPlan.length !== 0 && (
+                  {values.mealPlan?.length !== 0 && (
                     <div className="mt-3">
                       <Table responsive className="custom-table-bordered">
                         <thead className="thead-table">
@@ -372,7 +387,7 @@ const StepTwo = ({ formik: parentFormik }) => {
                                 {/* {plan.type
                                   ?.map((type) => type.label)
                                   .join(" - ")} */}
-                                {plan.type.label}
+                                {plan?.name}
                               </td>
                               <td>{plan.amount}</td>
                               <td>
@@ -409,9 +424,9 @@ const StepTwo = ({ formik: parentFormik }) => {
                 </div>
                 <div className="col-lg-6">
                   <div className="row">
-                    <div className="col-12">
+                    <div className="col-6">
                       <div className="mb-3">
-                        <label className="col-form-label col-sm-3 pt-0">
+                        <label className="col-form-label  pt-0">
                           Alloment
                         </label>
                         <div className="form-group mb-0">
@@ -435,7 +450,7 @@ const StepTwo = ({ formik: parentFormik }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="col-6 col-lg-4">
+                    {/* <div className="col-6 col-lg-4">
                       <label>From Date</label>
                       <DatePicker
                         className="form-control"
@@ -452,7 +467,7 @@ const StepTwo = ({ formik: parentFormik }) => {
                         selected={values.availableTo}
                         onChange={(date) => setFieldValue("availableTo", date)}
                       />
-                    </div>
+                    </div> */}
                     <div className="col-6 col-lg-4">
                       <InputField
                         label="Cut Off"
@@ -463,20 +478,44 @@ const StepTwo = ({ formik: parentFormik }) => {
                         values={values}
                       />
                     </div>
-                    <div className="col-6">
+                 
+                    <div className="col-12 d-flex">
+                    {values.editRoom !== -1  && <div className="me-2">
                       <Button
                         className="me-0"
                         variant="primary"
                         onClick={() => {
-                          parentFormik.setFieldValue("addRoom", [
-                            ...tableData,
-                            { ...values },
-                          ])
                           resetForm()
                         }
                         }
                       >
-                        Add Room Details
+                        Cancel
+                      </Button>
+                    </div>}
+                      <Button
+                        className="me-0"
+                        variant="primary"
+                        onClick={() => {
+                          if(values.editRoom === -1){
+                          parentFormik.setFieldValue("addRoom", [
+                            ...tableData,
+                            { ...values },
+                          ])}else{
+                            const filterData = tableData.map((data,ind)=>{
+                              if(ind == values.editRoom){
+                                return values
+                              }
+                              else{
+                                return data
+                              }
+                            })
+                            parentFormik.setFieldValue('addRoom',filterData)
+                          }
+                          resetForm()
+                        }
+                        }
+                      >
+                        {values.editRoom !== -1?'Edit':'Add'} Room Details
                       </Button>
                     </div>
                   </div>
@@ -505,8 +544,8 @@ const StepTwo = ({ formik: parentFormik }) => {
                               <th>{key + 1}</th>
                               <td>{formatDate(data.roomStartDate)}</td>
                               <td>{formatDate(data.roomEndDate)}</td>
-                              <td>{data.marketType}</td>
-                              <td>{data.roomType}</td>
+                              <td>{data.marketTypeLabel}</td>
+                              <td>{data.roomTypeLabel}</td>
                               {/* <td>{data.type?.map((type)=>type.label).join(' - ')}</td> */}
                               <td>{data.singleBed}</td>
                               <td>{data.doubleBed}</td>
@@ -516,7 +555,7 @@ const StepTwo = ({ formik: parentFormik }) => {
                                   <button
                                     className="btn bg-main btn-xs sharp me-1"
                                     onClick={() =>
-                                      handleEdit(key, values, setFieldValue)
+                                      handleEdit(key, tableData, setValues)
                                     }
                                   >
                                     <i className="fas fa-pencil-alt"></i>

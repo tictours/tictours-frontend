@@ -55,7 +55,7 @@ export function FileUploader(props) {
                     <div className="col-md-6 col-lg-4">
                         <div style={styles.preview}>
                             <img
-                                src={URL.createObjectURL(img)}
+                                src={img?.file_url ? img.file_url:URL.createObjectURL(img)}
                                 style={styles.image}
                                 alt="Thumb"
                             />

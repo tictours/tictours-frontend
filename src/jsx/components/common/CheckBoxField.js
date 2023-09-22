@@ -1,20 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export function CheckBoxField(props) {
     const {
-        key = '',
+        index = '',
         name,
         value,
         inputValue = '',
         className = '',
         labelClassName = '',
         inputClassName = '',
+        selectedValues=[],
+        setValue,
         ...restProps
     } = props;
 
+        const [isChecked,setIsChecked] = React.useState(false)
+    
+    const handleCheckboxChange = (event) => {
+        const selectedId = event.target.value // Parse the ID as an integer
+        // const checked = selectedValues.findIndex((item)=>item.id ? item.id == value : item == value)
+        // console.log('evn',selectedId)
+    
+        // Check if the ID is already in the selected values array
+        if (selectedValues.includes(selectedId)) {
+          // Remove it from the array
+          setValue(name,selectedValues.filter((id) => id !== selectedId));
+        } else {
+          // Add it to the array
+          setValue(name,[...selectedValues, selectedId]);
+        }
+      };
     return (
         <div
-            key={key}
+            key={value}
             className={`form-check form-check-inline  fw-normal ${className}`}
         >
             <label className={`form-check-label ${labelClassName}`}>
@@ -24,7 +42,8 @@ export function CheckBoxField(props) {
                     type="checkbox"
                     className={`form-check-input ${inputClassName}`}
                     value={value}
-                //   defaultChecked
+                    onChange={handleCheckboxChange}
+                    checked={selectedValues.includes(value)}
                 />
                 {inputValue}
             </label>

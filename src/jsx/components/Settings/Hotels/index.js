@@ -8,6 +8,8 @@ import course1 from "../../../../images/course/hotel-1.jpg";
 import CourseSlider from "../../Dashboard/CourseSlider";
 import { useDispatch } from "react-redux";
 import { FormAction } from "../../../../store/slices/formSlice";
+import { useAsync } from "../../../utilis/useAsync";
+import { URLS } from "../../../../constants";
 
 const RightIcon = () => {
   return (
@@ -148,6 +150,8 @@ const bigCardData = [
 const Hotels = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const hotelData = useAsync(URLS.HOTEL_URL)
+  console.log('hotel',hotelData)
   const [data, setData] = useState(
     document.querySelectorAll("#example2_wrapper tbody tr"),
   );
@@ -282,13 +286,13 @@ const Hotels = () => {
           {/* swiper end */}
 
           <div className="row">
-            {bigCardData.map((item, index) => (
+            {hotelData?.data?.data?.map((item, index) => (
               <div className="col-xl-3 col-xxl-4 col-sm-6" key={index}>
                 <div className="card all-crs-wid">
                   <div className="card-body">
                     <div className="courses-bx">
                       <div className="dlab-media overlay-main position-relative">
-                        <img src={item.image} alt="" />
+                        <img src={item.document_2[0].file_url} alt="" />
                         <div className="overlay-bx">
                           <div className="overlay-icon">
                             <Link

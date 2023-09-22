@@ -7,14 +7,25 @@ function SelectField(props) {
     label,
     name,
     values,
+    setValue,
     selected = '',
     options,
     optionValue,
     optionLabel,
+    onChange,
+    showLabelValue=false,
     ...restProps
   } = props;
 
   const isRequired = restProps.required
+
+  const handleSelectChange = (e) => {
+    onChange(e)
+    if(showLabelValue){
+      const selectedLabel = e.target.options[e.target.selectedIndex].text; // Get the selected option's label
+      setValue(`${name}Label`,selectedLabel)
+    }
+  } 
   return (
     <div className={`form-group mb-3 ${formClass}`}>
       {!!label && <label className="text-label">{label} {isRequired && <span>*</span>}</label>}
@@ -25,6 +36,7 @@ function SelectField(props) {
         className={`form-control ${selectClass}`}
         name={name}
         value={values && !!values[name] ? values[name] : selected}
+        onChange={handleSelectChange}
       >
         {!!options?.length ? (
           <>
