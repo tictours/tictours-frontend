@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import { FormAction } from "../../../../store/slices/formSlice";
 import { useAsync } from "../../../utilis/useAsync";
 import { URLS } from "../../../../constants";
+import { axiosDelete } from "../../../../services/AxiosInstance";
+import { notifyDelete, notifyError } from "../../../utilis/notifyMessage";
 
 const RightIcon = () => {
   return (
@@ -212,6 +214,18 @@ const Hotels = () => {
     dispatch(FormAction.setEditId(id));
     navigate(`/add-hotel`);
   };
+  const handleDelete = async (id, name) => {
+    const deleteUrl = `${URLS.HOTEL_URL}/${id}`;
+    try {
+      const response = await axiosDelete(deleteUrl);
+      if (response.success) {
+        dispatch(FormAction.setRefresh());
+        notifyDelete(name);
+      }
+    } catch (error) {
+      notifyError("Something went wrong !");
+    }
+  };
   return (
     <>
       <div className="row">
@@ -350,22 +364,31 @@ const Hotels = () => {
                             </div>
                           </div>
                           <div className="d-flex justify-content-between content align-items-center">
+                            <div>
                             <span>
                               {/* <img src={bitcoin} alt="" />{" "} */}
                               110+ Booking
                             </span>
-                            <div>
+                            </div>
+                            <Link to={""} className="btn btn-primary btn-sm ms-2">
+                                View all
+                              </Link>
+                          </div>
+                            <div className="mt-2">
                               <button
                                 className="btn btn-primary btn-sm me-2"
                                 onClick={() => handleEdit(item.id)}
                               >
                                 Edit
                               </button>
-                              <Link to={""} className="btn btn-primary btn-sm">
-                                View all
-                              </Link>
+                              <button
+                                className="btn btn-danger btn-sm me-2"
+                                onClick={() => handleDelete(item.id,item.name)}
+                              >
+                                Delete
+                              </button>
+                             
                             </div>
-                          </div>
                         </div>
                       </div>
                     </div>
