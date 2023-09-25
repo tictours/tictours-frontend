@@ -113,7 +113,7 @@ const AddHotel = () => {
       } catch (error) {
         const errMsg = error.response?.data?.data?.errors
         const firstErr = Object.values(errMsg)[0][0]
-        notifyError(firstErr)
+        notifyError(firstErr ? firstErr : 'Oops Something Went Wrong')
       }
     },
   })

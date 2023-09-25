@@ -306,7 +306,7 @@ const Hotels = () => {
                   <div className="card-body">
                     <div className="courses-bx">
                       <div className="dlab-media overlay-main position-relative">
-                        <img src={item.document_2[0].file_url} alt="" />
+                        <img src={item?.document_2[0]?.file_url} alt="" />
                         <div className="overlay-bx">
                           <div className="overlay-icon">
                             <Link
