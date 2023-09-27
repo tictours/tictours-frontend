@@ -13,7 +13,8 @@ const StepOne = ({ formik }) => {
   const subDestinationData = useAsync(subDestinationUrl, destinationId)
   const categoryData = useAsync(URLS.PROPERTY_CATEGORY_URL)
   const propertyTypeData = useAsync(URLS.PROPERTY_TYPE_URL)
-  // console.log('formik child', formik.values)
+
+  const errors = formik.errors
   // console.log(subDestinationUrl, 'data', subDestinationData,)
   return (
     <section>
@@ -26,6 +27,7 @@ const StepOne = ({ formik }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               values={formik.values}
+              formik={formik}
               required
             />
           </div>
@@ -62,6 +64,7 @@ const StepOne = ({ formik }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               values={formik.values}
+              formik={formik}
               required
             />
           </div>
@@ -76,6 +79,7 @@ const StepOne = ({ formik }) => {
             options={categoryData?.data?.data}
             optionValue="id"
             optionLabel="name"
+            formik={formik}
             required
           />
         </div>
@@ -143,6 +147,7 @@ const StepOne = ({ formik }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               values={formik.values}
+              formik={formik}
               required
             />
           </div>
@@ -155,6 +160,7 @@ const StepOne = ({ formik }) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             values={formik.values}
+            formik={formik}
             required
           />
         </div>

@@ -12,6 +12,8 @@ function InputField(props) {
     className = '',
     labelClassName = '',
     inputClassName = '',
+    handleBlur,
+    formik,
     ...restProps
   } = props;
 
@@ -30,13 +32,30 @@ function InputField(props) {
       ) : (
         <input
           {...restProps}
+          key={name}
           type={type}
           className={`form-control ${inputClassName}`}
           placeholder={placeholder}
           name={name}
           value={values && values[name] ? values[name] : inputValue}
+          onkeyup={handleBlur}
         />
       )}
+      {/* {errors && errors[name] && <div
+                            id="val-username1-error"
+                            className="invalid-feedback animated fadeInUp"
+                            style={{ display: "block" }}
+                          >
+                            {errors[name]}
+                          </div>} */}
+                          {/* <ErrorMessage name="email">
+              {(error) => <div style={{ color: '#f00' }}>{error}</div>}
+            </ErrorMessage> */}
+             {formik?.touched[name] && formik?.errors[name] && (
+            <div
+            className="invalid-feedback animated fadeInUp" style={{ display: "block" }}>{formik.errors[name]}</div>
+          )}
+            
     </div>
   );
 }

@@ -16,6 +16,7 @@ import { URLS } from "../../../../../constants";
 import { axiosPost, axiosPut, filePost } from "../../../../../services/AxiosInstance";
 import { notifyCreate, notifyError } from "../../../../utilis/notifyMessage";
 import { useAsync } from "../../../../utilis/useAsync";
+import * as Yup from "yup";
 
 const AddHotel = () => {
   const [goSteps, setGoSteps] = useState(0);
@@ -34,8 +35,30 @@ const AddHotel = () => {
   const editData = useAsync(editUrl,isEdit)
   // console.log('editData',editData)
 
+  const formSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(3, "Your name must consist of at least 3 characters ")
+      .max(50, "Your name must consist of at limit 50 characters ")
+      .required("Please enter a name"),
+    place: Yup.string()
+      .min(5, "Your place must be at least 5 characters long")
+      .max(50, "Your place must be at limit 50 characters long")
+      .required("Please provide a place"),
+    category: Yup.string()
+      .required("Please select a category"),
+    phoneNumber: Yup.string()
+      .min(5, "Your phone number must be at least 5 characters long")
+      .max(15, "Your phone number must be at limit 15 characters long")
+      .required("Please provide a phone number"),
+    address: Yup.string()
+      .min(5, "Your address must be at least 5 characters long")
+      .max(100, "Your address must be at limit 100 characters long")
+      .required("Please provide a address"),
+  });
+
   const formik = useFormik({
     initialValues,
+    validationSchema:formSchema,
     onSubmit: async (values) => {
       // Handle form submission here
       try {
@@ -247,6 +270,7 @@ const AddHotel = () => {
                       <button
                         className="btn btn-primary sw-btn-next"
                         onClick={() => setGoSteps(1)}
+                        disabled={formik.isSubmitting || !formik.isValid || !formik.dirty}
                       >
                         Next
                       </button>

@@ -14,6 +14,7 @@ function SelectField(props) {
     optionLabel,
     onChange,
     showLabelValue=false,
+    formik,
     ...restProps
   } = props;
 
@@ -58,6 +59,10 @@ function SelectField(props) {
           </option>
         )}
       </select>
+      {formik?.touched[name] && formik?.errors[name] && (
+            <div
+            className="invalid-feedback animated fadeInUp" style={{ display: "block" }}>{formik.errors[name]}</div>
+          )}
     </div>
   );
 }
