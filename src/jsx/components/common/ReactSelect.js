@@ -12,7 +12,7 @@ function ReactSelect(props) {
   const data = options?.map((opt) => {
     return { label: opt[optionLabel], value: opt[optionValue] }
   })
-  console.log('select', data)
+  
   return (
     <div className="form-group mb-3">
       {label && <label className="text-label">{label}</label>}

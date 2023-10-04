@@ -2,8 +2,8 @@ import React from "react";
 
 function SelectField(props) {
   const {
-    formClass,
-    selectClass,
+    formClass='',
+    selectClass='',
     label,
     name,
     values,

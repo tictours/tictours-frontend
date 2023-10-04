@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 export const useAsync = (url, condition = true) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   //   const [url, setUrl] = useState(initialUrl);
   const refresh = useSelector((state) => state.form.refresh);
 

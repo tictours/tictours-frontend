@@ -9,6 +9,11 @@ import pic1 from "../../../../images/contacts/1.jpg";
 
 import DropDownBlog from "../../Dashboard/DropDownBlog";
 import AddAgent from "./addAgent";
+import { useAsync } from "../../../utilis/useAsync";
+import { URLS } from "../../../../constants";
+import NoData from "../../common/NoData";
+import Avatar from "../../common/Avatar";
+import DeleteModal from "../../common/DeleteModal";
 
 const contactData = [
   { image: pic1, title: "Jordana" },
@@ -27,6 +32,23 @@ const contactData = [
 
 const Agent = () => {
   const [showAddModal, setShowAddModal] = useState(false);
+  const [editId, setEditId] = useState('');
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteUrl, setDeleteUrl] = useState('');
+  const [deleteName, setDeleteName] = useState('');
+  const url = URLS.AGENT_URL
+  const agentData  = useAsync(url)
+  const tableData = agentData?.data?.data
+
+  const onEdit = (id) => {
+    setEditId(id)
+    setShowAddModal(true)
+  }
+  const onDelete = (id,name) => {
+    setDeleteUrl(`${url}/${id}`)
+    setDeleteName(name)
+    setShowDeleteModal(true)
+  }
   return (
     <>
       <div className="row">
@@ -64,33 +86,38 @@ const Agent = () => {
               </div>
             </div>
             <div className="col-xl-12">
+              {agentData?.loading ? 
+              <NoData isCard={true} isLoading={agentData.loading}/> :
               <div className="row">
-                {contactData.map((item, ind) => (
+                {tableData?.map((item, ind) => (
                   <div className="col-xl-4 col-md-6" key={ind}>
                     <div className="card contact_list ">
                       <div className="card-body">
                         <div className="user-content">
                           <div className="user-info">
                             <div className="user-img">
-                              <img src={item.image} alt="" />
+                              {/* <img src={item.image} alt="" /> */}
+                              <Avatar name={item.name} index={ind}/>
                             </div>
                             <div className="user-details">
-                              <h4 className="user-name">{item.title}</h4>
-                              <span className="number">+1234567890</span>
-                              <span className="mail">jordan@mail.com</span>
-                              <span className="mail">Location : Malaysia</span>
+                              <h4 className="user-name">{item.name}</h4>
+                              <span className="number">{item.phone}</span>
+                              <span className="mail">{item.email}</span>
+                              <span className="mail">Location : {item.country_name}</span>
+                              <span className="mail">Address : {item.address}</span>
                             </div>
                           </div>
-                          <DropDownBlog />
+                          <DropDownBlog onEdit={()=>onEdit(item.id)} onDelete={()=>onDelete(item.id,item.name)}/>
                         </div>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
+              }
             </div>
           </div>
-          <div className="table-pagenation mb-3">
+         {!!tableData?.length && <div className="table-pagenation mb-3">
             <p className="ms-0">
               Showing <span>12-24</span>from <span>100</span>data
             </p>
@@ -123,10 +150,11 @@ const Agent = () => {
                 </li>
               </ul>
             </nav>
-          </div>
+            </div>}
         </div>
       </div>
-      <AddAgent showModal={showAddModal} setShowModal={setShowAddModal} />
+      <AddAgent showModal={showAddModal} setShowModal={setShowAddModal} editId={editId} setEditId={setEditId} />
+      <DeleteModal showModal={showDeleteModal} setShowModal={setShowDeleteModal} name={deleteName} url={deleteUrl} />
     </>
   );
 };

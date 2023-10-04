@@ -1,7 +1,7 @@
 import React from "react";
 import DropDown from "react-bootstrap/DropDown";
 
-const DropDownBlog = () => {
+const DropDownBlog = ({onEdit,onDelete}) => {
   return (
     <>
       <DropDown className="dropdown custom-dropdown">
@@ -24,8 +24,8 @@ const DropDownBlog = () => {
           </svg>
         </DropDown.Toggle>
         <DropDown.Menu align="end" className="dropdown-menu dropdown-menu-end">
-          <DropDown.Item>Edit</DropDown.Item>
-          <DropDown.Item>Delete</DropDown.Item>
+          <DropDown.Item onClick={onEdit}>Edit</DropDown.Item>
+          <DropDown.Item onClick={onDelete}>Delete</DropDown.Item>
           {/* <DropDown.Item>Option 3</DropDown.Item> */}
         </DropDown.Menu>
       </DropDown>
