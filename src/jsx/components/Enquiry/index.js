@@ -4,6 +4,8 @@ import { Badge, Dropdown } from "react-bootstrap";
 
 import InvoiceSlider from "../Dashboard/InvoiceSlider";
 import QuestionIcon from "../Dashboard/Ticketing/QuestionIcon";
+import EditProfile from "../AppsMenu/AppProfile/EditProfile";
+import CustomModal from "../../layouts/CustomModal";
 
 const RightIcon = () => {
   return (
@@ -105,6 +107,7 @@ const tableBlog = [
 
 const Enquiry = () => {
   const navigate = useNavigate();
+  const [showModal, setShowModal]=useState(false)
   const [data, setData] = useState(
     document.querySelectorAll("#example2_wrapper tbody tr"),
   );
@@ -201,7 +204,7 @@ const Enquiry = () => {
                   </div>
                   <div className="invoice-btn">
                     <button
-                      onClick={() => navigate(`/enquiry/profile`)}
+                      onClick={() => setShowModal(true)}
                       className="btn btn-primary"
                     >
                       New Enquiry{" "}
@@ -406,6 +409,16 @@ const Enquiry = () => {
           </div>
         </div>
       </div>
+      <CustomModal
+        showModal={showModal}
+        title={"Customer Info"}
+        handleModalClose={() => {
+          setShowModal(false);
+        }}
+        modalClass="insert-modal"
+      >
+        <EditProfile setShowModal={setShowModal} />
+      </CustomModal>
     </>
   );
 };

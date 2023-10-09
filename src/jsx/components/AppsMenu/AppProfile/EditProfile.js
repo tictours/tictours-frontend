@@ -1,15 +1,55 @@
 import React, { useState } from "react";
 import { Dropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Select from "react-select";
 
 import user from "./../../../../images/user.jpg";
 import DatePicker from "react-datepicker";
+import { useFormik } from "formik";
+import SelectField from "../../common/SelectField";
+import ReactSelect from "../../common/ReactSelect";
+import InputField from "../../common/InputField";
+import { SETUP } from "../../../../constants";
+import { notifyCreate } from "../../../utilis/notifyMessage";
 
-const inputBlog = [
-  { label: "Name", value: "" },
-  { label: "Email", value: "" },
-  { label: "Mobile", value: "" },
+
+const initialValues = {
+  type:'b2b',
+  requirement:[],
+  startDate:SETUP.TODAY_DATE,
+  endDate:SETUP.TODAY_DATE,
+}
+const TypeOptions = [{label:'B2B',value:'b2b'},{label:'B2C',value:'b2c'}]
+const SaluteOptions = [{label:'Mr',value:'mr'},{label:'Ms',value:'ms'}]
+const AgentOptions = [
+  {label:'Agent 1',value:'agent1'},
+  {label:'Agent 2',value:'agent2'},
+  {label:'Agent 3',value:'agent3'},
+  {label:'Agent 4',value:'agent4'},
+                    ]
+const CustomerOptions = [
+  {label:'Customer 1',value:'customer1'},
+  {label:'Customer 2',value:'customer2'},
+  {label:'Customer 3',value:'customer3'},
+  {label:'Customer 4',value:'customer4'},
+                    ]
+const LeadOptions = [
+  {label:'Agent',value:'1'},
+  {label:'Ads',value:'2'},
+  {label:'Social Media',value:'3'},
+  {label:'Friend Refferal',value:'4'},
+                    ]
+const StaffOptions = [
+  {label:'Staff 1',value:'staff1'},
+  {label:'Staff 2',value:'staff2'},
+  {label:'Staff 3',value:'staff3'},
+  {label:'Staff 4',value:'staff4'},
+                    ]
+
+const inputOptions = [
+  { label: "Name", name: "name" },
+  { label: "Email", name: "email" },
+  { label: "Mobile", name: "mobile" },
   // { label:'Skills', value:'HTML,  JavaScript,  PHP' },
 ];
 
@@ -33,10 +73,24 @@ const requirementOptions = [
   { value: "Transport", label: "Transport" },
 ];
 
-const EditProfile = () => {
+const EditProfile = ({setShowModal}) => {
   // const [selectOption , setSelectOption] = useState('Gender');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const navigate = useNavigate()
+  const formik = useFormik({
+    initialValues
+  })
+  const {handleBlur,handleChange,setFieldValue,values} = formik
+  // console.log('val',values)
+
+  const handleClick = () => {
+    if(setShowModal){
+    setShowModal(false)
+    navigate('profile')
+  }
+    notifyCreate('Profile')
+  }
   return (
     <>
       <div className="row">
@@ -79,39 +133,67 @@ const EditProfile = () => {
                     </div>
                 </div> */}
         <div className="col-xl-12 col-lg-12">
-          <div className="card profile-card card-bx m-b30">
-            <div className="card-header">
+          <div className="card profile-card card-bx m-b30 border-0">
+            {/* <div className="card-header">
               <h6 className="title">Customer Info</h6>
-            </div>
+            </div> */}
             <form className="profile-form">
               <div className="card-body">
                 <div className="row">
                   {" "}
-                  <div className="col-sm-6 m-b30">
-                    <label className="form-label">Agent</label>
-                    <select defaultValue={"option"} className="form-control">
-                      <option>Agent1</option>
-                      <option>Agent2</option>
-                      <option>Agent3</option>
-                    </select>
+                  <div className="col-sm-6">
+                  <SelectField
+                        label="Type"
+                        name={"type"}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
+                        options={TypeOptions}
+                        optionValue='value'
+                        optionLabel='label'
+                      />
                   </div>
-                  {inputBlog.map((item, ind) => (
-                    <div className="col-sm-6 m-b30" key={ind}>
-                      <label className="form-label">{item.label}</label>
+                  <div className="col-sm-6">
+                  <ReactSelect
+                        label={values.type === 'b2b' ? 'Agent' : 'Customer'}
+                        onChange={(selected) =>
+                          setFieldValue("typeValue", selected.value)
+                        }
+                        onBlur={handleBlur}
+                        values={values}
+                        options={values.type === 'b2b' ? AgentOptions : CustomerOptions}
+                        optionValue='value'
+                        optionLabel='label'
+                      />
+                  </div>
+                  {inputOptions.map((item, ind) => (
+                    <div className="col-sm-6" key={ind}>
+                      {/* <label className="form-label">{item.label}</label>
                       <input
                         type="text"
                         className="form-control"
                         defaultValue={item.value}
+                      /> */}
+                       <InputField
+                        label={item.label}
+                        name={item.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
                       />
                     </div>
                   ))}
-                  <div className="col-sm-6 m-b30">
-                    <label className="form-label">Gender</label>
-                    <select defaultValue={"option"} className="form-control">
-                      <option>Male</option>
-                      <option>Female</option>
-                      <option>Other</option>
-                    </select>
+                  <div className="col-sm-6">
+                  <SelectField
+                        label="Salute"
+                        name={"salute"}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
+                        options={SaluteOptions}
+                        optionValue='value'
+                        optionLabel='label'
+                      />
                     {/* <Dropdown className="profile-btn">
                                             <Dropdown.Toggle as="div" className="i-false profile-btn-toggle">{selectOption} <i className="fa-solid fa-angle-down"></i></Dropdown.Toggle>
                                             <Dropdown.Menu> 
@@ -133,8 +215,8 @@ const EditProfile = () => {
                                         <label className="form-label">Email address</label>
                                         <input type="text" className="form-control" defaultValue="demo@gmail.com" />
                                     </div> */}
-                  <div className="col-sm-6 m-b30">
-                    <label className="form-label">Destination</label>
+                  <div className="col-sm-6">
+                    {/* <label className="form-label">Destination</label>
                     <Select
                       // closeMenuOnSelect={false}
                       // components={{ ClearIndicator }}
@@ -142,10 +224,31 @@ const EditProfile = () => {
                       // defaultValue={[colourOptions[4], colourOptions[5]]}
                       isMulti
                       options={destinationOptions}
-                    />
+                    /> */}
+                     {/* <SelectField
+                        label="Destination"
+                        name={"destination"}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
+                        options={destinationOptions}
+                        optionValue='value'
+                        optionLabel='label'
+                      /> */}
+                       <ReactSelect
+                        label="Destination"
+                        onChange={(selected) =>
+                          setFieldValue("destination", selected)
+                        }
+                        onBlur={handleBlur}
+                        // values={values}
+                        options={destinationOptions}
+                        optionValue='value'
+                        optionLabel='label'
+                      />
                   </div>
-                  <div className="col-sm-6 m-b30">
-                    <label className="form-label">Sub Destination</label>
+                  <div className="col-sm-6">
+                    {/* <label className="form-label">Sub Destination</label>
                     <Select
                       // closeMenuOnSelect={false}
                       // components={{ ClearIndicator }}
@@ -153,87 +256,115 @@ const EditProfile = () => {
                       // defaultValue={[colourOptions[4], colourOptions[5]]}
                       isMulti
                       options={destinationOptions}
-                    />
-                  </div>
-                  <div className="col-sm-6 m-b30">
-                    <label className="form-label">Lead Source</label>
-
-                    <select defaultValue={"option"} className="form-control">
-                      <option>Agent</option>
-                      <option>Ads</option>
-                      <option>Social Media</option>
-                      <option>Friend Refer</option>
-                    </select>
+                    /> */}
+                    <ReactSelect
+                        label="Sub Destination"
+                        onChange={(selected) =>
+                          setFieldValue("subDestination", selected)
+                        }
+                        onBlur={handleBlur}
+                        // values={values}
+                        options={destinationOptions}
+                        optionValue='value'
+                        optionLabel='label'
+                      />
                   </div>
                   <div className="col-sm-6 m-b30">
                     <label>Start Date</label>
                     <DatePicker
                       className="form-control"
-                      selected={startDate}
-                      onChange={(date) => setStartDate(date)}
+                      selected={values.startDate}
+                      onChange={(date) => setFieldValue('startDate',date)}
                     />
                   </div>
                   <div className="col-sm-6 m-b30">
                     <label>End Date</label>
                     <DatePicker
                       className="form-control"
-                      selected={endDate}
-                      onChange={(date) => setEndDate(date)}
+                      selected={values.endDate}
+                      onChange={(date) => setFieldValue('endDate',date)}
                     />
                   </div>
-                  <div className="col-sm-6 m-b30">
-                    <label>Adult</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      // placeholder="Package 1"
-                    />
+                  <div className="col-sm-6">
+                     <InputField
+                        label="Adult"
+                        name="adult"
+                        type='number'
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
+                      />
                   </div>
-                  <div className="col-sm-6 m-b30">
-                    <label>Child</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      // placeholder="Package 1"
-                    />
+                  <div className="col-sm-6">
+                     <InputField
+                        label="Child"
+                        name="child"
+                        type='number'
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
+                      />
                   </div>
-                  <div className="col-sm-6 m-b30">
-                    <label>Infant</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      // placeholder="Package 1"
-                    />
+                  <div className="col-sm-6">
+                     <InputField
+                        label="Infant"
+                        name="infant"
+                        type='number'
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
+                      />
                   </div>
-                  <div className="col-sm-6 m-b30">
-                    <label className="form-label">Priority</label>
-                    <Select
-                      // closeMenuOnSelect={false}
-                      // components={{ ClearIndicator }}
-                      // styles={{ clearIndicator: ClearIndicatorStyles }}
-                      // defaultValue={[colourOptions[4], colourOptions[5]]}
-                      // isMulti
-                      options={priorityOptions}
-                    />
+                  <div className="col-sm-6">
+                     <SelectField
+                        label="Lead"
+                        name={"lead"}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
+                        options={LeadOptions}
+                        optionValue='value'
+                        optionLabel='label'
+                      />
                   </div>
-                  <div className="col-sm-6 m-b30">
-                    <label className="form-label">Requirement</label>
-                    <Select
-                      // closeMenuOnSelect={false}
-                      // components={{ ClearIndicator }}
-                      // styles={{ clearIndicator: ClearIndicatorStyles }}
-                      // defaultValue={[colourOptions[4], colourOptions[5]]}
-                      isMulti
-                      options={requirementOptions}
-                    />
+                  <div className="col-sm-6">
+                     <SelectField
+                        label="Priority"
+                        name={"priority"}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
+                        options={priorityOptions}
+                        optionValue='value'
+                        optionLabel='label'
+                      />
                   </div>
-                  <div className="col-sm-6 m-b30">
-                    <label>Assigned To</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      // placeholder="Package 1"
-                    />
+                  <div className="col-sm-6">
+                     <ReactSelect
+                        isMulti
+                        label='Requirement'
+                        onChange={(selected) =>{
+                          setFieldValue("requirement", selected)
+                        }}
+                        onBlur={handleBlur}
+                        values={values}
+                        options={requirementOptions}
+                        optionValue='value'
+                        optionLabel='label'
+                      />
+                  </div>
+                  <div className="col-sm-6">
+                  <ReactSelect             
+                        label='Assigned To'
+                        onChange={(selected) =>
+                          setFieldValue("assigned", selected.value)
+                        }
+                        onBlur={handleBlur}
+                        values={values}
+                        options={StaffOptions}
+                        optionValue='value'
+                        optionLabel='label'
+                      />
                   </div>
                   {/* <div className="col-sm-6 m-b30">
                                         <label className="form-label">City</label>
@@ -247,11 +378,11 @@ const EditProfile = () => {
                                     </div> */}
                 </div>
               </div>
-              <div className="card-footer">
+              <div className="card-footer border-0 pt-0 pb-3">
                 <button
                   className="btn btn-primary"
                   type="button"
-                  onClick={() => console.log("update")}
+                  onClick={handleClick}
                 >
                   UPDATE
                 </button>
