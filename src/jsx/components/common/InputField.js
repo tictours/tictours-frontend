@@ -10,6 +10,7 @@ function InputField(props) {
     values,
     inputValue = '',
     className = '',
+    mb=3,
     labelClassName = '',
     inputClassName = '',
     handleBlur,
@@ -19,7 +20,7 @@ function InputField(props) {
 
   const isRequired = restProps.required
   return (
-    <div className={`form-group mb-3 ${className}`}>
+    <div className={`form-group mb-${mb} ${className}`}>
       {label && <label className={`text-label ${labelClassName}`}>{label} {isRequired && <span>*</span>}</label>}
       {isTextarea ? (
         <textarea

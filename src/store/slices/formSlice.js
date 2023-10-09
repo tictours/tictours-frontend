@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   editId: "",
+  name: "",
   refresh: false,
 };
 
@@ -14,6 +15,9 @@ const Form = createSlice({
     },
     setRefresh(state, action) {
       state.refresh = !state.refresh;
+    },
+    setName(state, action) {
+      state.name = action.payload;
     },
   },
 });
