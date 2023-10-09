@@ -5,6 +5,9 @@ import { Badge, Dropdown } from "react-bootstrap";
 import InvoiceSlider from "../../../Dashboard/InvoiceSlider";
 import QuestionIcon from "../../../Dashboard/Ticketing/QuestionIcon";
 import AddUser from "./addUser";
+import { useAsync } from "../../../../utilis/useAsync";
+import { URLS } from "../../../../../constants";
+import { dateComparison } from "../../../../utilis/date";
 
 const RightIcon = () => {
   return (
@@ -99,6 +102,9 @@ const tableBlog = [
 
 const User = () => {
   const navigate = useNavigate();
+  const userData = useAsync(URLS.USER_URL)
+  const tableData = userData?.data?.data
+  console.log('tabl',userData)
   const [data, setData] = useState(
     document.querySelectorAll("#example2_wrapper tbody tr"),
   );
@@ -265,7 +271,7 @@ const User = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {tableBlog.map((item, ind) => (
+                    {tableData?.data?.map((item, ind) => (
                       <tr key={ind}>
                         {/* <td className="sorting_1">
                                                     <div className="checkbox me-0 align-self-center">
@@ -278,37 +284,35 @@ const User = () => {
                                                     </div>
                                                 </td> */}
                         <td className="text-center">{ind + 1}</td>
-                        <td className="">{`username ${ind + 1}`}</td>
+                        <td className="">{item.username}</td>
                         <td className="whitesp-no p-0">
                           <div className="py-sm-3 py-1 ps-3">
                             <div>
                               <h6 className="font-w500 fs-15 mb-0">
-                                Marilyn Workman
+                              {item.first_name}
                               </h6>
                               <span className="fs-14 font-w400">
                                 <Link to={"app-profile"}>
-                                  marilyn@gmail.com
+                                {item.email}
                                 </Link>
                               </span>
                             </div>
                           </div>
                         </td>
-                        <td className="">Manager</td>
+                        <td className="">{item?.roles[0]?.name}</td>
                         {/* <td>Dubai, Qatar</td>
                                                 <td className= "doller">Shanid CA</td> */}
                         <td className="whitesp-no fs-14 font-w400 text-center">
-                          June 1, 2022
+                        {item.start_date}
                         </td>
                         <td className="whitesp-no fs-14 font-w400 text-center">
-                          June 1, 2023
+                        {item.end_date}
                         </td>
                         <td className="text-end">
                           <span
-                            className={`btn light fs-14  btn-sm ${item.iconClass}`}
+                            className={`btn light fs-14  btn-sm ${dateComparison(item.end_date) ? 'Active': 'Inactive'}`}
                           >
-                            {/* {item.icon2}
-                                                        {" "} */}
-                            {item.icontext}
+                            {dateComparison(item.end_date) ? <RightIcon /> : <QuestionIcon colorchange="#EB62D0" />}
                           </span>
                         </td>
                         <td>

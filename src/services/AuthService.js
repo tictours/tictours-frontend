@@ -2,8 +2,9 @@ import axios from "axios";
 import swal from "sweetalert";
 import { loginConfirmedAction, Logout } from "../store/actions/AuthActions";
 import { URLS } from "../constants";
+import { formatDate } from "../jsx/utilis/date";
 
-export function signUp(values) {
+export function signUp(values,id) {
   //axios call
   const postData = {
     username: values.username,
@@ -12,15 +13,15 @@ export function signUp(values) {
     c_password: values.password,
     phone: values.phone,
     first_name: values.firstName,
-    secomd_name: values.secondName,
-    role_id: values.roleId,
-    country: values.country,
-    language: values.language,
+    last_name: values.secondName,
+    role_id: values.role.value,
+    country: values.country.value,
+    language: values.language.value,
     address: values.address,
-    from_date: values.fromDate,
-    to_date: values.toDate,
+    start_date: formatDate(values.fromDate),
+    end_date: formatDate(values.toDate),
   };
-  return axios.post(process.env.REACT_APP_API_URL + "user/register", postData);
+  return axios.post(process.env.REACT_APP_API_URL + URLS.REGISTER_URL, postData);
 }
 
 export function login(email, password) {

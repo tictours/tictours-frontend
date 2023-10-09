@@ -13,10 +13,16 @@ const notifyDelete = (title = '') => {
 }
 const notifyError = (error = '', showStatus) => {
     let Errormsg
+    const responseError = error.response?.data?.data?.errors
+    const firstError = Object.values(responseError)[0][0]
     if (showStatus) {
         Errormsg = `Oops! ${error} Error`
-    } else {
-        Errormsg = error
+    } 
+    if (firstError) {
+        Errormsg = firstError
+    } 
+    else {
+        Errormsg = "Oops, Something went wrong !"
     }
     notify({
         // if(status){
