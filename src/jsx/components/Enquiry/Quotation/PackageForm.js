@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import SelectField from "../../common/SelectField";
 import Img1 from "../../../../images/course/hotel-1.jpg";
 import DropDownBlog from "../../Dashboard/DropDownBlog";
 import { useNavigate } from "react-router-dom";
 import notify from "../../common/Notify";
+import InsertActivity from "./InsertActivity";
+import InsertTransfer from "./InsertTransfer";
+import InsertHotel from "./InsertHotel";
+import { notifyCreate } from "../../../utilis/notifyMessage";
 
 const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const {
@@ -17,6 +21,10 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
     setFieldValue,
   } = formik;
   const navigation = useNavigate();
+
+  const [showHotelModal,setShowHotelModal]= useState(false)
+  const [showActivityModal,setShowActivityModal]= useState(false)
+  const [showTransferModal,setShowTransferModal]= useState(false)
   const dayList = [1, 2, 3, 4];
   const scheduleData = [1, 2];
   const destinationOptions = ["Destination 1", "Destination 2"];
@@ -39,7 +47,29 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
     if (values.categoryOptions === "Hotel") {
       navigation("/add-hotel");
     }
+    if (values.categoryOptions === "Activity") {
+      navigation("/add-hotel");
+    }
+    if (values.categoryOptions === "Transfer") {
+      navigation("/add-hotel");
+    }
   };
+  const handleCardAdd = (data) => {
+    if (values.categoryOptions === "Hotel") {
+      setShowHotelModal(true)
+    }
+    if (values.categoryOptions === "Activity") {
+      setShowActivityModal(true)
+    }
+    if (values.categoryOptions === "Transfer") {
+      setShowTransferModal(true)
+    }
+  };
+
+  const onInsert = (name,setValue) =>{
+    setValue(false)
+    notifyCreate(name)
+  }
   const formSubmit = () => {
     // setShowModal(false)
     setFormComponent("paymentForm");
@@ -185,7 +215,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                     }`}</h6>
                   </div>
                   <div>
-                    <button type="button" className="btn btn-white p-0 mt-2">
+                    <button type="button" className="btn btn-white p-3" onClick={()=>handleCardAdd()}>
                       <i className="fa-solid fa-plus text-primary"></i>
                     </button>
                   </div>
@@ -194,7 +224,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
               <div>
                 <button
                   type="button"
-                  className="btn btn-primary mt-5"
+                  className="btn btn-primary mt-5 border-1"
                   onClick={handleAddCategory}
                 >{`Add ${values.categoryOptions}`}</button>
               </div>
@@ -209,6 +239,9 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
           Schedule itinerary
         </button>
       </form>
+      <InsertHotel showModal={showHotelModal} setShowModal={setShowHotelModal} onClick={onInsert}/>
+      <InsertActivity showModal={showActivityModal} setShowModal={setShowActivityModal} onClick={onInsert}/>
+      <InsertTransfer showModal={showTransferModal} setShowModal={setShowTransferModal} onClick={onInsert}/>
     </>
   );
 };
