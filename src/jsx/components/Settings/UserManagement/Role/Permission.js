@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Badge, Dropdown } from "react-bootstrap";
 
 import InvoiceSlider from "../../../Dashboard/InvoiceSlider";
@@ -12,6 +12,8 @@ import InputField from "../../../common/InputField";
 import { Formik, useFormik } from "formik";
 import { useAsync } from "../../../../utilis/useAsync";
 import { URLS } from "../../../../../constants";
+import { notifyCreate, notifyError } from "../../../../utilis/notifyMessage";
+import { axiosPost, axiosPut } from "../../../../../services/AxiosInstance";
 
 const RightIcon = () => {
   return (
@@ -50,11 +52,17 @@ const tableData1 = [
 
 const Permission = () => {
 
-  const asyncData = useAsync(URLS.PERMISSION_URL)
-  const tableData = asyncData?.data?.data
+  const { id } = useParams()
+  let isEdit = id && id !== 'add'
+  const url = URLS.USER_ROLE_URL
+  const editUrl = `${url}/${id}`
+  const editData = useAsync(editUrl,isEdit)
+  const permissionData = useAsync(URLS.PERMISSION_URL)
+  const tableData = permissionData?.data?.data
+
   // console.log('dat', tableData)
   const navigate = useNavigate();
-  const roleData = useSelector((data) => data.role);
+  // const roleData = useSelector((data) => data.form);
   const [data, setData] = useState(
     document.querySelectorAll("#example2_wrapper tbody tr"),
   );
@@ -62,7 +70,7 @@ const Permission = () => {
   const [myObject, setMyObject] = useState({});
 
   const initialValues = {
-    name: roleData.name,
+    name: '',
     permissions: [],
     permissionObj: {}
   };
@@ -138,9 +146,38 @@ const Permission = () => {
     "Added and Assigned",
   ];
   const readPermissionOption = ["All", "Added", "None"];
-  const handleSubmit = () => {
-    notify({ message: "User Role Added Successfully" });
-    navigate("/user-role");
+  const handleSubmit = async() => {
+    try {
+      let response;
+      const values = formik.values
+
+      const formData = new FormData()
+      formData.append('name',values.name)
+      formData.append('is_active',1)
+      formData.append('sync',1)
+      formData.append('description','description')
+      Object.values(values.permissionObj).forEach((item,i)=>{
+        if(item !== 'none'){
+          formData.append(`permissions[${i}]`,item)
+        }
+      })
+
+      if (isEdit) {
+        response = await axiosPut(editUrl, formData);
+      } else {
+        response = await axiosPost(url, formData);
+      }
+      if (response.success) {
+        // dispatch(FormAction.setRefresh());
+        // formik.setFieldValue("name", "");
+        navigate("/user-role");
+        notifyCreate('User Role', isEdit)
+      }
+    } catch (error) {
+      // console.log(error);
+      notifyError(error)
+    }
+    
   };
 
 
@@ -156,13 +193,14 @@ const Permission = () => {
       ...formik.values.permissionObj,
       [name]: val
     }
-
+    formik.setFieldValue('permissionObj',permissionObj)
+    
   }
 
 
   const orderPermission = (data) => {
 
-    const order = permissionOption.map((option => data.find(item => item.name === option)))
+    // const order = permissionOption.map((option => data.find(item => item.name === option)))
     const orderedArr = permissionOption.map((name) => {
       const matchingItem = data.find((item) => item.name === name);
       return matchingItem ? { ...matchingItem } : { id: 'none', name: 'None' };
@@ -171,6 +209,28 @@ const Permission = () => {
     // console.log('order', orderedArr)
     return orderedArr
   }
+
+  useEffect(() => {
+    const value = editData?.data?.data
+    if(value){
+    const permission = value?.permissions?.reduce((acc, item) => {
+      const menu = item.slug.split('-').slice(0,2).join('-')
+      acc[menu] = item.id;
+      return acc;
+    }, {});
+    const obj = {
+      name: value.name,
+      permissionObj: permission
+    }
+    formik.setValues(obj)
+  }
+
+  
+    return () => {
+      
+    }
+  }, [editData?.data?.data?.id])
+  
   return (
     <>
       <div className="row">
@@ -281,52 +341,60 @@ const Permission = () => {
                           <SelectField
                             // key={`${item.name}-${ind}-`}
                             // values={formik.values}
-                            name={`${item?.name}-read`}
+                            name={`${item?.name.toLowerCase()}-read`}
                             options={orderPermission(item?.permissions?.read)}
                             optionValue='id'
                             optionLabel='name'
+                            selected='none'
+                            values={formik.values.permissionObj}
                             formClass="w-50 mb-0"
                             selectClass="ms-0"
-                            onChange={(e) => onChange(e, `${item?.name}-read`)}
+                            onChange={(e) => onChange(e, `${item?.name.toLowerCase()}-read`)}
                           />
                         </td>
                         <td>
                           <SelectField
                             // key={`${item.name}-${ind}-`}
                             // values={formik.values}
-                            name={`${item?.name}-write`}
+                            name={`${item?.name.toLowerCase()}-write`}
                             options={orderPermission(item?.permissions?.write)}
                             optionValue='id'
                             optionLabel='name'
+                            selected='none'
+                            values={formik.values.permissionObj}
                             formClass="w-50 mb-0"
                             selectClass="ms-0"
-                            onChange={(e) => onChange(e, `${item?.name}-write`)}
+                            onChange={(e) => onChange(e, `${item?.name.toLowerCase()}-write`)}
                           />
                         </td>
                         <td>
                           <SelectField
                             // key={`${item.name}-${ind}-`}
                             // values={formik.values}
-                            name={`${item?.name}-update`}
+                            name={`${item?.name.toLowerCase()}-update`}
                             options={orderPermission(item?.permissions?.update)}
                             optionValue='id'
                             optionLabel='name'
+                            selected='none'
+                            values={formik.values.permissionObj}
                             formClass="w-50 mb-0"
                             selectClass="ms-0"
-                            onChange={(e) => onChange(e, `${item?.name}-update`)}
+                            onChange={(e) => onChange(e, `${item?.name.toLowerCase()}-update`)}
                           />
                         </td>
                         <td>
                           <SelectField
                             // key={`${item.name}-${ind}-`}
                             // values={formik.values}
-                            name={`${item?.name}-delete`}
+                            name={`${item?.name.toLowerCase()}-delete`}
                             options={orderPermission(item?.permissions?.delete)}
                             optionValue='id'
                             optionLabel='name'
+                            selected='none'
+                            values={formik.values.permissionObj}
                             formClass="w-50 mb-0"
                             selectClass="ms-0"
-                            onChange={(e) => onChange(e, `${item?.name}-delete`)}
+                            onChange={(e) => onChange(e, `${item?.name.toLowerCase()}-delete`)}
                           />
                         </td>
                         {/* ))} */}

@@ -7,6 +7,11 @@ import QuestionIcon from "../../../Dashboard/Ticketing/QuestionIcon";
 import AddRole from "./addRole";
 import { useDispatch } from "react-redux";
 import { RoleAction, setPage } from "../../../../../store/slices/roleSlice";
+import { useAsync } from "../../../../utilis/useAsync";
+import { URLS } from "../../../../../constants";
+import { FormAction } from "../../../../../store/slices/formSlice";
+import NoData from "../../../common/NoData";
+import DeleteModal from "../../../common/DeleteModal";
 
 const RightIcon = () => {
   return (
@@ -102,6 +107,15 @@ const tableBlog = [
 const Role = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const url= URLS.USER_ROLE_URL
+  const roleData = useAsync(url)
+  const isLoading = roleData?.loading
+  const tableData = roleData?.data?.data
+  // console.log('role',tableData)
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteUrl, setDeleteUrl] = useState('');
+  const [deleteName, setDeleteName] = useState('');
   const [data, setData] = useState(
     document.querySelectorAll("#example2_wrapper tbody tr"),
   );
@@ -164,10 +178,14 @@ const Role = () => {
     { name: "Inactive", value: "2" },
     { name: "Type", value: "6" },
   ];
-  const handleDetail = (id, value) => {
-    navigate(`${id}`);
-    dispatch(RoleAction.setName(value));
+  const handleDetail = (id) => {
+    navigate(id);
   };
+  const onDelete = (id,name) => {
+    setDeleteUrl(`${url}/${id}`)
+    setDeleteName(name)
+    setShowDeleteModal(true)
+  }
   return (
     <>
       <div className="row">
@@ -209,7 +227,7 @@ const Role = () => {
                   </div>
                   <div className="invoice-btn">
                     <button
-                      onClick={() => handleDetail("add", "")}
+                      onClick={() => handleDetail("add")}
                       className="btn btn-primary"
                     >
                       New User Role{" "}
@@ -255,16 +273,17 @@ const Role = () => {
                                                 <input type="checkbox" onClick={() => chackboxFun("all")} className="form-check-input" id="checkAll" required="" />
                                             </th> */}
                       <th className="text-center">SL No</th>
-                      <th className="text-center">Name</th>
+                      <th className="">Name</th>
                       {/* <th className="text-center">Permission</th> */}
-                      <th className="text-center">Created Date</th>
-                      <th className="text-center">Modified Date</th>
+                      {/* <th className="text-center">Created Date</th>
+                      <th className="text-center">Modified Date</th> */}
                       <th className="text-end">Status</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    {tableBlog.map((item, ind) => (
+                    {isLoading || !tableData.length ? <NoData colSpan={3} isLoading={isLoading} /> : <>
+                    {tableData?.map((item, ind) => (
                       <tr key={ind}>
                         {/* <td className="sorting_1">
                                                     <div className="checkbox me-0 align-self-center">
@@ -277,7 +296,7 @@ const Role = () => {
                                                     </div>
                                                 </td> */}
                         <td className="text-center">{ind + 1}</td>
-                        <td className="text-center">{`role ${ind + 1}`}</td>
+                        <td className="">{item.name}</td>
                         {/* <td className='text-center'><button onClick={()=>handleDetail(ind+1,`role ${ind+1}`)} className='btn'><i class="fa-solid fa-eye"></i></button></td> */}
                         {/* <td className="whitesp-no p-0">
                                                     <div className="py-sm-3 py-1 ps-3">
@@ -290,19 +309,20 @@ const Role = () => {
                         {/* <td>Manager</td> */}
                         {/* <td>Dubai, Qatar</td>
                                                 <td className= "doller">Shanid CA</td> */}
-                        <td className="whitesp-no fs-14 font-w400 text-center">
+                        {/* <td className="whitesp-no fs-14 font-w400 text-center">
                           June 1, 2022
                         </td>
                         <td className="whitesp-no fs-14 font-w400 text-center">
                           June 1, 2023
-                        </td>
+                        </td> */}
                         <td className="text-end">
                           <span
-                            className={`btn light fs-14  btn-sm ${item.iconClass}`}
+                            className={`btn light fs-14  btn-sm ${item.iconClass} btn-success`}
                           >
                             {/* {item.icon2}
                                                         {" "} */}
-                            {item.icontext}
+                            {/* {item.icontext} */}
+                            <RightIcon />
                           </span>
                         </td>
                         <td>
@@ -335,17 +355,18 @@ const Role = () => {
                             <Dropdown.Menu className="dropdown-menu-end">
                               <Dropdown.Item
                                 onClick={() =>
-                                  handleDetail(ind + 1, `role ${ind + 1}`)
+                                  handleDetail(item.id)
                                 }
                               >
                                 Edit
                               </Dropdown.Item>
-                              <Dropdown.Item>Delete</Dropdown.Item>
+                              <Dropdown.Item onClick={()=>onDelete(item.id,item.name)}>Delete</Dropdown.Item>
                             </Dropdown.Menu>
                           </Dropdown>
                         </td>
                       </tr>
                     ))}
+                    </>}
                   </tbody>
                 </table>
                 <div className="d-sm-flex text-center justify-content-between align-items-center mt-3 mb-3">
@@ -402,6 +423,9 @@ const Role = () => {
         </div>
       </div>
       <AddRole showModal={showModal} setShowModal={setShowModal} />
+      <DeleteModal
+       showModal={showDeleteModal} setShowModal={setShowDeleteModal} name={deleteName} url={deleteUrl} />
+
     </>
   );
 };
