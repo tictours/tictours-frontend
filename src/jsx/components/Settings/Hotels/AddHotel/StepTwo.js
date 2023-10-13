@@ -544,8 +544,8 @@ const StepTwo = ({ formik: parentFormik }) => {
                               <th>{key + 1}</th>
                               <td>{formatDate(data.roomStartDate)}</td>
                               <td>{formatDate(data.roomEndDate)}</td>
-                              <td>{data.marketTypeLabel}</td>
-                              <td>{data.roomTypeLabel}</td>
+                              <td>{data.marketType.label}</td>
+                              <td>{data.roomType.label}</td>
                               {/* <td>{data.type?.map((type)=>type.label).join(' - ')}</td> */}
                               <td>{data.singleBed}</td>
                               <td>{data.doubleBed}</td>

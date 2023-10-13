@@ -51,8 +51,8 @@ export function FileUploader(props) {
                 <div className="mb-2">
                     <h3>Preview</h3>
                 </div>
-                {fileData?.map((img) => (
-                    <div className="col-md-6 col-lg-4">
+                {fileData?.map((img,key) => (
+                    <div className="col-md-6 col-lg-4" key={key}>
                         <div style={styles.preview}>
                             <img
                                 src={img?.file_url ? img.file_url:URL.createObjectURL(img)}

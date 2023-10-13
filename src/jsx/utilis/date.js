@@ -2,6 +2,12 @@ export const formatDate = (date, type = "en-CA") => {
   const value = new Date(date).toLocaleDateString(type); // formated date
   return value;
 };
+export const parseDate = (date) => {
+  if(date){
+  const value = new Date(date); // parse date
+    return value;
+  }
+};
 
 export const dateComparison = (date) => {
   // Create a date object representing today's date

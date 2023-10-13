@@ -13,8 +13,8 @@ const notifyDelete = (title = '') => {
 }
 const notifyError = (error = '', showStatus) => {
     let Errormsg
-    const responseError = error.response?.data?.data?.errors
-    const firstError = Object.values(responseError)[0][0]
+    const responseError = error?.response?.data?.data?.errors
+    const firstError = responseError ? Object.values(responseError)[0][0] : false
     if (showStatus) {
         Errormsg = `Oops! ${error} Error`
     } 

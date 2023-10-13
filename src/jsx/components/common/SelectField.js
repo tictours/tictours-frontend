@@ -21,10 +21,14 @@ function SelectField(props) {
   const isRequired = restProps.required
 
   const handleSelectChange = (e) => {
-    onChange(e)
+    
     if(showLabelValue){
-      const selectedLabel = e.target.options[e.target.selectedIndex].text; // Get the selected option's label
-      setValue(`${name}Label`,selectedLabel)
+      const value = e.target.value
+      const label = e.target.options[e.target.selectedIndex].text; // Get the selected option's label
+      const obj = {value,label}
+      setValue(name,obj)
+    }else{
+      onChange(e)
     }
   } 
   return (
