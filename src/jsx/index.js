@@ -321,7 +321,7 @@ const Markup = () => {
           <Route path="/uc-toastr" exact element={<Toastr />} />
         </Route>
         <Route element={<Layout4 />}>
-          <Route path="/activity" exact element={<Activity />} />
+          <Route path="/activitys" exact element={<Activity />} />
           <Route path="/to-do-list" exact element={<ToDoList />} />
           <Route path="/ui-modal" exact element={<UiModal />} />
           <Route path="/ui-popover" exact element={<UiPopOver />} />

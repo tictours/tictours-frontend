@@ -48,10 +48,10 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
       navigation("/add-hotel");
     }
     if (values.categoryOptions === "Activity") {
-      navigation("/add-hotel");
+      navigation("/activity");
     }
     if (values.categoryOptions === "Transfer") {
-      navigation("/add-hotel");
+      navigation("/transfer");
     }
   };
   const handleCardAdd = (data) => {
