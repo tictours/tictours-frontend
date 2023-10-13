@@ -168,6 +168,8 @@ import {
 } from "./components/Settings/Hotels/Fields/HotelFields";
 import Destination from "./components/Settings/Destination";
 import SubDestination from "./components/Settings/SubDestination";
+import Transfer from "./components/Settings/Transfer";
+import AddTransfer from "./components/Settings/Transfer/addTransfer";
 
 const enquiryMenu = [
   { name: "profile", path: "", component: "" },
@@ -268,6 +270,8 @@ const Markup = () => {
     { url: "fields", component: <Fields /> },
     { url: "destination", component: <Destination /> },
     { url: "sub-destination", component: <SubDestination /> },
+    { url: "transfer", component: <Transfer /> },
+    { url: "transfer/:id", component: <AddTransfer /> },
 
     // finance
     { url: "follow-ups", component: <FollowUp /> },
