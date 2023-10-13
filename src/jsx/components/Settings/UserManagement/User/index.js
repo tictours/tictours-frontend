@@ -102,9 +102,8 @@ const tableBlog = [
 
 const User = () => {
   const navigate = useNavigate();
-  const userData = useAsync(URLS.USER_URL)
+  const userData = useAsync(URLS.USER_GET_URL)
   const tableData = userData?.data?.data
-  console.log('tabl',userData)
   const [data, setData] = useState(
     document.querySelectorAll("#example2_wrapper tbody tr"),
   );
@@ -344,7 +343,7 @@ const User = () => {
                             </Dropdown.Toggle>
                             <Dropdown.Menu className="dropdown-menu-end">
                               <Dropdown.Item
-                                onClick={() => handleEdit(item.title)}
+                                onClick={() => handleEdit(item.id)}
                               >
                                 Edit
                               </Dropdown.Item>

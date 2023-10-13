@@ -1,7 +1,9 @@
 export const URLS = {
   LOGIN_URL: "/user/login",
   REGISTER_URL: "/user/register",
-  USER_URL: "/user/list",
+  USER_GET_URL: "/user/list",
+  USER_GET_BY_ID_URL: "/user/show",
+  USER_UPDATE_URL: '/user/update',
   DESTINATION_URL: "/destinations",
   SUB_DESTINATION_URL: "/sub-destinations",
   PROPERTY_CATEGORY_URL: "/categories",
