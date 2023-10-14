@@ -170,6 +170,9 @@ import Destination from "./components/Settings/Destination";
 import SubDestination from "./components/Settings/SubDestination";
 import Transfer from "./components/Settings/Transfer";
 import AddTransfer from "./components/Settings/Transfer/addTransfer";
+import LeadSource from "./components/Settings/LeadSource";
+import Priority from "./components/Settings/Priority";
+import Requirement from "./components/Settings/Requirement";
 
 const enquiryMenu = [
   { name: "profile", path: "", component: "" },
@@ -272,6 +275,9 @@ const Markup = () => {
     { url: "sub-destination", component: <SubDestination /> },
     { url: "transfer", component: <Transfer /> },
     { url: "transfer/:id", component: <AddTransfer /> },
+    { url: "lead-source", component: <LeadSource /> },
+    { url: "priority", component: <Priority /> },
+    { url: "requirement", component: <Requirement /> },
 
     // finance
     { url: "follow-ups", component: <FollowUp /> },

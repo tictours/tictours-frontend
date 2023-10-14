@@ -18,6 +18,8 @@ const smallCard = [
   { image: transfer, title: "Transfer", path: "/transfer" },
   { image: crypto, title: "Day Itinerary", path: "/day-itinerary" },
   { image: school, title: "Lead Source", path: "/lead-source" },
+  { image: school, title: "Priority", path: "/priority" },
+  { image: school, title: "Requirement", path: "/requirement" },
   { image: wallet, title: "Mail Settings", path: "/mail-settings" },
   { image: crypto, title: "Currency", path: "/currency" },
   { image: transfer, title: "Agents", path: "/agent" },
