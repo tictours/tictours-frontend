@@ -16,6 +16,10 @@ const typeOptions = [
   { label: "Private", value: "private" },
   { label: "SIC", value: "sic" },
 ];
+const statusOptions = [
+  { label: "Active", value:1 },
+  { label: "Inactive", value:0 },
+];
 
 const AddTransfer = () => {
   const navigate = useNavigate();
@@ -24,6 +28,7 @@ const AddTransfer = () => {
     fromDate: SETUP.TODAY_DATE,
     toDate: SETUP.TODAY_DATE,
     type: { label: "Private", value: "private" },
+    status: { label: "Active", value:1 },
     cost:0,
     adultCost: 0,
     childCost: 0,
@@ -186,6 +191,19 @@ const AddTransfer = () => {
                       formik={formik}
                     />
                   </div>
+                  <div className="col-lg-6 mb-2">
+                  <ReactSelect
+                      isSearchable={false}
+                      label="Status"
+                      options={statusOptions}
+                      optionLabel="label"
+                      optionValue="value"
+                      value={formik.values?.status}
+                      onChange={(selected) =>
+                        formik.setFieldValue("status", selected)
+                      }
+                    />
+                  </div>
 
                   <div className="col-lg-7">
                     <FileUploader
@@ -220,6 +238,7 @@ const AddTransfer = () => {
 
                   <div className="col-lg-6 mb-2">
                   <ReactSelect
+                      isSearchable={false}
                       label="Type"
                       options={typeOptions}
                       optionLabel="label"

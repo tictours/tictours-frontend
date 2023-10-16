@@ -164,6 +164,10 @@ const Transfer = () => {
       }
     }
   };
+
+  const handleStatus = (ind) => {
+    console.log('status',ind)
+  }
   return (
     <>
       <div className="row">
@@ -344,6 +348,11 @@ const Transfer = () => {
                               </svg>
                             </Dropdown.Toggle>
                             <Dropdown.Menu className="dropdown-menu-end">
+                              <Dropdown.Item
+                                onClick={() => handleStatus(ind)}
+                              >
+                                Inactive
+                              </Dropdown.Item>
                               <Dropdown.Item
                                 onClick={() => navigate(`${ind}`)}
                               >
