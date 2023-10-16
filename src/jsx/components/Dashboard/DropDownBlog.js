@@ -1,7 +1,7 @@
 import React from "react";
 import DropDown from "react-bootstrap/DropDown";
 
-const DropDownBlog = ({onEdit,onDelete}) => {
+const DropDownBlog = ({onEdit,onDelete,onStatus,isActive}) => {
   return (
     <>
       <DropDown className="dropdown custom-dropdown">
@@ -24,6 +24,7 @@ const DropDownBlog = ({onEdit,onDelete}) => {
           </svg>
         </DropDown.Toggle>
         <DropDown.Menu align="end" className="dropdown-menu dropdown-menu-end">
+          <DropDown.Item onClick={onStatus}>{isActive?'Inactive':'Active'}</DropDown.Item>
           <DropDown.Item onClick={onEdit}>Edit</DropDown.Item>
           <DropDown.Item onClick={onDelete}>Delete</DropDown.Item>
           {/* <DropDown.Item>Option 3</DropDown.Item> */}
