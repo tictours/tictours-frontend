@@ -13,6 +13,10 @@ import { FormAction } from "../../../../store/slices/formSlice";
 import { notifyCreate, notifyError } from "../../../utilis/notifyMessage";
 import { useAsync } from "../../../utilis/useAsync";
 
+const statusOptions = [
+  { label: "Active", value:1 },
+  { label: "Inactive", value:0 },
+];
 const AddAgent = ({ showModal, setShowModal, editId, setEditId }) => {
 
   const isEdit = !!editId
@@ -24,7 +28,7 @@ const AddAgent = ({ showModal, setShowModal, editId, setEditId }) => {
 
   const dispatch = useDispatch()
   const initialValues = {
-    name:'',phone:'',email:'',address:'',country:{label:'',value:''}
+    name:'',phone:'',email:'',address:'',country:{label:'',value:''},status:{ label: "Active", value:1 },
   };
   const {
     values,
@@ -69,21 +73,7 @@ const AddAgent = ({ showModal, setShowModal, editId, setEditId }) => {
       }
     }
   })
-  const marketTypeOptions = ["Type 1", "Type 2", "Type 3"];
-  const countryOptions = [
-    { label: "Country 1", value: "country1" },
-    { label: "Country 2", value: "country2" },
-    { label: "Country 3", value: "country3" },
-    { label: "Country 4", value: "country4" },
-    { label: "Country 5", value: "country5" },
-  ];
-  const languageOptions = [
-    { label: "Language 1", value: "language1" },
-    { label: "Language 2", value: "language2" },
-    { label: "Language 3", value: "language3" },
-    { label: "Language 4", value: "language4" },
-    { label: "Language 5", value: "language5" },
-  ];
+  
 
   useEffect(() => {
     if(isEdit && showModal){
@@ -168,6 +158,19 @@ const AddAgent = ({ showModal, setShowModal, editId, setEditId }) => {
                     onChange={(selected) => setFieldValue("country", selected)}
                   />
                 </div>
+                <div className="col-lg-6 mb-2">
+                  <ReactSelect
+                      isSearchable={false}
+                      label="Status"
+                      options={statusOptions}
+                      optionLabel="label"
+                      optionValue="value"
+                      value={values?.status}
+                      onChange={(selected) =>
+                        setFieldValue("status", selected)
+                      }
+                    />
+                  </div>
                 {/* <div className="col-md-6 mb-2">
                   <SelectField
                     label="Role Type"

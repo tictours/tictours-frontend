@@ -49,6 +49,9 @@ const Agent = () => {
     setDeleteName(name)
     setShowDeleteModal(true)
   }
+  const onStatus = (id,name) => {
+    console.log('onStatus',name)
+  }
   return (
     <>
       <div className="row">
@@ -107,7 +110,8 @@ const Agent = () => {
                               <span className="mail">Address : {item.address}</span>
                             </div>
                           </div>
-                          <DropDownBlog onEdit={()=>onEdit(item.id)} onDelete={()=>onDelete(item.id,item.name)}/>
+                          <DropDownBlog onEdit={()=>onEdit(item.id)} onDelete={()=>onDelete(item.id,item.name)}
+                          isActive={true} onStatus={()=>onStatus(item.id,item.name)}/>
                         </div>
                       </div>
                     </div>
