@@ -4,10 +4,10 @@ import { useAsync } from "../../../utilis/useAsync";
 import { URLS } from "../../../../constants";
 
 const Priority = () => {
-  const url = URLS.DESTINATION_URL;
+  const url = URLS.PRIORITY_URL;
   return (
     <>
-      <FieldComponent title="Priority" addTitle="Priority" url={''} />
+      <FieldComponent title="Priority" addTitle="Priority" url={url} />
     </>
   );
 };

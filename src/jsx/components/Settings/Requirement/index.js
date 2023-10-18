@@ -4,10 +4,10 @@ import { useAsync } from "../../../utilis/useAsync";
 import { URLS } from "../../../../constants";
 
 const Requirement = () => {
-  const url = URLS.DESTINATION_URL;
+  const url = URLS.REQUIREMENT_URL;
   return (
     <>
-      <FieldComponent title="Requirement" addTitle="Requirement" url={''} />
+      <FieldComponent title="Requirement" addTitle="Requirement" url={url} />
     </>
   );
 };

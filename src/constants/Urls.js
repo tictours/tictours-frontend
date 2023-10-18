@@ -18,5 +18,7 @@ export const URLS = {
   HOTEL_URL: '/hotels',
   AGENT_URL: '/agents',
   COUNTRY_URL:'/settings/countries',
-  LANGUAGE_URL:'settings/languages'
+  LEAD_SOURCE_URL:'/lead-sources',
+  PRIORITY_URL:'/priorities',
+  REQUIREMENT_URL:'/requirements',
 };
