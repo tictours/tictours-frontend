@@ -370,7 +370,7 @@ const Hotels = () => {
                               110+ Booking
                             </span>
                             </div>
-                            <Link to={""} className="btn btn-primary btn-sm ms-2">
+                            <Link  className="btn btn-primary btn-sm ms-2"> 
                                 View all
                               </Link>
                           </div>

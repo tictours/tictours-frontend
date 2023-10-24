@@ -39,7 +39,7 @@ function InputField(props) {
           placeholder={placeholder}
           name={name}
           value={values && values[name] ? values[name] : inputValue}
-          onkeyup={handleBlur}
+          // onkeyup={handleBlur}
         />
       )}
       {/* {errors && errors[name] && <div

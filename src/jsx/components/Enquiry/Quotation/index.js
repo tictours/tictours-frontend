@@ -289,7 +289,7 @@ const Quotation = () => {
                               </td>
                               <td className="text-end">
                                 <Link
-                                  to={"/add-content"}
+                                  to={"/enquiry/itinerary"}
                                   className="btn btn-warning btn-sm content-icon me-1"
                                 >
                                   <i className="fa fa-edit"></i>

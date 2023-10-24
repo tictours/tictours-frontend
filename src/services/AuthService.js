@@ -58,7 +58,7 @@ export function formatError(errorResponse) {
 }
 
 export function saveTokenInLocalStorage(tokenDetails) {
-  tokenDetails.expireDate = new Date(
+  tokenDetails.authExpireTime = new Date(
     new Date().getTime() + process.env.REACT_APP_EXPIRE_IN * 1000,
   );
   localStorage.setItem("userDetails", JSON.stringify(tokenDetails));
@@ -80,17 +80,17 @@ export function checkAutoLogin(dispatch, navigate) {
   }
 
   tokenDetails = JSON.parse(tokenDetailsString);
-  let expireDate = new Date(tokenDetails.expireDate);
+  let authExpireTime = new Date(tokenDetails.authExpireTime);
   let todaysDate = new Date();
 
-  if (todaysDate > expireDate) {
+  if (todaysDate > authExpireTime) {
     dispatch(Logout(navigate));
     return;
   }
 
   dispatch(loginConfirmedAction(tokenDetails));
 
-  const timer = expireDate.getTime() - todaysDate.getTime();
+  const timer = authExpireTime.getTime() - todaysDate.getTime();
   runLogoutTimer(dispatch, timer, navigate);
 }
 
