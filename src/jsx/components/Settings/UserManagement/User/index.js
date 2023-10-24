@@ -8,6 +8,8 @@ import AddUser from "./addUser";
 import { useAsync } from "../../../../utilis/useAsync";
 import { URLS } from "../../../../../constants";
 import { dateComparison } from "../../../../utilis/date";
+import ResetPassword from "../../../common/ResetPassword";
+import { useSelector } from "react-redux";
 
 const RightIcon = () => {
   return (
@@ -108,7 +110,9 @@ const User = () => {
     document.querySelectorAll("#example2_wrapper tbody tr"),
   );
   const [showModal, setShowModal] = useState(false);
+  const [showResetModal, setShowResetModal] = useState(false);
   const [editId, setEditId] = useState("");
+  const [resetUsername, setResetUsername] = useState("");
   const sort = 8;
   const activePag = useRef(0);
   const chageData = (frist, sec) => {
@@ -173,6 +177,11 @@ const User = () => {
     setShowModal(true);
     setEditId(id);
   };
+  const handleResetPassword = (username) => {
+    setShowResetModal(true);
+    setResetUsername(username);
+  };
+  const isAdmin = useSelector(state=>state.auth.auth.data.is_super_admin)
   return (
     <>
       <div className="row">
@@ -347,12 +356,18 @@ const User = () => {
                               >
                                 Edit
                               </Dropdown.Item>
+                             {isAdmin && <>
+                              <Dropdown.Item
+                                onClick={() => handleResetPassword(item.username)}
+                              >
+                                Reset Password
+                              </Dropdown.Item>
                               <Dropdown.Item>Delete</Dropdown.Item>
                               <Dropdown.Item>
                                 {item.icontext === "Active"
                                   ? "Inactive"
                                   : "Active"}
-                              </Dropdown.Item>
+                              </Dropdown.Item></>}
                             </Dropdown.Menu>
                           </Dropdown>
                         </td>
@@ -419,6 +434,7 @@ const User = () => {
         editId={editId}
         setEditId={setEditId}
       />
+      <ResetPassword showModal={showResetModal} setShowModal={setShowResetModal} username={resetUsername} setUsername={setResetUsername}/>
     </>
   );
 };

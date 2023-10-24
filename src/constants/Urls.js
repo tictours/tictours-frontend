@@ -21,4 +21,5 @@ export const URLS = {
   LEAD_SOURCE_URL:'/lead-sources',
   PRIORITY_URL:'/priorities',
   REQUIREMENT_URL:'/requirements',
+  CHANGE_PASSWORD_URL:'/user/change-password',
 };
