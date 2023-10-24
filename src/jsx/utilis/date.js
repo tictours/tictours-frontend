@@ -20,3 +20,16 @@ export const dateComparison = (date) => {
   const isGreaterThanToday = otherDate > today;
   return isGreaterThanToday
   }
+
+export const formatTimeToHis = (timeString) => {
+  const [hours, minutes] = timeString.split(':');
+
+  // Create a new Date object
+  const time = new Date();
+  time.setHours(parseInt(hours, 10));
+  time.setMinutes(parseInt(minutes, 10));
+
+  // Format the time as "H:i:s"
+  const formattedTime = time.toTimeString().split(' ')[0];
+  return formattedTime
+}

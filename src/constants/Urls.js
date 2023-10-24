@@ -22,4 +22,5 @@ export const URLS = {
   PRIORITY_URL:'/priorities',
   REQUIREMENT_URL:'/requirements',
   CHANGE_PASSWORD_URL:'/user/change-password',
+  ACTIVITY_URL:'/activities',
 };

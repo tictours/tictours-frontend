@@ -41,7 +41,7 @@ import CourseDetails from "./components/Dashboard/CourseDetails";
 import FileManager from "./components/FileManager/FileManager";
 import FUser from "./components/FileManager/User";
 import HomeCalendar from "./components/FileManager/HomeCalendar";
-import Activity from "./components/FileManager/Activity";
+import FileActivity from "./components/FileManager/Activity";
 import ToDoList from "./components/FileManager/ToDoList";
 import FileChat from "./components/FileManager/FileChat";
 
@@ -173,6 +173,10 @@ import AddTransfer from "./components/Settings/Transfer/addTransfer";
 import LeadSource from "./components/Settings/LeadSource";
 import Priority from "./components/Settings/Priority";
 import Requirement from "./components/Settings/Requirement";
+import HotelDetail from "./components/Settings/Hotels/detail";
+import Activity from "./components/Settings/Activity";
+import AddActivity from "./components/Settings/Activity/addActivity";
+import DetailActivity from "./components/Settings/Activity/detail";
 
 const enquiryMenu = [
   { name: "profile", path: "", component: "" },
@@ -262,7 +266,7 @@ const Markup = () => {
     { url: "add-lead", component: <EditProfile /> },
     // Settings
     { url: "settings", component: <Settings /> },
-    // {url:'hotels', component: <Hotels/>},
+    {url:'hotels/:id', component: <HotelDetail/>},
     { url: "add-hotel", component: <AddHotel /> },
     { url: "user", component: <User /> },
     { url: "user-role", component: <UserRole /> },
@@ -275,6 +279,10 @@ const Markup = () => {
     { url: "sub-destination", component: <SubDestination /> },
     { url: "transfer", component: <Transfer /> },
     { url: "transfer/:id", component: <AddTransfer /> },
+    { url: "activity", component: <Activity /> },
+    { url: "activity/add", component:<AddActivity /> },
+    { url: "activity/add/:id", component: <AddActivity /> },
+    { url: "activity/:id", component: <DetailActivity /> },
     { url: "lead-source", component: <LeadSource /> },
     { url: "priority", component: <Priority /> },
     { url: "requirement", component: <Requirement /> },
@@ -327,7 +335,7 @@ const Markup = () => {
           <Route path="/uc-toastr" exact element={<Toastr />} />
         </Route>
         <Route element={<Layout4 />}>
-          <Route path="/activitys" exact element={<Activity />} />
+          <Route path="/activitys" exact element={<FileActivity />} />
           <Route path="/to-do-list" exact element={<ToDoList />} />
           <Route path="/ui-modal" exact element={<UiModal />} />
           <Route path="/ui-popover" exact element={<UiPopOver />} />

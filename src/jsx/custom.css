@@ -1,3 +1,5 @@
+
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -33,6 +35,12 @@
   border-radius: 0;
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
+}
+#example2_wrapper .table{
+  min-height: 260px;
+}
+#example2_wrapper .table tbody tr td{
+  vertical-align: top;
 }
 
 .table.custom-table-bordered {
