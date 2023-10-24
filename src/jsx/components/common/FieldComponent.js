@@ -12,6 +12,7 @@ import { FormAction } from "../../../store/slices/formSlice";
 import { useAsync } from "../../utilis/useAsync";
 import NoData from "./NoData";
 import { notifyDelete, notifyError } from "../../utilis/notifyMessage";
+import DeleteModal from "./DeleteModal";
 
 const RightIcon = () => {
   return (
@@ -142,6 +143,9 @@ const FieldComponent = (props) => {
   const [selectBtn, setSelectBtn] = useState(fieldOptions[0]);
   const [fieldData, setFieldData] = useState(MENU[0]);
   const [activeTab, setActiveTab] = useState(0);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteUrl, setDeleteUrl] = useState('');
+  const [deleteName, setDeleteName] = useState('');
   const sort = 8;
   const activePag = useRef(0);
   const chageData = (frist, sec) => {
@@ -214,18 +218,23 @@ const FieldComponent = (props) => {
     setShowModal(true);
     setEditId(id);
   };
-  const handleDelete = async (id, name) => {
-    const deleteUrl = `${url}/${id}`;
-    try {
-      const response = await axiosDelete(deleteUrl);
-      if (response.success) {
-        dispatch(FormAction.setRefresh());
-        notifyDelete(name);
-      }
-    } catch (error) {
-      notifyError("Something went wrong !");
-    }
-  };
+  const onDelete = (id,name) => {
+    setDeleteUrl(`${url}/${id}`)
+    setDeleteName(name)
+    setShowDeleteModal(true)
+  }
+  // const handleDelete = async (id, name) => {
+  //   const deleteUrl = `${url}/${id}`;
+  //   try {
+  //     const response = await axiosDelete(deleteUrl);
+  //     if (response.success) {
+  //       dispatch(FormAction.setRefresh());
+  //       notifyDelete(name);
+  //     }
+  //   } catch (error) {
+  //     notifyError("Something went wrong !");
+  //   }
+  // };
   return (
     <>
       <div className="row">
@@ -369,7 +378,7 @@ const FieldComponent = (props) => {
                                   Edit
                                 </Dropdown.Item>
                                 <Dropdown.Item
-                                  onClick={() => handleDelete(item.id, item.name)}
+                                  onClick={() => onDelete(item.id, item.name)}
                                 >
                                   Delete
                                 </Dropdown.Item>
@@ -444,6 +453,8 @@ const FieldComponent = (props) => {
         parentName={parentName}
         {...props}
       />
+      <DeleteModal
+       showModal={showDeleteModal} setShowModal={setShowDeleteModal} name={deleteName} url={deleteUrl} />
     </>
   );
 };
