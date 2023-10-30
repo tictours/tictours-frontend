@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import InputField from "../../common/InputField";
 import { useAsync } from "../../../utilis/useAsync";
 import { SETUP, URLS } from "../../../../constants";
@@ -7,14 +7,16 @@ import { useFormik } from "formik";
 import ReactSelect from "../../common/ReactSelect";
 import CustomDatePicker from "../../common/CustomDatePicker";
 import { FileUploader } from "../../common/FileUploader";
-import { notifyCreate } from "../../../utilis/notifyMessage";
+import { notifyCreate, notifyError } from "../../../utilis/notifyMessage";
 import { useNavigate, useParams } from "react-router-dom";
 import {  Table } from "react-bootstrap";
 import { formatDate } from "../../../utilis/date";
+import {  filePost } from "../../../../services/AxiosInstance";
+import { checkIsFile } from "../../../utilis/check";
 
 const typeOptions = [
-  { label: "Private", value: "private" },
-  { label: "SIC", value: "sic" },
+  { label: "Private", value: "Private" },
+  { label: "SIC", value: "SIC" },
 ];
 const statusOptions = [
   { label: "Active", value:1 },
@@ -27,17 +29,59 @@ const AddTransfer = () => {
   const initialValues = {
     fromDate: SETUP.TODAY_DATE,
     toDate: SETUP.TODAY_DATE,
-    type: { label: "Private", value: "private" },
+    type: { label: "Private", value: "Private" },
     status: { label: "Active", value:1 },
     cost:0,
     adultCost: 0,
     childCost: 0,
     editArr:-1,
-    image: [],
+    image: '',
     costArr: [],
+  };
+  const url = URLS.TRANSFER_URL
+  const editUrl = `${URLS.TRANSFER_URL}/${id}`
+  const updateUrl = `${URLS.TRANSFER_UPDATE_URL}/${id}`
+  
+  
+  const handleClick = async(values) => {
+    try {
+      let response
+      const formData = new FormData()
+      // const values = formik.values
+      formData.append('vehicle_name',values.name)
+      formData.append('vehicle_number',values.vehicleNumber)
+      formData.append('phone_number',values.phoneNumber)
+      formData.append('destination_id',values.destination?.value)
+      formData.append('description',values.description)
+      formData.append('is_active',values.status.value)
+      if(checkIsFile(values.image)){
+        formData.append('image',values.image)
+      }
+      values.costArr.map((data,ind)=>{
+        formData.append(`estimations[${ind}][from_date]`,data.fromDate)
+        formData.append(`estimations[${ind}][to_date]`,data.toDate)
+        formData.append(`estimations[${ind}][type]`,data.type.value)
+        formData.append(`estimations[${ind}][cost]`,data.cost)
+        formData.append(`estimations[${ind}][adult_cost]`,data.adultCost)
+        formData.append(`estimations[${ind}][child_cost]`,data.childCost)
+      })
+      // console.log('formDa',Object.fromEntries(formData.entries()))
+      if(isEdit){
+        response = await filePost(updateUrl,formData)
+      }else{
+        response = await filePost(url,formData)
+      }
+      if(response.success){
+        notifyCreate("Transfer",isEdit);
+        navigate("/transfer");
+      }
+    } catch (error) {
+      notifyError(error)
+    }
   };
   const formik = useFormik({
     initialValues,
+    onSubmit:handleClick
   });
   const tableData = formik?.values?.costArr;
   // const destinationId = formik.values.destination
@@ -49,12 +93,34 @@ const AddTransfer = () => {
   const propertyTypeData = useAsync(URLS.PROPERTY_TYPE_URL);
 
   const errors = formik.errors;
-  const isEdit = id && id !== "add";
+  const isEdit = !!id;
 
-  const handleClick = () => {
-    notifyCreate("Transfer");
-    navigate("/transfer");
-  };
+  const editData = useAsync(editUrl,isEdit)
+
+  useEffect(() => {
+    const data = editData?.data?.data
+    if(data){
+    formik.setFieldValue('name',data.vehicle_name)
+    formik.setFieldValue('vehicleNumber',data.vehicle_number)
+    formik.setFieldValue('phoneNumber',data.phone_number)
+      formik.setFieldValue('destination',{value:data.destination?.id,label:data.destination?.name})
+      formik.setFieldValue('description',data.description)
+      formik.setFieldValue('image',data.image)
+      formik.setFieldValue('status',{value:data.is_active,label:data.is_active===1?'Active':'Inactive'})
+      const costArr = data.estimations?.map((item,ind)=>{
+        const obj = {fromDate:item.from_date, toDate:item.to_date,
+          type:{label:item.type,value:item.type},cost:item.cost,
+          adultCost:item.adult_cost,childCost:item.child_cost}
+          return obj
+  
+      })
+      formik.setFieldValue('costArr',costArr )
+    }
+    // return () => {
+    //   second
+    // }
+  }, [editData?.data,id])
+  
   const handleEstimationForm = (value,id=-1) => {
     formik.setFieldValue("fromDate", value.fromDate);
     formik.setFieldValue("toDate", value.toDate);
@@ -118,7 +184,7 @@ const AddTransfer = () => {
                   <div className="col-lg-6 mb-2">
                     <div className="form-group mb-3">
                       <InputField
-                        label="Vechile Name"
+                        label="Vehicle Name"
                         name="name"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -131,8 +197,8 @@ const AddTransfer = () => {
                   <div className="col-lg-6 mb-2">
                     <div className="form-group mb-3">
                       <InputField
-                        label="Vechile Number"
-                        name="vechileNumber"
+                        label="Vehicle Number"
+                        name="vehicleNumber"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         values={formik.values}
@@ -250,7 +316,7 @@ const AddTransfer = () => {
                     />
                   </div>
 
-                  {formik.values.type.value === "private" ? (
+                  {formik.values.type.value === "Private" ? (
                     <div className="col-lg-6 mb-2">
                       <div className="form-group mb-3">
                         <InputField
@@ -379,7 +445,7 @@ const AddTransfer = () => {
                     <button
                       className="btn btn-primary"
                       type="button"
-                      onClick={handleClick}
+                      onClick={formik.handleSubmit}
                     >
                       UPDATE
                     </button>

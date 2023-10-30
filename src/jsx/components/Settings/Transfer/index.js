@@ -4,8 +4,9 @@ import { Badge, Dropdown } from "react-bootstrap";
 
 import InvoiceSlider from "../../Dashboard/InvoiceSlider";
 import QuestionIcon from "../../Dashboard/Ticketing/QuestionIcon";
-import EditProfile from "../../AppsMenu/AppProfile/EditProfile";
-import CustomModal from "../../../layouts/CustomModal";
+import { URLS } from "../../../../constants";
+import { useAsync } from "../../../utilis/useAsync";
+import DeleteModal from "../../common/DeleteModal";
 // import CustomModal from "../../layouts/CustomModal";
 
 const RightIcon = () => {
@@ -31,84 +32,17 @@ const RightIcon = () => {
   );
 };
 
-const tableBlog = [
-  {
-    title: "Talan Siphron",
-    mail: "ahmad@mail.com",
-    icon: "#1EBA62",
-    iconClass: "btn-success",
-    icon2: <RightIcon />,
-    icontext: "Confirmed",
-  },
-  {
-    title: "Thomas Khun",
-    mail: "soap@mail.com",
-    icon: "#FF4646",
-    iconClass: "btn-primary",
-    icon2: <QuestionIcon colorchange="#01A3FF" />,
-    icontext: "Pending",
-  },
-  {
-    title: "Marilyn Workman",
-    mail: "mantha@mail.com",
-    icon: "#FF4646",
-    iconClass: "btn-pink",
-    icon2: <QuestionIcon colorchange="#EB62D0" />,
-    icontext: "W. Approval",
-  },
-  {
-    title: "Thomas Khun",
-    mail: "hope@mail.com",
-    icon: "#FF4646",
-    iconClass: "btn-primary",
-    icon2: <QuestionIcon colorchange="#01A3FF" />,
-    icontext: "Pending",
-  },
-  {
-    title: "Talan Siphron",
-    mail: "jordan@mail.com",
-    icon: "#1EBA62",
-    iconClass: "btn-success",
-    icon2: <RightIcon />,
-    icontext: "Complete",
-  },
-  {
-    title: "Marilyn Workman",
-    mail: "adja@mail.com",
-    icon: "#FF4646",
-    iconClass: "btn-pink",
-    icon2: <QuestionIcon colorchange="#EB62D0" />,
-    icontext: "W. Approval",
-  },
-  {
-    title: "Thomas Khun",
-    mail: "soap@mail.com",
-    icon: "#FF4646",
-    iconClass: "btn-primary",
-    icon2: <QuestionIcon colorchange="#01A3FF" />,
-    icontext: "Pending",
-  },
-  {
-    title: "Talan Siphron",
-    mail: "kevin@mail.com",
-    icon: "#FF4646",
-    iconClass: "btn-pink",
-    icon2: <QuestionIcon colorchange="#EB62D0" />,
-    icontext: "W. Approval",
-  },
-  {
-    title: "Marilyn Workman",
-    mail: "vita@mail.com",
-    icon: "#1EBA62",
-    iconClass: "btn-success",
-    icon2: <RightIcon />,
-    icontext: "Complete",
-  },
-];
+
 
 const Transfer = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal]=useState(false)
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteUrl, setDeleteUrl] = useState('');
+  const [deleteName, setDeleteName] = useState('');
+  const url = URLS.TRANSFER_URL
+  const transferData = useAsync(url)
+  const tableData = transferData?.data?.data
   const [data, setData] = useState(
     document.querySelectorAll("#example2_wrapper tbody tr"),
   );
@@ -167,6 +101,11 @@ const Transfer = () => {
 
   const handleStatus = (ind) => {
     console.log('status',ind)
+  }
+  const onDelete = (id,name) => {
+    setDeleteUrl(`${url}/${id}`)
+    setDeleteName(name)
+    setShowDeleteModal(true)
   }
   return (
     <>
@@ -260,18 +199,16 @@ const Transfer = () => {
                           required=""
                         />
                       </th>
+                      <th>Sl No</th>
                       <th>Vechile No</th>
                       <th>Name</th>
-                      <th>Type</th>
                       <th>Destination</th>
-                      <th className="text-center">Start Date</th>
-                      <th className="text-center">End Date</th>
                       <th className="text-end">Status</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    {tableBlog.map((item, ind) => (
+                    {tableData?.map((item, ind) => (
                       <tr key={ind}>
                         <td className="sorting_1">
                           <div className="checkbox me-0 align-self-center">
@@ -290,34 +227,29 @@ const Transfer = () => {
                             </div>
                           </div>
                         </td>
-                        <td>{"JDJ01" + ind}</td>
+                        <td>{ind+1}</td>
+                        <td>{item?.vehicle_number}</td>
                         <td className="whitesp-no p-0">
                           <div className="py-sm-3 py-1 ps-3">
                             <div>
                               <h6 className="font-w500 fs-15 mb-0">
-                                Swift
+                                {item?.vehicle_name}
                               </h6>
                               <span className="fs-14 font-w400">
-                                <Link to={"app-profile"}>+91 7723823348</Link>
+                                <Link to={"app-profile"}>{item?.phone_number}</Link>
                               </span>
                             </div>
                           </div>
                         </td>
-                        <td>Private</td>
-                        <td>Dubai, Qatar</td>
-                        <td className="whitesp-no fs-14 font-w400">
-                          June 1, 2022
-                        </td>
-                        <td className="whitesp-no fs-14 font-w400">
-                          June 15, 2022
-                        </td>
+                        <td>{item?.destination?.name}</td>
                         <td className="text-end">
                           <span
-                            className={`btn light fs-14  btn-sm ${true?'btn-success':'btn-pink'}`}
+                            className={`btn light fs-14  btn-sm ${item?.is_active === 1 ?'btn-success':'btn-pink'}`}
                           >
                             {/* {item.icon2}
                                                         {" "} */}
-                            {true?'Active':'Inactive'}
+                            {item?.is_active === 1 ?'Active':'Inactive'}
+
                           </span>
                         </td>
                         <td>
@@ -354,11 +286,16 @@ const Transfer = () => {
                                 Inactive
                               </Dropdown.Item>
                               <Dropdown.Item
-                                onClick={() => navigate(`${ind}`)}
+                                onClick={() => navigate(`${item?.id}`)}
+                              >
+                                View
+                              </Dropdown.Item>
+                              <Dropdown.Item
+                                onClick={() => navigate(`add/${item?.id}`)}
                               >
                                 Edit
                               </Dropdown.Item>
-                              <Dropdown.Item>Delete</Dropdown.Item>
+                              <Dropdown.Item onClick={()=>onDelete(item.id,item.vehicle_name)}>Delete</Dropdown.Item>
                             </Dropdown.Menu>
                           </Dropdown>
                         </td>
@@ -419,16 +356,8 @@ const Transfer = () => {
           </div>
         </div>
       </div>
-      <CustomModal
-        showModal={showModal}
-        title={"Customer Info"}
-        handleModalClose={() => {
-          setShowModal(false);
-        }}
-        modalClass="insert-modal"
-      >
-        <EditProfile setShowModal={setShowModal} />
-      </CustomModal>
+      <DeleteModal showModal={showDeleteModal} setShowModal={setShowDeleteModal} name={deleteName} url={deleteUrl} />
+    
     </>
   );
 };

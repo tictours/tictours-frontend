@@ -177,6 +177,7 @@ import HotelDetail from "./components/Settings/Hotels/detail";
 import Activity from "./components/Settings/Activity";
 import AddActivity from "./components/Settings/Activity/addActivity";
 import DetailActivity from "./components/Settings/Activity/detail";
+import DetailTransfer from "./components/Settings/Transfer/detail";
 
 const enquiryMenu = [
   { name: "profile", path: "", component: "" },
@@ -278,7 +279,9 @@ const Markup = () => {
     { url: "destination", component: <Destination /> },
     { url: "sub-destination", component: <SubDestination /> },
     { url: "transfer", component: <Transfer /> },
-    { url: "transfer/:id", component: <AddTransfer /> },
+    { url: "transfer/:id", component: <DetailTransfer /> },
+    { url: "transfer/add", component: <AddTransfer /> },
+    { url: "transfer/add/:id", component: <AddTransfer /> },
     { url: "activity", component: <Activity /> },
     { url: "activity/add", component:<AddActivity /> },
     { url: "activity/add/:id", component: <AddActivity /> },
