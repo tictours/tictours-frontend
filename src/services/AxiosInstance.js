@@ -33,6 +33,10 @@ export const filePost = (url, data) =>
   createCustomInstance(formDataType).post(url, data).then(responseBody);
 export const axiosPut = (url, data) =>
   createCustomInstance().put(url, data).then(responseBody);
+export const filePut = (url, data) =>
+  createCustomInstance(formDataType).put(url, data).then(responseBody);
+export const axiosPatch = (url, params) =>
+  createCustomInstance().patch(url,params).then(responseBody);
 export const axiosDelete = (url, data) =>
   createCustomInstance().delete(url).then(responseBody);
 

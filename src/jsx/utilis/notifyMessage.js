@@ -5,6 +5,11 @@ const notifyCreate = (title = '', isEdit = false) => {
         message: `${title} ${isEdit ? "Edited" : "Added"} Successfully`,
     });
 }
+const notifySuccess = (title = '',) => {
+    notify({
+        message: `${title}`,
+    });
+}
 const notifyDelete = (title = '') => {
     notify({
         type: 'warning',
@@ -32,4 +37,4 @@ const notifyError = (error = '', showStatus) => {
     });
 }
 
-export { notifyCreate, notifyDelete, notifyError }
+export { notifyCreate, notifyDelete, notifyError,notifySuccess }
