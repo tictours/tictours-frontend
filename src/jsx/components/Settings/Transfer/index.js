@@ -7,6 +7,7 @@ import QuestionIcon from "../../Dashboard/Ticketing/QuestionIcon";
 import { URLS } from "../../../../constants";
 import { useAsync } from "../../../utilis/useAsync";
 import DeleteModal from "../../common/DeleteModal";
+import { CustomTable } from "../../common/CustomTable";
 // import CustomModal from "../../layouts/CustomModal";
 
 const RightIcon = () => {
@@ -32,19 +33,49 @@ const RightIcon = () => {
   );
 };
 
-
-
 const Transfer = () => {
   const navigate = useNavigate();
-  const [showModal, setShowModal]=useState(false)
+  const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [deleteUrl, setDeleteUrl] = useState('');
-  const [deleteName, setDeleteName] = useState('');
-  const url = URLS.TRANSFER_URL
-  const transferData = useAsync(url)
-  const tableData = transferData?.data?.data
+  const [deleteUrl, setDeleteUrl] = useState("");
+  const [deleteName, setDeleteName] = useState("");
+  const onStatus = (id) => {
+    console.log("handle Status", id);
+    };
+  const onView = (id) => {
+    navigate(`${id}`)
+  };
+  const onEdit = (id) => {
+    navigate(`add/${id}`)
+  };
+  const onDelete = (id,name) => {
+    setDeleteUrl(`${url}/${id}`)
+    setDeleteName(name)
+    setShowDeleteModal(true)
+  }
+
+  const tableArray = [
+    { label: "Sl no", value: "index", className: "text-center" },
+    { label: "Vehicle No", value: "vehicle_number" },
+    { label: "Name", value: "vehicle_name" },
+    { label: "Destination", value: ["destination", "name"] },
+    { label: "Status", value: "is_active" },
+    {
+      label: "Actions",
+      value: [
+        { menu: "Status",showLabel:'vehicle_name',showValue:"is_active" },
+        { menu: "View", onPress: onView },
+        { menu: "Edit", onPress: onEdit },
+        { menu: "Delete",showLabel:'vehicle_name' },
+      ],
+    },
+  ];
+  const url = URLS.TRANSFER_URL;
+  const patchUrl = URLS.TRANSFER_PATCH_URL;
+  const transferData = useAsync(url);
+  const tableData = transferData?.data?.data;
   const [data, setData] = useState(
-    document.querySelectorAll("#example2_wrapper tbody tr"),
+    document.querySelectorAll("#example2_wrapper tbody tr")
   );
   const sort = 8;
   const activePag = useRef(0);
@@ -100,13 +131,9 @@ const Transfer = () => {
   };
 
   const handleStatus = (ind) => {
-    console.log('status',ind)
-  }
-  const onDelete = (id,name) => {
-    setDeleteUrl(`${url}/${id}`)
-    setDeleteName(name)
-    setShowDeleteModal(true)
-  }
+    console.log("status", ind);
+  };
+
   return (
     <>
       <div className="row">
@@ -178,7 +205,7 @@ const Transfer = () => {
           <InvoiceSlider title="Transfer" />
           {/* swiper end */}
 
-          <div className="row">
+          {/* <div className="row">
             <div className="col-xl-12">
               <div
                 className="table-responsive  full-data dataTables_wrapper"
@@ -246,8 +273,8 @@ const Transfer = () => {
                           <span
                             className={`btn light fs-14  btn-sm ${item?.is_active === 1 ?'btn-success':'btn-pink'}`}
                           >
-                            {/* {item.icon2}
-                                                        {" "} */}
+                            {item.icon2}
+                                                        {" "} 
                             {item?.is_active === 1 ?'Active':'Inactive'}
 
                           </span>
@@ -353,11 +380,23 @@ const Transfer = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
+          <CustomTable
+            tableArray={tableArray}
+            data={tableData}
+            length={tableData?.length}
+            loading={transferData?.loading}
+            url={url}
+            url2={patchUrl}
+          />
         </div>
       </div>
-      <DeleteModal showModal={showDeleteModal} setShowModal={setShowDeleteModal} name={deleteName} url={deleteUrl} />
-    
+      {/* <DeleteModal
+        showModal={showDeleteModal}
+        setShowModal={setShowDeleteModal}
+        name={deleteName}
+        url={deleteUrl}
+      /> */}
     </>
   );
 };

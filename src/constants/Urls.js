@@ -25,4 +25,5 @@ export const URLS = {
   ACTIVITY_URL:'/activities',
   TRANSFER_URL:'/transfers',
   TRANSFER_UPDATE_URL:'/transfer-update',
+  TRANSFER_PATCH_URL:'/transfer-status-update',
 };
