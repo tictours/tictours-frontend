@@ -139,18 +139,17 @@ const StepTwo = ({ formik: parentFormik }) => {
                 <h4>Room Details</h4>
               </div>
               <div className="col-6 col-sm-4 col-md-3 col-lg-2 mb-2">
-                <SelectField
-                  label="Market Type"
-                  name="marketType"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  values={values}
-                  setValue={setFieldValue}
-                  options={marketTypeData?.data?.data}
-                  optionValue="id"
-                  optionLabel="name"
-                  showLabelValue
-                />
+                <ReactSelect
+                        label="Market Type"
+                        options={marketTypeData?.data?.data}
+                        value={values.marketType}
+                        onChange={(selected) =>
+                          setFieldValue("marketType", selected)
+                        }
+                        optionValue="id"
+                        optionLabel="name"
+                        required
+                      />
               </div>
               <div className="col-6 col-sm-4 col-md-3 col-lg-2 m-b30">
                 <label>From Date</label>
@@ -172,18 +171,15 @@ const StepTwo = ({ formik: parentFormik }) => {
               </div>
               <div className="col-6 col-sm-4 col-md-3 col-lg-2 mb-2">
                 <div className="form-group mb-3">
-                  <SelectField
-                    label="Room Type"
-                    name="roomType"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    setValue={setFieldValue}
-                    values={values}
-                    options={roomTypeData?.data?.data}
-                    optionValue="id"
-                    optionLabel="name"
-                    showLabelValue
-                  />
+                <ReactSelect
+                  label="Room Type"
+                  options={roomTypeData?.data?.data}
+                  value={values.roomType}
+                  onChange={(selected) => setFieldValue("roomType", selected)}
+                  optionValue="id"
+                  optionLabel="name"
+                  required
+                />
                 </div>
               </div>
               <div className="col-6 col-sm-4 col-md-3 col-lg-2  mb-2">
@@ -254,7 +250,7 @@ const StepTwo = ({ formik: parentFormik }) => {
               </div>
               <div className="row mb-3">
                 <div className="col-12">
-                  <h4>Amentities</h4>
+                  <h4>Amentities *</h4>
                 </div>
                 <div className="col-12">
                   <div className="form-group">
@@ -293,7 +289,7 @@ const StepTwo = ({ formik: parentFormik }) => {
               </div>
               <div className="row mb-3">
                 <div className="col-12">
-                  <h4>Image</h4>
+                  <h4>Room Images *</h4>
                 </div>
                 <div className="col-lg-6">
                   {/* <div className="form-group">
@@ -310,19 +306,20 @@ const StepTwo = ({ formik: parentFormik }) => {
                     </div>
                   </div> */}
                   <FileUploader
-                    label='Room image'
+                    // label='Room images'
                     name="roomImg"
                     // onChange={onChange}
                     onBlur={handleBlur}
                     values={values}
                     setFieldValue={setFieldValue}
                     isMulti
+                    required
                   />
                 </div>
               </div>
               <div className="row">
                 <div className="col-12">
-                  <h4>Meals Plan</h4>
+                  <h4>Meals Plan *</h4>
                 </div>
                 <div className="col-lg-6">
                   <div className="row">
@@ -330,6 +327,7 @@ const StepTwo = ({ formik: parentFormik }) => {
                       <ReactSelect
                         options={mealTypeData?.data?.data}
                         // isMulti
+                        value={values.mealType}
                         onChange={(selected) =>
                           setFieldValue("mealType", selected)
                         }
@@ -392,14 +390,14 @@ const StepTwo = ({ formik: parentFormik }) => {
                               <td>{plan.amount}</td>
                               <td>
                                 <div className="d-flex">
-                                  <button
+                                  {/* <button
                                     className="btn bg-main btn-xs sharp me-1"
                                     onClick={() =>
                                       handleEdit(key, values.mealPlan, setFieldValue, 'mealPlan')
                                     }
                                   >
                                     <i className="fas fa-pencil-alt"></i>
-                                  </button>
+                                  </button> */}
                                   <button
                                     className="btn bg-main btn-xs sharp"
                                     onClick={() =>

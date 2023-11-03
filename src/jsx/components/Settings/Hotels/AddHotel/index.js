@@ -7,7 +7,7 @@ import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 import StepOne from "./StepOne";
 import PageTitle from "../../../../layouts/PageTitle";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import notify from "../../../common/Notify";
 import { useDispatch, useSelector } from "react-redux";
 import { FormAction } from "../../../../../store/slices/formSlice";
@@ -17,20 +17,26 @@ import { axiosPost, axiosPut, filePost } from "../../../../../services/AxiosInst
 import { notifyCreate, notifyError } from "../../../../utilis/notifyMessage";
 import { useAsync } from "../../../../utilis/useAsync";
 import * as Yup from "yup";
+import { checkFormValue, checkIsFile } from "../../../../utilis/check";
+import { LoadingButton } from "../../../common/LoadingBtn";
 
 const AddHotel = () => {
   const [goSteps, setGoSteps] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const formId = useSelector((data) => data.form);
-  const isEdit = !!formId.editId;
+  const {id} = useParams()
+  // const formId = useSelector((data) => data.form);
+  // const isEdit = !!formId.editId;
+  const isEdit = !!id;
   const initialValues = {
+    // destination:{label:'',value:''},
     addRoom: [],
     hotelAmentity: [],
     hotelImg: [],
   }
   const url = URLS.HOTEL_URL
-  const editUrl = `${URLS.HOTEL_URL}/${formId.editId}`
+  const editUrl = `${URLS.HOTEL_URL}/${id}`
+  const updateUrl = `${URLS.HOTEL_UPDATE_URL}/${id}`
 
   const editData = useAsync(editUrl,isEdit)
   // console.log('editData',editData)
@@ -44,8 +50,14 @@ const AddHotel = () => {
       .min(5, "Your place must be at least 5 characters long")
       .max(50, "Your place must be at limit 50 characters long")
       .required("Please provide a place"),
+    destination: Yup.object().required('Please select a destination'),
+    subDestination: Yup.object().required('Please select a sub destination'),
     category: Yup.string()
       .required("Please select a category"),
+    propertyType: Yup.string()
+      .required("Please select a property type"),
+    salesEmail: Yup.string()
+      .required("Please select a sales email").email("Please provide valid email"),
     phoneNumber: Yup.string()
       .min(5, "Your phone number must be at least 5 characters long")
       .max(15, "Your phone number must be at limit 15 characters long")
@@ -62,24 +74,26 @@ const AddHotel = () => {
     onSubmit: async (values) => {
       // Handle form submission here
       try {
+        dispatch(FormAction.setLoading(true))
         const formData = new FormData();
-        formData.append('name', values.name);
-        formData.append('destination_id', values.destination);
-        formData.append('sub_destination_id', values.subDestination);
+        formData.append('name',values.name)
+        // formData.append('name', values.name);
+        formData.append('destination_id', values.destination?.value);
+        formData.append('sub_destination_id', values.subDestination?.value);
         formData.append('place', values.place);
         formData.append('category_id', values.category);
         formData.append('property_type_id', values.propertyType);
         formData.append('sales_email', values.salesEmail);
-        formData.append('sales_no', values.salesNumber);
-        formData.append('reservation_email', values.reservationEmail);
-        formData.append('reservation_no', values.reservationNumber);
+        formData.append('sales_no', checkFormValue(values.salesNumber));
+        formData.append('reservation_email', checkFormValue(values.reservationEmail));
+        formData.append('reservation_no', checkFormValue(values.reservationNumber));
         formData.append('phone_number', values.phoneNumber);
         formData.append('address', values.address);
-        values.addRoom.forEach((item,ind)=>{
-          formData.append(`rooms[${ind}][market_type_id]`, item.marketType);
+        values.addRoom?.forEach((item,ind)=>{
+          formData.append(`rooms[${ind}][market_type_id]`, item.marketType.value);
           formData.append(`rooms[${ind}][from_date]`, new Date(item.roomStartDate).toLocaleDateString('en-CA'));
           formData.append(`rooms[${ind}][to_date]`, new Date(item.roomEndDate).toLocaleDateString('en-CA'));
-          formData.append(`rooms[${ind}][room_type_id]`, item.roomType);
+          formData.append(`rooms[${ind}][room_type_id]`, item.roomType.value);
           formData.append(`rooms[${ind}][single_bed_amount]`, item.singleBed);
           formData.append(`rooms[${ind}][double_bed_amount]`, item.doubleBed);
           formData.append(`rooms[${ind}][triple_bed_amount]`, item.tripleBed);
@@ -91,15 +105,15 @@ const AddHotel = () => {
           formData.append(`rooms[${ind}][child_n_bed_amount]`, item.childNBed);
           formData.append(`rooms[${ind}][is_child_n_bed_available]`, item.childNBedSelect ? 1 : 0);
           formData.append(`rooms[${ind}][occupancy]`, item.occupancy);
-          item.roomAmentity.forEach((item,i)=>{
+          item.roomAmentity?.forEach((item,i)=>{
             formData.append(`rooms[${ind}][amenities][${i}]`, item);
           })
-          item.roomImg.forEach((item,i)=>{
-            if(!item.file_url){
+          item.roomImg?.forEach((item,i)=>{
+            if(checkIsFile(item)){
             formData.append(`rooms[${ind}][images][${i}]`, item);
             }
           })
-          item.mealPlan.forEach((item,i)=>{
+          item.mealPlan?.forEach((item,i)=>{
             formData.append(`rooms[${ind}][meal_plans][${i}][id]`, item.id);
             formData.append(`rooms[${ind}][meal_plans][${i}][amount]`, item.amount);
           })
@@ -108,17 +122,17 @@ const AddHotel = () => {
           // formData.append(`rooms[${ind}][]`, item.availableTo);
           formData.append(`rooms[${ind}][allotted_cut_off_days]`, item.cutOff);
         })
-        values.hotelAmentity.forEach((item,ind)=>{
+        values.hotelAmentity?.forEach((item,ind)=>{
           formData.append(`amenities[${ind}]`, item);
         })
-        values.hotelImg.forEach((item,ind)=>{
-        if(!item.file_url){
+        values.hotelImg?.forEach((item,ind)=>{
+        if(checkIsFile(item)){
           formData.append(`document_2[${ind}]`, item);
         }
         })
         let response;
         if (isEdit) {
-          response = await axiosPut(editUrl, formData);
+          response = await filePost(updateUrl, formData);
         } else {
           response = await filePost(url, formData);
         }
@@ -134,9 +148,12 @@ const AddHotel = () => {
           navigate('/hotels')
         }
       } catch (error) {
-        const errMsg = error.response?.data?.data?.errors
-        const firstErr = Object.values(errMsg)[0][0]
-        notifyError(firstErr ? firstErr : 'Oops Something Went Wrong')
+        // const errMsg = error.response?.data?.data?.errors
+        // const firstErr = Object.values(errMsg)[0][0]
+        console.log('err',error)
+        notifyError(error)
+      }finally{
+        dispatch(FormAction.setLoading(false))
       }
     },
   })
@@ -146,8 +163,8 @@ const AddHotel = () => {
     if(!!editValues){
     const obj = {
       name: editValues.name,
-      destination: editValues.destination_id,
-      subDestination: editValues.sub_destination_id,
+      destination: {label:editValues.destination_name,value:editValues.destination_id},
+      subDestination: {label:editValues.sub_destination_name,value:editValues.sub_destination_id},
       place: editValues.place,
       category: editValues.category_id,
       propertyType: editValues.property_type_id  ,
@@ -164,12 +181,12 @@ const AddHotel = () => {
      const hotelAmentityArr = editValues.amenities.map((item)=>item.id)
      const addRoomArr = editValues.rooms?.map((item,ind)=>{
       const obj = {
-        marketType: item.market_type_id,
-        marketTypeLabel: item.market_type_name,
+        marketType: {label:item.market_type_name,value:item.market_type_id},
+        // marketTypeLabel: item.market_type_name,
         roomStartDate: item.from_date,
         roomEndDate: item.to_date,
-        roomType: item.room_type_id,
-        roomTypeLabel: item.room_type_name,
+        roomType:  {label:item.room_type_name,value:item.room_type_id},
+        // roomTypeLabel: item.room_type_name,
         singleBed: item.single_bed_amount,
         doubleBed: item.double_bed_amount,
         tripleBed: item.triple_bed_amount,
@@ -226,7 +243,7 @@ const AddHotel = () => {
     // formik.setFieldValue('addRoom',addRoomArr)
 
     }
-  },[formId.editId,editValues])
+  },[id,editValues])
 
   const handleSubmit = () => {
 
@@ -320,18 +337,19 @@ const AddHotel = () => {
                     <StepFour formik={formik} />
                     <div className="text-end toolbar toolbar-bottom p-2">
                       <button
-                        className="btn btn-secondary sw-btn-prev me-1"
+                        className="btn btn-secondary sw-btn-prev me-2"
                         onClick={() => setGoSteps(2)}
                       >
                         Prev
                       </button>
-                      <button
+                      {/* <button
                         className="btn btn-primary sw-btn-next ms-1"
                         type="submit"
                         onClick={() => formik.handleSubmit()}
                       >
                         Submit
-                      </button>
+                      </button> */}
+                      <LoadingButton label='Submit'  onClick={formik.handleSubmit}/>
                     </div>
                   </>
                 )}

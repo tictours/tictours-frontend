@@ -3,10 +3,11 @@ import InputField from "../../../common/InputField";
 import { useAsync } from "../../../../utilis/useAsync";
 import { URLS } from "../../../../../constants";
 import SelectField from "../../../common/SelectField";
+import ReactSelect from "../../../common/ReactSelect";
 
 const StepOne = ({ formik }) => {
 
-  const destinationId = formik.values.destination
+  const destinationId = formik.values.destination?.value
   const subDestinationUrl = `${URLS.SUB_DESTINATION_URL}?destination_id=${destinationId}`
 
   const destinationData = useAsync(URLS.DESTINATION_URL)
@@ -16,6 +17,7 @@ const StepOne = ({ formik }) => {
 
   const errors = formik.errors
   // console.log(subDestinationUrl, 'data', subDestinationData,)
+  console.log('err',errors)
   return (
     <section>
       <div className="row">
@@ -33,7 +35,7 @@ const StepOne = ({ formik }) => {
           </div>
         </div>
         <div className="col-lg-6 mb-2">
-          <SelectField
+          {/* <SelectField
             label={'Destination'}
             name={'destination'}
             onChange={formik.handleChange}
@@ -42,10 +44,22 @@ const StepOne = ({ formik }) => {
             options={destinationData?.data?.data}
             optionValue="id"
             optionLabel="name"
-          />
+          /> */}
+          <ReactSelect
+                  label="Destination"
+                  options={destinationData?.data?.data}
+                  value={formik.values.destination}
+                  onChange={(selected) => formik.setFieldValue("destination", selected)}
+                  optionValue="id"
+                  optionLabel="name"
+                  inputId='destination'
+                  formik={formik}
+                  onBlur={formik.handleBlur}
+                  required
+                />
         </div>
         <div className="col-lg-6 mb-2">
-          <SelectField
+          {/* <SelectField
             label={'Sub Destination'}
             name={'subDestination'}
             onChange={formik.handleChange}
@@ -54,7 +68,19 @@ const StepOne = ({ formik }) => {
             options={subDestinationData?.data?.data}
             optionValue="id"
             optionLabel="name"
-          />
+          /> */}
+          <ReactSelect
+                  label="Sub Destination"
+                  options={subDestinationData?.data?.data}
+                  value={formik.values.subDestination}
+                  onChange={(selected) => formik.setFieldValue("subDestination", selected)}
+                  optionValue="id"
+                  optionLabel="name"
+                  inputId='subDestination'
+                  formik={formik}
+                  onBlur={formik.handleBlur}
+                  required
+                />
         </div>
         <div className="col-lg-6 mb-2">
           <div className="form-group mb-3">
@@ -93,6 +119,7 @@ const StepOne = ({ formik }) => {
             options={propertyTypeData?.data?.data}
             optionValue="id"
             optionLabel="name"
+            required
           />
         </div>
         <div className="col-lg-6 mb-2">
@@ -103,6 +130,8 @@ const StepOne = ({ formik }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               values={formik.values}
+              formik={formik}
+              required
             />
           </div>
         </div>

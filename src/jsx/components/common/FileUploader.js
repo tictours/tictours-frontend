@@ -14,6 +14,7 @@ export function FileUploader(props) {
     labelClassName = "",
     inputClassName = "",
     onChange,
+    required=false,
     ...restProps
   } = props;
 
@@ -22,7 +23,6 @@ export function FileUploader(props) {
 
   // This function will be triggered when the file field change
   const onFileChange = (e) => {
-    console.log("set", e.target.files[0]);
     if (e.target.files && e.target.files.length > 0) {
       if (isMulti) {
         setFieldValue(name, [e.target.files[0], ...fileData]);
@@ -41,14 +41,14 @@ export function FileUploader(props) {
       setFieldValue(name, "");
     }
   };
-  const isPreview = !!fileData || !!fileData?.length
+  const isPreview = isMulti ? !!fileData?.length : !!fileData
 
   return (
     <div className="form-group" key={key}>
       <div className="my-3">
         {label && (
           <label htmlFor="formFileMultiple" className="form-label">
-            {label}
+            {label} {required && <span>*</span>}
           </label>
         )}
         <input
@@ -56,13 +56,13 @@ export function FileUploader(props) {
           className="form-control"
           type={type}
           // id="formFileMultiple"
+          // multiple={isMulti}
           name={name}
           onChange={onFileChange}
         />
       </div>
       {isPreview && (
           <div className="row" style={styles.container}>
-            {console.log("render", fileData)}
             <div className="mb-2">
               <h3>Preview</h3>
             </div>

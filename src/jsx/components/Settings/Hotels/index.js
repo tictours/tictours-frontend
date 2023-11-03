@@ -211,8 +211,8 @@ const Hotels = () => {
   };
 
   const handleEdit = (id) => {
-    dispatch(FormAction.setEditId(id));
-    navigate(`/add-hotel`);
+    // dispatch(FormAction.setEditId(id));
+    navigate(`add/${id}`);
   };
   const handleDelete = async (id, name) => {
     const deleteUrl = `${URLS.HOTEL_URL}/${id}`;
@@ -267,7 +267,7 @@ const Hotels = () => {
                   </div>
                   <div className="invoice-btn">
                     <button
-                      onClick={() => navigate(`/add-hotel`)}
+                      onClick={() => navigate(`add`)}
                       className="btn btn-primary"
                     >
                       New Hotels{" "}

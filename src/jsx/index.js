@@ -268,7 +268,8 @@ const Markup = () => {
     // Settings
     { url: "settings", component: <Settings /> },
     {url:'hotels/:id', component: <HotelDetail/>},
-    { url: "add-hotel", component: <AddHotel /> },
+    { url: "hotels/add", component: <AddHotel /> },
+    { url: "hotels/add/:id", component: <AddHotel /> },
     { url: "user", component: <User /> },
     { url: "user-role", component: <UserRole /> },
     { url: "user-role/:id", component: <Permission /> },
