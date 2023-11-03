@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
   loadingToggleAction,
@@ -12,6 +12,8 @@ import BgImage from "../../images/bg.png";
 import logo from "../../images/logo-full.png";
 import logolight from "../../images/logo-full-light.png";
 import pol from "../../images/pol.jpg";
+import { LoadingButton } from "../components/common/LoadingBtn";
+import { FormAction } from "../../store/slices/formSlice";
 
 function Login(props) {
   const [email, setEmail] = useState("testuser");
@@ -37,6 +39,7 @@ function Login(props) {
     if (error) {
       return;
     }
+    dispatch(FormAction.setLoading(true))
     dispatch(loadingToggleAction(true));
     dispatch(loginAction(email, password, navigate));
   }
@@ -150,12 +153,13 @@ function Login(props) {
 												</div>
 											</div> */}
                       <div className="text-center">
-                        <button
+                        {/* <button
                           type="submit"
                           className="btn btn-primary btn-block"
                         >
                           Sign Me In
-                        </button>
+                        </button> */}
+                        <LoadingButton label='Sign In' className={'btn-block'}/>
                       </div>
                     </form>
                   </div>

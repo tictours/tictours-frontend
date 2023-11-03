@@ -4,6 +4,7 @@ const initialState = {
   editId: "",
   name: "",
   refresh: false,
+  loading:false
 };
 
 const Form = createSlice({
@@ -18,6 +19,9 @@ const Form = createSlice({
     },
     setName(state, action) {
       state.name = action.payload;
+    },
+    setLoading(state, action) {
+      state.loading = action.payload;
     },
   },
 });

@@ -8,6 +8,7 @@ import {
   saveTokenInLocalStorage,
   signUp,
 } from "../../services/AuthService";
+import { FormAction } from "../slices/formSlice";
 
 export const SIGNUP_CONFIRMED_ACTION = "[signup action] confirmed signup";
 export const SIGNUP_FAILED_ACTION = "[signup action] failed signup";
@@ -71,7 +72,9 @@ export function loginAction(email, password, navigate) {
         //console.log('error');
         const errorMessage = formatError(error.response);
         dispatch(loginFailedAction(errorMessage));
-      });
+      }).finally(()=>{
+        dispatch(FormAction.setLoading(false))
+      })
   };
 }
 
