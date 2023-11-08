@@ -9,6 +9,7 @@ import CustomModal from "../../../layouts/CustomModal";
 import { useAsync } from "../../../utilis/useAsync";
 import { URLS } from "../../../../constants";
 import DeleteModal from "../../common/DeleteModal";
+import { CustomTable } from "../../common/CustomTable";
 // import CustomModal from "../../layouts/CustomModal";
 
 const RightIcon = () => {
@@ -34,88 +35,36 @@ const RightIcon = () => {
   );
 };
 
-const tableBlog = [
-  {
-    title: "Talan Siphron",
-    mail: "ahmad@mail.com",
-    icon: "#1EBA62",
-    iconClass: "btn-success",
-    icon2: <RightIcon />,
-    icontext: "Confirmed",
-  },
-  {
-    title: "Thomas Khun",
-    mail: "soap@mail.com",
-    icon: "#FF4646",
-    iconClass: "btn-primary",
-    icon2: <QuestionIcon colorchange="#01A3FF" />,
-    icontext: "Pending",
-  },
-  {
-    title: "Marilyn Workman",
-    mail: "mantha@mail.com",
-    icon: "#FF4646",
-    iconClass: "btn-pink",
-    icon2: <QuestionIcon colorchange="#EB62D0" />,
-    icontext: "W. Approval",
-  },
-  {
-    title: "Thomas Khun",
-    mail: "hope@mail.com",
-    icon: "#FF4646",
-    iconClass: "btn-primary",
-    icon2: <QuestionIcon colorchange="#01A3FF" />,
-    icontext: "Pending",
-  },
-  {
-    title: "Talan Siphron",
-    mail: "jordan@mail.com",
-    icon: "#1EBA62",
-    iconClass: "btn-success",
-    icon2: <RightIcon />,
-    icontext: "Complete",
-  },
-  {
-    title: "Marilyn Workman",
-    mail: "adja@mail.com",
-    icon: "#FF4646",
-    iconClass: "btn-pink",
-    icon2: <QuestionIcon colorchange="#EB62D0" />,
-    icontext: "W. Approval",
-  },
-  {
-    title: "Thomas Khun",
-    mail: "soap@mail.com",
-    icon: "#FF4646",
-    iconClass: "btn-primary",
-    icon2: <QuestionIcon colorchange="#01A3FF" />,
-    icontext: "Pending",
-  },
-  {
-    title: "Talan Siphron",
-    mail: "kevin@mail.com",
-    icon: "#FF4646",
-    iconClass: "btn-pink",
-    icon2: <QuestionIcon colorchange="#EB62D0" />,
-    icontext: "W. Approval",
-  },
-  {
-    title: "Marilyn Workman",
-    mail: "vita@mail.com",
-    icon: "#1EBA62",
-    iconClass: "btn-success",
-    icon2: <RightIcon />,
-    icontext: "Complete",
-  },
-];
+
 
 const Activity = () => {
   const navigate = useNavigate();
-  const [showModal, setShowModal]=useState(false)
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [deleteUrl, setDeleteUrl] = useState('');
-  const [deleteName, setDeleteName] = useState('');
+
+  const onView = (id) => {
+    navigate(`${id}`)
+  };
+  const onEdit = (id) => {
+    navigate(`add/${id}`)
+  };
+  const tableArray = [
+    { label: "Sl no", value: "index", className: "text-center" },
+    { label: "Name", value: "activity_name" },
+    { label: "Number", value: "contact_number" },
+    { label: "Email", value: "contact_email" },
+    { label: "Destination", value: ["destination", "name"],className:'text-center' },
+    { label: "Status", value: "is_active" },
+    {
+      label: "Actions",
+      value: [
+        { menu: "Status",showLabel:'activity_name',showValue:"is_active" },
+        { menu: "View", onPress: onView },
+        { menu: "Edit", onPress: onEdit },
+        { menu: "Delete",showLabel:'activity_name' },
+      ],
+    },
+  ];
   const url = URLS.ACTIVITY_URL
+  const patchUrl = URLS.ACTIVITY_UPDATE_URL
   const activityData = useAsync(url)
   const tableData = activityData?.data?.data
   const [data, setData] = useState(
@@ -173,14 +122,7 @@ const Activity = () => {
       }
     }
   };
-  const onDelete = (id,name) => {
-    setDeleteUrl(`${url}/${id}`)
-    setDeleteName(name)
-    setShowDeleteModal(true)
-  }
-  const handleStatus = (ind) => {
-    console.log('status',ind)
-  }
+  
   return (
     <>
       <div className="row">
@@ -252,7 +194,7 @@ const Activity = () => {
           <InvoiceSlider title="Activity" />
           {/* swiper end */}
 
-          <div className="row">
+          {/* <div className="row">
             <div className="col-xl-12">
               <div
                 className="table-responsive  full-data dataTables_wrapper"
@@ -278,8 +220,8 @@ const Activity = () => {
                       <th>Email</th>
                       <th>Destination</th>
                       <th>Sub Destination</th>
-                      {/* <th className="text-center">Start Date</th> */}
-                      {/* <th className="text-center">End Date</th> */}
+                      <th className="text-center">Start Date</th> 
+                      <th className="text-center">End Date</th>
                       <th className="text-end">Status</th>
                       <th></th>
                     </tr>
@@ -320,18 +262,18 @@ const Activity = () => {
                         <td>{item?.contact_email}</td>
                         <td>{item?.destination?.name}</td>
                         <td> {item?.sub_destination?.name}</td>
-                        {/* <td className="whitesp-no fs-14 font-w400">
+                        <td className="whitesp-no fs-14 font-w400">
                           June 1, 2022
                         </td>
                         <td className="whitesp-no fs-14 font-w400">
                           June 15, 2022
-                        </td> */}
+                        </td>
                         <td className="text-end">
                           <span
                             className={`btn light fs-14  btn-sm ${item?.is_active === 1 ?'btn-success':'btn-pink'}`}
                           >
-                            {/* {item.icon2}
-                                                        {" "} */}
+                            {item.icon2}
+                                                        {" "}
                             {item?.is_active === 1 ?'Active':'Inactive'}
                           </span>
                         </td>
@@ -436,7 +378,15 @@ const Activity = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
+          <CustomTable
+            tableArray={tableArray}
+            data={tableData}
+            length={tableData?.length}
+            loading={activityData?.loading}
+            url={url}
+            url2={patchUrl}
+          />
         </div>
       </div>
       {/* <CustomModal
@@ -449,7 +399,6 @@ const Activity = () => {
       >
         <EditProfile setShowModal={setShowModal} />
       </CustomModal> */}
-      <DeleteModal showModal={showDeleteModal} setShowModal={setShowDeleteModal} name={deleteName} url={deleteUrl} />
 
     </>
   );

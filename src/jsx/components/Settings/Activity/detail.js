@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom'
 import { useAsync } from '../../../utilis/useAsync';
 import { URLS } from '../../../../constants';
 import { Table } from 'react-bootstrap';
+import { parseTime } from '../../../utilis/date';
 
 function DetailActivity() {
   const {id} = useParams()
@@ -68,8 +69,8 @@ function DetailActivity() {
                                 <td>{key + 1}</td>
                                 <td>{data.from_date}</td>
                                 <td>{data.to_date}</td>
-                                <td>{data.opening_time}</td>
-                                <td>{data.closing_time}</td>
+                                <td>{parseTime(data.opening_time)}</td>
+                                <td>{parseTime(data.closing_time)}</td>
                                 <td>{data.adult_cost}</td>
                                 <td>{data.child_cost}</td>
                               </tr>

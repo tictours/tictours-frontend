@@ -23,6 +23,7 @@ export const URLS = {
   REQUIREMENT_URL:'/requirements',
   CHANGE_PASSWORD_URL:'/user/change-password',
   ACTIVITY_URL:'/activities',
+  ACTIVITY_UPDATE_URL:'/activity-status-update',
   TRANSFER_URL:'/transfers',
   TRANSFER_UPDATE_URL:'/transfer-update',
   TRANSFER_PATCH_URL:'/transfer-status-update',
