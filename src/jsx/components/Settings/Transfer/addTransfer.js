@@ -12,7 +12,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import {  Table } from "react-bootstrap";
 import { formatDate } from "../../../utilis/date";
 import {  filePost } from "../../../../services/AxiosInstance";
-import { checkIsFile } from "../../../utilis/check";
+import { checkFormValue, checkIsFile } from "../../../utilis/check";
+import { useDispatch } from "react-redux";
+import { FormAction } from "../../../../store/slices/formSlice";
+import {LoadingButton} from "../../../components/common/LoadingBtn"
 
 const typeOptions = [
   { label: "Private", value: "Private" },
@@ -25,6 +28,7 @@ const statusOptions = [
 
 const AddTransfer = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { id } = useParams();
   const initialValues = {
     fromDate: SETUP.TODAY_DATE,
@@ -37,6 +41,7 @@ const AddTransfer = () => {
     editArr:-1,
     image: '',
     costArr: [],
+    costId:''
   };
   const url = URLS.TRANSFER_URL
   const editUrl = `${URLS.TRANSFER_URL}/${id}`
@@ -45,19 +50,23 @@ const AddTransfer = () => {
   
   const handleClick = async(values) => {
     try {
+      dispatch(FormAction.setLoading(true))
       let response
       const formData = new FormData()
       // const values = formik.values
-      formData.append('vehicle_name',values.name)
-      formData.append('vehicle_number',values.vehicleNumber)
-      formData.append('phone_number',values.phoneNumber)
-      formData.append('destination_id',values.destination?.value)
-      formData.append('description',values.description)
+      formData.append('vehicle_name',checkFormValue(values.name))
+      formData.append('vehicle_number',checkFormValue(values.vehicleNumber))
+      formData.append('phone_number',checkFormValue(values.phoneNumber))
+      formData.append('destination_id',checkFormValue(values.destination?.value))
+      formData.append('description',checkFormValue(values.description))
       formData.append('is_active',values.status.value)
       if(checkIsFile(values.image)){
         formData.append('image',values.image)
       }
-      values.costArr.map((data,ind)=>{
+      values.costArr.forEach((data,ind)=>{
+        if(!!data.costId){
+          formData.append(`estimations[${ind}][id]`,data.costId)
+        }
         formData.append(`estimations[${ind}][from_date]`,data.fromDate)
         formData.append(`estimations[${ind}][to_date]`,data.toDate)
         formData.append(`estimations[${ind}][type]`,data.type.value)
@@ -77,6 +86,8 @@ const AddTransfer = () => {
       }
     } catch (error) {
       notifyError(error)
+    } finally{
+      dispatch(FormAction.setLoading(false))
     }
   };
   const formik = useFormik({
@@ -108,7 +119,7 @@ const AddTransfer = () => {
       formik.setFieldValue('image',data.image)
       formik.setFieldValue('status',{value:data.is_active,label:data.is_active===1?'Active':'Inactive'})
       const costArr = data.estimations?.map((item,ind)=>{
-        const obj = {fromDate:item.from_date, toDate:item.to_date,
+        const obj = {costId:item.id,fromDate:item.from_date, toDate:item.to_date,
           type:{label:item.type,value:item.type},cost:item.cost,
           adultCost:item.adult_cost,childCost:item.child_cost}
           return obj
@@ -122,6 +133,9 @@ const AddTransfer = () => {
   }, [editData?.data,id])
   
   const handleEstimationForm = (value,id=-1) => {
+    if(!!value.costId){
+      formik.setFieldValue("costId", value.costId);
+    }
     formik.setFieldValue("fromDate", value.fromDate);
     formik.setFieldValue("toDate", value.toDate);
     formik.setFieldValue("type", value.type);
@@ -133,6 +147,7 @@ const AddTransfer = () => {
   const handleCost = () => {
     const values = formik.values;
     const obj = {
+      costId: values.costId,
       fromDate: formatDate(values.fromDate),
       toDate: formatDate(values.toDate),
       type: values.type,
@@ -167,7 +182,6 @@ const AddTransfer = () => {
     const filteredVal = tableData.filter((val, i) => i !== id);
     formik.setFieldValue("costArr", filteredVal);
   };
-  // console.log(subDestinationUrl, 'data', subDestinationData,)
   return (
     <div className="row">
       <div className="col-xl-12 col-xxl-12">
@@ -218,6 +232,7 @@ const AddTransfer = () => {
                       onChange={(selected) =>
                         formik.setFieldValue("destination", selected)
                       }
+                      required
                     />
                   </div>
                   {/* <div className="col-lg-6 mb-2">
@@ -282,7 +297,7 @@ const AddTransfer = () => {
                     />
                   </div>
                   <div className="col-lg-12">
-                    <h5>Estimation</h5>
+                    <h5>Estimation *</h5>
                   </div>
 
                   <div className="col-lg-6 mb-3">
@@ -442,13 +457,14 @@ const AddTransfer = () => {
                   </div>
 
                   <div className="card-footer border-0 pt-2 pb-3">
-                    <button
+                    {/* <button
                       className="btn btn-primary"
                       type="button"
                       onClick={formik.handleSubmit}
                     >
                       UPDATE
-                    </button>
+                    </button> */}
+                    <LoadingButton label='UPDATE' onClick={formik.handleSubmit}/>
                     {/* <Link to={"#"} className="btn-link">Forgot your password?</Link> */}
                   </div>
                 </div>
