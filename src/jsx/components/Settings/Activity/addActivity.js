@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import InputField from "../../common/InputField";
 import { useAsync } from "../../../utilis/useAsync";
 import { SETUP, URLS } from "../../../../constants";
@@ -6,18 +6,21 @@ import SelectField from "../../common/SelectField";
 import { useFormik } from "formik";
 import ReactSelect from "../../common/ReactSelect";
 import CustomDatePicker from "../../common/CustomDatePicker";
-import { FileUploader } from "../../common/FileUploader";
-import { notifyCreate } from "../../../utilis/notifyMessage";
+import { notifyCreate, notifyError } from "../../../utilis/notifyMessage";
 import { useNavigate, useParams } from "react-router-dom";
 import {  Table } from "react-bootstrap";
-import { formatDate, formatTimeToHis } from "../../../utilis/date";
+import { formatDate, formatTimeToHis, parseTime } from "../../../utilis/date";
 import { axiosPost, axiosPut } from "../../../../services/AxiosInstance";
 import * as Yup from "yup";
+import { checkFormValue } from "../../../utilis/check";
+import { LoadingButton } from "../../common/LoadingBtn";
+import { useDispatch } from "react-redux";
+import { FormAction } from "../../../../store/slices/formSlice";
 
 
 const typeOptions = [
-  { label: "Private", value: "private" },
-  { label: "SIC", value: "sic" },
+  { label: "Private", value: "Private" },
+  { label: "SIC", value: "SIC" },
 ];
 const statusOptions = [
   { label: "Active", value:1 },
@@ -26,6 +29,7 @@ const statusOptions = [
 
 const AddActivity = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { id } = useParams();
   const isEdit = !!id;
 
@@ -35,12 +39,15 @@ const AddActivity = () => {
   const initialValues = {
     fromDate: SETUP.TODAY_DATE,
     toDate: SETUP.TODAY_DATE,
+    openingTime: SETUP.START_TIME,
+    closingTime: SETUP.START_TIME,
     status: { label: "Active", value:1 },
     cost:0,
     adultCost: 0,
     childCost: 0,
     editArr:-1,
     costArr: [],
+    costId:''
   };
   const formSchema = Yup.object().shape({
     name: Yup.string()
@@ -57,17 +64,21 @@ const AddActivity = () => {
   });
   const handleClick = async(values) => {
     try {
+      dispatch(FormAction.setLoading(true))
       let response
       const formData = new FormData()
       // const values = formik.values
       formData.append('activity_name',values.name)
       formData.append('contact_number',values.phoneNumber)
       formData.append('contact_email',values.email)
-      formData.append('destination_id',values.destination?.value)
-      formData.append('sub_destination_id',values.subDestination?.value)
-      formData.append('description',values.description)
+      formData.append('destination_id',checkFormValue(values.destination?.value))
+      formData.append('sub_destination_id',checkFormValue(values.subDestination?.value))
+      formData.append('description',checkFormValue(values.description))
       formData.append('is_active',values.status.value)
       values.costArr.map((data,ind)=>{
+        if(!!data.costId){
+          formData.append(`estimations[${ind}][id]`,data.costId)
+        }
         formData.append(`estimations[${ind}][from_date]`,data.fromDate)
         formData.append(`estimations[${ind}][to_date]`,data.toDate)
         formData.append(`estimations[${ind}][opening_time]`,formatTimeToHis(data.openingTime))
@@ -85,7 +96,10 @@ const AddActivity = () => {
         navigate("/activity");
       }
     } catch (error) {
-      
+      console.log('activity error',error)
+      notifyError(error)
+    }finally{
+      dispatch(FormAction.setLoading(false))
     }
   };
   const formik = useFormik({
@@ -117,7 +131,7 @@ const AddActivity = () => {
       formik.setFieldValue('description',data.description)
       formik.setFieldValue('status',{value:data.is_active,label:data.is_active===1?'Active':'Inactive'})
       const costArr = data.estimations?.map((item,ind)=>{
-        const obj = {fromDate:item.from_date, toDate:item.to_date,
+        const obj = {costId:item.id,fromDate:item.from_date, toDate:item.to_date,
           openingTime:item.opening_time,closingTime:item.closing_time,
           adultCost:item.adult_cost,childCost:item.child_cost}
           return obj
@@ -133,6 +147,9 @@ const AddActivity = () => {
   
   
   const handleEstimationForm = (value,id=-1) => {
+    if(!!value.costId){
+      formik.setFieldValue(`costId`,value.costId)
+    }
     formik.setFieldValue("fromDate", value.fromDate);
     formik.setFieldValue("toDate", value.toDate);
     formik.setFieldValue("type", value.type);
@@ -145,6 +162,7 @@ const AddActivity = () => {
     const values = formik.values;
     
     const obj = {
+      costId:values.costId,
       fromDate: formatDate(values.fromDate),
       toDate: formatDate(values.toDate),
       openingTime: values.openingTime,
@@ -216,6 +234,7 @@ const AddActivity = () => {
                       onChange={(selected) =>
                         formik.setFieldValue("destination", selected)
                       }
+                      required
                     />
                   </div>
                   <div className="col-lg-6 mb-2">
@@ -228,6 +247,7 @@ const AddActivity = () => {
                       onChange={(selected) =>
                         formik.setFieldValue("subDestination", selected)
                       }
+                      required
                     />
                   </div>
 
@@ -293,7 +313,7 @@ const AddActivity = () => {
                     />
                   </div> */}
                   <div className="col-lg-12">
-                    <h5>Estimation</h5>
+                    <h5>Estimation *</h5>
                   </div>
 
                   <div className="col-lg-6 mb-3">
@@ -410,8 +430,8 @@ const AddActivity = () => {
                                 <th>{key + 1}</th>
                                 <td>{data.fromDate}</td>
                                 <td>{data.toDate}</td>
-                                <td>{data.openingTime}</td>
-                                <td>{data.closingTime}</td>
+                                <td>{parseTime(data.openingTime)}</td>
+                                <td>{parseTime(data.closingTime)}</td>
                                 <td>{data.adultCost}</td>
                                 <td>{data.childCost}</td>
                                 <td>
@@ -445,14 +465,15 @@ const AddActivity = () => {
                   </div>
 
                   <div className="card-footer border-0 pt-2 pb-3">
-                    <button
+                    {/* <button
                       className="btn btn-primary"
                       type="button"
                       onClick={formik.handleSubmit}
                       disabled={formik.isSubmitting || !formik.isValid || !formik.dirty}
                     >
                       UPDATE
-                    </button>
+                    </button> */}
+                    <LoadingButton label='UPDATE' onClick={formik.handleSubmit}  disabled={formik.isSubmitting || !formik.isValid || !formik.dirty}/>
                     {/* <Link to={"#"} className="btn-link">Forgot your password?</Link> */}
                   </div>
                 </div>

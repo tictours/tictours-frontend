@@ -33,3 +33,8 @@ export const formatTimeToHis = (timeString) => {
   const formattedTime = time.toTimeString().split(' ')[0];
   return formattedTime
 }
+export const parseTime = (time) => {
+  const [hr, min] = time.split(':');
+  const parse = `${hr}:${min}`
+  return parse
+};
