@@ -178,8 +178,11 @@ const Role = () => {
     { name: "Inactive", value: "2" },
     { name: "Type", value: "6" },
   ];
-  const handleDetail = (id) => {
+  const onDetail = (id) => {
     navigate(id);
+  };
+  const onEdit = (id) => {
+    navigate(`add/${id}`);
   };
   const onDelete = (id,name) => {
     setDeleteUrl(`${url}/${id}`)
@@ -227,7 +230,7 @@ const Role = () => {
                   </div>
                   <div className="invoice-btn">
                     <button
-                      onClick={() => handleDetail("add")}
+                      onClick={() => navigate('add')}
                       className="btn btn-primary"
                     >
                       New User Role{" "}
@@ -355,7 +358,14 @@ const Role = () => {
                             <Dropdown.Menu className="dropdown-menu-end">
                               <Dropdown.Item
                                 onClick={() =>
-                                  handleDetail(item.id)
+                                  onDetail(item.id)
+                                }
+                              >
+                                View
+                              </Dropdown.Item>
+                              <Dropdown.Item
+                                onClick={() =>
+                                  onEdit(item.id)
                                 }
                               >
                                 Edit
