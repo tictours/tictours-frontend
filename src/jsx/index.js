@@ -178,6 +178,7 @@ import Activity from "./components/Settings/Activity";
 import AddActivity from "./components/Settings/Activity/addActivity";
 import DetailActivity from "./components/Settings/Activity/detail";
 import DetailTransfer from "./components/Settings/Transfer/detail";
+import UserDetail from "./components/Settings/UserManagement/User/detail";
 import RoleDetail from "./components/Settings/UserManagement/Role/detail";
 
 const enquiryMenu = [
@@ -272,6 +273,7 @@ const Markup = () => {
     { url: "hotels/add", component: <AddHotel /> },
     { url: "hotels/add/:id", component: <AddHotel /> },
     { url: "user", component: <User /> },
+    { url: "user/:id", component: <UserDetail /> },
     { url: "user-role", component: <UserRole /> },
     { url: "user-role/add", component: <Permission /> },
     { url: "user-role/add/:id", component: <Permission /> },

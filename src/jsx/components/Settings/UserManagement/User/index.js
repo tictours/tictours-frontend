@@ -352,6 +352,11 @@ const User = () => {
                             </Dropdown.Toggle>
                             <Dropdown.Menu className="dropdown-menu-end">
                               <Dropdown.Item
+                                onClick={() => navigate(item.id)}
+                              >
+                                View
+                              </Dropdown.Item>
+                              <Dropdown.Item
                                 onClick={() => handleEdit(item.id)}
                               >
                                 Edit

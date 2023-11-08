@@ -370,9 +370,12 @@ const Hotels = () => {
                               110+ Booking
                             </span>
                             </div>
-                            <Link  className="btn btn-primary btn-sm ms-2"> 
-                                View all
-                              </Link>
+                            <button
+                                className="btn btn-primary btn-sm ms-2"
+                                onClick={() => navigate(item.id)}
+                              >
+                                View All
+                              </button>
                           </div>
                             <div className="mt-2">
                               <button
