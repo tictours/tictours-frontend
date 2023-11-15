@@ -33,6 +33,7 @@ const AddHotel = () => {
     addRoom: [],
     hotelAmentity: [],
     hotelImg: [],
+    roomId:''
   }
   const url = URLS.HOTEL_URL
   const editUrl = `${URLS.HOTEL_URL}/${id}`
@@ -90,6 +91,9 @@ const AddHotel = () => {
         formData.append('phone_number', values.phoneNumber);
         formData.append('address', values.address);
         values.addRoom?.forEach((item,ind)=>{
+          if(!!item.roomId){
+            formData.append(`rooms[${ind}][id]`,item.roomId)
+          }
           formData.append(`rooms[${ind}][market_type_id]`, item.marketType.value);
           formData.append(`rooms[${ind}][from_date]`, new Date(item.roomStartDate).toLocaleDateString('en-CA'));
           formData.append(`rooms[${ind}][to_date]`, new Date(item.roomEndDate).toLocaleDateString('en-CA'));
@@ -181,6 +185,7 @@ const AddHotel = () => {
      const hotelAmentityArr = editValues.amenities.map((item)=>item.id)
      const addRoomArr = editValues.rooms?.map((item,ind)=>{
       const obj = {
+        roomId:item.id,
         marketType: {label:item.market_type_name,value:item.market_type_id},
         // marketTypeLabel: item.market_type_name,
         roomStartDate: item.from_date,
