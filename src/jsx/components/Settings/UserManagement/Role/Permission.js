@@ -53,7 +53,7 @@ const tableData1 = [
 const Permission = () => {
 
   const { id } = useParams()
-  let isEdit = id && id !== 'add'
+  let isEdit = !!id
   const url = URLS.USER_ROLE_URL
   const editUrl = `${url}/${id}`
   const editData = useAsync(editUrl,isEdit)
@@ -239,7 +239,7 @@ const Permission = () => {
             <div className="col-xl-12">
               <div className="page-titles">
                 <div className="d-flex align-items-center">
-                  <h2 className="heading">Add role</h2>
+                  <h2 className="heading">{isEdit?"Edit":"Add"} role</h2>
                 </div>
                 <div className="d-flex flex-wrap my-2 my-sm-0">
                   {/* <div className="input-group search-area">

@@ -12,11 +12,11 @@ export function LoadingButton({ label, onClick,type='submit',className,disabled=
     >
       {loading ? (
         <div
-        class="spinner-border text-light spinner-border-sm"
+        className="spinner-border text-light spinner-border-sm"
         // style={{ width: "3rem", height: "3rem" }}
         role="status"
       >
-        <span class="visually-hidden">Loading...</span>
+        <span className="visually-hidden">Loading...</span>
       </div>
       ) : (
         label
