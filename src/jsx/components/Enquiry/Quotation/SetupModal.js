@@ -22,6 +22,8 @@ function SetupModal() {
     formStartDate: date,
     formEndDate: date,
     formValidityDate: date,
+    planArr:[],
+    planIndex:0
   };
   return (
     <>

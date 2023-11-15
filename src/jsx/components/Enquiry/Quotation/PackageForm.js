@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import SelectField from "../../common/SelectField";
 import Img1 from "../../../../images/course/hotel-1.jpg";
@@ -9,6 +9,7 @@ import InsertActivity from "./InsertActivity";
 import InsertTransfer from "./InsertTransfer";
 import InsertHotel from "./InsertHotel";
 import { notifyCreate } from "../../../utilis/notifyMessage";
+import { formatDate, parseDate, parseTime } from "../../../utilis/date";
 
 const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const {
@@ -22,9 +23,12 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   } = formik;
   const navigation = useNavigate();
 
-  const [showHotelModal,setShowHotelModal]= useState(false)
-  const [showActivityModal,setShowActivityModal]= useState(false)
-  const [showTransferModal,setShowTransferModal]= useState(false)
+  const [showHotelModal, setShowHotelModal] = useState(false);
+  const [showActivityModal, setShowActivityModal] = useState(false);
+  const [showTransferModal, setShowTransferModal] = useState(false);
+  const [editId , setEditId] = useState('')
+  const [editData , setEditData] = useState({})
+  const [datesArray, setDatesArray] = useState([]);
   const dayList = [1, 2, 3, 4];
   const scheduleData = [1, 2];
   const destinationOptions = ["Destination 1", "Destination 2"];
@@ -35,13 +39,35 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const startDate = new Date(values.formStartDate);
   const endDate = new Date(values.formEndDate);
 
-  // Step 2 and Step 3: Generate all dates between the two dates and store in an array
-  const datesArray = [];
-  let currentDate = startDate;
-  while (currentDate <= endDate) {
-    datesArray.push(new Date(currentDate));
-    currentDate.setDate(currentDate.getDate() + 1);
-  }
+  // Set the time component of startDate to midnight (00:00:00)
+  startDate.setHours(0, 0, 0, 0);
+
+  // Set the time component of endDate to midnight (00:00:00)
+  endDate.setHours(0, 0, 0, 0);
+
+  const generateDates = () => {
+    // Step 2 and Step 3: Generate all dates between the two dates and store in an array
+    // const datesArr = [];
+    const scheduleArray = [];
+    let currentDate = new Date(startDate); // Clone the startDate
+    let currentDay = 1;
+    while (currentDate <= endDate) {
+      // datesArr.push(new Date(currentDate));
+      const obj = {
+        date: new Date(currentDate),
+        day: currentDay,
+        schedule: [],
+      };
+      scheduleArray.push(obj);
+      // setFieldValue('planArr',[...values.planArr,obj])
+      currentDate.setDate(currentDate.getDate() + 1);
+      currentDay = currentDay + 1;
+    }
+    setFieldValue("planArr", scheduleArray);
+  };
+  useEffect(() => {
+    generateDates();
+  }, []);
 
   const handleAddCategory = () => {
     if (values.categoryOptions === "Hotel") {
@@ -54,27 +80,88 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
       navigation("/transfer");
     }
   };
-  const handleCardAdd = (data) => {
-    if (values.categoryOptions === "Hotel") {
-      setShowHotelModal(true)
+  const handleCardAdd = (value = values.categoryOptions) => {
+    const checkValue = value?.toLowerCase()
+    if (checkValue === "hotel") {
+      setShowHotelModal(true);
     }
-    if (values.categoryOptions === "Activity") {
-      setShowActivityModal(true)
+    if (checkValue === "activity") {
+      setShowActivityModal(true);
     }
-    if (values.categoryOptions === "Transfer") {
-      setShowTransferModal(true)
+    if (checkValue === "transfer") {
+      setShowTransferModal(true);
     }
   };
 
-  const onInsert = (name,setValue) =>{
-    setValue(false)
-    notifyCreate(name)
-  }
   const formSubmit = () => {
     // setShowModal(false)
     setFormComponent("paymentForm");
     // notify({message:'Itinary Created Successfully'})
   };
+  const onDayPackage = (date, day) => {
+    setFieldValue("planIndex", day - 1);
+  };
+  const showScheduleValue = values.planArr[`${values.planIndex}`];
+  const onInsert = (value, setShowModal) => {
+    // console.log("value", value);
+    const isEdit = !!editId || editId === 0
+    // if(values.categoryOptions !== "Hotel"){
+    const insertSchedule = values.planArr.map((data, key) => {
+      if (key === values.planIndex) {
+        let insertData 
+        if(isEdit){
+          const editArr = data.schedule.map((arrItem,key)=>{
+            if(key === editId){
+              return value
+            }else{
+              return arrItem
+            }
+          })
+          insertData = { ...data, schedule:editArr}
+        }else{
+          insertData= { ...data, schedule: [...data.schedule, value] };
+        }
+        // console.log("insert", insertData);
+        return insertData;
+      } else {
+        return data;
+      }
+    });
+    // console.log("map", insertSchedule);
+    setFieldValue("planArr", insertSchedule);
+  // }else{
+    // notifyCreate(value)
+  // }
+    if(isEdit){
+      setEditId('')
+    }
+    setShowModal(false);
+  };
+  const onEdit = (id,data) => {
+    setEditId(id)
+    setEditData(data)
+    handleCardAdd(data.insertType)
+  }
+  const onClose = (setModal) => {
+    setModal(false)
+    setEditId('')
+    setEditData(null)
+  }
+  const onDelete = (deleteIndex) => {
+    const removeData = showScheduleValue?.schedule?.filter(
+      (item, ind) => deleteIndex !== ind
+    );
+    const insertSchedule = values.planArr.map((data, key) => {
+      if (key === values.planIndex) {
+        const insertData = { ...data, schedule: removeData };
+        return insertData;
+      } else {
+        return data;
+      }
+    });
+    setFieldValue("planArr", insertSchedule);
+  };
+  // console.log('show',values.planArr,'ind',values.planIndex,'val',showScheduleValue)
   return (
     <>
       <form
@@ -82,19 +169,21 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
       >
         <div className="row package">
           <div className="col-3">
-            {datesArray?.map((date, key) => (
-              <div className="row border-bottom" key={key}>
+            {values.planArr?.map((item, key) => (
+              <div
+                className="row border-bottom"
+                key={key}
+                onClick={() => onDayPackage(item.date, item.day)}
+              >
                 <div className="col-md-3 align-self-center">
                   <div className=" day-circle bg-primary d-flex align-items-center justify-content-center m-0 rounded-circle">
-                    <h6 className="text-white m-0">{key + 1}</h6>
+                    <h6 className="text-white m-0">{item.day}</h6>
                   </div>
                 </div>
                 <div className="col-md-9">
-                  <p className="text-center mb-1">
-                    {date.toLocaleDateString("en-GB")}
-                  </p>
+                  <p className="text-center mb-1">{formatDate(item.date)}</p>
                   <SelectField
-                    name={`${key + 1}marketType`}
+                    name={`${item.day}marketType`}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     values={values}
@@ -107,43 +196,58 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
           <div className="col-5 px-1">
             <div className="schedule-box">
               <div className="p-3">
-                <h6>Day 1 - 21/02/2023</h6>
+                <h6>{`Day ${showScheduleValue?.day} - ${formatDate(
+                  showScheduleValue?.date
+                )}`}</h6>
               </div>
               <div className="">
-                {scheduleData.map((item, ind) => (
-                  <div className="d-flex justify-content-center" key={ind}>
-                    <div className="card contact_list schedule-card">
-                      <div className="card-body">
-                        <div className="user-content">
-                          <div className="user-info">
-                            <div className="user-img">
-                              <img src={Img1} alt="" />
-                            </div>
-                            <div className="user-details">
-                              <h6 className="user-name">Hotel: Marriott</h6>
-                              <span className="number">10am to 2pm</span>
-                              <span className="mail">Room type : Deluxe</span>
-                              <span className="mail">No of guest : 02</span>
-                              <div className="d-flex justify-content-between mt-1">
-                                <div className="me-1">
-                                  <span className="mail">
-                                    Check in Date & Time
-                                  </span>
-                                  <span className="mail">26-05-2023 11am</span>
-                                </div>
-                                <div>
-                                  <span className="mail">
-                                    Check out Date & Time
-                                  </span>
-                                  <span className="mail">27-05-2023 11am</span>
-                                </div>
+                {!!showScheduleValue?.schedule?.length ? (
+                  showScheduleValue?.schedule?.map((item, ind) => (
+                    <div className="d-flex justify-content-center" key={ind}>
+                      <div className="card contact_list schedule-card">
+                        <div className="card-body">
+                          <div className="user-content">
+                            <div className="user-info">
+                              <div className="user-img">
+                                <img src={Img1} alt="" />
                               </div>
-                              {/* <span className="mail">jordan@mail.com</span>  */}
+                              <div className="user-details">
+                                <h6 className="user-name">{`${item.insertType} : ${item.insertType === "activity"?item.activity?.label:item.name}`}</h6>
+                                {item.insertType === "hotel" && (
+                                  <>
+                                    <span className="number">10am to 2pm</span>
+                                    <span className="mail">
+                                      Room type : Deluxe
+                                    </span>
+                                    <span className="mail">
+                                      No of guest : 02
+                                    </span>
+                                  </>
+                                )}
+                                <div className="d-flex justify-content-between mt-1">
+                                  <div className="me-1">
+                                    <span className="mail">
+                                      Check in Date & Time
+                                    </span>
+                                    <span className="mail">{`${formatDate(
+                                      item.startDate
+                                    )} ${parseTime(item.startTime)}`}</span>
+                                  </div>
+                                  <div>
+                                    <span className="mail">
+                                      Check out Date & Time
+                                    </span>
+                                    <span className="mail">{`${formatDate(
+                                      item.startDate
+                                    )} ${parseTime(item.endTime)}`}</span>
+                                  </div>
+                                </div>
+                                {/* <span className="mail">jordan@mail.com</span>  */}
+                              </div>
                             </div>
+                            <DropDownBlog onEdit={()=>onEdit(ind,item)} onDelete={() => onDelete(ind)} />
                           </div>
-                          <DropDownBlog />
-                        </div>
-                        {/* <div className="contact-icon">
+                          {/* <div className="contact-icon">
                                                     <div className="icon">
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M19.973 14.7709C19.9394 14.6283 19.8749 14.4949 19.784 14.3799C19.6931 14.265 19.578 14.1715 19.447 14.1059L15.447 12.1059C15.2592 12.0122 15.0468 11.98 14.8397 12.0137C14.6325 12.0475 14.4413 12.1455 14.293 12.2939L12.618 13.9689C10.211 13.5819 6.418 9.78994 6.032 7.38294L7.707 5.70694C7.85545 5.55864 7.95349 5.36739 7.98723 5.16028C8.02097 4.95317 7.9887 4.7407 7.895 4.55294L5.895 0.552942C5.82953 0.421827 5.73604 0.306705 5.62115 0.215724C5.50625 0.124744 5.37277 0.0601275 5.23014 0.0264496C5.08751 -0.00722831 4.93922 -0.00914485 4.79577 0.0208356C4.65231 0.050816 4.5172 0.111961 4.4 0.199942L0.4 3.19994C0.275804 3.29309 0.175 3.41387 0.105573 3.55273C0.036145 3.69158 0 3.8447 0 3.99994C0 13.5699 6.43 19.9999 16 19.9999C16.1552 19.9999 16.3084 19.9638 16.4472 19.8944C16.5861 19.8249 16.7069 19.7241 16.8 19.5999L19.8 15.5999C19.8877 15.4828 19.9487 15.3479 19.9786 15.2047C20.0085 15.0614 20.0066 14.9134 19.973 14.7709ZM15.5 17.9929C7.569 17.7799 2.22 12.4309 2.007 4.49994L4.642 2.51894L5.783 4.79994L4.293 6.28994C4.19978 6.38314 4.1259 6.49384 4.07561 6.61569C4.02533 6.73754 3.99963 6.86813 4 6.99994C4 10.5329 9.467 15.9999 13 15.9999C13.2652 15.9999 13.5195 15.8945 13.707 15.7069L15.197 14.2169L17.481 15.3589L15.5 17.9929Z" fill="#01A3FF"/>
@@ -167,10 +271,13 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                                                         </svg>
                                                     </div>
                                                 </div> */}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <h6 className="text-center mt-3">Empty !</h6>
+                )}
               </div>
             </div>
           </div>
@@ -215,7 +322,11 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                     }`}</h6>
                   </div>
                   <div>
-                    <button type="button" className="btn btn-white p-3" onClick={()=>handleCardAdd()}>
+                    <button
+                      type="button"
+                      className="btn btn-white p-3"
+                      onClick={() => handleCardAdd()}
+                    >
                       <i className="fa-solid fa-plus text-primary"></i>
                     </button>
                   </div>
@@ -239,9 +350,30 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
           Schedule itinerary
         </button>
       </form>
-      <InsertHotel showModal={showHotelModal} setShowModal={setShowHotelModal} onClick={onInsert}/>
-      <InsertActivity showModal={showActivityModal} setShowModal={setShowActivityModal} onClick={onInsert}/>
-      <InsertTransfer showModal={showTransferModal} setShowModal={setShowTransferModal} onClick={onInsert}/>
+      <InsertHotel
+        showModal={showHotelModal}
+        setShowModal={setShowHotelModal}
+        onClick={onInsert}
+        onClose={onClose}
+        editId={editId}
+        data={editData}
+      />
+      <InsertActivity
+        showModal={showActivityModal}
+        setShowModal={setShowActivityModal}
+        onClick={onInsert}
+        onClose={onClose}
+        editId={editId}
+        data={editData}
+      />
+      <InsertTransfer
+        showModal={showTransferModal}
+        setShowModal={setShowTransferModal}
+        onClick={onInsert}
+        onClose={onClose}
+        editId={editId}
+        data={editData}
+      />
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import ReactSelect from "../../common/ReactSelect";
 import { SETUP } from "../../../../constants";
 import InputField from "../../common/InputField";
@@ -42,9 +42,13 @@ const roomAllotement = [
   { name: "child n", allowed: 2 },
 ];
 
-const InsertHotel = ({ showModal, setShowModal, data, onClick }) => {
+const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) => {
+  const isEdit = !!editId || editId === 0
   const initialValues = {
     startDate: SETUP.TODAY_DATE,
+    startTime: SETUP.START_TIME,
+    endTime: SETUP.END_TIME,
+    insertType:'hotel'
   };
   const {
     values,
@@ -54,18 +58,26 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick }) => {
     handleSubmit,
     isSubmitting,
     setFieldValue,
+    setValues,
+    resetForm
   } = useFormik({ initialValues });
 
   const handleSetup = () => {
-    onClick(values.name, setShowModal);
+    onClick(values, setShowModal);
   };
+  useEffect(()=>{
+    if(isEdit){
+      setValues(data)
+    }
+  },[editId])
   return (
     <>
       <CustomModal
         showModal={showModal}
-        title={"Create Hotel"}
+        title={`${isEdit?'Edit':'Create'} Hotel`}
         handleModalClose={() => {
-          setShowModal(false);
+          onClose(setShowModal)
+          resetForm()
         }}
       >
         <div className="card-body">
@@ -76,6 +88,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick }) => {
                   <div className="col-sm-4">
                     <ReactSelect
                       label="Destination"
+                      value={values.destination}
                       onChange={(selected) =>
                         setFieldValue("destination", selected)
                       }
@@ -89,6 +102,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick }) => {
                   <div className="col-sm-4">
                     <ReactSelect
                       label="Type"
+                      value={values.type}
                       onChange={(selected) => setFieldValue("type", selected)}
                       onBlur={handleBlur}
                       // values={values}
@@ -101,6 +115,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick }) => {
                   <div className="col-sm-4">
                     <ReactSelect
                       label="Category"
+                      value={values.category}
                       onChange={(selected) =>
                         setFieldValue("category", selected)
                       }
@@ -114,6 +129,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick }) => {
                   <div className="col-sm-4">
                     <ReactSelect
                       label="Room Type"
+                      value={values.roomType}
                       onChange={(selected) =>
                         setFieldValue("roomtype", selected)
                       }
@@ -136,8 +152,9 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick }) => {
                   <div className="col-sm-7">
                     <ReactSelect
                       label="Meal Plan"
+                      value={values.mealPlan}
                       onChange={(selected) =>
-                        setFieldValue("meal plan", selected)
+                        setFieldValue("mealPlan", selected)
                       }
                       onBlur={handleBlur}
                       // values={values}

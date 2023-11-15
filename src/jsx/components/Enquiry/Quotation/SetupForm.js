@@ -17,7 +17,7 @@ const SetupForm = ({ formik, setFormComponent, setShowModal, showModal }) => {
   const navigate = useNavigate();
 
   const formSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     setShowModal(false);
     setFormComponent("packageForm");
   };
@@ -34,7 +34,7 @@ const SetupForm = ({ formik, setFormComponent, setShowModal, showModal }) => {
       >
         <div className="card-body">
           <div className="basic-form">
-            <form onSubmit={formSubmit}>
+            <form>
               <div className="row">
                 <div className="form-group mb-3 col-md-4">
                   <label>Package Name</label>
@@ -127,7 +127,7 @@ const SetupForm = ({ formik, setFormComponent, setShowModal, showModal }) => {
                       <label className="form-check-label">Check me out</label>
                     </div>
                   </div> */}
-              <button type="submit" className="btn btn-primary">
+              <button type="button" className="btn btn-primary" onClick={formSubmit}>
                 Setup itinerary
               </button>
             </form>

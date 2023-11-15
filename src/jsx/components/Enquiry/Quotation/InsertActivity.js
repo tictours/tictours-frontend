@@ -9,6 +9,7 @@ import TimePickerPicker from "react-time-picker";
 
 import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
+import { useEffect } from "react";
 const typeOptions = [
   { label: "Type 1", value: "1" },
   { label: "Type 2", value: "2" },
@@ -29,9 +30,13 @@ const activityOptions = [
   { label: "Activity 4", value: "4" },
 ];
 
-const InsertActivity = ({ showModal, setShowModal, data, onClick }) => {
+const InsertActivity = ({ showModal, setShowModal, data, onClick,editId,onClose }) => {
+  const isEdit = !!editId || editId === 0
   const initialValues = {
     startDate: SETUP.TODAY_DATE,
+    startTime: SETUP.START_TIME,
+    endTime: SETUP.END_TIME,
+    insertType:'activity'
   };
   const {
     values,
@@ -41,18 +46,27 @@ const InsertActivity = ({ showModal, setShowModal, data, onClick }) => {
     handleSubmit,
     isSubmitting,
     setFieldValue,
+    setValues,
+    resetForm
   } = useFormik({ initialValues });
 
   const handleSetup = () => {
-    onClick(values.activity.label, setShowModal);
+    onClick(values, setShowModal);
+    resetForm()
   };
+  useEffect(()=>{
+    if(isEdit){
+      setValues(data)
+    }
+  },[editId])
   return (
     <>
       <CustomModal
         showModal={showModal}
-        title={"Create Activity"}
+        title={`${isEdit?'Edit':'Create'} Activity`}
         handleModalClose={() => {
-          setShowModal(false);
+          onClose(setShowModal);
+          resetForm()
         }}
       >
         <div className="card-body">
@@ -63,6 +77,7 @@ const InsertActivity = ({ showModal, setShowModal, data, onClick }) => {
                   <div className="col-sm-4">
                     <ReactSelect
                       label="Destination"
+                      value={values.destination}
                       onChange={(selected) =>
                         setFieldValue("destination", selected)
                       }
@@ -76,6 +91,7 @@ const InsertActivity = ({ showModal, setShowModal, data, onClick }) => {
                   <div className="col-sm-4">
                     <ReactSelect
                       label="Type"
+                      value={values.type}
                       onChange={(selected) => setFieldValue("type", selected)}
                       onBlur={handleBlur}
                       // values={values}
@@ -87,6 +103,7 @@ const InsertActivity = ({ showModal, setShowModal, data, onClick }) => {
                   <div className="col-sm-4">
                     <ReactSelect
                       label="Activity"
+                      value={values.activity}
                       onChange={(selected) =>
                         setFieldValue("activity", selected)
                       }
