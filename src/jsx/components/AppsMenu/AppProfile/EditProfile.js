@@ -9,8 +9,9 @@ import { useFormik } from "formik";
 import SelectField from "../../common/SelectField";
 import ReactSelect from "../../common/ReactSelect";
 import InputField from "../../common/InputField";
-import { SETUP } from "../../../../constants";
+import { SETUP, URLS } from "../../../../constants";
 import { notifyCreate } from "../../../utilis/notifyMessage";
+import { useAsync } from "../../../utilis/useAsync";
 
 
 const initialValues = {
@@ -28,10 +29,10 @@ const AgentOptions = [
   {label:'Agent 4',value:'agent4'},
                     ]
 const CustomerOptions = [
-  {label:'Customer 1',value:'customer1'},
-  {label:'Customer 2',value:'customer2'},
-  {label:'Customer 3',value:'customer3'},
-  {label:'Customer 4',value:'customer4'},
+  {name:'Customer 1',id:'customer1'},
+  {name:'Customer 2',id:'customer2'},
+  {name:'Customer 3',id:'customer3'},
+  {name:'Customer 4',id:'customer4'},
                     ]
 const LeadOptions = [
   {label:'Agent',value:'1'},
@@ -82,6 +83,21 @@ const EditProfile = ({setShowModal}) => {
     initialValues
   })
   const {handleBlur,handleChange,setFieldValue,values} = formik
+  const agentData = useAsync(URLS.AGENT_URL)
+  const agentDataOptions = agentData?.data?.data
+  const destinationId = values.destination?.value
+  const subDestinationUrl = `${URLS.SUB_DESTINATION_URL}?destination_id=${destinationId}`
+
+  const destinationData = useAsync(URLS.DESTINATION_URL)
+  const subDestinationData = useAsync(subDestinationUrl, destinationId)
+  const leadData = useAsync(URLS.LEAD_SOURCE_URL)
+  const leadDataOptions = leadData?.data?.data
+  const priorityData = useAsync(URLS.PRIORITY_URL)
+  const priorityDataOptions = priorityData?.data?.data
+  const requirementData = useAsync(URLS.REQUIREMENT_URL)
+  const requirementDataOptions = requirementData?.data?.data
+  const staffData = useAsync(URLS.USER_GET_URL)
+  const staffDataOptions = staffData?.data?.data?.data
   // console.log('val',values)
 
   const handleClick = () => {
@@ -161,9 +177,9 @@ const EditProfile = ({setShowModal}) => {
                         }
                         onBlur={handleBlur}
                         values={values}
-                        options={values.type === 'b2b' ? AgentOptions : CustomerOptions}
-                        optionValue='value'
-                        optionLabel='label'
+                        options={values.type === 'b2b' ? agentDataOptions : CustomerOptions}
+                        optionValue='id'
+                        optionLabel='name'
                       />
                   </div>
                   {inputOptions.map((item, ind) => (
@@ -242,9 +258,9 @@ const EditProfile = ({setShowModal}) => {
                         }
                         onBlur={handleBlur}
                         // values={values}
-                        options={destinationOptions}
-                        optionValue='value'
-                        optionLabel='label'
+                        options={destinationData?.data?.data}
+                        optionValue='id'
+                        optionLabel='name'
                       />
                   </div>
                   <div className="col-sm-6">
@@ -264,9 +280,9 @@ const EditProfile = ({setShowModal}) => {
                         }
                         onBlur={handleBlur}
                         // values={values}
-                        options={destinationOptions}
-                        optionValue='value'
-                        optionLabel='label'
+                        options={subDestinationData?.data?.data}
+                        optionValue='id'
+                        optionLabel='name'
                       />
                   </div>
                   <div className="col-sm-6 m-b30">
@@ -322,9 +338,9 @@ const EditProfile = ({setShowModal}) => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         values={values}
-                        options={LeadOptions}
-                        optionValue='value'
-                        optionLabel='label'
+                        options={leadDataOptions}
+                        optionValue='id'
+                        optionLabel='name'
                       />
                   </div>
                   <div className="col-sm-6">
@@ -334,9 +350,9 @@ const EditProfile = ({setShowModal}) => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         values={values}
-                        options={priorityOptions}
-                        optionValue='value'
-                        optionLabel='label'
+                        options={priorityDataOptions}
+                        optionValue='id'
+                        optionLabel='name'
                       />
                   </div>
                   <div className="col-sm-6">
@@ -348,9 +364,9 @@ const EditProfile = ({setShowModal}) => {
                         }}
                         onBlur={handleBlur}
                         values={values}
-                        options={requirementOptions}
-                        optionValue='value'
-                        optionLabel='label'
+                        options={requirementDataOptions}
+                        optionValue='id'
+                        optionLabel='name'
                       />
                   </div>
                   <div className="col-sm-6">
@@ -361,9 +377,9 @@ const EditProfile = ({setShowModal}) => {
                         }
                         onBlur={handleBlur}
                         values={values}
-                        options={StaffOptions}
-                        optionValue='value'
-                        optionLabel='label'
+                        options={staffDataOptions}
+                        optionValue='id'
+                        optionLabel='first_name'
                       />
                   </div>
                   {/* <div className="col-sm-6 m-b30">
