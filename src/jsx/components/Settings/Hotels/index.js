@@ -12,6 +12,7 @@ import { useAsync } from "../../../utilis/useAsync";
 import { URLS } from "../../../../constants";
 import { axiosDelete } from "../../../../services/AxiosInstance";
 import { notifyDelete, notifyError } from "../../../utilis/notifyMessage";
+import NoData from '../../common/NoData'
 
 const RightIcon = () => {
   return (
@@ -300,7 +301,9 @@ const Hotels = () => {
           {/* swiper end */}
 
           <div className="row">
-            {hotelData?.data?.data?.map((item, index) => (
+            {hotelData?.loading ?
+            <NoData isLoading={hotelData?.loading} isCard/>
+            :hotelData?.data?.data?.map((item, index) => (
               <div className="col-xl-3 col-xxl-4 col-sm-6" key={index}>
                 <div className="card all-crs-wid">
                   <div className="card-body">

@@ -10,6 +10,7 @@ import { axiosDelete } from "../../../services/AxiosInstance";
 import { useDispatch } from "react-redux";
 import { FormAction } from "../../../store/slices/formSlice";
 import { useAsync } from "../../utilis/useAsync";
+
 import NoData from "./NoData";
 import { notifyDelete, notifyError } from "../../utilis/notifyMessage";
 import DeleteModal from "./DeleteModal";
@@ -135,6 +136,7 @@ const FieldComponent = (props) => {
   const dispatch = useDispatch();
   const asyncData = useAsync(url);
   const tableData = asyncData?.data?.data;
+  const isLoading = asyncData?.loading
   const [data, setData] = useState(
     document.querySelectorAll("#example2_wrapper tbody tr"),
   );
@@ -388,7 +390,7 @@ const FieldComponent = (props) => {
                         </tr>
                       ))
                     ) : (
-                      <NoData />
+                      <NoData isLoading={isLoading} />
                     )}
                   </tbody>
                 </table>
@@ -406,7 +408,7 @@ const FieldComponent = (props) => {
                   >
                     <Link
                       className="paginate_button previous disabled"
-                      to="/invoice"
+                      to=""
                       onClick={() =>
                         activePag.current > 0 && onClick(activePag.current - 1)
                       }
@@ -417,7 +419,7 @@ const FieldComponent = (props) => {
                       {paggination.map((number, i) => (
                         <Link
                           key={i}
-                          to="/invoice"
+                          to=""
                           className={`paginate_button  ${activePag.current === i ? "current" : ""
                             } `}
                           onClick={() => onClick(i)}
@@ -429,7 +431,7 @@ const FieldComponent = (props) => {
 
                     <Link
                       className="paginate_button next"
-                      to="/invoice"
+                      to=""
                       onClick={() =>
                         activePag.current + 1 < paggination.length &&
                         onClick(activePag.current + 1)

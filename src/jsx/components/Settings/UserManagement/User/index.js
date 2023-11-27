@@ -10,6 +10,7 @@ import { URLS } from "../../../../../constants";
 import { dateComparison } from "../../../../utilis/date";
 import ResetPassword from "../../../common/ResetPassword";
 import { useSelector } from "react-redux";
+import NoData from "../../../common/NoData";
 
 const RightIcon = () => {
   return (
@@ -106,6 +107,7 @@ const User = () => {
   const navigate = useNavigate();
   const userData = useAsync(URLS.USER_GET_URL)
   const tableData = userData?.data?.data
+  const isLoading = userData?.loading
   const [data, setData] = useState(
     document.querySelectorAll("#example2_wrapper tbody tr"),
   );
@@ -279,7 +281,9 @@ const User = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {tableData?.data?.map((item, ind) => (
+                    {isLoading?
+                    <NoData isLoading={isLoading} />
+                    :tableData?.data?.map((item, ind) => (
                       <tr key={ind}>
                         {/* <td className="sorting_1">
                                                     <div className="checkbox me-0 align-self-center">
@@ -394,7 +398,7 @@ const User = () => {
                   >
                     <Link
                       className="paginate_button previous disabled"
-                      to="/invoice"
+                      to=""
                       onClick={() =>
                         activePag.current > 0 && onClick(activePag.current - 1)
                       }
@@ -405,7 +409,7 @@ const User = () => {
                       {paggination.map((number, i) => (
                         <Link
                           key={i}
-                          to="/invoice"
+                          to=""
                           className={`paginate_button  ${
                             activePag.current === i ? "current" : ""
                           } `}
@@ -418,7 +422,7 @@ const User = () => {
 
                     <Link
                       className="paginate_button next"
-                      to="/invoice"
+                      to=""
                       onClick={() =>
                         activePag.current + 1 < paggination.length &&
                         onClick(activePag.current + 1)
