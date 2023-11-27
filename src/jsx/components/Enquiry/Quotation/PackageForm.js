@@ -10,6 +10,7 @@ import InsertTransfer from "./InsertTransfer";
 import InsertHotel from "./InsertHotel";
 import { notifyCreate } from "../../../utilis/notifyMessage";
 import { formatDate, parseDate, parseTime } from "../../../utilis/date";
+import { LoadingButton } from "../../common/LoadingBtn";
 
 const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const {
@@ -167,6 +168,13 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
       <form
       // onSubmit={formSubmit}
       >
+        <div className="d-flex justify-content-end mb-3">
+          <LoadingButton label='Quotation' type="button" className='me-2'/>
+          <LoadingButton label='Pricing' type="button" className='me-2'/>
+          <LoadingButton label='View' type="button" className='me-2'/>
+          <LoadingButton label='Export' type="button" className='me-2'/>
+          <LoadingButton label='Share' type="button"/>
+        </div>
         <div className="row package">
           <div className="col-3">
             {values.planArr?.map((item, key) => (
@@ -192,6 +200,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                 </div>
               </div>
             ))}
+            <LoadingButton label='Package Terms' type="button" className='mt-3'/>
           </div>
           <div className="col-5 px-1">
             <div className="schedule-box">

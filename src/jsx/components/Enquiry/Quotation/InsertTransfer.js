@@ -9,6 +9,7 @@ import TimePickerPicker from "react-time-picker";
 
 import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
+import { FormSection } from "../../common/FormSection";
 const nameOptions = [
   { label: "Vechile 1", value: "1" },
   { label: "Vechile 2", value: "2" },
@@ -78,7 +79,7 @@ const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose 
             <form>
               <div className="card-body">
                 <div className="row">
-                <div className="col-sm-4">
+                <div className="col-sm-6">
                     <ReactSelect
                       label="Destination"
                       value={values.destination}
@@ -105,7 +106,7 @@ const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose 
                       optionLabel="label"
                     />
                   </div> */}
-                  <div className="col-sm-4">
+                  <div className="col-sm-6">
                     <InputField
                       label="Vechile Name"
                       name="name"
@@ -125,7 +126,7 @@ const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose 
                     />
                   </div> */}
                   
-                  {/* <div className="col-sm-4">
+                  {/* <div className="col-sm-6">
                     <ReactSelect
                       label="Activity"
                       onChange={(selected) =>
@@ -150,35 +151,7 @@ const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose 
                       isTextarea
                     />
                   </div> */}
-                  <div className="col-sm-4">
-                    <label>Start Date</label>
-                    <DatePicker
-                      className="form-control"
-                      selected={values.startDate}
-                      onChange={(date) => setFieldValue("startDate", date)}
-                    />
-                  </div>
-
-                  <div className="col-sm-4">
-                    <InputField
-                      label="Start Time"
-                      name="startTime"
-                      type="time"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      values={values}
-                    />
-                  </div>
-                  <div className="col-sm-4">
-                    <InputField
-                      label="End Time"
-                      name="endTime"
-                      type="time"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      values={values}
-                    />
-                  </div>
+                 
                   <div className="col-sm-4">
                     <ReactSelect
                       label="Type"
@@ -189,6 +162,7 @@ const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose 
                       options={typeOptions}
                       optionValue="value"
                       optionLabel="label"
+                      isSearchable={false}
                     />
                   </div>
                   {values.type?.label === 'Private'?<div className="col-sm-4">
@@ -219,6 +193,45 @@ const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose 
                     />
                     </div>
                   </>}
+                  <FormSection>
+                  <div className="col-sm-5">
+                    <label>Start Date</label>
+                    <DatePicker
+                      className="form-control"
+                      selected={values.startDate}
+                      onChange={(date) => setFieldValue("startDate", date)}
+                    />
+                  </div>
+
+                  <div className="col-sm-5">
+                    <InputField
+                      label="Start Time"
+                      name="startTime"
+                      type="time"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      values={values}
+                    />
+                  </div>
+                  <div className="col-sm-5">
+                    <label>End Date</label>
+                    <DatePicker
+                      className="form-control"
+                      selected={values.endDate}
+                      onChange={(date) => setFieldValue("endDate", date)}
+                    />
+                  </div>
+                  <div className="col-sm-5">
+                    <InputField
+                      label="End Time"
+                      name="endTime"
+                      type="time"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      values={values}
+                    />
+                  </div>
+                  </FormSection>
                 </div>
               </div>
               <button

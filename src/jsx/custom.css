@@ -160,3 +160,10 @@
 .custom-first-cell {
   max-width: 2rem;
 }
+.form-section {
+  background-color: #fdfdfd;
+  padding: .5rem 0;
+  margin-bottom: 1.4rem;
+  border:1px solid #eee;
+  border-radius: .5rem;
+}

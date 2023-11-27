@@ -9,6 +9,7 @@ import TimePickerPicker from "react-time-picker";
 
 import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
+import { FormSection } from "../../common/FormSection";
 const typeOptions = [
   { label: "Type 1", value: "1" },
   { label: "Type 2", value: "2" },
@@ -85,7 +86,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
             <form>
               <div className="card-body">
                 <div className="row">
-                  <div className="col-sm-4">
+                  <div className="col-sm-6">
                     <ReactSelect
                       label="Destination"
                       value={values.destination}
@@ -99,7 +100,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                       optionLabel="label"
                     />
                   </div>
-                  <div className="col-sm-4">
+                  <div className="col-sm-6">
                     <ReactSelect
                       label="Type"
                       value={values.type}
@@ -112,7 +113,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                     />
                   </div>
 
-                  <div className="col-sm-4">
+                  <div className="col-sm-6">
                     <ReactSelect
                       label="Category"
                       value={values.category}
@@ -126,7 +127,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                       optionLabel="label"
                     />
                   </div>
-                  <div className="col-sm-4">
+                  <div className="col-sm-6">
                     <ReactSelect
                       label="Room Type"
                       value={values.roomType}
@@ -164,6 +165,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                       isMulti
                     />
                   </div>
+                  <FormSection bg={'#fffada'}>
                   <div className="col-sm-4">
                     <InputField
                       label="No of person"
@@ -175,7 +177,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                     />
                   </div>
                   {roomAllotement?.map((data) => (
-                    <div className="col-sm-3">
+                    <div className="col-sm-4">
                       <InputField
                         mb="0"
                         label={data.name}
@@ -188,8 +190,9 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                       <p className="text-danger mb-3">{`max ${data.allowed}`}</p>
                     </div>
                   ))}
-
-                  <div className="col-sm-4">
+                  </FormSection>
+                  <FormSection>
+                  <div className="col-sm-5">
                     <label>Start Date</label>
                     <DatePicker
                       className="form-control"
@@ -198,7 +201,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                     />
                   </div>
 
-                  <div className="col-sm-4">
+                  <div className="col-sm-5">
                     <InputField
                       label="Start Time"
                       name="startTime"
@@ -208,7 +211,15 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                       values={values}
                     />
                   </div>
-                  <div className="col-sm-4">
+                  <div className="col-sm-5">
+                    <label>End Date</label>
+                    <DatePicker
+                      className="form-control"
+                      selected={values.endDate}
+                      onChange={(date) => setFieldValue("endDate", date)}
+                    />
+                  </div>
+                  <div className="col-sm-5">
                     <InputField
                       label="End Time"
                       name="endTime"
@@ -218,6 +229,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                       values={values}
                     />
                   </div>
+                  </FormSection>
                 </div>
               </div>
               <button

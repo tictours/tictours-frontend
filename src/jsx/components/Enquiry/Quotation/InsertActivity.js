@@ -10,6 +10,7 @@ import TimePickerPicker from "react-time-picker";
 import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
 import { useEffect } from "react";
+import { FormSection } from "../../common/FormSection";
 const typeOptions = [
   { label: "Type 1", value: "1" },
   { label: "Type 2", value: "2" },
@@ -74,7 +75,7 @@ const InsertActivity = ({ showModal, setShowModal, data, onClick,editId,onClose 
             <form>
               <div className="card-body">
                 <div className="row">
-                  <div className="col-sm-4">
+                  <div className="col-sm-6">
                     <ReactSelect
                       label="Destination"
                       value={values.destination}
@@ -88,7 +89,7 @@ const InsertActivity = ({ showModal, setShowModal, data, onClick,editId,onClose 
                       optionLabel="label"
                     />
                   </div>
-                  <div className="col-sm-4">
+                  <div className="col-sm-6">
                     <ReactSelect
                       label="Type"
                       value={values.type}
@@ -100,7 +101,7 @@ const InsertActivity = ({ showModal, setShowModal, data, onClick,editId,onClose 
                       optionLabel="label"
                     />
                   </div>
-                  <div className="col-sm-4">
+                  <div className="col-sm-6">
                     <ReactSelect
                       label="Activity"
                       value={values.activity}
@@ -114,7 +115,7 @@ const InsertActivity = ({ showModal, setShowModal, data, onClick,editId,onClose 
                       optionLabel="label"
                     />
                   </div>
-                  <div className="col-sm-4">
+                  <div className="col-sm-6">
                     <InputField
                       label="No of person"
                       name="person"
@@ -133,9 +134,10 @@ const InsertActivity = ({ showModal, setShowModal, data, onClick,editId,onClose 
                       onBlur={handleBlur}
                       values={values}
                       isTextarea
-                    />
+                      />
                   </div>
-                  <div className="col-sm-4">
+                      <FormSection>
+                  <div className="col-sm-5">
                     <label>Start Date</label>
                     <DatePicker
                       className="form-control"
@@ -144,7 +146,7 @@ const InsertActivity = ({ showModal, setShowModal, data, onClick,editId,onClose 
                     />
                   </div>
 
-                  <div className="col-sm-4">
+                  <div className="col-sm-5">
                     <InputField
                       label="Start Time"
                       name="startTime"
@@ -154,7 +156,15 @@ const InsertActivity = ({ showModal, setShowModal, data, onClick,editId,onClose 
                       values={values}
                     />
                   </div>
-                  <div className="col-sm-4">
+                  <div className="col-sm-5">
+                    <label>End Date</label>
+                    <DatePicker
+                      className="form-control"
+                      selected={values.endDate}
+                      onChange={(date) => setFieldValue("endDate", date)}
+                    />
+                  </div>
+                  <div className="col-sm-5">
                     <InputField
                       label="End Time"
                       name="endTime"
@@ -164,6 +174,7 @@ const InsertActivity = ({ showModal, setShowModal, data, onClick,editId,onClose 
                       values={values}
                     />
                   </div>
+                  </FormSection>
                 </div>
               </div>
               <button
