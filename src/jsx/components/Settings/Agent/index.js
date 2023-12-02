@@ -89,35 +89,35 @@ const Agent = () => {
               </div>
             </div>
             <div className="col-xl-12">
-              {agentData?.loading ? 
-              <NoData isCard={true} isLoading={agentData.loading}/> :
+              {tableData?.length > 0 ?
               <div className="row">
-                {tableData?.map((item, ind) => (
-                  <div className="col-xl-4 col-md-6" key={ind}>
-                    <div className="card contact_list ">
-                      <div className="card-body">
-                        <div className="user-content">
-                          <div className="user-info">
-                            <div className="user-img">
-                              {/* <img src={item.image} alt="" /> */}
-                              <Avatar name={item.name} index={ind}/>
-                            </div>
-                            <div className="user-details">
-                              <h4 className="user-name">{item.name}</h4>
-                              <span className="number">{item.phone}</span>
-                              <span className="mail">{item.email}</span>
-                              <span className="mail">Location : {item.country_name}</span>
-                              <span className="mail">Address : {item.address}</span>
-                            </div>
+              {tableData?.map((item, ind) => (
+                <div className="col-xl-4 col-md-6" key={ind}>
+                  <div className="card contact_list ">
+                    <div className="card-body">
+                      <div className="user-content">
+                        <div className="user-info">
+                          <div className="user-img">
+                            {/* <img src={item.image} alt="" /> */}
+                            <Avatar name={item.name} index={ind}/>
                           </div>
-                          <DropDownBlog onEdit={()=>onEdit(item.id)} onDelete={()=>onDelete(item.id,item.name)}
-                          isActive={true} onStatus={()=>onStatus(item.id,item.name)}/>
+                          <div className="user-details">
+                            <h4 className="user-name">{item.name}</h4>
+                            <span className="number">{item.phone}</span>
+                            <span className="mail">{item.email}</span>
+                            <span className="mail">Location : {item.country_name}</span>
+                            <span className="mail">Address : {item.address}</span>
+                          </div>
                         </div>
+                        <DropDownBlog onEdit={()=>onEdit(item.id)} onDelete={()=>onDelete(item.id,item.name)}
+                        isActive={true} onStatus={()=>onStatus(item.id,item.name)}/>
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
+            </div> :
+               <NoData isCard={true} isLoading={agentData.loading}/>
               }
             </div>
           </div>

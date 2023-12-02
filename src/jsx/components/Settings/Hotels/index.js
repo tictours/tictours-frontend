@@ -301,9 +301,8 @@ const Hotels = () => {
           {/* swiper end */}
 
           <div className="row">
-            {hotelData?.loading ?
-            <NoData isLoading={hotelData?.loading} isCard/>
-            :hotelData?.data?.data?.map((item, index) => (
+            {hotelData?.data?.data?.length > 0 ?
+            hotelData?.data?.data?.map((item, index) => (
               <div className="col-xl-3 col-xxl-4 col-sm-6" key={index}>
                 <div className="card all-crs-wid">
                   <div className="card-body">
@@ -401,7 +400,9 @@ const Hotels = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            ))
+            
+            :<NoData isLoading={hotelData?.loading} isCard/>}
           </div>
         </div>
       </div>
