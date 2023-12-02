@@ -63,6 +63,17 @@ export const CustomTable = ({
     }
   };
 
+  const showValue = (value) => {
+    const isArray = Array.isArray(value)
+    let listValue
+    if(isArray){
+      listValue = value?.map(item => item.name).join(', ')
+    }else{
+      listValue = value
+    }
+    return listValue
+  }
+
   const getValue = (data, val) => {
     const keys = val;
     if (Array.isArray(keys)) {
@@ -70,9 +81,9 @@ export const CustomTable = ({
       keys.forEach((key) => {
         value = value[key];
       });
-      return value;
+      return showValue(value);
     } else {
-      return data[keys];
+      return showValue(data[keys]);
     }
   };
 

@@ -16,6 +16,8 @@ export const URLS = {
   PERMISSION_URL: "/permissions",
   USER_ROLE_URL: "/roles",
   HOTEL_URL: '/hotels',
+  HOTEL_UPDATE_URL: '/hotel-update',
+  LANGUAGE_URL:'settings/languages',
   AGENT_URL: '/agents',
   COUNTRY_URL:'/settings/countries',
   LEAD_SOURCE_URL:'/lead-sources',
