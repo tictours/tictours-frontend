@@ -6,6 +6,9 @@ import InvoiceSlider from "../Dashboard/InvoiceSlider";
 import QuestionIcon from "../Dashboard/Ticketing/QuestionIcon";
 import EditProfile from "../AppsMenu/AppProfile/EditProfile";
 import CustomModal from "../../layouts/CustomModal";
+import { URLS } from "../../../constants";
+import { CustomTable } from "../common/CustomTable";
+import { useAsync } from "../../utilis/useAsync";
 
 const RightIcon = () => {
   return (
@@ -108,6 +111,35 @@ const tableBlog = [
 const Enquiry = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal]=useState(false)
+  const url = URLS.ENQUIRY_URL
+  const enquiryData = useAsync(url);
+  const tableData = enquiryData?.data?.data;
+
+  const onView = (id) => {
+    navigate(`/enquiry-detail/${id}`)
+  }
+  const onEdit = (id) => {
+    navigate(`${id}/profile`)
+  }
+  const tableArray = [
+    { label: "Sl no", value: "index", className: "text-center" },
+    { label: "Client / Agent", value: "type" },
+    { label: "Name", value: ["customer", "name"],condition:["agent", "name"] },
+    { label: "Lead Source", value: ["lead_source", "name"] },
+    { label: "Requirement", value: ["requirements"] },
+    // { label: "Package Details", value: "is_active" },
+    { label: "Assigned To", value: ["assigned_to_user","first_name"] },
+    { label: "Date", value: "start_date" },
+    {
+      label: "Actions",
+      value: [
+        // { menu: "Status",showLabel:'vehicle_name',showValue:"is_active" },
+        { menu: "View", onPress: onView },
+        { menu: "Edit", onPress: onEdit },
+        { menu: "Delete",showLabel:'name' },
+      ],
+    },
+  ];
   const [data, setData] = useState(
     document.querySelectorAll("#example2_wrapper tbody tr"),
   );
@@ -234,7 +266,7 @@ const Enquiry = () => {
           <InvoiceSlider />
           {/* swiper end */}
 
-          <div className="row">
+          {/* <div className="row">
             <div className="col-xl-12">
               <div
                 className="table-responsive  full-data dataTables_wrapper"
@@ -310,8 +342,8 @@ const Enquiry = () => {
                           <span
                             className={`btn light fs-14  btn-sm ${item.iconClass}`}
                           >
-                            {/* {item.icon2}
-                                                        {" "} */}
+                             {item.icon2}
+                                                        {" "} 
                             {item.icontext}
                           </span>
                         </td>
@@ -406,7 +438,15 @@ const Enquiry = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
+           <CustomTable
+            tableArray={tableArray}
+            data={tableData}
+            length={tableData?.length}
+            loading={enquiryData?.loading}
+            url={url}
+            // url2={patchUrl}
+          />
         </div>
       </div>
       <CustomModal
