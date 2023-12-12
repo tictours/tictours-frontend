@@ -180,6 +180,7 @@ import DetailActivity from "./components/Settings/Activity/detail";
 import DetailTransfer from "./components/Settings/Transfer/detail";
 import UserDetail from "./components/Settings/UserManagement/User/detail";
 import RoleDetail from "./components/Settings/UserManagement/Role/detail";
+import Supplier from "./components/Settings/Supplier";
 
 const enquiryMenu = [
   { name: "profile", path: "", component: "" },
@@ -295,6 +296,7 @@ const Markup = () => {
     { url: "lead-source", component: <LeadSource /> },
     { url: "priority", component: <Priority /> },
     { url: "requirement", component: <Requirement /> },
+    { url: "supplier", component: <Supplier /> },
 
     // finance
     { url: "follow-ups", component: <FollowUp /> },
