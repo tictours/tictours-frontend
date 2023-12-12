@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import React from "react";
 import ReactSelect from "../../common/ReactSelect";
-import { SETUP } from "../../../../constants";
+import { SETUP, URLS } from "../../../../constants";
 import InputField from "../../common/InputField";
 import CustomModal from "../../../layouts/CustomModal";
 import DatePicker from "react-datepicker";
@@ -11,13 +11,14 @@ import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
 import { useEffect } from "react";
 import { FormSection } from "../../common/FormSection";
+import { useAsync } from "../../../utilis/useAsync";
 const typeOptions = [
   { label: "Type 1", value: "1" },
   { label: "Type 2", value: "2" },
   { label: "Type 3", value: "3" },
   { label: "Type 4", value: "4" },
 ];
-const destinationOptions = [
+const destinationOption = [
   { value: "Dubai", label: "Dubai" },
   { value: "Qatar", label: "Qatar" },
   { value: "Europe", label: "Europe" },
@@ -32,9 +33,12 @@ const activityOptions = [
 ];
 
 const InsertActivity = ({ showModal, setShowModal, data, onClick,editId,onClose }) => {
+  const destination = useAsync(URLS.DESTINATION_URL)
+  const destinationOptions = destination?.data?.data
   const isEdit = !!editId || editId === 0
   const initialValues = {
     startDate: SETUP.TODAY_DATE,
+    endDate: SETUP.TODAY_DATE,
     startTime: SETUP.START_TIME,
     endTime: SETUP.END_TIME,
     insertType:'activity'
@@ -56,10 +60,17 @@ const InsertActivity = ({ showModal, setShowModal, data, onClick,editId,onClose 
     resetForm()
   };
   useEffect(()=>{
+console.log('edi',data)
     if(isEdit){
       setValues(data)
+    }else{
+      const destinationObj ={label:data?.destination?.name,
+        value:data?.destination?.name} 
+      setFieldValue('destination',destinationObj)
+      setFieldValue('name',data?.activity_name)
+      setFieldValue('id',data?.id)
     }
-  },[editId])
+  },[editId,data,showModal])
   return (
     <>
       <CustomModal
@@ -102,17 +113,12 @@ const InsertActivity = ({ showModal, setShowModal, data, onClick,editId,onClose 
                     />
                   </div>
                   <div className="col-sm-6">
-                    <ReactSelect
-                      label="Activity"
-                      value={values.activity}
-                      onChange={(selected) =>
-                        setFieldValue("activity", selected)
-                      }
+                  <InputField
+                      label="Activity name"
+                      name="name"
+                      onChange={handleChange}
                       onBlur={handleBlur}
-                      // values={values}
-                      options={activityOptions}
-                      optionValue="value"
-                      optionLabel="label"
+                      values={values}
                     />
                   </div>
                   <div className="col-sm-6">

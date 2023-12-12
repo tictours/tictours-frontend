@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import ReactSelect from "../../common/ReactSelect";
-import { SETUP } from "../../../../constants";
+import { SETUP, URLS } from "../../../../constants";
 import InputField from "../../common/InputField";
 import CustomModal from "../../../layouts/CustomModal";
 import DatePicker from "react-datepicker";
@@ -10,6 +10,7 @@ import TimePickerPicker from "react-time-picker";
 import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
 import { FormSection } from "../../common/FormSection";
+import { useAsync } from "../../../utilis/useAsync";
 const nameOptions = [
   { label: "Vechile 1", value: "1" },
   { label: "Vechile 2", value: "2" },
@@ -20,7 +21,7 @@ const typeOptions = [
   { label: "Private", value: "1" },
   { label: "SIC", value: "2" },
 ];
-const destinationOptions = [
+const destinationOption = [
   { value: "Dubai", label: "Dubai" },
   { value: "Qatar", label: "Qatar" },
   { value: "Europe", label: "Europe" },
@@ -35,10 +36,14 @@ const activityOptions = [
 ];
 
 const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose }) => {
+
+  const destination = useAsync(URLS.DESTINATION_URL)
+  const destinationOptions = destination?.data?.data
   const isEdit = !!editId || editId === 0
   const initialValues = {
     startDate: SETUP.TODAY_DATE,
     startTime: SETUP.START_TIME,
+    endDate: SETUP.TODAY_DATE,
     endTime: SETUP.END_TIME,
     insertType:'transfer',
     type:{ label: "Private", value: "1" }
@@ -62,8 +67,14 @@ const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose 
   useEffect(()=>{
     if(isEdit){
       setValues(data)
+    }else{
+      const destinationObj ={label:data?.destination?.name,
+        value:data?.destination?.name} 
+      setFieldValue('destination',destinationObj)
+      setFieldValue('name',data?.vehicle_name)
+      setFieldValue('id',data?.id)
     }
-  },[editId])
+  },[editId,data,showModal])
   return (
     <>
       <CustomModal
@@ -89,8 +100,8 @@ const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose 
                       onBlur={handleBlur}
                       // values={values}
                       options={destinationOptions}
-                      optionValue="value"
-                      optionLabel="label"
+                      optionValue="id"
+                      optionLabel="name"
                     />
                   </div>
                   {/* <div className="col-sm-4">

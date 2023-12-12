@@ -74,13 +74,21 @@ export const CustomTable = ({
     return listValue
   }
 
-  const getValue = (data, val) => {
+  const getValue = (data, val, condition) => {
     const keys = val;
     if (Array.isArray(keys)) {
       let value = data;
       keys.forEach((key) => {
-        value = value[key];
+        value = value?.[key];
       });
+      if(!value && !!condition){
+        let value2 = data;
+        let keys2 = condition
+      keys2.forEach((key) => {
+        value2 = value2?.[key];
+      });
+      return showValue(value2);
+      }
       return showValue(value);
     } else {
       return showValue(data[keys]);
@@ -218,7 +226,7 @@ export const CustomTable = ({
                         <td
                           className={arrValue?.className ? arrValue.className : ""}
                         >
-                          {arrValue?.value === 'index'? index+1 :getValue(item, arrValue?.value)}
+                          {arrValue?.value === 'index'? index+1 :getValue(item, arrValue?.value,arrValue?.condition)}
                         </td>
                     }
                     </React.Fragment>

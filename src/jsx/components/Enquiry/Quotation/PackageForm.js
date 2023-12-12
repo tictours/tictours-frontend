@@ -11,6 +11,8 @@ import InsertHotel from "./InsertHotel";
 import { notifyCreate } from "../../../utilis/notifyMessage";
 import { formatDate, parseDate, parseTime } from "../../../utilis/date";
 import { LoadingButton } from "../../common/LoadingBtn";
+import { useAsync } from "../../../utilis/useAsync";
+import { URLS } from "../../../../constants";
 
 const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const {
@@ -27,6 +29,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const [showHotelModal, setShowHotelModal] = useState(false);
   const [showActivityModal, setShowActivityModal] = useState(false);
   const [showTransferModal, setShowTransferModal] = useState(false);
+  const [selectedModalData, setSelectedModalData] = useState({});
   const [editId , setEditId] = useState('')
   const [editData , setEditData] = useState({})
   const [datesArray, setDatesArray] = useState([]);
@@ -34,7 +37,21 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const scheduleData = [1, 2];
   const destinationOptions = ["Destination 1", "Destination 2"];
   const categoryOptions = ["Hotel", "Activity", "Transfer"];
-  const dataList = [1, 2, 3, 4];
+  // const dataList = [1, 2, 3, 4];
+  const hotelFetchData = useAsync(URLS.HOTEL_URL)
+  const hotelData = hotelFetchData?.data?.data
+  const activityFetchData = useAsync(URLS.ACTIVITY_URL)
+  const activityData = activityFetchData?.data?.data
+  const transferFetchData = useAsync(URLS.TRANSFER_URL)
+  const transferData = transferFetchData?.data?.data
+  let dataList
+  if(values.categoryOptions === 'Hotel'){
+    dataList = hotelData
+  }else if(values.categoryOptions === 'Activity'){
+    dataList = activityData
+  }else{
+    dataList = transferData
+  }
 
   // Step 1: Parse the date strings into Date objects
   const startDate = new Date(values.formStartDate);
@@ -66,9 +83,17 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
     }
     setFieldValue("planArr", scheduleArray);
   };
+  let initialLoad = true
   useEffect(() => {
-    generateDates();
+    if(initialLoad){
+      generateDates();
+      console.log('inital generate datae')
+    }
+    return ()=>{
+     initialLoad = false
+    }
   }, []);
+  
 
   const handleAddCategory = () => {
     if (values.categoryOptions === "Hotel") {
@@ -81,8 +106,11 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
       navigation("/transfer");
     }
   };
-  const handleCardAdd = (value = values.categoryOptions) => {
+  const handleCardAdd = (value = values.categoryOptions,data) => {
     const checkValue = value?.toLowerCase()
+    if(data){
+    setEditData(data)
+  }
     if (checkValue === "hotel") {
       setShowHotelModal(true);
     }
@@ -163,14 +191,23 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
     setFieldValue("planArr", insertSchedule);
   };
   // console.log('show',values.planArr,'ind',values.planIndex,'val',showScheduleValue)
+  console.log('package form',values)
+  const handleBack = () => {
+    setShowModal(true)
+    setFormComponent("setupForm")
+  }
   return (
     <>
       <form
       // onSubmit={formSubmit}
       >
+        <div>
+          <button className="btn btn-outline-light" type="button" onClick={handleBack}><i class="fa fa-arrow-left fa-xl" aria-hidden="true"></i></button>
+        </div>
         <div className="d-flex justify-content-end mb-3">
+          <LoadingButton label='Save' type="submit" className='me-2' onClick={handleSubmit}/>
           <LoadingButton label='Quotation' type="button" className='me-2'/>
-          <LoadingButton label='Pricing' type="button" className='me-2'/>
+          <LoadingButton label='Pricing' type="button" className='me-2' onClick={formSubmit}/>
           <LoadingButton label='View' type="button" className='me-2'/>
           <LoadingButton label='Export' type="button" className='me-2'/>
           <LoadingButton label='Share' type="button"/>
@@ -221,7 +258,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                                 <img src={Img1} alt="" />
                               </div>
                               <div className="user-details">
-                                <h6 className="user-name">{`${item.insertType} : ${item.insertType === "activity"?item.activity?.label:item.name}`}</h6>
+                                <h6 className="user-name">{`${item.insertType} : ${item.insertType === "activity"?item.name:item.name}`}</h6>
                                 {item.insertType === "hotel" && (
                                   <>
                                     <span className="number">10am to 2pm</span>
@@ -317,24 +354,24 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
               </div>
             </div>
             <div className="mt-4">
-              {dataList.map((list, key) => (
+              {dataList?.map((list, key) => (
                 <div
                   className="d-flex justify-content-between mb-3 ps-2"
                   key={key}
                 >
                   <div className="d-flex align-item-center">
+                    {values.categoryOptions !== 'Activity' &&
                     <div className="custom-img-container">
-                      <img src={Img1} alt="" className="custom-img" />
+                      <img src={list?.image || list?.document_2[0]?.file_url} alt="" className="custom-img" />
                     </div>
-                    <h6 className="m-2">{`${values.categoryOptions} ${
-                      key + 1
-                    }`}</h6>
+                    }
+                    <h6 className="m-2">{list.name || list.activity_name || list.vehicle_name}</h6>
                   </div>
                   <div>
                     <button
                       type="button"
                       className="btn btn-white p-3"
-                      onClick={() => handleCardAdd()}
+                      onClick={() => handleCardAdd(values.categoryOptions,list)}
                     >
                       <i className="fa-solid fa-plus text-primary"></i>
                     </button>
@@ -351,13 +388,13 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
             </div>
           </div>
         </div>
-        <button
+        {/* <button
           type="button"
           className="btn btn-primary mt-4"
           onClick={formSubmit}
         >
           Schedule itinerary
-        </button>
+        </button> */}
       </form>
       <InsertHotel
         showModal={showHotelModal}

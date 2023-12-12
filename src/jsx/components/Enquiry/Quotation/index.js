@@ -198,7 +198,7 @@ const Quotation = () => {
               <div className="ms-2">
                 <button
                   className="btn btn-primary"
-                  onClick={() => navigate("/enquiry/itinerary")}
+                  onClick={() => navigate("itinerary")}
                 >
                   Create itinerary
                 </button>

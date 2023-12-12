@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactSelect from "../../common/ReactSelect";
-import { SETUP } from "../../../../constants";
+import { SETUP, URLS } from "../../../../constants";
 import InputField from "../../common/InputField";
 import CustomModal from "../../../layouts/CustomModal";
 import DatePicker from "react-datepicker";
@@ -10,11 +10,17 @@ import TimePickerPicker from "react-time-picker";
 import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
 import { FormSection } from "../../common/FormSection";
+import { useAsync } from "../../../utilis/useAsync";
 const typeOptions = [
   { label: "Type 1", value: "1" },
   { label: "Type 2", value: "2" },
   { label: "Type 3", value: "3" },
   { label: "Type 4", value: "4" },
+];
+const hotelOptions = [
+  { label: "Option 1", value: "1" },
+  { label: "Option 2", value: "2" },
+  { label: "Option 3", value: "3" },
 ];
 const destinationOptions = [
   { value: "Dubai", label: "Dubai" },
@@ -34,21 +40,20 @@ const mealOptions = [
   { label: "Lunch - 250 rs", value: "2" },
   { label: "Dinner - 220 rs", value: "3" },
 ];
-const roomAllotement = [
-  { name: "single", allowed: 4 },
-  { name: "double", allowed: 2 },
-  { name: "triple", allowed: 5 },
-  { name: "extra", allowed: 2 },
-  { name: "child w", allowed: 1 },
-  { name: "child n", allowed: 2 },
-];
+let roomAllotement
 
 const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) => {
+  const hotelId = data?.id
+  const hotelData = useAsync(`${URLS.HOTEL_URL}/${hotelId}`, !!hotelId)
+  const hotelDetailData = hotelData?.data?.data
+  const [selectedRoom,setSelectedRoom]=useState(hotelDetailData?.rooms[0])
   const isEdit = !!editId || editId === 0
   const initialValues = {
     startDate: SETUP.TODAY_DATE,
     startTime: SETUP.START_TIME,
+    endDate: SETUP.TODAY_DATE,
     endTime: SETUP.END_TIME,
+    option:hotelOptions[0],
     insertType:'hotel'
   };
   const {
@@ -69,8 +74,37 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
   useEffect(()=>{
     if(isEdit){
       setValues(data)
+    }else{
+      if(hotelDetailData){
+      const destinationObj = {label:hotelDetailData?.destination_name,value:hotelDetailData?.destination_id}
+      const roomTypeObj = {label:hotelDetailData?.rooms[0]?.room_type_name,value:hotelDetailData?.rooms[0]?.id}
+      setFieldValue('destination',destinationObj)
+      setFieldValue('name',hotelDetailData?.name)
+      setFieldValue('id',hotelDetailData?.id)
+      setFieldValue('roomType',roomTypeObj)
+    }}
+  },[editId,hotelId,hotelDetailData])
+  
+  const roomTypeId = values.roomType?.value
+  useEffect(()=>{
+    console.log('findDataidd',roomTypeId)
+    if(roomTypeId){
+      const data = hotelDetailData.rooms.find((val)=> val.room_type_id == roomTypeId)
+      if(data){
+        setSelectedRoom(data)
+        const typeObj = {label:data?.market_type_name,value:data?.market_type_id}
+        setFieldValue('type',typeObj)
+        roomAllotement = [
+          { name: "single",label: "single", allowed: data.single_bed_amount },
+          { name: "double",label: "double", allowed: data.double_bed_amount },
+          { name: "triple",label: "triple", allowed: data.triple_bed_amount },
+          { name: "extra", label: "extra",allowed: data.extra_bed_amount },
+          { name: "childW",label: "child W", allowed: data.child_w_bed_amount },
+          { name: "childN",label: "child N", allowed: data.child_n_bed_amount },
+        ];
+      }
     }
-  },[editId])
+  },[roomTypeId])
   return (
     <>
       <CustomModal
@@ -132,13 +166,15 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                       label="Room Type"
                       value={values.roomType}
                       onChange={(selected) =>
-                        setFieldValue("roomtype", selected)
+                        {console.log('sele',selected)
+                        setFieldValue("roomType", selected)
+                      }
                       }
                       onBlur={handleBlur}
                       // values={values}
-                      options={typeOptions}
-                      optionValue="value"
-                      optionLabel="label"
+                      options={hotelDetailData?.rooms}
+                      optionValue="id"
+                      optionLabel="room_type_name"
                     />
                   </div>
                   <div className="col-sm-5">
@@ -159,14 +195,28 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                       }
                       onBlur={handleBlur}
                       // values={values}
-                      options={mealOptions}
-                      optionValue="value"
-                      optionLabel="label"
+                      options={selectedRoom?.meal_plans}
+                      optionValue="id"
+                      optionLabel="name"
                       isMulti
                     />
                   </div>
+                  <div className="col-sm-6">
+                    <ReactSelect
+                      label="Hotel Option"
+                      value={values.option}
+                      onChange={(selected) =>
+                        setFieldValue("option", selected)
+                      }
+                      onBlur={handleBlur}
+                      // values={values}
+                      options={hotelOptions}
+                      optionValue="value"
+                      optionLabel="label"
+                    />
+                  </div>
                   <FormSection bg={'#fffada'}>
-                  <div className="col-sm-4">
+                  {/* <div className="col-sm-4">
                     <InputField
                       label="No of person"
                       name="person"
@@ -175,19 +225,19 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                       onBlur={handleBlur}
                       values={values}
                     />
-                  </div>
+                  </div> */}
                   {roomAllotement?.map((data) => (
                     <div className="col-sm-4">
                       <InputField
                         mb="0"
-                        label={data.name}
+                        label={data.label}
                         name={data.name}
                         type="number"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         values={values}
                       />
-                      <p className="text-danger mb-3">{`max ${data.allowed}`}</p>
+                      <p className="text-danger mb-3">{`amount ${data.allowed}`}</p>
                     </div>
                   ))}
                   </FormSection>

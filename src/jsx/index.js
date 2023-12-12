@@ -181,6 +181,7 @@ import DetailTransfer from "./components/Settings/Transfer/detail";
 import UserDetail from "./components/Settings/UserManagement/User/detail";
 import RoleDetail from "./components/Settings/UserManagement/Role/detail";
 import Supplier from "./components/Settings/Supplier";
+import EnquiryDetail from "./components/Enquiry/detail";
 
 const enquiryMenu = [
   { name: "profile", path: "", component: "" },
@@ -302,6 +303,9 @@ const Markup = () => {
     { url: "follow-ups", component: <FollowUp /> },
     { url: "quotation", component: <Quotation /> },
     { url: "supplier-payments", component: <SupplierPayment /> },
+
+    // enquiry
+    {url:'enquiry-detail/:id',component:<EnquiryDetail/>}
   ];
 
   return (
@@ -374,12 +378,12 @@ const Markup = () => {
         </Route>
         <Route element={<Layout7 />}>
           <Route exact path="/enquiry" element={<Enquiry />} />
-          <Route path="/enquiry" element={<Tabs menu={enquiryMenu} />}>
+          <Route path="/enquiry/:id" element={<Tabs menu={enquiryMenu} />}>
             <Route path="*" element={null} />
             <Route path="profile" element={<EditProfile />} />
             <Route path="quotation" element={<Quotation />} />
             <Route path="follow-ups" element={<FollowUp />} />
-            <Route path="itinerary" element={<SetupModal />} />
+            <Route path="quotation/itinerary" element={<SetupModal />} />
             <Route path="payments" element={<Payment />} />
             <Route path="mail-to-supplier" element={<MailToSupplier />} />
             <Route path="supplier-payments" element={<SupplierPayment />} />

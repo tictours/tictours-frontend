@@ -38,6 +38,7 @@ function InputField(props) {
           className={`form-control ${inputClassName}`}
           placeholder={placeholder}
           name={name}
+          min={0}
           value={values && values[name] ? values[name] : inputValue}
           // onkeyup={handleBlur}
         />

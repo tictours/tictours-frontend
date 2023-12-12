@@ -6,6 +6,7 @@ import todoReducers from "./reducers/Reducers";
 import itinerarySlice from "./slices/itinerarySlice";
 import roleSlice from "./slices/roleSlice";
 import formSlice from "./slices/formSlice";
+import fetchSlice from "./slices/fetchSlice";
 //import { reducer as reduxFormReducer } from 'redux-form';
 const middleware = applyMiddleware(thunk);
 
@@ -18,6 +19,7 @@ const reducers = combineReducers({
   itinerary: itinerarySlice,
   role: roleSlice,
   form: formSlice,
+  fetch:fetchSlice
   //form: reduxFormReducer,
 });
 

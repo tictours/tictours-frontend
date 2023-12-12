@@ -2,7 +2,7 @@ import React from "react";
 import Select from "react-select";
 
 function ReactSelect(props) {
-  const { label, optionLabel = 'label', optionValue = 'value',formik, ...restProps } = props;
+  const { label, optionLabel = 'label', optionValue = 'value',className='',formik, ...restProps } = props;
   const selectStyle = {
     borderColor: "#D5DFE7",
     padding: "2px 20px",
@@ -30,7 +30,7 @@ function ReactSelect(props) {
           }),
         }}
         classNames={{
-          control: (state) => "form-control",
+          control: (state) => `form-control ${className}`,
         }}
       />
       {!value && formik?.touched[name] && formik?.errors[name] && (

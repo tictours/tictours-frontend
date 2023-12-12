@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DatePicker from "react-datepicker";
 import CustomModal from "../../../layouts/CustomModal";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import InputField from "../../common/InputField";
+import { useAsync } from "../../../utilis/useAsync";
+import { URLS } from "../../../../constants";
+import ReactSelect from "../../common/ReactSelect";
+import { parseDate } from "../../../utilis/date";
+import { checkFormValue } from "../../../utilis/check";
 
 const SetupForm = ({ formik, setFormComponent, setShowModal, showModal }) => {
   const {
@@ -15,6 +21,24 @@ const SetupForm = ({ formik, setFormComponent, setShowModal, showModal }) => {
   } = formik;
 
   const navigate = useNavigate();
+  const {id} = useParams()
+  const isEquiryId = id && id !== 'add'
+  const url = URLS.ENQUIRY_URL
+  const equiryIdUrl = `${url}/${id}`
+  const {data} = useAsync(equiryIdUrl,!!isEquiryId)
+  const equiryIdData = data?.data
+  const destinationData = useAsync(URLS.DESTINATION_URL)
+
+  useEffect(()=>{
+    if(equiryIdData){
+      setFieldValue('formStartDate',parseDate(equiryIdData.start_date))
+      setFieldValue('formEndDate',parseDate(equiryIdData.end_date))
+      setFieldValue('adult',checkFormValue(equiryIdData.adult_count))
+      setFieldValue('child',checkFormValue(equiryIdData.child_count))
+      const destinationObj = {label:equiryIdData.destination.name,value:equiryIdData.destination.id}
+      setFieldValue('destination',checkFormValue(destinationObj))
+    }
+  },[equiryIdData?.id])
 
   const formSubmit = (e) => {
     // e.preventDefault();
@@ -29,19 +53,23 @@ const SetupForm = ({ formik, setFormComponent, setShowModal, showModal }) => {
         handleModalClose={() => {
           setShowModal(false);
           setFormComponent("setupForm");
-          navigate("/enquiry/quotation");
+          navigate(-1);
         }}
       >
         <div className="card-body">
           <div className="basic-form">
             <form>
               <div className="row">
-                <div className="form-group mb-3 col-md-4">
-                  <label>Package Name</label>
-                  <input
-                    type="text"
-                    className="form-control custom-input"
-                    placeholder="Package 1"
+                <div className="col-md-4">
+                  <InputField
+                    inputClassName="custom-input"
+                    label="Package Name"
+                    name="packageName"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    values={values}
+                    formik={formik}
+                    required
                   />
                 </div>
                 <div className="form-group mb-3 col-md-4">
@@ -60,36 +88,46 @@ const SetupForm = ({ formik, setFormComponent, setShowModal, showModal }) => {
                     onChange={(date) => setFieldValue("formEndDate", date)}
                   />
                 </div>
-                <div className="form-group mb-3 col-md-4">
-                  <label>Adult</label>
-                  <input
-                    type="text"
-                    className="form-control custom-input"
-                    // placeholder="Package 1"
+                <div className="col-md-4">
+                  <InputField
+                    inputClassName="custom-input"
+                    label="Adult"
+                    name="adult"
+                    type='number'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    values={values}
+                    formik={formik}
+                    required
                   />
                 </div>
-                <div className="form-group mb-3 col-md-4">
-                  <label>Child</label>
-                  <input
-                    type="text"
-                    className="form-control custom-input"
-                    // placeholder="Package 1"
+                <div className="col-md-4">
+                  <InputField
+                    inputClassName="custom-input"
+                    label="Child"
+                    name="child"
+                    type='number'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    values={values}
+                    formik={formik}
+                    required
                   />
                 </div>
-                <div className="form-group mb-3 col-md-3">
-                  <label>Destination</label>
-                  <select
-                    defaultValue={"option"}
-                    id="inputState"
-                    className="form-control custom-input"
-                  >
-                    <option value="option" disabled>
-                      Choose...
-                    </option>
-                    <option>Dubai</option>
-                    <option>Sharjah</option>
-                    <option>Qatar</option>
-                  </select>
+                <div className="col-md-4">
+                <ReactSelect
+                  label="Destination"
+                  options={destinationData?.data?.data}
+                  value={values.destination}
+                  onChange={(selected) => setFieldValue("destination", selected)}
+                  optionValue="id"
+                  optionLabel="name"
+                  inputId='destination'
+                  formik={formik}
+                  onBlur={handleBlur}
+                  className='custom-input'
+                  required
+                />
                 </div>
                 <div className="form-group mb-3 col-md-4">
                   <label>Validity</label>
@@ -127,7 +165,11 @@ const SetupForm = ({ formik, setFormComponent, setShowModal, showModal }) => {
                       <label className="form-check-label">Check me out</label>
                     </div>
                   </div> */}
-              <button type="button" className="btn btn-primary" onClick={formSubmit}>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={formSubmit}
+              >
                 Setup itinerary
               </button>
             </form>

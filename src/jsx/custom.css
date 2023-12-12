@@ -30,9 +30,9 @@
 /* form input */
 .modal .modal-content input.custom-input,
 .custom-input {
-  border: none;
-  border-bottom: 1px solid #d5dfe7;
-  border-radius: 0;
+  border: none !important;
+  border-bottom: 1px solid #d5dfe7 !important;
+  border-radius: 0 !important;
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
 }

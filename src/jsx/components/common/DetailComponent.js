@@ -16,10 +16,11 @@ export const DetailComponent = ({ title = "", url, array = [] }) => {
     if(isArray){
       listValue = value?.map(item => item.name).join(', ')
     }
+    let dataValue = value || typeof value === 'number' ? value : 'Nil'
     return (
       <div className="mb-3 d-flex align-items-center">
         <h4 className="text-primary me-1">{label} :</h4>
-        <h6>{isArray ? listValue : value || 'Nil'}</h6>
+        <h6>{isArray ? listValue : dataValue }</h6>
       </div>
     );
   };
