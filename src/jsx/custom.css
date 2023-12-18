@@ -167,3 +167,14 @@
   border:1px solid #eee;
   border-radius: .5rem;
 }
+.payment-detail {
+  background-color: #eee;
+  padding: .5rem;
+}
+/* .payment-detail-cell {
+  border-right: 2px solid #fff;
+  padding:0 .8rem;
+} */
+.payment-card , .payment-detail{
+  border-radius: 8px;
+}

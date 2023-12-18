@@ -135,6 +135,10 @@ export const MenuList = [
         to: "currency-settings",
       },
       {
+        title: "Package Terms",
+        to: "package-terms",
+      },
+      {
         title: "User Management",
         //to: './',
         hasMenu: true,

@@ -182,6 +182,7 @@ import UserDetail from "./components/Settings/UserManagement/User/detail";
 import RoleDetail from "./components/Settings/UserManagement/Role/detail";
 import Supplier from "./components/Settings/Supplier";
 import EnquiryDetail from "./components/Enquiry/detail";
+import PackageTerms from "./components/Settings/PackageTerms";
 
 const enquiryMenu = [
   { name: "profile", path: "", component: "" },
@@ -298,6 +299,7 @@ const Markup = () => {
     { url: "priority", component: <Priority /> },
     { url: "requirement", component: <Requirement /> },
     { url: "supplier", component: <Supplier /> },
+    { url: "package-terms", component: <PackageTerms /> },
 
     // finance
     { url: "follow-ups", component: <FollowUp /> },
