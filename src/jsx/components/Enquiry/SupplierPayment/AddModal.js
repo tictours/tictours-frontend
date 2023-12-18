@@ -12,7 +12,9 @@ const AddModal = ({ setShowModal, showModal }) => {
   const date = new Date();
 
   const initialValues = { cancelDate: date, dueDate: date };
-  const TypeOptions = ["Transfer", "Hotel", "Activity"];
+  const TypeOptions = ["Supplier 1", "Supplier 2", "Supplier 3"];
+  const StatusOptions = ["Mail to", "Pending", "Completed"];
+  const PaymentOptions = [ "Pending", "Success"];
   return (
     <>
       <Formik
@@ -44,32 +46,50 @@ const AddModal = ({ setShowModal, showModal }) => {
               <div className="basic-form">
                 <form onSubmit={handleSubmit}>
                   <div className="row">
-                    <div className="mb-3 col-md-4">
-                      <InputField
-                        label="Name"
-                        name="name"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        values={values}
-                      />
-                    </div>
                     <div className="form-group mb-3 col-md-4">
                       <SelectField
-                        label="Type"
-                        name={"type"}
+                        label="Supplier"
+                        name={"supplier"}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         values={values}
                         options={TypeOptions}
                       />
                     </div>
-                    <div className="mb-3 col-md-4">
-                      <InputField
-                        label="Supplier name"
-                        name="supplierName"
+                    <div className="form-group mb-3 col-md-4">
+                      <SelectField
+                        label="Booking Status"
+                        name={"status"}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         values={values}
+                        options={StatusOptions}
+                      />
+                    </div>
+                    <div className="form-group mb-3 col-md-4">
+                      <SelectField
+                        label="Payment Status"
+                        name={"payment"}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
+                        options={PaymentOptions}
+                      />
+                    </div>
+                    <div className="form-group mb-3 col-md-4">
+                      <label>Cancellation Date</label>
+                      <DatePicker
+                        className="form-control"
+                        selected={values?.cancelDate}
+                        onChange={(date) => setFieldValue("cancelDate", date)}
+                      />
+                    </div>
+                    <div className="form-group mb-3 col-md-4">
+                      <label>Due Date</label>
+                      <DatePicker
+                        className="form-control"
+                        selected={values?.dueDate}
+                        onChange={(date) => setFieldValue("dueDate", date)}
                       />
                     </div>
                     <div className="mb-3 col-md-4">
@@ -92,22 +112,7 @@ const AddModal = ({ setShowModal, showModal }) => {
                         type="number"
                       />
                     </div>
-                    <div className="form-group mb-3 col-md-4">
-                      <label>Cancellation Date</label>
-                      <DatePicker
-                        className="form-control"
-                        selected={values?.cancelDate}
-                        onChange={(date) => setFieldValue("cancelDate", date)}
-                      />
-                    </div>
-                    <div className="form-group mb-3 col-md-4">
-                      <label>Due Date</label>
-                      <DatePicker
-                        className="form-control"
-                        selected={values?.dueDate}
-                        onChange={(date) => setFieldValue("dueDate", date)}
-                      />
-                    </div>
+                    
                   </div>
                   <button type="submit" className="btn btn-primary">
                     Add Payment

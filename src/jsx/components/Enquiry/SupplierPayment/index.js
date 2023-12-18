@@ -234,7 +234,7 @@ const SupplierPayment = () => {
 
           <div className="row">
             <div className="col-xl-12">
-              <div
+              {/* <div
                 className="table-responsive  full-data dataTables_wrapper"
                 id="example2_wrapper"
               >
@@ -244,9 +244,9 @@ const SupplierPayment = () => {
                 >
                   <thead>
                     <tr>
-                      {/* <th className="sorting_asc ">
+                       <th className="sorting_asc ">
                                                 <input type="checkbox" onClick={() => chackboxFun("all")} className="form-check-input" id="checkAll" required="" />
-                                            </th> */}
+                                            </th> 
                       <th className="text-center">Sl No</th>
                       <th className="text-center">Name</th>
                       <th className="text-center">Type</th>
@@ -264,7 +264,7 @@ const SupplierPayment = () => {
                   <tbody>
                     {tableBlog.map((item, ind) => (
                       <tr key={ind}>
-                        {/* <td className="sorting_1">
+                         <td className="sorting_1">
                                                     <div className="checkbox me-0 align-self-center">
                                                         <div className="custom-control custom-checkbox ">
                                                             <input type="checkbox" className="form-check-input" id={"customCheckBox2"+ ind} required="" 
@@ -273,22 +273,22 @@ const SupplierPayment = () => {
                                                             <label className="custom-control-label" htmlFor={"customCheckBox2"+ ind} ></label>
                                                         </div>
                                                     </div>
-                                                </td> */}
+                                                </td> 
                         <td className="text-center">{`${ind + 1}`}</td>
                         <td className="text-center">Burj Khalifa</td>
                         <td className="text-center">Hotel</td>
                         <td className="text-center">Supplier 1</td>
-                        {/* <td className="whitesp-no p-0">
+                         <td className="whitesp-no p-0">
                                                     <div className="py-sm-3 py-1 ps-3">
                                                         <div >
                                                             <h6 className="font-w500 fs-15 mb-0">Marilyn Workman</h6>
                                                             <span className="fs-14 font-w400"><Link to={"app-profile"}>marilyn@gmail.com</Link></span>
                                                         </div>												
                                                     </div>
-                                                </td> */}
-                        {/* <td>Manager</td> */}
-                        {/* <td>Dubai, Qatar</td>
-                                                <td className= "doller">Shanid CA</td> */}
+                                                </td> 
+                         <td>Manager</td> 
+                        <td>Dubai, Qatar</td>
+                                                <td className= "doller">Shanid CA</td> 
                         <td className="whitesp-no font-w400 text-center">
                           20000
                         </td>
@@ -304,8 +304,8 @@ const SupplierPayment = () => {
                           <span
                             className={`btn light fs-14  btn-sm ${item.iconClass}`}
                           >
-                            {/* {item.icon2}
-                                                        {" "} */}
+                             {item.icon2}
+                                                        {" "} 
                             {item.icontext}
                           </span>
                         </td>
@@ -394,7 +394,61 @@ const SupplierPayment = () => {
                     </Link>
                   </div>
                 </div>
+              </div> */}
+              {tableBlog.map((item,ind)=>(
+
+              <div className="col-12">
+                <div className="payment-card bg-white p-3 mb-2">
+                  <div className="payment-header bg-primary py-1 ps-2">
+                    <h6 className="payment-header-label text-white mb-0">Accommodation</h6>
+                  </div>
+                  <div className="payment-footer mt-3">
+                    <div className="d-flex justify-content-between">
+                      <div className="">
+                        <h6>Hotel 1</h6>
+                        <p>delux - 10-12-2023 to 11-12-2023</p>
+                      </div>
+                      <div className="">
+                        <button className="btn btn-outline-primary" 
+                          onClick={() => setShowModal(true)}>Edit</button>
+                        <button className="btn btn-outline-primary ms-2">Delete</button>
+                      </div>
+                    </div>
+                    <div className="payment-detail d-flex justify-content-around">
+                      <div className="payment-detail-cell">
+                        <p className="payment-detail-label fw-bold">Supplier</p>
+                        <p className="payment-detail-value">Supplier 1</p>
+                      </div>
+                      <div className="payment-detail-cell">
+                        <p className="payment-detail-label fw-bold">Status</p>
+                        <Badge bg='success' className="payment-detail-value">Mail Sent</Badge>
+                      </div>
+                      <div className="payment-detail-cell">
+                        <p className="payment-detail-label fw-bold">Payment</p>
+                        <Badge bg='success' className="payment-detail-value">Paid</Badge>
+                      </div>
+                      <div className="payment-detail-cell">
+                        <p className="payment-detail-label fw-bold">Amount</p>
+                        <p className="payment-detail-value">11223</p>
+                      </div>
+                      <div className="payment-detail-cell">
+                        <p className="payment-detail-label fw-bold">Due Date</p>
+                        <p className="payment-detail-value">12/12/23</p>
+                      </div>
+                      <div className="payment-detail-cell">
+                        <p className="payment-detail-label fw-bold">Paid Amount</p>
+                        <p className="payment-detail-value">10000</p>
+                      </div>
+                      <div className="payment-detail-cell">
+                        <p className="payment-detail-label fw-bold">Due Amount</p>
+                        <p className="payment-detail-value">1223</p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
               </div>
+              ))}
             </div>
           </div>
         </div>
