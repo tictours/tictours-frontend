@@ -31,5 +31,6 @@ export const URLS = {
   TRANSFER_PATCH_URL:'/transfer-status-update',
   ENQUIRY_URL:'enquiries',
   ITINERARY_URL:'itineraries',
+  ITINERARY_UPDATE_URL:'itinerary-update',
   CUSTOMER_URL:'customers-search-by-mobile',
 };

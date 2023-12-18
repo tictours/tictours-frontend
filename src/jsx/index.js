@@ -384,6 +384,7 @@ const Markup = () => {
             <Route path="quotation" element={<Quotation />} />
             <Route path="follow-ups" element={<FollowUp />} />
             <Route path="quotation/itinerary" element={<SetupModal />} />
+            <Route path="quotation/itinerary/:itineraryId" element={<SetupModal />} />
             <Route path="payments" element={<Payment />} />
             <Route path="mail-to-supplier" element={<MailToSupplier />} />
             <Route path="supplier-payments" element={<SupplierPayment />} />

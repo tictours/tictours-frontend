@@ -9,6 +9,11 @@ import InputField from "../../common/InputField";
 import { formatDate } from "../../../utilis/date";
 import ReactSelect from "../../common/ReactSelect";
 import CustomModal from "../../../layouts/CustomModal";
+import { URLS } from "../../../../constants";
+import { useAsync } from "../../../utilis/useAsync";
+import { checkFormValue } from "../../../utilis/check";
+import { filePost } from "../../../../services/AxiosInstance";
+import { notifyCreate, notifyError } from "../../../utilis/notifyMessage";
 
 const PaymentForm = ({ formik, setFormComponent, setShowModal }) => {
   const {
@@ -22,6 +27,8 @@ const PaymentForm = ({ formik, setFormComponent, setShowModal }) => {
   } = formik;
   const navigate = useNavigate();
   const [showMarkup,setShowMarkup] = useState(false)
+  const itineraryId = values.itineraryId
+  const isEdit = !!itineraryId
 
   const dayList = [1, 2, 3, 4];
   const scheduleData = [1, 2];
@@ -66,12 +73,117 @@ const PaymentForm = ({ formik, setFormComponent, setShowModal }) => {
     // {id:2,name:'GST on Per'},
 ]
   const currencyOption = [
-    {id:1,name:'INR'},
-    {id:2,name:'USD'},
+    {id:'INR',name:'INR'},
+    {id:'USD',name:'USD'},
 ]
-const addOnField = ['CGST','SGST','IGST','TCS','Discount']
+const addOnField = [
+  {label:'CGST',name:'cgst',field:'cgst_percentage'},
+  {label:'SGST',name:'sgst',field:'sgst_percentage'},
+  {label:'IGST',name:'igst',field:'igst_percentage'},
+  {label:'TCS',name:'tcs',field:'tcs_percentage'},
+  {label:'Discount',name:'discount',field:'discount_amount'},
+]
 const handleMarkup = ()=>{
+  setFieldValue('baseMarkup',checkFormValue(values.baseMarkupInput,'number'))
+  setFieldValue('extraMarkup',checkFormValue(values.extraMarkupInput,'number'))
   setShowMarkup(false)
+}
+const handleInputChange = (planIndex,index, newValue,type='amount') => {
+    const newData = values.planArr?.map((item,planArrInd) => (
+     planArrInd === planIndex ? {
+        ...item,
+        schedule: item.schedule.map((scheduleItem,ind) =>
+        ind === index ? { ...scheduleItem, [type]: Number(newValue) } : scheduleItem
+        )
+      } : item
+      
+    ));
+  setFieldValue('planArr',newData);
+};
+const handleBilling = async() =>{
+  try {
+    const formData = new FormData()
+    formData.append('extra_markup_percentage',checkFormValue(values.baseMarkup,'number'))   
+    formData.append('extra_markup_amount',checkFormValue(values.extraMarkup,'number'))  
+    formData.append('description',values.paymentDescription || '.')  
+    formData.append('currency',checkFormValue(values.priceIn.value))  
+    addOnField.forEach((item)=>{
+      formData.append(item.field,checkFormValue(values[item.name],'number'))  
+    }) 
+    values.planArr?.flatMap(({ date, schedule }) =>
+      schedule.map((data,ind) => {
+      // if(data.isExist){
+      //   formData.append(`requirements[id]`,data?.value)
+      // }
+      formData.append(`entries[${ind}][id]`,checkFormValue(data.entryId))
+      formData.append(`entries[${ind}][amount]`,checkFormValue(data.amount))
+      formData.append(`entries[${ind}][markup]`,checkFormValue(data.markup))
+    }))
+    // formData.append('assigned_to',checkFormValue(values.assigned?.value))
+    let response
+    const url = `${URLS.ITINERARY_URL}/${itineraryId}/set-pricing`
+    // if(isEdit){
+    //   response = await axiosPut(editUrl,formData)
+    // }else{
+    //   console.log('url',url,formData)
+      response = await filePost(url,formData)
+    // }
+
+    if(setShowModal){
+    setShowModal(false)
+    // navigate('add/profile')
+  }
+  if(response?.success){
+    // formik.setFieldValue('itineraryId',response?.data?.id)
+    // navigate(response?.data?.id)
+    notifyCreate('Payment',isEdit)
+  }
+  } catch (error) {
+    console.log('er',error)
+    notifyError(error)
+  }
+}
+
+const scheduleArr = values.planArr?.flatMap(({ date, schedule },planArrInd) => {
+  return schedule.map((item,scheduleInd) => ({
+    date,
+    item,
+    planArrInd,
+    scheduleInd
+  }));
+});
+// Calculate total using reduce
+const totals = scheduleArr.reduce((accumulator, currentValue) => {
+  const {item} = currentValue
+  if(item.insertType !== 'hotel'){
+
+      // Add amount to totalAmount
+      accumulator.totalAmount += item.amount;
+      
+      // Add markup to totalMarkup
+      accumulator.totalMarkup += item.markup;
+    }
+    return accumulator;
+  
+}, { totalAmount: 0, totalMarkup: 0 });
+const getHotelOptionTotal = (amount,type='amount') => {
+  const typeTotal = type === 'amount' ? totals.totalAmount : totals.totalMarkup
+  const total = amount + typeTotal
+  return total
+}
+const calculateTotal = (amount,markup) =>{
+  const grandTotal = totals.totalAmount + totals.totalMarkup + amount + markup + checkFormValue(values.extraMarkup,'number') - checkFormValue(values.discount,'number')
+  const getPercentValue = (val) => {
+    let result 
+    if(val){
+      result  =  grandTotal * val * 0.01
+    }else{
+      result = 0
+    }
+    return result
+  }
+  const percentValue = grandTotal + getPercentValue(values.cgst) + getPercentValue(values.sgst) + getPercentValue(values.igst) + getPercentValue(values.tcs)
+  return percentValue
 }
   return (
     <>
@@ -106,8 +218,7 @@ const handleMarkup = ()=>{
               </tr>
             </thead>
             <tbody>
-              {values.planArr?.flatMap(({ date, schedule }) =>
-        schedule.map((item,ind) => (
+              {scheduleArr.map(({item,planArrInd},ind) => (
                 <tr key={ind}>
                   {/* <td className="sorting_1">
                                                     <div className="checkbox me-0 align-self-center">
@@ -139,16 +250,16 @@ const handleMarkup = ()=>{
                   </td>
                   <td>{item.insertType}</td>
                   <td className="package-td">
-                    <input className="form-control" defaultValue={0} />
+                    <input className="form-control" type="number" value={item.amount} onChange={(e)=>handleInputChange(planArrInd,ind,e.target.value)}/>
                   </td>
                   <td className="package-td">
-                    <input className="form-control" defaultValue={0} />
+                    <input className="form-control" type="number" value={item.markup} onChange={(e)=>handleInputChange(planArrInd,ind,e.target.value,'markup')}/>
                   </td>
                   <td className="package-td">
-                    200
+                    {item.amount+item.markup} 
                   </td>
                 </tr>
-              )))
+              ))
               }
               {/* <tr className="custom-tr">
                 <td>Total</td>
@@ -203,7 +314,7 @@ const handleMarkup = ()=>{
 
                 </div>
           <div className="">
-            <h6 className="">Extra Markup - 500 rs</h6>
+            <h6 className="">{`Extra Markup - ${values.extraMarkup || 0} rs`}</h6>
             <button type="button" className="btn bg-white p-2 mx-auto" onClick={()=>setShowMarkup(true)}>Update</button>
           </div>
         </div>
@@ -236,8 +347,7 @@ const handleMarkup = ()=>{
               </tr>
             </thead>
             <tbody>
-              {values.planArr?.flatMap(({ date, schedule }) =>
-        schedule.map((item,ind) => (
+              {scheduleArr.map(({item,planArrInd},ind) => (
           item.insertType === 'hotel' &&
                 <tr key={ind}>
                   {/* <td className="sorting_1">
@@ -267,28 +377,21 @@ const handleMarkup = ()=>{
                       </div>
                     </div>
                   </td>
-                  <td>1000</td>
-                  <td>200</td>
-                  <td className="package-td">
-                    <input className="form-control" defaultValue={0} />
+                  <td>{getHotelOptionTotal(item.amount)}</td>
+                  <td>{getHotelOptionTotal(item.markup,'markup')}</td>
+                  {addOnField.map((field,key)=>(
+                  <td className="package-td" key={key}>
+                   
+                    {/* <input className="form-control" type="number" value={item[field.name]} onChange={(e)=>handleInputChange(planArrInd,ind,e.target.value,field.name)}/> */}
+                    <td>{values[field.name] || 0}</td>
                   </td>
+                    
+                  ))}
                   <td className="package-td">
-                    <input className="form-control" defaultValue={0} />
-                  </td>
-                  <td className="package-td">
-                    <input className="form-control" defaultValue={0} />
-                  </td>
-                  <td className="package-td">
-                    <input className="form-control" defaultValue={0} />
-                  </td>
-                  <td className="package-td">
-                    <input className="form-control" defaultValue={0} />
-                  </td>
-                  <td className="package-td">
-                    2000
+                    {calculateTotal(item.amount,item.markup)}
                   </td>
                 </tr>
-              )))
+              ))
               }
               {/* <tr className="custom-tr">
                 <td>Total</td>
@@ -313,8 +416,17 @@ const handleMarkup = ()=>{
           <div>
 {addOnField.map((item)=>(
   <div className="d-flex justify-content-end align-items-center mb-2">
-    <h6 >{item} %</h6>
-    <input className="form-control ms-3"  defaultValue={0} style={{width:'25%'}}/>
+    <h6 >{item.label} %</h6>
+    <input
+        className="form-control ms-3"
+        defaultValue={0}
+        name={item.name}
+        type="number"
+        onChange={handleChange}
+        onBlur={handleBlur}
+        value={values[item.name]}
+        style={{ width: "25%" }}
+      />
   </div>
 ))}
 <div className="d-flex justify-content-end align-items-center mb-2">
@@ -334,11 +446,16 @@ const handleMarkup = ()=>{
   </div>
   <div className="d-flex flex-column justify-content-center align-items-end mb-2">
     {/* <div> */}
-  <input className="form-control ms-3" placeholder="Early Bird Offer" style={{width:'50%'}}/>
+  <input className="form-control ms-3" placeholder="Early Bird Offer"
+   name={'paymentDescription'}
+   onChange={handleChange}
+   onBlur={handleBlur}
+   value={values.paymentDescription}
+  style={{width:'50%'}}/>
         <button
-          type="submit"
+          type="button"
           className="btn btn-primary mt-4"
-          onClick={handleSubmit}
+          onClick={handleBilling}
         >
           Update Billing
         </button>
@@ -361,7 +478,7 @@ const handleMarkup = ()=>{
               <div className="mb-3 col-md-12">
                 <InputField
                   label="Base Markup %"
-                  name="baseMarkup"
+                  name="baseMarkupInput"
                   type='number'
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -372,7 +489,7 @@ const handleMarkup = ()=>{
               <div className="mb-3 col-md-12">
                 <InputField
                   label="Extra Markup"
-                  name="extraMarkup"
+                  name="extraMarkupInput"
                   type='number'
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}

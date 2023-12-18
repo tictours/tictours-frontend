@@ -7,6 +7,10 @@ import { Badge, Button, Form } from "react-bootstrap";
 import SetupModal from "./SetupModal";
 import InsertModal from "./InsertModal";
 import notify from "../../common/Notify";
+import NoData from "../../common/NoData"
+import { useAsync } from "../../../utilis/useAsync";
+import { URLS } from "../../../../constants";
+import ConfirmationModal from "../../common/DeleteModal";
 
 const options = [
   //{ value: '1', label: 'Select Status' },
@@ -17,7 +21,7 @@ const options = [
   { value: "6", label: "Pending" },
 ];
 
-const tableData = [
+const tableData1 = [
   { number: "1", title: "Privacy Policy" },
   { number: "2", title: "Contact Us" },
   { number: "3", title: "Price" },
@@ -38,6 +42,13 @@ const Quotation = () => {
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(true);
   const [showInsertModal, setShowInsertModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteUrl, setDeleteUrl] = useState('');
+  const [deleteName, setDeleteName] = useState('');
+  const itineraryUrl = URLS.ITINERARY_URL
+  const fetchData = useAsync(itineraryUrl)
+  const tableData = fetchData?.data?.data
+  console.log('fetch',tableData)
 
   const [data, setData] = useState(
     document.querySelectorAll("#content_wrapper tbody tr"),
@@ -109,6 +120,12 @@ const Quotation = () => {
   const handleCombine = () => {
     notify({ message: "Downloaded Successfully" });
   };
+  const onDelete = (id,name) => {
+    const url = `${itineraryUrl}/${id}`
+    setDeleteUrl(url)
+    setDeleteName(name)
+    setShowDeleteModal(true)
+  }
 
   return (
     <>
@@ -208,7 +225,7 @@ const Quotation = () => {
           <div className="filter cm-content-box box-primary mt-5">
             <div className={`content-title`}>
               <div className="cpa">
-                <i className="fas fa-file-word me-2"></i>Contact List
+                <i className="fas fa-file-word me-2"></i>Enquiry List
               </div>
               <div className="tools">
                 <Link
@@ -245,16 +262,20 @@ const Quotation = () => {
                             <th>Pax</th>
                             <th>From Date</th>
                             <th>To Date</th>
-                            <th>Created By</th>
-                            <th>Created Date</th>
-                            <th>Title</th>
+                            {/* <th>Created By</th> */}
+                            <th>Valid Until</th>
+                            {/* <th>Title</th> */}
                             <th>Price</th>
                             <th>Status</th>
                             <th className="text-end">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
-                          {deleteItem.map((item, ind) => (
+                          {
+                          fetchData.loading ?
+                          <NoData isLoading={fetchData.loading} colSpan={10}/>
+                          :
+                          tableData?.map((item, ind) => (
                             <tr key={ind}>
                               <td className="sorting_1 ps-3">
                                 <div className="checkbox me-0 align-self-center">
@@ -273,14 +294,14 @@ const Quotation = () => {
                                   </div>
                                 </div>
                               </td>
-                              <td>{item.number}</td>
-                              <td>{`Package ${item.number}`}</td>
-                              <td>2 Adults</td>
-                              <td>18 Feb, 2023</td>
-                              <td>28 Feb, 2023</td>
-                              <td>sahid</td>
-                              <td>18 Feb, 2023</td>
-                              <td>Option 1</td>
+                              <td>{ind+1}</td>
+                              <td>{item.package_name}</td>
+                              <td>{`${item.adult_count} adult , ${item.child_count} child`}</td>
+                              <td>{item.start_date}</td>
+                              <td>{item.end_date}</td>
+                              {/* <td>sahid</td> */}
+                              <td>{item.valid_until}</td>
+                              {/* <td>Option 1</td> */}
                               <td>25000</td>
                               <td>
                                 <Badge bg="" className="light badge-warning">
@@ -289,18 +310,18 @@ const Quotation = () => {
                               </td>
                               <td className="text-end">
                                 <Link
-                                  to={"/enquiry/itinerary"}
+                                  to={`itinerary/${item.id}`}
                                   className="btn btn-warning btn-sm content-icon me-1"
                                 >
                                   <i className="fa fa-edit"></i>
                                 </Link>
-                                <Link
-                                  to={"#"}
+                                <button
+                                  // to={"#"}
                                   className="btn btn-danger btn-sm content-icon ms-1"
-                                  onClick={() => handleDelete(ind)}
+                                  onClick={() => onDelete(item.id,item.package_name)}
                                 >
-                                  <i className="fa fa-times"></i>
-                                </Link>
+                                  <i className="fa fa-trash"></i>
+                                </button>
                               </td>
                             </tr>
                           ))}
@@ -372,6 +393,12 @@ const Quotation = () => {
         <InsertModal
           showModal={showInsertModal}
           setShowModal={setShowInsertModal}
+        />
+        <ConfirmationModal 
+          showModal={showDeleteModal}
+          setShowModal={setShowDeleteModal}
+          url={deleteUrl}
+          name={deleteName}
         />
       </div>
     </>

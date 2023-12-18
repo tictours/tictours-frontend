@@ -11,6 +11,7 @@ import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
 import { FormSection } from "../../common/FormSection";
 import { useAsync } from "../../../utilis/useAsync";
+import { useParams } from "react-router-dom";
 const typeOptions = [
   { label: "Type 1", value: "1" },
   { label: "Type 2", value: "2" },
@@ -18,9 +19,9 @@ const typeOptions = [
   { label: "Type 4", value: "4" },
 ];
 const hotelOptions = [
-  { label: "Option 1", value: "1" },
-  { label: "Option 2", value: "2" },
-  { label: "Option 3", value: "3" },
+  { label: "Option 1", value: "Option 1" },
+  { label: "Option 2", value: "Option 2" },
+  { label: "Option 3", value: "Option 3" },
 ];
 const destinationOptions = [
   { value: "Dubai", label: "Dubai" },
@@ -43,11 +44,14 @@ const mealOptions = [
 let roomAllotement
 
 const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) => {
+  const {itineraryId} = useParams()
+  const isItineraryId = !!itineraryId
   const hotelId = data?.id
   const hotelData = useAsync(`${URLS.HOTEL_URL}/${hotelId}`, !!hotelId)
   const hotelDetailData = hotelData?.data?.data
   const [selectedRoom,setSelectedRoom]=useState(hotelDetailData?.rooms[0])
   const isEdit = !!editId || editId === 0
+
   const initialValues = {
     startDate: SETUP.TODAY_DATE,
     startTime: SETUP.START_TIME,
@@ -81,7 +85,9 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
       setFieldValue('destination',destinationObj)
       setFieldValue('name',hotelDetailData?.name)
       setFieldValue('id',hotelDetailData?.id)
+      setFieldValue('roomOption',hotelDetailData?.rooms)
       setFieldValue('roomType',roomTypeObj)
+      setFieldValue('image',hotelDetailData?.document_2[0]?.file_url)
     }}
   },[editId,hotelId,hotelDetailData])
   
@@ -89,7 +95,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
   useEffect(()=>{
     console.log('findDataidd',roomTypeId)
     if(roomTypeId){
-      const data = hotelDetailData.rooms.find((val)=> val.room_type_id == roomTypeId)
+      const data = values.roomOption.find((val)=> val.id == roomTypeId)
       if(data){
         setSelectedRoom(data)
         const typeObj = {label:data?.market_type_name,value:data?.market_type_id}
@@ -172,7 +178,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                       }
                       onBlur={handleBlur}
                       // values={values}
-                      options={hotelDetailData?.rooms}
+                      options={values.roomOption}
                       optionValue="id"
                       optionLabel="room_type_name"
                     />

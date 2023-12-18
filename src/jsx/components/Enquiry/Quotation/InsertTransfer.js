@@ -18,8 +18,8 @@ const nameOptions = [
   { label: "Vechile 4", value: "4" },
 ];
 const typeOptions = [
-  { label: "Private", value: "1" },
-  { label: "SIC", value: "2" },
+  { label: "PRIVATE", value: "PRIVATE" },
+  { label: "SIC", value: "SIC" },
 ];
 const destinationOption = [
   { value: "Dubai", label: "Dubai" },
@@ -35,18 +35,24 @@ const activityOptions = [
   { label: "Activity 4", value: "4" },
 ];
 
-const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose }) => {
-
-  const destination = useAsync(URLS.DESTINATION_URL)
-  const destinationOptions = destination?.data?.data
-  const isEdit = !!editId || editId === 0
+const InsertTransfer = ({
+  showModal,
+  setShowModal,
+  data,
+  onClick,
+  editId,
+  onClose,
+}) => {
+  const destination = useAsync(URLS.DESTINATION_URL);
+  const destinationOptions = destination?.data?.data;
+  const isEdit = !!editId || editId === 0;
   const initialValues = {
     startDate: SETUP.TODAY_DATE,
     startTime: SETUP.START_TIME,
     endDate: SETUP.TODAY_DATE,
     endTime: SETUP.END_TIME,
-    insertType:'transfer',
-    type:{ label: "Private", value: "1" }
+    insertType: "transfer",
+    type: { label: "PRIVATE", value: "PRIVATE" },
   };
   const {
     values,
@@ -57,24 +63,27 @@ const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose 
     isSubmitting,
     setFieldValue,
     setValues,
-    resetForm
+    resetForm,
   } = useFormik({ initialValues });
 
   const handleSetup = () => {
     onClick(values, setShowModal);
-    resetForm()
+    resetForm();
   };
-  useEffect(()=>{
-    if(isEdit){
-      setValues(data)
-    }else{
-      const destinationObj ={label:data?.destination?.name,
-        value:data?.destination?.name} 
-      setFieldValue('destination',destinationObj)
-      setFieldValue('name',data?.vehicle_name)
-      setFieldValue('id',data?.id)
+  useEffect(() => {
+    if (isEdit) {
+      setValues(data);
+    } else {
+      const destinationObj = {
+        label: data?.destination?.name,
+        value: data?.destination?.name,
+      };
+      setFieldValue("destination", destinationObj);
+      setFieldValue("name", data?.vehicle_name);
+      setFieldValue("id", data?.id);
+      setFieldValue("image", data?.image);
     }
-  },[editId,data,showModal])
+  }, [editId, data, showModal]);
   return (
     <>
       <CustomModal
@@ -82,7 +91,7 @@ const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose 
         title={"Create Transfer"}
         handleModalClose={() => {
           onClose(setShowModal);
-          resetForm()
+          resetForm();
         }}
       >
         <div className="card-body">
@@ -90,7 +99,7 @@ const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose 
             <form>
               <div className="card-body">
                 <div className="row">
-                <div className="col-sm-6">
+                  <div className="col-sm-6">
                     <ReactSelect
                       label="Destination"
                       value={values.destination}
@@ -126,7 +135,7 @@ const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose 
                       values={values}
                     />
                   </div>
-                  
+
                   {/* <div className="col-sm-8">
                     <InputField
                       label="Note"
@@ -136,7 +145,7 @@ const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose 
                       values={values}
                     />
                   </div> */}
-                  
+
                   {/* <div className="col-sm-6">
                     <ReactSelect
                       label="Activity"
@@ -162,7 +171,7 @@ const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose 
                       isTextarea
                     />
                   </div> */}
-                 
+
                   <div className="col-sm-4">
                     <ReactSelect
                       label="Type"
@@ -176,72 +185,76 @@ const InsertTransfer = ({ showModal, setShowModal, data, onClick,editId,onClose 
                       isSearchable={false}
                     />
                   </div>
-                  {values.type?.label === 'Private'?<div className="col-sm-4">
-                    <InputField
-                      label="Cost"
-                      name="cost"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      values={values}
-                    />
-                  </div>:<>
-                  <div className="col-sm-4">
-                  <InputField
-                      label="Adult Cost"
-                      name="adultCost"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      values={values}
-                    />
+                  {values.type?.label === "PRIVATE" ? (
+                    <div className="col-sm-4">
+                      <InputField
+                        label="Cost"
+                        name="cost"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
+                      />
                     </div>
-                  <div className="col-sm-4">
-                  <InputField
-                      label="Child Cost"
-                      name="childCost"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      values={values}
-                    />
-                    </div>
-                  </>}
+                  ) : (
+                    <>
+                      <div className="col-sm-4">
+                        <InputField
+                          label="Adult Cost"
+                          name="adultCost"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          values={values}
+                        />
+                      </div>
+                      <div className="col-sm-4">
+                        <InputField
+                          label="Child Cost"
+                          name="childCost"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          values={values}
+                        />
+                      </div>
+                    </>
+                  )}
                   <FormSection>
-                  <div className="col-sm-5">
-                    <label>Start Date</label>
-                    <DatePicker
-                      className="form-control"
-                      selected={values.startDate}
-                      onChange={(date) => setFieldValue("startDate", date)}
-                    />
-                  </div>
+                    <div className="col-sm-5">
+                      <label>Start Date</label>
+                      <DatePicker
+                        className="form-control"
+                        selected={values.startDate}
+                        onChange={(date) => setFieldValue("startDate", date)}
+                      />
+                    </div>
 
-                  <div className="col-sm-5">
-                    <InputField
-                      label="Start Time"
-                      name="startTime"
-                      type="time"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      values={values}
-                    />
-                  </div>
-                  <div className="col-sm-5">
-                    <label>End Date</label>
-                    <DatePicker
-                      className="form-control"
-                      selected={values.endDate}
-                      onChange={(date) => setFieldValue("endDate", date)}
-                    />
-                  </div>
-                  <div className="col-sm-5">
-                    <InputField
-                      label="End Time"
-                      name="endTime"
-                      type="time"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      values={values}
-                    />
-                  </div>
+                    <div className="col-sm-5">
+                      <InputField
+                        label="Start Time"
+                        name="startTime"
+                        type="time"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
+                      />
+                    </div>
+                    <div className="col-sm-5">
+                      <label>End Date</label>
+                      <DatePicker
+                        className="form-control"
+                        selected={values.endDate}
+                        onChange={(date) => setFieldValue("endDate", date)}
+                      />
+                    </div>
+                    <div className="col-sm-5">
+                      <InputField
+                        label="End Time"
+                        name="endTime"
+                        type="time"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
+                      />
+                    </div>
                   </FormSection>
                 </div>
               </div>

@@ -21,24 +21,7 @@ const SetupForm = ({ formik, setFormComponent, setShowModal, showModal }) => {
   } = formik;
 
   const navigate = useNavigate();
-  const {id} = useParams()
-  const isEquiryId = id && id !== 'add'
-  const url = URLS.ENQUIRY_URL
-  const equiryIdUrl = `${url}/${id}`
-  const {data} = useAsync(equiryIdUrl,!!isEquiryId)
-  const equiryIdData = data?.data
   const destinationData = useAsync(URLS.DESTINATION_URL)
-
-  useEffect(()=>{
-    if(equiryIdData){
-      setFieldValue('formStartDate',parseDate(equiryIdData.start_date))
-      setFieldValue('formEndDate',parseDate(equiryIdData.end_date))
-      setFieldValue('adult',checkFormValue(equiryIdData.adult_count))
-      setFieldValue('child',checkFormValue(equiryIdData.child_count))
-      const destinationObj = {label:equiryIdData.destination.name,value:equiryIdData.destination.id}
-      setFieldValue('destination',checkFormValue(destinationObj))
-    }
-  },[equiryIdData?.id])
 
   const formSubmit = (e) => {
     // e.preventDefault();

@@ -30,27 +30,28 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const [showActivityModal, setShowActivityModal] = useState(false);
   const [showTransferModal, setShowTransferModal] = useState(false);
   const [selectedModalData, setSelectedModalData] = useState({});
-  const [editId , setEditId] = useState('')
-  const [editData , setEditData] = useState({})
+  const isEdit = !!values.itineraryId;
+  const [editId, setEditId] = useState("");
+  const [editData, setEditData] = useState({});
   const [datesArray, setDatesArray] = useState([]);
   const dayList = [1, 2, 3, 4];
   const scheduleData = [1, 2];
   const destinationOptions = ["Destination 1", "Destination 2"];
   const categoryOptions = ["Hotel", "Activity", "Transfer"];
   // const dataList = [1, 2, 3, 4];
-  const hotelFetchData = useAsync(URLS.HOTEL_URL)
-  const hotelData = hotelFetchData?.data?.data
-  const activityFetchData = useAsync(URLS.ACTIVITY_URL)
-  const activityData = activityFetchData?.data?.data
-  const transferFetchData = useAsync(URLS.TRANSFER_URL)
-  const transferData = transferFetchData?.data?.data
-  let dataList
-  if(values.categoryOptions === 'Hotel'){
-    dataList = hotelData
-  }else if(values.categoryOptions === 'Activity'){
-    dataList = activityData
-  }else{
-    dataList = transferData
+  const hotelFetchData = useAsync(URLS.HOTEL_URL);
+  const hotelData = hotelFetchData?.data?.data;
+  const activityFetchData = useAsync(URLS.ACTIVITY_URL);
+  const activityData = activityFetchData?.data?.data;
+  const transferFetchData = useAsync(URLS.TRANSFER_URL);
+  const transferData = transferFetchData?.data?.data;
+  let dataList;
+  if (values.categoryOptions === "Hotel") {
+    dataList = hotelData;
+  } else if (values.categoryOptions === "Activity") {
+    dataList = activityData;
+  } else {
+    dataList = transferData;
   }
 
   // Step 1: Parse the date strings into Date objects
@@ -83,17 +84,16 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
     }
     setFieldValue("planArr", scheduleArray);
   };
-  let initialLoad = true
+  let initialLoad = true;
   useEffect(() => {
-    if(initialLoad){
+    if (!isEdit) {
       generateDates();
-      console.log('inital generate datae')
+      // console.log('inital generate datae')
     }
-    return ()=>{
-     initialLoad = false
-    }
-  }, []);
-  
+    return () => {
+      initialLoad = false;
+    };
+  }, [values.itineraryId]);
 
   const handleAddCategory = () => {
     if (values.categoryOptions === "Hotel") {
@@ -106,11 +106,11 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
       navigation("/transfer");
     }
   };
-  const handleCardAdd = (value = values.categoryOptions,data) => {
-    const checkValue = value?.toLowerCase()
-    if(data){
-    setEditData(data)
-  }
+  const handleCardAdd = (value = values.categoryOptions, data) => {
+    const checkValue = value?.toLowerCase();
+    if (data) {
+      setEditData(data);
+    }
     if (checkValue === "hotel") {
       setShowHotelModal(true);
     }
@@ -127,28 +127,28 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
     setFormComponent("paymentForm");
     // notify({message:'Itinary Created Successfully'})
   };
-  const onDayPackage = (date, day) => {
-    setFieldValue("planIndex", day - 1);
+  const onDayPackage = (date, ind) => {
+    setFieldValue("planIndex", ind);
   };
   const showScheduleValue = values.planArr[`${values.planIndex}`];
   const onInsert = (value, setShowModal) => {
     // console.log("value", value);
-    const isEdit = !!editId || editId === 0
+    const isEdit = !!editId || editId === 0;
     // if(values.categoryOptions !== "Hotel"){
     const insertSchedule = values.planArr.map((data, key) => {
       if (key === values.planIndex) {
-        let insertData 
-        if(isEdit){
-          const editArr = data.schedule.map((arrItem,key)=>{
-            if(key === editId){
-              return value
-            }else{
-              return arrItem
+        let insertData;
+        if (isEdit) {
+          const editArr = data.schedule.map((arrItem, key) => {
+            if (key === editId) {
+              return value;
+            } else {
+              return arrItem;
             }
-          })
-          insertData = { ...data, schedule:editArr}
-        }else{
-          insertData= { ...data, schedule: [...data.schedule, value] };
+          });
+          insertData = { ...data, schedule: editArr };
+        } else {
+          insertData = { ...data, schedule: [...data.schedule, value] };
         }
         // console.log("insert", insertData);
         return insertData;
@@ -158,24 +158,25 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
     });
     // console.log("map", insertSchedule);
     setFieldValue("planArr", insertSchedule);
-  // }else{
+    // }else{
     // notifyCreate(value)
-  // }
-    if(isEdit){
-      setEditId('')
+    // }
+    if (isEdit) {
+      setEditId("");
     }
     setShowModal(false);
   };
-  const onEdit = (id,data) => {
-    setEditId(id)
-    setEditData(data)
-    handleCardAdd(data.insertType)
-  }
+
+  const onEdit = (id, data) => {
+    setEditId(id);
+    setEditData(data);
+    handleCardAdd(data.insertType);
+  };
   const onClose = (setModal) => {
-    setModal(false)
-    setEditId('')
-    setEditData(null)
-  }
+    setModal(false);
+    setEditId("");
+    setEditData(null);
+  };
   const onDelete = (deleteIndex) => {
     const removeData = showScheduleValue?.schedule?.filter(
       (item, ind) => deleteIndex !== ind
@@ -191,26 +192,41 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
     setFieldValue("planArr", insertSchedule);
   };
   // console.log('show',values.planArr,'ind',values.planIndex,'val',showScheduleValue)
-  console.log('package form',values)
   const handleBack = () => {
-    setShowModal(true)
-    setFormComponent("setupForm")
-  }
+    setShowModal(true);
+    setFormComponent("setupForm");
+  };
   return (
     <>
       <form
       // onSubmit={formSubmit}
       >
         <div>
-          <button className="btn btn-outline-light" type="button" onClick={handleBack}><i class="fa fa-arrow-left fa-xl" aria-hidden="true"></i></button>
+          <button
+            className="btn btn-outline-light"
+            type="button"
+            onClick={handleBack}
+          >
+            <i class="fa fa-arrow-left fa-xl" aria-hidden="true"></i>
+          </button>
         </div>
         <div className="d-flex justify-content-end mb-3">
-          <LoadingButton label='Save' type="submit" className='me-2' onClick={handleSubmit}/>
-          <LoadingButton label='Quotation' type="button" className='me-2'/>
-          <LoadingButton label='Pricing' type="button" className='me-2' onClick={formSubmit}/>
-          <LoadingButton label='View' type="button" className='me-2'/>
-          <LoadingButton label='Export' type="button" className='me-2'/>
-          <LoadingButton label='Share' type="button"/>
+          <LoadingButton
+            label={isEdit ? "Update" : "Save"}
+            type="submit"
+            className="me-2"
+            onClick={handleSubmit}
+          />
+          <LoadingButton label="Quotation" type="button" className="me-2" />
+          <LoadingButton
+            label="Pricing"
+            type="button"
+            className="me-2"
+            onClick={formSubmit}
+          />
+          <LoadingButton label="View" type="button" className="me-2" />
+          <LoadingButton label="Export" type="button" className="me-2" />
+          <LoadingButton label="Share" type="button" />
         </div>
         <div className="row package">
           <div className="col-3">
@@ -218,11 +234,11 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
               <div
                 className="row border-bottom"
                 key={key}
-                onClick={() => onDayPackage(item.date, item.day)}
+                onClick={() => onDayPackage(item.date, key)}
               >
                 <div className="col-md-3 align-self-center">
                   <div className=" day-circle bg-primary d-flex align-items-center justify-content-center m-0 rounded-circle">
-                    <h6 className="text-white m-0">{item.day}</h6>
+                    <h6 className="text-white m-0">{key + 1}</h6>
                   </div>
                 </div>
                 <div className="col-md-9">
@@ -237,12 +253,16 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                 </div>
               </div>
             ))}
-            <LoadingButton label='Package Terms' type="button" className='mt-3'/>
+            <LoadingButton
+              label="Package Terms"
+              type="button"
+              className="mt-3"
+            />
           </div>
           <div className="col-5 px-1">
             <div className="schedule-box">
               <div className="p-3">
-                <h6>{`Day ${showScheduleValue?.day} - ${formatDate(
+                <h6>{`Day ${values.planIndex + 1} - ${formatDate(
                   showScheduleValue?.date
                 )}`}</h6>
               </div>
@@ -254,11 +274,19 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                         <div className="card-body">
                           <div className="user-content">
                             <div className="user-info">
-                              <div className="user-img">
-                                <img src={Img1} alt="" />
-                              </div>
+                              {item.insertType !== "activity" && (
+                                <div className="user-img">
+                                  <img src={item?.image} alt="" />
+                                </div>
+                              )}
                               <div className="user-details">
-                                <h6 className="user-name">{`${item.insertType} : ${item.insertType === "activity"?item.name:item.name}`}</h6>
+                                <h6 className="user-name">{`${
+                                  item.insertType
+                                } : ${
+                                  item.insertType === "activity"
+                                    ? item.name
+                                    : item.name
+                                }`}</h6>
                                 {item.insertType === "hotel" && (
                                   <>
                                     <span className="number">10am to 2pm</span>
@@ -291,7 +319,10 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                                 {/* <span className="mail">jordan@mail.com</span>  */}
                               </div>
                             </div>
-                            <DropDownBlog onEdit={()=>onEdit(ind,item)} onDelete={() => onDelete(ind)} />
+                            <DropDownBlog
+                              onEdit={() => onEdit(ind, item)}
+                              onDelete={() => onDelete(ind)}
+                            />
                           </div>
                           {/* <div className="contact-icon">
                                                     <div className="icon">
@@ -360,18 +391,26 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                   key={key}
                 >
                   <div className="d-flex align-item-center">
-                    {values.categoryOptions !== 'Activity' &&
-                    <div className="custom-img-container">
-                      <img src={list?.image || list?.document_2[0]?.file_url} alt="" className="custom-img" />
-                    </div>
-                    }
-                    <h6 className="m-2">{list.name || list.activity_name || list.vehicle_name}</h6>
+                    {values.categoryOptions !== "Activity" && (
+                      <div className="custom-img-container">
+                        <img
+                          src={list?.image || list?.document_2[0]?.file_url}
+                          alt=""
+                          className="custom-img"
+                        />
+                      </div>
+                    )}
+                    <h6 className="m-2">
+                      {list.name || list.activity_name || list.vehicle_name}
+                    </h6>
                   </div>
                   <div>
                     <button
                       type="button"
                       className="btn btn-white p-3"
-                      onClick={() => handleCardAdd(values.categoryOptions,list)}
+                      onClick={() =>
+                        handleCardAdd(values.categoryOptions, list)
+                      }
                     >
                       <i className="fa-solid fa-plus text-primary"></i>
                     </button>

@@ -32,16 +32,23 @@ const activityOptions = [
   { label: "Activity 4", value: "4" },
 ];
 
-const InsertActivity = ({ showModal, setShowModal, data, onClick,editId,onClose }) => {
-  const destination = useAsync(URLS.DESTINATION_URL)
-  const destinationOptions = destination?.data?.data
-  const isEdit = !!editId || editId === 0
+const InsertActivity = ({
+  showModal,
+  setShowModal,
+  data,
+  onClick,
+  editId,
+  onClose,
+}) => {
+  const destination = useAsync(URLS.DESTINATION_URL);
+  const destinationOptions = destination?.data?.data;
+  const isEdit = !!editId || editId === 0;
   const initialValues = {
     startDate: SETUP.TODAY_DATE,
     endDate: SETUP.TODAY_DATE,
     startTime: SETUP.START_TIME,
     endTime: SETUP.END_TIME,
-    insertType:'activity'
+    insertType: "activity",
   };
   const {
     values,
@@ -52,33 +59,35 @@ const InsertActivity = ({ showModal, setShowModal, data, onClick,editId,onClose 
     isSubmitting,
     setFieldValue,
     setValues,
-    resetForm
+    resetForm,
   } = useFormik({ initialValues });
 
   const handleSetup = () => {
     onClick(values, setShowModal);
-    resetForm()
+    resetForm();
   };
-  useEffect(()=>{
-console.log('edi',data)
-    if(isEdit){
-      setValues(data)
-    }else{
-      const destinationObj ={label:data?.destination?.name,
-        value:data?.destination?.name} 
-      setFieldValue('destination',destinationObj)
-      setFieldValue('name',data?.activity_name)
-      setFieldValue('id',data?.id)
+  useEffect(() => {
+    console.log("edi", data);
+    if (isEdit) {
+      setValues(data);
+    } else {
+      const destinationObj = {
+        label: data?.destination?.name,
+        value: data?.destination?.name,
+      };
+      setFieldValue("destination", destinationObj);
+      setFieldValue("name", data?.activity_name);
+      setFieldValue("id", data?.id);
     }
-  },[editId,data,showModal])
+  }, [editId, data, showModal]);
   return (
     <>
       <CustomModal
         showModal={showModal}
-        title={`${isEdit?'Edit':'Create'} Activity`}
+        title={`${isEdit ? "Edit" : "Create"} Activity`}
         handleModalClose={() => {
           onClose(setShowModal);
-          resetForm()
+          resetForm();
         }}
       >
         <div className="card-body">
@@ -100,7 +109,7 @@ console.log('edi',data)
                       optionLabel="label"
                     />
                   </div>
-                  <div className="col-sm-6">
+                  {/* <div className="col-sm-6">
                     <ReactSelect
                       label="Type"
                       value={values.type}
@@ -111,9 +120,9 @@ console.log('edi',data)
                       optionValue="value"
                       optionLabel="label"
                     />
-                  </div>
+                  </div> */}
                   <div className="col-sm-6">
-                  <InputField
+                    <InputField
                       label="Activity name"
                       name="name"
                       onChange={handleChange}
@@ -131,7 +140,7 @@ console.log('edi',data)
                       values={values}
                     />
                   </div>
-                  <div className="col-sm-8">
+                  <div className="col-sm-6">
                     <InputField
                       label="Description"
                       name="description"
@@ -140,46 +149,46 @@ console.log('edi',data)
                       onBlur={handleBlur}
                       values={values}
                       isTextarea
+                    />
+                  </div>
+                  <FormSection>
+                    <div className="col-sm-5">
+                      <label>Start Date</label>
+                      <DatePicker
+                        className="form-control"
+                        selected={values.startDate}
+                        onChange={(date) => setFieldValue("startDate", date)}
                       />
-                  </div>
-                      <FormSection>
-                  <div className="col-sm-5">
-                    <label>Start Date</label>
-                    <DatePicker
-                      className="form-control"
-                      selected={values.startDate}
-                      onChange={(date) => setFieldValue("startDate", date)}
-                    />
-                  </div>
+                    </div>
 
-                  <div className="col-sm-5">
-                    <InputField
-                      label="Start Time"
-                      name="startTime"
-                      type="time"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      values={values}
-                    />
-                  </div>
-                  <div className="col-sm-5">
-                    <label>End Date</label>
-                    <DatePicker
-                      className="form-control"
-                      selected={values.endDate}
-                      onChange={(date) => setFieldValue("endDate", date)}
-                    />
-                  </div>
-                  <div className="col-sm-5">
-                    <InputField
-                      label="End Time"
-                      name="endTime"
-                      type="time"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      values={values}
-                    />
-                  </div>
+                    <div className="col-sm-5">
+                      <InputField
+                        label="Start Time"
+                        name="startTime"
+                        type="time"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
+                      />
+                    </div>
+                    <div className="col-sm-5">
+                      <label>End Date</label>
+                      <DatePicker
+                        className="form-control"
+                        selected={values.endDate}
+                        onChange={(date) => setFieldValue("endDate", date)}
+                      />
+                    </div>
+                    <div className="col-sm-5">
+                      <InputField
+                        label="End Time"
+                        name="endTime"
+                        type="time"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
+                      />
+                    </div>
                   </FormSection>
                 </div>
               </div>
