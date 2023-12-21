@@ -13,6 +13,7 @@ import { formatDate, parseDate, parseTime } from "../../../utilis/date";
 import { LoadingButton } from "../../common/LoadingBtn";
 import { useAsync } from "../../../utilis/useAsync";
 import { URLS } from "../../../../constants";
+import ShareModal from "./ShareModal";
 
 const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const {
@@ -29,6 +30,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const [showHotelModal, setShowHotelModal] = useState(false);
   const [showActivityModal, setShowActivityModal] = useState(false);
   const [showTransferModal, setShowTransferModal] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
   const [selectedModalData, setSelectedModalData] = useState({});
   const isEdit = !!values.itineraryId;
   const [editId, setEditId] = useState("");
@@ -226,7 +228,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
           />
           <LoadingButton label="View" type="button" className="me-2" />
           <LoadingButton label="Export" type="button" className="me-2" />
-          <LoadingButton label="Share" type="button" />
+          <LoadingButton label="Share" type="button" onClick={()=>setShowShareModal(true)}/>
         </div>
         <div className="row package">
           <div className="col-3">
@@ -458,6 +460,14 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
         onClose={onClose}
         editId={editId}
         data={editData}
+      />
+      <ShareModal
+        showModal={showShareModal}
+        setShowModal={setShowShareModal}
+        // onClick={onInsert}
+        // onClose={onClose}
+        // editId={editId}
+        // data={editData}
       />
     </>
   );
