@@ -134,7 +134,7 @@ const Enquiry = () => {
       label: "Actions",
       value: [
         // { menu: "Status",showLabel:'vehicle_name',showValue:"is_active" },
-        { menu: "View", onPress: onView },
+        // { menu: "View", onPress: onView },
         { menu: "Edit", onPress: onEdit },
         { menu: "Delete",showLabel:'name' },
       ],

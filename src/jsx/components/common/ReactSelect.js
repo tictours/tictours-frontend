@@ -14,12 +14,13 @@ function ReactSelect(props) {
   })
 
   const isRequired = restProps.required
+  const isDisabled = restProps.isDisabled
   const name = restProps.inputId
   const value = restProps.value
   
   return (
     <div className="form-group mb-3">
-      {label && <label className="text-label">{label} {isRequired && <span>*</span>}</label>}
+      {label && <label className="text-label">{label} {isRequired && !isDisabled && <span>*</span>}</label>}
       <Select
         {...restProps}
         options={data}
@@ -27,6 +28,20 @@ function ReactSelect(props) {
           control: (baseStyles, state) => ({
             ...baseStyles,
             ...selectStyle,
+            // borderColor: state.isDisabled ? 'transparent' : 'white',
+            backgroundColor: state.isDisabled ? 'transparent' : 'white',
+            cursor: state.isDisabled ? 'not-allowed' : 'default',
+            borderColor: state.isDisabled ? 'transparent !important' : baseStyles.borderColor,
+            padding: state.isDisabled ? '0px 0px !important' : '2px 20px',
+            // height: state.isDisabled ? '0px !important' : '50px',
+          }),
+          indicatorSeparator: (provided, state) => ({
+            ...provided,
+            display: state.isDisabled ? 'none' : provided.display,
+          }),
+          dropdownIndicator: (provided, state) => ({
+            ...provided,
+            display: state.isDisabled ? 'none' : provided.display,
           }),
         }}
         classNames={{

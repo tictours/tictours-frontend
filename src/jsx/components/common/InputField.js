@@ -1,3 +1,4 @@
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 import React from "react";
 
 function InputField(props) {
@@ -19,9 +20,10 @@ function InputField(props) {
   } = props;
 
   const isRequired = restProps.required
+  const isDisabled = restProps.disabled
   return (
     <div className={`form-group mb-${mb} ${className}`}>
-      {label && <label className={`text-label ${labelClassName}`}>{label} {isRequired && <span>*</span>}</label>}
+      {label && <label className={`text-label ${labelClassName}`}>{label} {isRequired && !isDisabled && <span>*</span>}</label>}
       {isTextarea ? (
         <textarea
           {...restProps}
@@ -39,7 +41,7 @@ function InputField(props) {
           placeholder={placeholder}
           name={name}
           min={0}
-          value={values && values[name] ? values[name] : inputValue}
+          value={values && values[name] || values[name] == 0 ? values[name] : inputValue}
           // onkeyup={handleBlur}
         />
       )}

@@ -19,6 +19,7 @@ function SelectField(props) {
   } = props;
 
   const isRequired = restProps.required
+  const isDisabled = restProps.disabled
 
   const handleSelectChange = (e) => {
     
@@ -33,7 +34,7 @@ function SelectField(props) {
   } 
   return (
     <div className={`form-group mb-3 ${formClass}`}>
-      {!!label && <label className="text-label">{label} {isRequired && <span>*</span>}</label>}
+      {!!label && <label className="text-label">{label} {isRequired && !isDisabled && <span>*</span>}</label>}
       <select
         {...restProps}
         // defaultValue={"option"}

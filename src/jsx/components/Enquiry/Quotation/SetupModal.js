@@ -52,6 +52,8 @@ function SetupModal() {
       setFieldValue('formEndDate',parseDate(data.end_date))
       setFieldValue('adult',checkFormValue(data.adult_count))
       setFieldValue('child',checkFormValue(data.child_count))
+      setFieldValue('baseMarkupInput',checkFormValue(data.extra_markup_percentage))
+      setFieldValue('extraMarkupInput',checkFormValue(data.extra_markup_amount))
       setFieldValue('baseMarkup',checkFormValue(data.extra_markup_percentage))
       setFieldValue('extraMarkup',checkFormValue(data.extra_markup_amount))
       setFieldValue('cgst',checkFormValue(data.cgst_percentage))
@@ -244,6 +246,7 @@ function SetupModal() {
                 setFormComponent={setFormComponent}
                 showModal={showModal}
                 setShowModal={setShowModal}
+                isEdit={isEdit}
               />
             ) : (
               <div className="bg-white mt-4 p-4 rounded">

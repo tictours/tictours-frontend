@@ -166,13 +166,33 @@ const totals = scheduleArr.reduce((accumulator, currentValue) => {
     return accumulator;
   
 }, { totalAmount: 0, totalMarkup: 0 });
-const getHotelOptionTotal = (amount,type='amount') => {
-  const typeTotal = type === 'amount' ? totals.totalAmount : totals.totalMarkup
-  const total = amount + typeTotal
-  return total
+
+const getRoundOfValue = (value,round=2) => {
+  if(value){
+    const roundOfValue = value?.toFixed(round)
+    const result = Number(roundOfValue)
+    return result
+  }
+}
+const getHotelOptionTotal = (amount,markup,type='amount') => {
+  // const typeTotal = type === 'amount' ? totals.totalAmount : totals.totalMarkup
+  const total = amount + markup + totals.totalAmount + totals.totalMarkup
+  const roundOfTotal = getRoundOfValue(total)
+    return roundOfTotal
+}
+const calculateInputMarkup = (amount,markup) => {
+  if(values.baseMarkup){
+    const optionTotal = getHotelOptionTotal(amount,markup)
+    const val = optionTotal * values.baseMarkup * 0.01
+    const roundOfVal = getRoundOfValue(val)
+    return roundOfVal
+  }else{
+    return values.extraMarkup
+  }
 }
 const calculateTotal = (amount,markup) =>{
-  const grandTotal = totals.totalAmount + totals.totalMarkup + amount + markup + checkFormValue(values.extraMarkup,'number') - checkFormValue(values.discount,'number')
+  const optionTotal = totals.totalAmount + totals.totalMarkup + amount + markup 
+  const grandTotal = optionTotal - checkFormValue(values.discount,'number')
   const getPercentValue = (val) => {
     let result 
     if(val){
@@ -182,8 +202,9 @@ const calculateTotal = (amount,markup) =>{
     }
     return result
   }
-  const percentValue = grandTotal + getPercentValue(values.cgst) + getPercentValue(values.sgst) + getPercentValue(values.igst) + getPercentValue(values.tcs)
-  return percentValue
+  const percentValue = grandTotal + calculateInputMarkup(amount,markup) + getPercentValue(values.cgst) + getPercentValue(values.sgst) + getPercentValue(values.igst) + getPercentValue(values.tcs)
+  const roundOfPercentValue = getRoundOfValue(percentValue)
+  return roundOfPercentValue
 }
   return (
     <>
@@ -314,7 +335,7 @@ const calculateTotal = (amount,markup) =>{
 
                 </div>
           <div className="">
-            <h6 className="">{`Extra Markup - ${values.extraMarkup || 0} rs`}</h6>
+            <h6 className="">{values.baseMarkup ?`Base Markup - ${values.baseMarkup} %`:`Extra Markup -  ${values.extraMarkup || 0} Rs`}</h6>
             <button type="button" className="btn bg-white p-2 mx-auto" onClick={()=>setShowMarkup(true)}>Update</button>
           </div>
         </div>
@@ -377,8 +398,8 @@ const calculateTotal = (amount,markup) =>{
                       </div>
                     </div>
                   </td>
-                  <td>{getHotelOptionTotal(item.amount)}</td>
-                  <td>{getHotelOptionTotal(item.markup,'markup')}</td>
+                  <td>{getHotelOptionTotal(item.amount,item.markup)}</td>
+                  <td>{calculateInputMarkup(item.amount,item.markup)}</td>
                   {addOnField.map((field,key)=>(
                   <td className="package-td" key={key}>
                    
@@ -420,6 +441,7 @@ const calculateTotal = (amount,markup) =>{
     <input
         className="form-control ms-3"
         defaultValue={0}
+        min={0}
         name={item.name}
         type="number"
         onChange={handleChange}
@@ -480,9 +502,12 @@ const calculateTotal = (amount,markup) =>{
                   label="Base Markup %"
                   name="baseMarkupInput"
                   type='number'
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  values={formik.values}
+                  onChange={(e)=>{
+                    handleChange(e)
+                    setFieldValue('extraMarkupInput',0)
+                  }}
+                  onBlur={handleBlur}
+                  values={values}
                   inputClassName='w-25'
                 />
               </div>
@@ -491,9 +516,12 @@ const calculateTotal = (amount,markup) =>{
                   label="Extra Markup"
                   name="extraMarkupInput"
                   type='number'
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  values={formik.values}
+                  onChange={(e)=>{
+                    handleChange(e)
+                    setFieldValue('baseMarkupInput',0)
+                  }}
+                  onBlur={handleBlur}
+                  values={values}
                   inputClassName='w-25'
                 />
               </div>

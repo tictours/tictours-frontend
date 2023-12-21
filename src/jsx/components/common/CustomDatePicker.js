@@ -21,6 +21,7 @@ function CustomDatePicker(props) {
     <>
       {label && <label className={`text-label ${labelClassName}`}>{label} {isRequired && <span>*</span>}</label>}
       <DatePicker
+      {...props}
                 dateFormat={dateFormat}
                   className={`form-control ${className}`}
                   selected={parseDate(selected)}

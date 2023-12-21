@@ -19,6 +19,8 @@ import { checkFormValue } from "../../../utilis/check";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { FetchAction } from "../../../../store/slices/fetchSlice";
+import CustomSlider from "../../common/Slider";
+import ProfileSlider from "./Slider";
 
 const initialValues = {
   type: "B2B",
@@ -88,12 +90,21 @@ const requirementOptions = [
   { value: "Hotel", label: "Hotel" },
   { value: "Transport", label: "Transport" },
 ];
+const suggestionArr = [
+  {name:'Package 1', description:'description of package 1',cost:'10000'},
+  {name:'Package 2', description:'description of package 2',cost:'20000'},
+  {name:'Package 3', description:'description of package 3',cost:'30000'},
+  {name:'Package 4', description:'description of package 4',cost:'40000'},
+  {name:'Package 5', description:'description of package 5',cost:'40000'},
+]
 
 const EditProfile = ({ setShowModal }) => {
   // const [selectOption , setSelectOption] = useState('Gender');
+  const isFormPage = !setShowModal
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [disabled, setDisabled] = useState(false);
+  const [readOnly, setReadOnly] = useState(isFormPage);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -266,6 +277,10 @@ const EditProfile = ({ setShowModal }) => {
   return (
     <>
       <div className="row">
+        {isFormPage && 
+          <ProfileSlider/>
+        }
+
         {/* <div className="col-xl-3 col-lg-4">
                     <div className="clearfix">
                         <div className="card card-bx profile-card author-profile m-b30">
@@ -304,7 +319,7 @@ const EditProfile = ({ setShowModal }) => {
                         </div>
                     </div>
                 </div> */}
-        <div className="col-xl-12 col-lg-12">
+        <div className={`col-${isFormPage?'8':'12'}`}>
           <div className="card profile-card card-bx m-b30 border-0">
             {/* <div className="card-header">
               <h6 className="title">Customer Info</h6>
@@ -313,11 +328,23 @@ const EditProfile = ({ setShowModal }) => {
               <div className="card-body">
                 <div className="row">
                   {" "}
+                  {isFormPage &&
+                  <>
+                  <div className="col-sm-12 d-flex justify-content-end">
+                    <button className="btn btn-primary mb-3" type="button" onClick={()=>{setReadOnly((prev)=>!prev)}}>{readOnly?'Read Mode':'Write Mode'}</button>
+                  </div>
+                  </>
+                  }
+  
                   <div className="col-sm-6">
                     <ReactSelect
                       label="Type"
                       onChange={(selected) => {
-                        setDisabled(true);
+                        if(selected.label === 'B2B'){
+                          setDisabled(true);
+                        }else{
+                          setDisabled(false);
+                        }
                         setFieldValue("type", selected);
                       }}
                       onBlur={handleBlur}
@@ -325,6 +352,7 @@ const EditProfile = ({ setShowModal }) => {
                       options={TypeOptions}
                       optionValue="value"
                       optionLabel="label"
+                      isDisabled={readOnly}
                     />
                   </div>
                   <div className="col-sm-6">
@@ -339,6 +367,7 @@ const EditProfile = ({ setShowModal }) => {
                       options={isB2b ? agentDataOptions : customerDataOptions}
                       optionValue="id"
                       optionLabel={isB2b ? "name" : "mobile"}
+                      isDisabled={readOnly}
                     />
                   </div>
                   {!isB2b && (
@@ -353,7 +382,7 @@ const EditProfile = ({ setShowModal }) => {
                         optionValue="value"
                         optionLabel="label"
                         required
-                        disabled={disabled}
+                        disabled={disabled || readOnly}
                       />
                       {/* <Dropdown className="profile-btn">
                                             <Dropdown.Toggle as="div" className="i-false profile-btn-toggle">{selectOption} <i className="fa-solid fa-angle-down"></i></Dropdown.Toggle>
@@ -379,7 +408,7 @@ const EditProfile = ({ setShowModal }) => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         values={values}
-                        disabled={disabled}
+                        disabled={disabled || readOnly}
                         required
                       />
                     </div>
@@ -427,6 +456,7 @@ const EditProfile = ({ setShowModal }) => {
                       optionValue="id"
                       optionLabel="name"
                       required
+                      isDisabled={readOnly}
                     />
                   </div>
                   <div className="col-sm-6">
@@ -450,6 +480,7 @@ const EditProfile = ({ setShowModal }) => {
                       optionValue="id"
                       optionLabel="name"
                       required
+                      isDisabled={readOnly}
                     />
                   </div>
                   <div className="col-sm-6 m-b30">
@@ -459,6 +490,7 @@ const EditProfile = ({ setShowModal }) => {
                       onChange={(date) =>
                         formik.setFieldValue("startDate", date)
                       }
+                      disabled={readOnly}
                     />
                   </div>
                   <div className="col-sm-6 m-b30">
@@ -466,6 +498,7 @@ const EditProfile = ({ setShowModal }) => {
                       label="End Date"
                       selected={formik.values?.endDate}
                       onChange={(date) => formik.setFieldValue("endDate", date)}
+                      disabled={readOnly}
                     />
                   </div>
                   <div className="col-sm-6">
@@ -476,6 +509,7 @@ const EditProfile = ({ setShowModal }) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       values={values}
+                      disabled={readOnly}
                     />
                   </div>
                   <div className="col-sm-6">
@@ -486,6 +520,7 @@ const EditProfile = ({ setShowModal }) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       values={values}
+                      disabled={readOnly}
                     />
                   </div>
                   <div className="col-sm-6">
@@ -496,6 +531,7 @@ const EditProfile = ({ setShowModal }) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       values={values}
+                      disabled={readOnly}
                     />
                   </div>
                   <div className="col-sm-6">
@@ -509,6 +545,7 @@ const EditProfile = ({ setShowModal }) => {
                       optionValue="id"
                       optionLabel="name"
                       required
+                      disabled={readOnly}
                     />
                   </div>
                   <div className="col-sm-6">
@@ -522,6 +559,7 @@ const EditProfile = ({ setShowModal }) => {
                       optionValue="id"
                       optionLabel="name"
                       required
+                      disabled={readOnly}
                     />
                   </div>
                   <div className="col-sm-6">
@@ -537,6 +575,7 @@ const EditProfile = ({ setShowModal }) => {
                       optionValue="id"
                       optionLabel="name"
                       required
+                      isDisabled={readOnly}
                     />
                   </div>
                   <div className="col-sm-6">
@@ -550,6 +589,7 @@ const EditProfile = ({ setShowModal }) => {
                       options={staffDataOptions}
                       optionValue="id"
                       optionLabel="first_name"
+                      isDisabled={readOnly}
                     />
                   </div>
                   {/* <div className="col-sm-6 m-b30">
@@ -562,8 +602,8 @@ const EditProfile = ({ setShowModal }) => {
                                         </select>
                                        
                                     </div> */}
-                </div>
-              </div>
+               
+             
               <div className="card-footer border-0 pt-0 pb-3">
                 <button
                   className="btn btn-primary"
@@ -574,9 +614,41 @@ const EditProfile = ({ setShowModal }) => {
                 </button>
                 {/* <Link to={"#"} className="btn-link">Forgot your password?</Link> */}
               </div>
+              </div>
+              </div>
+
             </form>
           </div>
         </div>
+        {isFormPage && <div className="col-4">
+          <div className="bg-white p-3 rounded">
+                  <div>
+                  <InputField
+                        label={'Description'}
+                        name={'description'}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        values={values}
+                        // disabled={disabled || readOnly}
+                        // required
+                      />
+                  </div>
+                  <div className="">
+                    <h6 className="my-4">Package Suggestion</h6>
+                    {suggestionArr.map((item,ind)=>(
+                      <div className="d-flex border suggestion-card p-2 rounded mb-2">
+                        <div>
+                          <h6>{item.name}</h6>
+                          <p>{item.description}</p>
+                      </div>
+                        <div>
+                          <h6>{item.cost} Rs</h6>
+                      </div>
+                      </div>
+                    ))}
+                  </div>
+                  </div>
+              </div>}
       </div>
     </>
   );
