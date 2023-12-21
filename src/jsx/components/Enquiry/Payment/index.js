@@ -328,7 +328,7 @@ const Payment = () => {
                             </Dropdown.Toggle>
                             <Dropdown.Menu className="dropdown-menu-end">
                               <Dropdown.Item>Download</Dropdown.Item>
-                              <Dropdown.Item>Edit</Dropdown.Item>
+                              <Dropdown.Item onClick={() => setShowModal(true)}>Edit</Dropdown.Item>
                               <Dropdown.Item>Delete</Dropdown.Item>
                             </Dropdown.Menu>
                           </Dropdown>

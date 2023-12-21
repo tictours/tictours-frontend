@@ -49,7 +49,7 @@ const AddModal = ({ setShowModal, showModal }) => {
               <div className="basic-form">
                 <form onSubmit={handleSubmit}>
                   <div className="row">
-                    <div className="mb-3 col-md-4">
+                    {/* <div className="mb-3 col-md-4">
                       <InputField
                         label="Payment Id"
                         name="paymentId"
@@ -57,7 +57,7 @@ const AddModal = ({ setShowModal, showModal }) => {
                         onBlur={handleBlur}
                         values={values}
                       />
-                    </div>
+                    </div> */}
                     <div className="mb-3 col-md-4">
                       <InputField
                         label="Trans Id"
