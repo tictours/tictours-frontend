@@ -14,6 +14,7 @@ import { LoadingButton } from "../../common/LoadingBtn";
 import { useAsync } from "../../../utilis/useAsync";
 import { URLS } from "../../../../constants";
 import ShareModal from "./ShareModal";
+import ReactSelect from "../../common/ReactSelect";
 
 const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const {
@@ -36,6 +37,8 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const [editId, setEditId] = useState("");
   const [editData, setEditData] = useState({});
   const [datesArray, setDatesArray] = useState([]);
+  const [readOnly, setReadOnly] = useState(isEdit);
+
   const dayList = [1, 2, 3, 4];
   const scheduleData = [1, 2];
   const destinationOptions = ["Destination 1", "Destination 2"];
@@ -47,6 +50,8 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const activityData = activityFetchData?.data?.data;
   const transferFetchData = useAsync(URLS.TRANSFER_URL);
   const transferData = transferFetchData?.data?.data;
+  const destinationFetchData = useAsync(URLS.DESTINATION_URL);
+  const destinationData = destinationFetchData?.data?.data;
   let dataList;
   if (values.categoryOptions === "Hotel") {
     dataList = hotelData;
@@ -77,6 +82,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
       const obj = {
         date: new Date(currentDate),
         day: currentDay,
+        dayDestination:values.destination,
         schedule: [],
       };
       scheduleArray.push(obj);
@@ -131,6 +137,11 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   };
   const onDayPackage = (date, ind) => {
     setFieldValue("planIndex", ind);
+  };
+  const onDayDestination = (ind, data) => {
+    const result = values.planArr.map((item,arrInd) => ind === arrInd ? {...item, dayDestination: data} 
+    : item )
+    setFieldValue("planArr", result);
   };
   const showScheduleValue = values.planArr[`${values.planIndex}`];
   const onInsert = (value, setShowModal) => {
@@ -203,7 +214,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
       <form
       // onSubmit={formSubmit}
       >
-        <div>
+        <div className="d-flex justify-content-between">
           <button
             className="btn btn-outline-light"
             type="button"
@@ -211,6 +222,10 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
           >
             <i class="fa fa-arrow-left fa-xl" aria-hidden="true"></i>
           </button>
+          {isEdit &&
+                  <div className="">
+                    <button className="btn btn-primary mb-3" type="button" onClick={()=>{setReadOnly((prev)=>!prev)}}>{readOnly?'Read Mode':'Write Mode'}</button>
+                  </div>}
         </div>
         <div className="d-flex justify-content-end mb-3">
           <LoadingButton
@@ -218,6 +233,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
             type="submit"
             className="me-2"
             onClick={handleSubmit}
+            disabled={readOnly}
           />
           <LoadingButton label="Quotation" type="button" className="me-2" />
           <LoadingButton
@@ -245,13 +261,29 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                 </div>
                 <div className="col-md-9">
                   <p className="text-center mb-1">{formatDate(item.date)}</p>
-                  <SelectField
-                    name={`${item.day}marketType`}
+                  {/* <SelectField
+                    name={`dayDestination`}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     values={values}
-                    options={destinationOptions}
-                  />
+                    options={destinationData}
+                    optionValue='id'
+                    optionLabel='name'
+
+                  /> */}
+                  <ReactSelect
+                  options={destinationData}
+                  value={item.dayDestination}
+                  onChange={(selected) => onDayDestination(key,selected)}
+                  optionValue="id"
+                  optionLabel="name"
+                  formik={formik}
+                  onBlur={handleBlur}
+                  // inputId='destination'
+                  // className='custom-input'
+                  // required
+                  // isDisabled={readOnly}
+                />
                 </div>
               </div>
             ))}
@@ -321,10 +353,10 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                                 {/* <span className="mail">jordan@mail.com</span>  */}
                               </div>
                             </div>
-                            <DropDownBlog
+                           {!readOnly && <DropDownBlog
                               onEdit={() => onEdit(ind, item)}
                               onDelete={() => onDelete(ind)}
-                            />
+                            />}
                           </div>
                           {/* <div className="contact-icon">
                                                     <div className="icon">
@@ -406,7 +438,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                       {list.name || list.activity_name || list.vehicle_name}
                     </h6>
                   </div>
-                  <div>
+                 {!readOnly &&  <div>
                     <button
                       type="button"
                       className="btn btn-white p-3"
@@ -416,7 +448,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                     >
                       <i className="fa-solid fa-plus text-primary"></i>
                     </button>
-                  </div>
+                  </div> }
                 </div>
               ))}
               <div>

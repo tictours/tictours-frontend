@@ -49,6 +49,10 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
   const hotelId = data?.id
   const hotelData = useAsync(`${URLS.HOTEL_URL}/${hotelId}`, !!hotelId)
   const hotelDetailData = hotelData?.data?.data
+  const marketTypefetchData = useAsync(URLS.MARKET_TYPE_URL)
+  const marketTypeData = marketTypefetchData?.data?.data
+  const categoryfetchData = useAsync(URLS.PROPERTY_CATEGORY_URL)
+  const categoryData = categoryfetchData?.data?.data
   const [selectedRoom,setSelectedRoom]=useState(hotelDetailData?.rooms[0])
   const isEdit = !!editId || editId === 0
 
@@ -82,18 +86,19 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
       if(hotelDetailData){
       const destinationObj = {label:hotelDetailData?.destination_name,value:hotelDetailData?.destination_id}
       const roomTypeObj = {label:hotelDetailData?.rooms[0]?.room_type_name,value:hotelDetailData?.rooms[0]?.id}
+      const categoryObj = {label:hotelDetailData?.category_name,value:hotelDetailData?.category_id}
       setFieldValue('destination',destinationObj)
       setFieldValue('name',hotelDetailData?.name)
       setFieldValue('id',hotelDetailData?.id)
       setFieldValue('roomOption',hotelDetailData?.rooms)
       setFieldValue('roomType',roomTypeObj)
+      setFieldValue('category',categoryObj)
       setFieldValue('image',hotelDetailData?.document_2[0]?.file_url)
     }}
   },[editId,hotelId,hotelDetailData])
   
   const roomTypeId = values.roomType?.value
   useEffect(()=>{
-    console.log('findDataidd',roomTypeId)
     if(roomTypeId){
       const data = values.roomOption.find((val)=> val.id == roomTypeId)
       if(data){
@@ -142,14 +147,14 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                   </div>
                   <div className="col-sm-6">
                     <ReactSelect
-                      label="Type"
+                      label="Market Type"
                       value={values.type}
                       onChange={(selected) => setFieldValue("type", selected)}
                       onBlur={handleBlur}
                       // values={values}
-                      options={typeOptions}
-                      optionValue="value"
-                      optionLabel="label"
+                      options={marketTypeData}
+                      optionValue="id"
+                      optionLabel="name"
                     />
                   </div>
 
@@ -162,9 +167,9 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                       }
                       onBlur={handleBlur}
                       // values={values}
-                      options={categoryOptions}
-                      optionValue="value"
-                      optionLabel="label"
+                      options={categoryData}
+                      optionValue="id"
+                      optionLabel="name"
                     />
                   </div>
                   <div className="col-sm-6">

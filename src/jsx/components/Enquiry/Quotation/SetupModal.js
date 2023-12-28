@@ -40,7 +40,7 @@ function SetupModal() {
     formValidityDate: date,
     planArr:[],
     planIndex:0,
-    priceOption:{value:2,label:'total price'},
+    priceOption:{value:'TOTAL',label:'Total Price'},
     gstOption:{value:1,label:'GST on Total'},
     priceIn:{id:'INR',name:'INR'},
   };
@@ -62,6 +62,7 @@ function SetupModal() {
       setFieldValue('tcs',checkFormValue(data.tcs_percentage))
       setFieldValue('discount',checkFormValue(data.discount_amount))
       setFieldValue('paymentDescription',checkFormValue(data.description))
+      setFieldValue('priceOption',data.price_mode === 'PER_PERSON'?{value:'PER',label:'Price Per Traveller'}:{value:'TOTAL',label:'Total Price'})
       const priceInObj = {label:data.currency,value:data.currency}
       setFieldValue('priceIn',priceInObj)
       const destinationObj = {label:data.destination.name,value:data.destination.id}
@@ -117,7 +118,7 @@ function SetupModal() {
   const handleFormClick = async(values) => {
     try {
       const formData = new FormData()
-      formData.append('currency','inr')
+      // formData.append('currency',values.priceIn)
       formData.append('package_name',values.packageName)
       formData.append('enquiry_id',id)
       formData.append('start_date',checkFormValue(formatDate(values.formStartDate)))
@@ -126,42 +127,46 @@ function SetupModal() {
       formData.append('child_count',checkFormValue(values.child))
       formData.append('destination_id',checkFormValue(values.destination?.value))
       formData.append('valid_until',checkFormValue(formatDate(values.formValidityDate)))
-      values.planArr?.flatMap(({ date, schedule }) =>
-        schedule.map((data,ind) => {
+      let index = 0
+      values.planArr?.flatMap(({ date, schedule },arrInd) =>
+      schedule.map((data,ind) => {
+          console.log('date',data,index)
         // if(data.isExist){
         //   formData.append(`requirements[id]`,data?.value)
         // }
         if(data.entryId){
-          formData.append(`entries[${ind}][id]`,checkFormValue(data.entryId))
+          formData.append(`entries[${index}][id]`,checkFormValue(data.entryId))
         }
-        formData.append(`entries[${ind}][subject_id]`,checkFormValue(data.id))
-        formData.append(`entries[${ind}][entry_type]`,checkFormValue(data.insertType.toUpperCase()))
+        formData.append(`entries[${index}][subject_id]`,checkFormValue(data.id))
+        formData.append(`entries[${index}][entry_type]`,checkFormValue(data.insertType?.toUpperCase()))
+        formData.append(`entries[${index}][date]`,checkFormValue(formatDate(date)))
+        formData.append(`entries[${index}][no_of_person]`,checkFormValue(data.person,'number'))
         if(data.insertType === 'hotel'){
-          formData.append(`entries[${ind}][option]`,checkFormValue(data.option?.value))
-          formData.append(`entries[${ind}][room_id]`,checkFormValue(data.roomType?.value))
-          formData.append(`entries[${ind}][single_count]`,checkFormValue(data.single,'number'))
-          formData.append(`entries[${ind}][double_count]`,checkFormValue(data.double,'number'))
-          formData.append(`entries[${ind}][triple_count]`,checkFormValue(data.triple,'number'))
-          formData.append(`entries[${ind}][extra_count]`,checkFormValue(data.extra,'number'))
-          formData.append(`entries[${ind}][child_w_count]`,checkFormValue(data.childW,'number'))
-          formData.append(`entries[${ind}][child_n_count]`,checkFormValue(data.childN,'number'))
+          formData.append(`entries[${index}][option]`,checkFormValue(data.option?.value))
+          formData.append(`entries[${index}][room_id]`,checkFormValue(data.roomType?.value))
+          formData.append(`entries[${index}][single_count]`,checkFormValue(data.single,'number'))
+          formData.append(`entries[${index}][double_count]`,checkFormValue(data.double,'number'))
+          formData.append(`entries[${index}][triple_count]`,checkFormValue(data.triple,'number'))
+          formData.append(`entries[${index}][extra_count]`,checkFormValue(data.extra,'number'))
+          formData.append(`entries[${index}][child_w_count]`,checkFormValue(data.childW,'number'))
+          formData.append(`entries[${index}][child_n_count]`,checkFormValue(data.childN,'number'))
         }
-        formData.append(`entries[${ind}][date]`,checkFormValue(formatDate(date)))
-        formData.append(`entries[${ind}][no_of_person]`,checkFormValue(data.person,'number'))
+      
         if(data.insertType === 'activity'){
-          formData.append(`entries[${ind}][description]`,checkFormValue(data.description))
+          formData.append(`entries[${index}][description]`,checkFormValue(data.description))
         }
         if(data.insertType === 'transfer'){
-          formData.append(`entries[${ind}][transfer_type]`,checkFormValue(data.type?.value))
-          formData.append(`entries[${ind}][cost]`,checkFormValue(data.cost,'number'))
-          formData.append(`entries[${ind}][adult_cost]`,checkFormValue(data.adultCost,'number'))
-          formData.append(`entries[${ind}][child_cost]`,checkFormValue(data.childCost,'number'))
+          formData.append(`entries[${index}][transfer_type]`,checkFormValue(data.type?.value))
+          formData.append(`entries[${index}][cost]`,checkFormValue(data.cost,'number'))
+          formData.append(`entries[${index}][adult_cost]`,checkFormValue(data.adultCost,'number'))
+          formData.append(`entries[${index}][child_cost]`,checkFormValue(data.childCost,'number'))
         }
 
-        formData.append(`entries[${ind}][start_date]`,checkFormValue(formatDate(data.startDate)))
-        formData.append(`entries[${ind}][start_time]`,checkFormValue(formatTimeToHis(data.startTime)))
-        formData.append(`entries[${ind}][end_date]`,checkFormValue(formatDate(data.endDate)))
-        formData.append(`entries[${ind}][end_time]`,checkFormValue(formatTimeToHis(data.endTime)))
+        formData.append(`entries[${index}][start_date]`,checkFormValue(formatDate(data.startDate)))
+        formData.append(`entries[${index}][start_time]`,checkFormValue(formatTimeToHis(data.startTime)))
+        formData.append(`entries[${index}][end_date]`,checkFormValue(formatDate(data.endDate)))
+        formData.append(`entries[${index}][end_time]`,checkFormValue(formatTimeToHis(data.endTime)))
+        index = index + 1
       }))
       // formData.append('assigned_to',checkFormValue(values.assigned?.value))
       let response

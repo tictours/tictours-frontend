@@ -65,8 +65,8 @@ const PaymentForm = ({ formik, setFormComponent, setShowModal }) => {
   }
   // console.log('payment',values)
   const priceOption = [
-    {id:1,name:'price per traveller'},
-    {id:2,name:'total price'},
+    {id:'TOTAL',name:'Total Price'},
+    {id:'PER',name:'Price Per Traveller'},
 ]
   const gstOption = [
     {id:1,name:'GST on Total'},
@@ -88,18 +88,48 @@ const handleMarkup = ()=>{
   setFieldValue('extraMarkup',checkFormValue(values.extraMarkupInput,'number'))
   setShowMarkup(false)
 }
+const getRoundOfValue = (value,round=2) => {
+  if(value){
+    // console.log('va fix',value,typeof value)
+    const roundOfValue = value?.toFixed(round)
+    const result = Number(roundOfValue)
+    return result
+  }
+}
 const handleInputChange = (planIndex,index, newValue,type='amount') => {
-    const newData = values.planArr?.map((item,planArrInd) => (
-     planArrInd === planIndex ? {
-        ...item,
-        schedule: item.schedule.map((scheduleItem,ind) =>
-        ind === index ? { ...scheduleItem, [type]: Number(newValue) } : scheduleItem
-        )
-      } : item
-      
+  const inputValue = Number(newValue)
+  const newData = values.planArr?.map((item,planArrInd) => (
+    planArrInd === planIndex ? {
+      ...item,
+      schedule: item.schedule.map((scheduleItem,ind) =>
+      ind === index ? { ...scheduleItem, [type]: getRoundOfValue(inputValue) } : scheduleItem
+      )
+    } : item
+    
     ));
+    // console.log('planIn',planIndex,index,newValue)
+    // console.log('pdata',newData)
   setFieldValue('planArr',newData);
 };
+const handlePriceMode = (type) => {
+  if(values.priceOption.value !== type){
+  const newData = values.planArr?.map((item,planArrInd) => (
+     {
+       ...item,
+       schedule: item.schedule.map((scheduleItem,ind) =>{
+        const person = scheduleItem.insertType === 'activity' ? scheduleItem.person : values.adult + values.child
+        // console.log('pers',person)
+       const result = { ...scheduleItem, amount: type == 'TOTAL' ? scheduleItem.amount * person :  scheduleItem.amount / person } 
+      return result
+      }
+       )
+     } 
+     
+   ));
+ setFieldValue('planArr',newData);
+}
+}
+// console.log('valuss',values)
 const handleBilling = async() =>{
   try {
     const formData = new FormData()
@@ -107,6 +137,7 @@ const handleBilling = async() =>{
     formData.append('extra_markup_amount',checkFormValue(values.extraMarkup,'number'))  
     formData.append('description',values.paymentDescription || '.')  
     formData.append('currency',checkFormValue(values.priceIn.value))  
+    formData.append('price_mode',checkFormValue(values.priceOption.value === 'PER'?'PER_PERSON':'TOTAL_PRICE'))  
     addOnField.forEach((item)=>{
       formData.append(item.field,checkFormValue(values[item.name],'number'))  
     }) 
@@ -167,13 +198,6 @@ const totals = scheduleArr.reduce((accumulator, currentValue) => {
   
 }, { totalAmount: 0, totalMarkup: 0 });
 
-const getRoundOfValue = (value,round=2) => {
-  if(value){
-    const roundOfValue = value?.toFixed(round)
-    const result = Number(roundOfValue)
-    return result
-  }
-}
 const getHotelOptionTotal = (amount,markup,type='amount') => {
   // const typeTotal = type === 'amount' ? totals.totalAmount : totals.totalMarkup
   const total = amount + markup + totals.totalAmount + totals.totalMarkup
@@ -239,7 +263,7 @@ const calculateTotal = (amount,markup) =>{
               </tr>
             </thead>
             <tbody>
-              {scheduleArr.map(({item,planArrInd},ind) => (
+              {scheduleArr.map(({item,planArrInd,scheduleInd},ind) => (
                 <tr key={ind}>
                   {/* <td className="sorting_1">
                                                     <div className="checkbox me-0 align-self-center">
@@ -271,10 +295,10 @@ const calculateTotal = (amount,markup) =>{
                   </td>
                   <td>{item.insertType}</td>
                   <td className="package-td">
-                    <input className="form-control" type="number" value={item.amount} onChange={(e)=>handleInputChange(planArrInd,ind,e.target.value)}/>
+                    <input className="form-control" type="number" value={item.amount} onChange={(e)=>handleInputChange(planArrInd,scheduleInd,e.target.value)}/>
                   </td>
                   <td className="package-td">
-                    <input className="form-control" type="number" value={item.markup} onChange={(e)=>handleInputChange(planArrInd,ind,e.target.value,'markup')}/>
+                    <input className="form-control" type="number" value={item.markup} onChange={(e)=>handleInputChange(planArrInd,scheduleInd,e.target.value,'markup')}/>
                   </td>
                   <td className="package-td">
                     {item.amount+item.markup} 
@@ -308,7 +332,10 @@ const calculateTotal = (amount,markup) =>{
                   // label="priceOption"
                   options={priceOption}
                   value={values.priceOption}
-                  onChange={(selected) => setFieldValue("priceOption", selected)}
+                  onChange={(selected) => {
+                    setFieldValue("priceOption", selected)
+                    handlePriceMode(selected.value)
+                  }}
                   optionValue="id"
                   optionLabel="name"
                   inputId='destination'

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Select from "react-select";
 import Collapse from "react-bootstrap/Collapse";
 import DatePicker from "react-datepicker";
@@ -45,10 +45,11 @@ const Quotation = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteUrl, setDeleteUrl] = useState('');
   const [deleteName, setDeleteName] = useState('');
+  const {id}= useParams()
   const itineraryUrl = URLS.ITINERARY_URL
-  const fetchData = useAsync(itineraryUrl)
+  const itineraryByEnquiryUrl = `${URLS.ITINERARY_URL}?enquiry_id=${id}`
+  const fetchData = useAsync(itineraryByEnquiryUrl)
   const tableData = fetchData?.data?.data
-  console.log('fetch',tableData)
 
   const [data, setData] = useState(
     document.querySelectorAll("#content_wrapper tbody tr"),
@@ -272,9 +273,7 @@ const Quotation = () => {
                         </thead>
                         <tbody>
                           {
-                          fetchData.loading ?
-                          <NoData isLoading={fetchData.loading} colSpan={10}/>
-                          :
+                          !!tableData?.length ?
                           tableData?.map((item, ind) => (
                             <tr key={ind}>
                               <td className="sorting_1 ps-3">
@@ -324,7 +323,10 @@ const Quotation = () => {
                                 </button>
                               </td>
                             </tr>
-                          ))}
+                          ))
+                          :
+                          <NoData isLoading={fetchData.loading} colSpan={10}/>
+                        }
                         </tbody>
                       </table>
                       <div className="d-sm-flex text-center justify-content-between align-items-center mt-3">
