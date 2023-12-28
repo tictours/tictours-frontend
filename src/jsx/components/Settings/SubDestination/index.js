@@ -10,7 +10,7 @@ const SubDestination = () => {
         addTitle="Sub Destination"
         url={URLS.SUB_DESTINATION_URL}
         parentName="Destination"
-        parentValue="destination_id"
+        parentValue="destination_name"
         parentId="destination_id"
         parentUrl={URLS.DESTINATION_URL}
       />
