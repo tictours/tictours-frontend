@@ -80,6 +80,8 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
     onClick(values, setShowModal);
   };
   useEffect(()=>{
+    setFieldValue('startDate',data?.showScheduleDate)
+    setFieldValue('endDate',data?.showScheduleDate)
     if(isEdit){
       setValues(data)
     }else{
@@ -143,6 +145,17 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                       options={destinationOptions}
                       optionValue="value"
                       optionLabel="label"
+                      isDisabled={true}
+                    />
+                  </div>
+                  <div className="col-sm-6">
+                    <InputField
+                      label="Hotel Name"
+                      name="name"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      values={values}
+                      disabled={true}
                     />
                   </div>
                   <div className="col-sm-6">
@@ -188,16 +201,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                       optionLabel="room_type_name"
                     />
                   </div>
-                  <div className="col-sm-5">
-                    <InputField
-                      label="Hotel Name"
-                      name="name"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      values={values}
-                    />
-                  </div>
-                  <div className="col-sm-7">
+                  <div className="col-sm-6">
                     <ReactSelect
                       label="Meal Plan"
                       value={values.mealPlan}
@@ -238,7 +242,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                     />
                   </div> */}
                   {roomAllotement?.map((data) => (
-                    <div className="col-sm-4">
+                    <div className="col-sm-3 col-4 col-md-2">
                       <InputField
                         mb="0"
                         label={data.label}
@@ -248,13 +252,13 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                         onBlur={handleBlur}
                         values={values}
                       />
-                      <p className="text-danger mb-3">{`amount ${data.allowed}`}</p>
+                      <p className="text-danger mb-3 mt-1" style={{fontSize:'10px'}}>{`amount ${data.allowed}`}</p>
                     </div>
                   ))}
                   </FormSection>
                   <FormSection>
                   <div className="col-sm-5">
-                    <label>Start Date</label>
+                    <label>Check In</label>
                     <DatePicker
                       className="form-control"
                       selected={values.startDate}
@@ -273,7 +277,7 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                     />
                   </div>
                   <div className="col-sm-5">
-                    <label>End Date</label>
+                    <label>Check Out</label>
                     <DatePicker
                       className="form-control"
                       selected={values.endDate}

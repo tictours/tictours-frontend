@@ -61,24 +61,36 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
     dataList = transferData;
   }
 
-  // Step 1: Parse the date strings into Date objects
-  const startDate = new Date(values.formStartDate);
-  const endDate = new Date(values.formEndDate);
-
-  // Set the time component of startDate to midnight (00:00:00)
-  startDate.setHours(0, 0, 0, 0);
-
-  // Set the time component of endDate to midnight (00:00:00)
-  endDate.setHours(0, 0, 0, 0);
-
+  
   const generateDates = () => {
+
+    // Step 1: Parse the date strings into Date objects
+    const startDate = new Date(values.formStartDate);
+    const endDate = new Date(values.formEndDate);
+  
+    // Set the time component of startDate to midnight (00:00:00)
+    startDate.setHours(0, 0, 0, 0);
+  
+    // Set the time component of endDate to midnight (00:00:00)
+    endDate.setHours(0, 0, 0, 0);
+
     // Step 2 and Step 3: Generate all dates between the two dates and store in an array
     // const datesArr = [];
+    const planArrValue = values.planArr
     const scheduleArray = [];
     let currentDate = new Date(startDate); // Clone the startDate
     let currentDay = 1;
     while (currentDate <= endDate) {
       // datesArr.push(new Date(currentDate));
+      const existingPlan = planArrValue.find((item)=> {
+        console.log(formatDate(currentDate),'item',item)
+       return item.date === formatDate(currentDate)
+      }
+        )
+      if(existingPlan){
+        scheduleArray.push(existingPlan);
+      }
+      else{
       const obj = {
         date: new Date(currentDate),
         day: currentDay,
@@ -86,22 +98,23 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
         schedule: [],
       };
       scheduleArray.push(obj);
-      // setFieldValue('planArr',[...values.planArr,obj])
-      currentDate.setDate(currentDate.getDate() + 1);
-      currentDay = currentDay + 1;
     }
+    // setFieldValue('planArr',[...values.planArr,obj])
+    currentDate.setDate(currentDate.getDate() + 1);
+    currentDay = currentDay + 1;
+  }
     setFieldValue("planArr", scheduleArray);
   };
   let initialLoad = true;
   useEffect(() => {
-    if (!isEdit) {
+    // if (!isEdit) {
       generateDates();
       // console.log('inital generate datae')
-    }
+    // }
     return () => {
       initialLoad = false;
     };
-  }, [values.itineraryId]);
+  }, [values.itineraryId,values.planArr.length]);
 
   const handleAddCategory = () => {
     if (values.categoryOptions === "Hotel") {
@@ -117,7 +130,9 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const handleCardAdd = (value = values.categoryOptions, data) => {
     const checkValue = value?.toLowerCase();
     if (data) {
-      setEditData(data);
+      const personCount = values.adult + values.child 
+      const value = {...data,showScheduleDate:new Date(showScheduleValue?.date),personCount}
+      setEditData(value);
     }
     if (checkValue === "hotel") {
       setShowHotelModal(true);
@@ -273,7 +288,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                   /> */}
                   <ReactSelect
                   options={destinationData}
-                  value={item.dayDestination}
+                  value={values.destination}
                   onChange={(selected) => onDayDestination(key,selected)}
                   optionValue="id"
                   optionLabel="name"
@@ -282,7 +297,8 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                   // inputId='destination'
                   // className='custom-input'
                   // required
-                  // isDisabled={readOnly}
+                  isDisabled={true}
+                  showBorderOnDisabled={true}
                 />
                 </div>
               </div>
@@ -346,7 +362,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                                       Check out Date & Time
                                     </span>
                                     <span className="mail">{`${formatDate(
-                                      item.startDate
+                                      item.endDate
                                     )} ${parseTime(item.endTime)}`}</span>
                                   </div>
                                 </div>

@@ -71,6 +71,8 @@ const InsertTransfer = ({
     resetForm();
   };
   useEffect(() => {
+    setFieldValue('startDate',data?.showScheduleDate)
+    setFieldValue('endDate',data?.showScheduleDate)
     if (isEdit) {
       setValues(data);
     } else {

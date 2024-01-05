@@ -267,7 +267,7 @@ const Quotation = () => {
                             <th>Valid Until</th>
                             {/* <th>Title</th> */}
                             <th>Price</th>
-                            <th>Status</th>
+                            {/* <th>Status</th> */}
                             <th className="text-end">Actions</th>
                           </tr>
                         </thead>
@@ -301,12 +301,12 @@ const Quotation = () => {
                               {/* <td>sahid</td> */}
                               <td>{item.valid_until}</td>
                               {/* <td>Option 1</td> */}
-                              <td>25000</td>
-                              <td>
+                              <td>{item.net_amount}</td>
+                              {/* <td>
                                 <Badge bg="" className="light badge-warning">
                                   Pending
                                 </Badge>
-                              </td>
+                              </td> */}
                               <td className="text-end">
                                 <Link
                                   to={`itinerary/${item.id}`}

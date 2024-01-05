@@ -68,6 +68,12 @@ const InsertActivity = ({
   };
   useEffect(() => {
     console.log("edi", data);
+    const showScheduleDateValue = data?.showScheduleDate
+    if(showScheduleDateValue){
+      setFieldValue('startDate',showScheduleDateValue)
+      setFieldValue('endDate',showScheduleDateValue)
+    }
+    setFieldValue('person',data?.personCount)
     if (isEdit) {
       setValues(data);
     } else {

@@ -29,6 +29,7 @@ const PaymentForm = ({ formik, setFormComponent, setShowModal }) => {
   const [showMarkup,setShowMarkup] = useState(false)
   const itineraryId = values.itineraryId
   const isEdit = !!itineraryId
+  const [readOnly, setReadOnly] = useState(isEdit);
 
   const dayList = [1, 2, 3, 4];
   const scheduleData = [1, 2];
@@ -198,6 +199,29 @@ const totals = scheduleArr.reduce((accumulator, currentValue) => {
   
 }, { totalAmount: 0, totalMarkup: 0 });
 
+// Calculate total using reduce
+const optionInitialValue = [{name:'Option 1',amount:0,markup:0},{name:'Option 2',amount:0,markup:0},{name:'Option 3',amount:0,markup:0}]
+const hotelOption = scheduleArr.reduce((accumulator, currentValue) => {
+  const {item} = currentValue
+  if(item.insertType == 'hotel'){
+      if(item.option?.label === 'Option 1'){
+        accumulator[0].amount += item.amount
+        accumulator[0].markup += item.markup
+      }
+      if(item.option?.label === 'Option 2'){
+        accumulator[1].amount += item.amount
+        accumulator[1].markup += item.markup
+      }
+      if(item.option?.label === 'Option 3'){
+        accumulator[2].amount += item.amount
+        accumulator[2].markup += item.markup
+      }
+    
+    }
+    return accumulator;
+  
+}, optionInitialValue);
+
 const getHotelOptionTotal = (amount,markup,type='amount') => {
   // const typeTotal = type === 'amount' ? totals.totalAmount : totals.totalMarkup
   const total = amount + markup + totals.totalAmount + totals.totalMarkup
@@ -235,9 +259,14 @@ const calculateTotal = (amount,markup) =>{
       <form
       // onSubmit={formSubmit}
       >
-        <div>
+
+        <div className="d-flex justify-content-between">
           <button className="btn btn-outline-light" type="button" onClick={handleBack}><i class="fa fa-arrow-left fa-xl" aria-hidden="true"></i></button>
-        </div>
+        {isEdit &&
+                  <div className="">
+                    <button className="btn btn-primary mb-3" type="button" onClick={()=>{setReadOnly((prev)=>!prev)}}>{readOnly?'Read Mode':'Write Mode'}</button>
+                  </div>}
+                  </div>
         <div
           className="table-responsive  full-data dataTables_wrapper"
           id="example2_wrapperr"
@@ -295,13 +324,13 @@ const calculateTotal = (amount,markup) =>{
                   </td>
                   <td>{item.insertType}</td>
                   <td className="package-td">
-                    <input className="form-control" type="number" value={item.amount} onChange={(e)=>handleInputChange(planArrInd,scheduleInd,e.target.value)}/>
+                    <input className="form-control" type="number" value={item.amount} disabled={readOnly} onChange={(e)=>handleInputChange(planArrInd,scheduleInd,e.target.value)}/>
                   </td>
                   <td className="package-td">
-                    <input className="form-control" type="number" value={item.markup} onChange={(e)=>handleInputChange(planArrInd,scheduleInd,e.target.value,'markup')}/>
+                    <input className="form-control" type="number" value={item.markup} disabled={readOnly} onChange={(e)=>handleInputChange(planArrInd,scheduleInd,e.target.value,'markup')}/>
                   </td>
                   <td className="package-td">
-                    {item.amount+item.markup} 
+                    {getRoundOfValue(item.amount+item.markup)} 
                   </td>
                 </tr>
               ))
@@ -336,11 +365,12 @@ const calculateTotal = (amount,markup) =>{
                     setFieldValue("priceOption", selected)
                     handlePriceMode(selected.value)
                   }}
+                  isDisabled={readOnly}
                   optionValue="id"
                   optionLabel="name"
-                  inputId='destination'
                   formik={formik}
                   onBlur={handleBlur}
+                  // inputId='destination'
                   // className='custom-input'
                   required
                 />
@@ -351,6 +381,7 @@ const calculateTotal = (amount,markup) =>{
                   options={gstOption}
                   value={values.gstOption}
                   onChange={(selected) => setFieldValue("gstOption", selected)}
+                  isDisabled={readOnly}
                   optionValue="id"
                   optionLabel="name"
                   formik={formik}
@@ -363,7 +394,7 @@ const calculateTotal = (amount,markup) =>{
                 </div>
           <div className="">
             <h6 className="">{values.baseMarkup ?`Base Markup - ${values.baseMarkup} %`:`Extra Markup -  ${values.extraMarkup || 0} Rs`}</h6>
-            <button type="button" className="btn bg-white p-2 mx-auto" onClick={()=>setShowMarkup(true)}>Update</button>
+            <button type="button" className="btn bg-white p-2 mx-auto" disabled={readOnly} onClick={()=>setShowMarkup(true)}>Update</button>
           </div>
         </div>
         <div
@@ -395,8 +426,8 @@ const calculateTotal = (amount,markup) =>{
               </tr>
             </thead>
             <tbody>
-              {scheduleArr.map(({item,planArrInd},ind) => (
-          item.insertType === 'hotel' &&
+              {hotelOption?.map((item,ind) => (
+          // item.insertType === 'hotel' &&
                 <tr key={ind}>
                   {/* <td className="sorting_1">
                                                     <div className="checkbox me-0 align-self-center">
@@ -413,7 +444,7 @@ const calculateTotal = (amount,markup) =>{
                     <div className="py-sm-3 py-1 ps-3">
                       <div>
                        
-                        <h6 className="font-w500 fs-15 mb-0">{item.option?.label} 
+                        <h6 className="font-w500 fs-15 mb-0">{item.name} 
                         {/* {
                           item.insertType == 'hotel' && 
                           // <div className="">
@@ -475,6 +506,7 @@ const calculateTotal = (amount,markup) =>{
         onBlur={handleBlur}
         value={values[item.name]}
         style={{ width: "25%" }}
+        disabled={readOnly}
       />
   </div>
 ))}
@@ -489,6 +521,7 @@ const calculateTotal = (amount,markup) =>{
                   optionLabel="name"
                   formik={formik}
                   onBlur={handleBlur}
+                  isDisabled={readOnly}
                   // className='custom-input'
                   // required
                 />
@@ -498,6 +531,7 @@ const calculateTotal = (amount,markup) =>{
   <input className="form-control ms-3" placeholder="Early Bird Offer"
    name={'paymentDescription'}
    onChange={handleChange}
+   disabled={readOnly}
    onBlur={handleBlur}
    value={values.paymentDescription}
   style={{width:'50%'}}/>
@@ -505,6 +539,7 @@ const calculateTotal = (amount,markup) =>{
           type="button"
           className="btn btn-primary mt-4"
           onClick={handleBilling}
+          disabled={readOnly}
         >
           Update Billing
         </button>
