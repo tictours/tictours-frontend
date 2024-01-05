@@ -7,7 +7,7 @@ import InputField from "../../common/InputField";
 import SelectField from "../../common/SelectField";
 import notify from "../../common/Notify";
 
-const AddModal = ({ setShowModal, showModal }) => {
+const MailModal = ({ setShowModal, showModal }) => {
   const navigate = useNavigate();
   const date = new Date();
 
@@ -39,7 +39,7 @@ const AddModal = ({ setShowModal, showModal }) => {
         }) => (
           <CustomModal
             showModal={showModal}
-            title={"Add Payment"}
+            title={"Send Payment Link"}
             handleModalClose={() => {
               setShowModal(false);
               //   setFormComponent('setupForm')
@@ -59,71 +59,24 @@ const AddModal = ({ setShowModal, showModal }) => {
                         values={values}
                       />
                     </div> */}
-                    <div className="mb-3 col-md-4">
+                    <div className="mb-3 col-md-7">
                       <InputField
-                        label="Trans Id"
-                        name="TransId"
+                        label="Mail Send To"
+                        name="to"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         values={values}
+                        required
                       />
                     </div>
-                    <div className="form-group mb-3 col-md-4">
-                      <SelectField
-                        label="Type"
-                        name={"type"}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        values={values}
-                        options={TypeOptions}
-                      />
-                    </div>
-                    <div className="form-group mb-3 col-md-4">
-                      <SelectField
-                        label="Status"
-                        name={"status"}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        values={values}
-                        options={StatusOptions}
-                      />
-                    </div>
-                    <div className="mb-3 col-md-4">
+                    <div className="mb-3 col-md-7">
                       <InputField
-                        label="Amount"
-                        name="amount"
+                        label="CC Mails"
+                        name="cc"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         values={values}
-                        type="number"
-                      />
-                    </div>
-                    <div className="mb-3 col-md-4">
-                      <InputField
-                        label="Convience Fee"
-                        name="fee"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        values={values}
-                        type="number"
-                      />
-                    </div>
-                    <div className="form-group mb-3 col-md-4">
-                      <label>Payment Date</label>
-                      <DatePicker
-                        className="form-control"
-                        selected={values?.paymentDate}
-                        onChange={(date) => setFieldValue("paymentDate", date)}
-                      />
-                    </div>
-                    <div className="mb-3 col-md-4">
-                      <InputField
-                        label="Remarks"
-                        name="remarks"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        values={values}
-                        isTextarea
+                        required
                       />
                     </div>
                   </div>
@@ -140,4 +93,4 @@ const AddModal = ({ setShowModal, showModal }) => {
   );
 };
 
-export default AddModal;
+export default MailModal;

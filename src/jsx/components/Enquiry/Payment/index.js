@@ -5,6 +5,8 @@ import { Badge, Dropdown } from "react-bootstrap";
 import InvoiceSlider from "../../Dashboard/InvoiceSlider";
 import QuestionIcon from "../../Dashboard/Ticketing/QuestionIcon";
 import AddModal from "./AddModal";
+import CustomSlider from "../../common/Slider";
+import MailModal from "./MailModal";
 
 const RightIcon = () => {
   return (
@@ -103,6 +105,7 @@ const Payment = () => {
     document.querySelectorAll("#example2_wrapper tbody tr"),
   );
   const [showModal, setShowModal] = useState(false);
+  const [showMailModal, setShowMailModal] = useState(false);
   const sort = 8;
   const activePag = useRef(0);
   const chageData = (frist, sec) => {
@@ -156,11 +159,21 @@ const Payment = () => {
     }
   };
   const sliderArr = [
-    { name: "Total", value: "8000" },
-    { name: "Received", value: "6000" },
-    { name: "Pending", value: "2000" },
-    { name: "Profit", value: "2000" },
+    { label: "Total Amount", value: "8000" },
+    { label: "Received", value: "6000" },
+    { label: "Pending", value: "2000" },
+    { label: "Gross Profit", value: "2000" },
+    { label: "Supplier Amount", value: "8000" },
+    { label: "Supplier Received", value: "6000" },
+    { label: "Supplier Pending", value: "2000" },
   ];
+  const breakpoints = [
+    { width: 450, slides: 1 }, 
+    { width: 576, slides: 2 }, 
+    { width: 768, slides: 3 },
+    { width: 992, slides: 4 }, 
+    { width: 1200, slides: 5 }, 
+  ]
   return (
     <>
       <div className="row">
@@ -229,7 +242,7 @@ const Payment = () => {
             </div>
           </div>
           {/* swiper */}
-          <InvoiceSlider title="Amount" array={sliderArr} />
+        <CustomSlider title="Amount" array={sliderArr} slidesPerView={7} breakpoints={breakpoints} />
           {/* swiper end */}
 
           <div className="row">
@@ -254,6 +267,8 @@ const Payment = () => {
                       <th className="text-center">Amount</th>
                       <th className="text-center">Payment Date</th>
                       <th className="text-end">Status</th>
+                      <th className="text-end">Convenience Fee</th>
+                      <th className="text-end">Receipt</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -299,6 +314,12 @@ const Payment = () => {
                             {item.icontext}
                           </span>
                         </td>
+                        <td className="whitesp-no fs-15 font-w400 text-center">
+                          2000
+                        </td>
+                        <td className="whitesp-no fs-14 font-w400 text-center">
+                          june12023
+                        </td>
                         <td>
                           <Dropdown>
                             <Dropdown.Toggle
@@ -327,6 +348,7 @@ const Payment = () => {
                               </svg>
                             </Dropdown.Toggle>
                             <Dropdown.Menu className="dropdown-menu-end">
+                              <Dropdown.Item onClick={() => setShowMailModal(true)}>Send Mail</Dropdown.Item>
                               <Dropdown.Item>Download</Dropdown.Item>
                               <Dropdown.Item onClick={() => setShowModal(true)}>Edit</Dropdown.Item>
                               <Dropdown.Item>Delete</Dropdown.Item>
@@ -391,6 +413,7 @@ const Payment = () => {
         </div>
       </div>
       <AddModal showModal={showModal} setShowModal={setShowModal} />
+      <MailModal showModal={showMailModal} setShowModal={setShowMailModal} />
     </>
   );
 };
