@@ -2,7 +2,7 @@ import React from "react";
 import Select from "react-select";
 
 function ReactSelect(props) {
-  const { label, optionLabel = 'label', optionValue = 'value',className='',formik, ...restProps } = props;
+  const { label, optionLabel = 'label', optionValue = 'value',className='',formik,showBorderOnDisabled, ...restProps } = props;
   const selectStyle = {
     borderColor: "#D5DFE7",
     padding: "2px 20px",
@@ -31,7 +31,7 @@ function ReactSelect(props) {
             // borderColor: state.isDisabled ? 'transparent' : 'white',
             backgroundColor: state.isDisabled ? 'transparent' : 'white',
             cursor: state.isDisabled ? 'not-allowed' : 'default',
-            borderColor: state.isDisabled ? 'transparent !important' : baseStyles.borderColor,
+            borderColor: state.isDisabled && !showBorderOnDisabled ? 'transparent !important' : baseStyles.borderColor,
             padding: state.isDisabled ? '0px 0px !important' : '2px 20px',
             // height: state.isDisabled ? '0px !important' : '50px',
           }),
