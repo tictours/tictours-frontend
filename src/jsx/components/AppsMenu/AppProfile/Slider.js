@@ -1,40 +1,26 @@
 import React from "react";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.min.css';
 
-//import "swiper/css";
+// Import Swiper styles
+import 'swiper/swiper.min.css';
+// import 'swiper/components/navigation/navigation.min.css';
+// import 'swiper/components/pagination/pagination.min.css';
 
-import { Autoplay } from "swiper";
+// Install Swiper modules
+SwiperCore.use([Navigation, Pagination, Autoplay]);
 
 export default function ProfileSlider({ title = "", array }) {
   return (
     <>
-      <Swiper
-        className="overflow-hidden"
-        speed={1500}
-        parallax={true}
-        slidesPerView={4}
-        spaceBetween={20}
-        loop={false}
-        modules={[Autoplay]}
-        breakpoints={{
-          300: {
-            slidesPerView: 1,
-          },
-          576: {
-            slidesPerView: 2,
-          },
-          991: {
-            slidesPerView: 3,
-          },
-          1200: {
-            slidesPerView: 3,
-          },
-          1600: {
-            slidesPerView: 4,
-          },
-        }}
-      >
+        <Swiper
+      spaceBetween={30}
+      slidesPerView={3}
+      navigation
+      // pagination={{ clickable: true }}
+      // autoplay={{ delay: 3000 }}
+    >
         <SwiperSlide>
           <div className="card card-box blue">
             {/* <div className="back-image">
