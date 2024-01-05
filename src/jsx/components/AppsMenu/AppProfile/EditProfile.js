@@ -221,10 +221,7 @@ const EditProfile = ({ setShowModal }) => {
       setFieldValue("typeValue", checkFormValue(typeObj));
       setFieldValue("name", checkFormValue(typeData?.name));
       setFieldValue("email", checkFormValue(typeData?.email));
-      setFieldValue(
-        "mobile",
-        checkFormValue(typeData?.mobile || typeData?.phone)
-      );
+      setFieldValue("mobile", checkFormValue(typeData?.mobile || typeData?.phone));
       setFieldValue("salute", checkFormValue(typeData?.salute));
       setFieldValue("destination", {
         value: editData.destination?.id,
@@ -262,7 +259,7 @@ const EditProfile = ({ setShowModal }) => {
     }
   }
   useEffect(() => {
-    if (selectedTypeData) {
+    if (!!values.typeValue?.label && selectedTypeData) {
       setFieldValue("name", checkFormValue(selectedTypeData.name));
       setFieldValue("email", checkFormValue(selectedTypeData.email));
       if (!isB2b) {
@@ -271,8 +268,13 @@ const EditProfile = ({ setShowModal }) => {
       } else {
         setFieldValue("mobile", checkFormValue(selectedTypeData.phone));
       }
+    }else{
+      setFieldValue("name", '');
+      setFieldValue("email", '');
+      setFieldValue("mobile", '');
+      setFieldValue("salute", '');
     }
-  }, [selectedTypeValue?.id, selectedTypeData?.id]);
+  }, [selectedTypeValue?.id, selectedTypeData?.id,values.typeValue?.label]);
 
   return (
     <>
@@ -345,6 +347,11 @@ const EditProfile = ({ setShowModal }) => {
                         }else{
                           setDisabled(false);
                         }
+                        setFieldValue("typeValue",{label:'',value:''});
+                        setFieldValue("name", '');
+                        setFieldValue("email", '');
+                        setFieldValue("mobile", '');
+                        setFieldValue("salute", '');
                         setFieldValue("type", selected);
                       }}
                       onBlur={handleBlur}
