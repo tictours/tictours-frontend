@@ -21,6 +21,7 @@
 /* modal */
 .custom-modal {
   /* width: 50%; */
+  min-width: 300px;
   max-width: 700px;
   /* position: absolute; */
   /* left: 50%; */
@@ -185,4 +186,36 @@
   padding:0 !important;
   height: 40px !important;
   cursor: not-allowed; /* Optional: Change cursor style */
+}
+
+/* Slider.css */
+.custom-slider-container {
+  overflow: hidden;
+  width: 100%;
+  margin: 16px auto;
+}
+
+.custom-sliderr {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px; // Set the gap between slides */
+  grid-auto-rows: 100px; /* Set the height of each slide */
+  transition: transform 0.3s ease-in-out;
+}
+
+.custom-slide {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 5px;
+}
+.custom-slide .slide-label{
+  color: gray;
+  text-align: center;
+}
+.custom-slide .slide-value{
+  font-weight: 600;
 }
