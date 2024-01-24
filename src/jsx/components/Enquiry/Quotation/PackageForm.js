@@ -444,7 +444,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                     {values.categoryOptions !== "Activity" && (
                       <div className="custom-img-container">
                         <img
-                          src={list?.image || list?.document_2[0]?.file_url}
+                          src={values.categoryOptions == "Transfer" ? list?.image : list?.document_2[0]?.file_url}
                           alt=""
                           className="custom-img"
                         />
