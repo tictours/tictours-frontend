@@ -21,6 +21,7 @@ import { useDispatch } from "react-redux";
 import { FetchAction } from "../../../../store/slices/fetchSlice";
 import CustomSlider from "../../common/Slider";
 import ProfileSlider from "./Slider";
+import { ModeBtn } from "../../common/ModeBtn";
 
 const initialValues = {
   type: "B2B",
@@ -329,15 +330,8 @@ const EditProfile = ({ setShowModal }) => {
             <form className="profile-form">
               <div className="card-body">
                 <div className="row">
-                  {" "}
-                  {isFormPage &&
-                  <>
-                  <div className="col-sm-12 d-flex justify-content-end">
-                    <button className="btn btn-primary mb-3" type="button" onClick={()=>{setReadOnly((prev)=>!prev)}}>{readOnly?'Read Mode':'Write Mode'}</button>
-                  </div>
-                  </>
-                  }
-  
+                  <ModeBtn className="col-sm-12 d-flex justify-content-end" isEdit={isFormPage} 
+                     readOnly={readOnly} setReadOnly={setReadOnly}/>
                   <div className="col-sm-6">
                     <ReactSelect
                       label="Type"

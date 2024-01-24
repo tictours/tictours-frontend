@@ -8,6 +8,7 @@ import { URLS } from "../../../../constants";
 import ReactSelect from "../../common/ReactSelect";
 import { parseDate } from "../../../utilis/date";
 import { checkFormValue } from "../../../utilis/check";
+import {ModeBtn} from "../../common/ModeBtn";
 
 const SetupForm = ({ formik, setFormComponent, setShowModal, showModal,isEdit }) => {
   const {
@@ -45,10 +46,14 @@ const SetupForm = ({ formik, setFormComponent, setShowModal, showModal,isEdit })
           <div className="basic-form">
             <form>
               <div className="row">
-              {isEdit &&
+              {/* {isEdit &&
                   <div className="col-sm-12 d-flex justify-content-end">
                     <button className="btn btn-primary mb-3" type="button" onClick={()=>{setReadOnly((prev)=>!prev)}}>{readOnly?'Read Mode':'Write Mode'}</button>
-                  </div>}
+                  </div>
+                  
+                  } */}
+                  <ModeBtn className="col-sm-12 d-flex justify-content-end" isEdit={isEdit} 
+                  readOnly={readOnly} setReadOnly={setReadOnly}/>
                 <div className="col-md-4">
                   <InputField
                     inputClassName={readOnly?'':"custom-input"}

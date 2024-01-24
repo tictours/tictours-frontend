@@ -15,6 +15,7 @@ import { useAsync } from "../../../utilis/useAsync";
 import { URLS } from "../../../../constants";
 import ShareModal from "./ShareModal";
 import ReactSelect from "../../common/ReactSelect";
+import { ModeBtn } from "../../common/ModeBtn";
 
 const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const {
@@ -237,10 +238,8 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
           >
             <i class="fa fa-arrow-left fa-xl" aria-hidden="true"></i>
           </button>
-          {isEdit &&
-                  <div className="">
-                    <button className="btn btn-primary mb-3" type="button" onClick={()=>{setReadOnly((prev)=>!prev)}}>{readOnly?'Read Mode':'Write Mode'}</button>
-                  </div>}
+          <ModeBtn className="" isEdit={isEdit} 
+              readOnly={readOnly} setReadOnly={setReadOnly}/>
         </div>
         <div className="d-flex justify-content-end mb-3">
           <LoadingButton

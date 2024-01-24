@@ -14,6 +14,7 @@ import { useAsync } from "../../../utilis/useAsync";
 import { checkFormValue } from "../../../utilis/check";
 import { filePost } from "../../../../services/AxiosInstance";
 import { notifyCreate, notifyError } from "../../../utilis/notifyMessage";
+import { ModeBtn } from "../../common/ModeBtn";
 
 const PaymentForm = ({ formik, setFormComponent, setShowModal }) => {
   const {
@@ -262,10 +263,8 @@ const calculateTotal = (amount,markup) =>{
 
         <div className="d-flex justify-content-between">
           <button className="btn btn-outline-light" type="button" onClick={handleBack}><i class="fa fa-arrow-left fa-xl" aria-hidden="true"></i></button>
-        {isEdit &&
-                  <div className="">
-                    <button className="btn btn-primary mb-3" type="button" onClick={()=>{setReadOnly((prev)=>!prev)}}>{readOnly?'Read Mode':'Write Mode'}</button>
-                  </div>}
+          <ModeBtn className="" isEdit={isEdit} 
+              readOnly={readOnly} setReadOnly={setReadOnly}/>
                   </div>
         <div
           className="table-responsive  full-data dataTables_wrapper"
@@ -428,7 +427,7 @@ const calculateTotal = (amount,markup) =>{
             <tbody>
               {hotelOption?.map((item,ind) => (
           // item.insertType === 'hotel' &&
-                <tr key={ind}>
+             item.amount !== 0 &&   <tr key={ind}>
                   {/* <td className="sorting_1">
                                                     <div className="checkbox me-0 align-self-center">
                                                         <div className="custom-control custom-checkbox ">
