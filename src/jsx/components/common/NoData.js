@@ -5,34 +5,34 @@ const NoData = ({ colSpan = 8, isCard, isLoading }) => {
     <>
       {isLoading ? (
         <>
-          {/* <div class="d-flex justify-content-center my-5">
+          {/* <div className="d-flex justify-content-center my-5">
             <div
-              class="spinner-border text-primary"
+              className="spinner-border text-primary"
               style={{ width: "3rem", height: "3rem" }}
               role="status"
             >
-              <span class="visually-hidden">Loading...</span>
+              <span className="visually-hidden">Loading...</span>
             </div>
           </div> */}
           {isCard ? (
-            <div class="d-flex justify-content-center my-5">
+            <div className="d-flex justify-content-center my-5">
               <div
-                class="spinner-border text-primary"
+                className="spinner-border text-primary"
                 style={{ width: "3rem", height: "3rem" }}
                 role="status"
               >
-                <span class="visually-hidden">Loading...</span>
+                <span className="visually-hidden">Loading...</span>
               </div>
             </div>
           ) : (
             <tr id="empty-table-data">
               <td colSpan={colSpan} style={{ textAlign: "center" }}>
                 <div
-                  class="spinner-border text-primary"
+                  className="spinner-border text-primary"
                   style={{ width: "3rem", height: "3rem" }}
                   role="status"
                 >
-                  <span class="visually-hidden">Loading...</span>
+                  <span className="visually-hidden">Loading...</span>
                 </div>
               </td>
             </tr>

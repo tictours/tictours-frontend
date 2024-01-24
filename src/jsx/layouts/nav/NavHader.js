@@ -4,21 +4,31 @@ import { Link } from "react-router-dom";
 import { ThemeContext } from "../../../context/ThemeContext";
 import { BRAND } from "../../../constants";
 
-export function NavMenuToggle() {
-  setTimeout(() => {
-    let mainwrapper = document.querySelector("#main-wrapper");
-    if (mainwrapper.classList.contains("menu-toggle")) {
-      mainwrapper.classList.remove("menu-toggle");
-    } else {
-      mainwrapper.classList.add("menu-toggle");
-    }
-  }, 200);
-}
+// export function NavMenuToggle() {
+//   setTimeout(() => {
+//     let mainwrapper = document.querySelector("#main-wrapper");
+//     if (mainwrapper.classList.contains("menu-toggle")) {
+//       mainwrapper.classList.remove("menu-toggle");
+//     } else {
+//       mainwrapper.classList.add("menu-toggle");
+//     }
+//   }, 200);
+// }
 
 const NavHader = () => {
   const [toggle, setToggle] = useState(false);
   const { navigationHader, openMenuToggle, background } =
     useContext(ThemeContext);
+  function NavMenuToggle() {
+      setTimeout(() => {
+        let mainwrapper = document.querySelector("#main-wrapper");
+        if (toggle) {
+          mainwrapper.classList.remove("menu-toggle");
+        } else {
+          mainwrapper.classList.add("menu-toggle");
+        }
+      }, 200);
+    }
   return (
     <div className="nav-header">
       <Link to="/dashboard" className="brand-logo">
@@ -55,7 +65,7 @@ const NavHader = () => {
       <div
         className="nav-control"
         onClick={() => {
-          setToggle(!toggle);
+          setToggle((prev)=>!prev);
           openMenuToggle();
           NavMenuToggle();
           //SideBarOverlay();

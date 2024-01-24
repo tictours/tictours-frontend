@@ -7,6 +7,7 @@ import itinerarySlice from "./slices/itinerarySlice";
 import roleSlice from "./slices/roleSlice";
 import formSlice from "./slices/formSlice";
 import fetchSlice from "./slices/fetchSlice";
+import userPermissionSlice from "./slices/permissionSlice";
 //import { reducer as reduxFormReducer } from 'redux-form';
 const middleware = applyMiddleware(thunk);
 
@@ -19,7 +20,8 @@ const reducers = combineReducers({
   itinerary: itinerarySlice,
   role: roleSlice,
   form: formSlice,
-  fetch:fetchSlice
+  fetch:fetchSlice,
+  userPermission: userPermissionSlice,
   //form: reduxFormReducer,
 });
 

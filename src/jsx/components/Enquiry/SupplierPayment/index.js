@@ -5,6 +5,7 @@ import { Badge, Dropdown } from "react-bootstrap";
 import InvoiceSlider from "../../Dashboard/InvoiceSlider";
 import QuestionIcon from "../../Dashboard/Ticketing/QuestionIcon";
 import AddModal from "./AddModal";
+import { usePermissionType } from "../../../utilis/usePermissionType";
 
 const RightIcon = () => {
   return (
@@ -161,6 +162,8 @@ const SupplierPayment = () => {
     { name: "Pending", value: "2000" },
     { name: "Profit", value: "2000" },
   ];
+  const permissionType = usePermissionType('finance')
+  console.log('perrr',permissionType)
   return (
     <>
       <div className="row">
@@ -200,7 +203,7 @@ const SupplierPayment = () => {
                       </Link>
                     </span>
                   </div>
-                  <div className="invoice-btn">
+                  {permissionType.write && <div className="invoice-btn">
                     <button
                       onClick={() => setShowModal(true)}
                       className="btn btn-primary"
@@ -223,7 +226,7 @@ const SupplierPayment = () => {
                         />
                       </svg>
                     </button>
-                  </div>
+                  </div>}
                 </div>
               </div>
             </div>
@@ -409,9 +412,9 @@ const SupplierPayment = () => {
                         <p>delux - 10-12-2023 to 11-12-2023</p>
                       </div>
                       <div className="">
-                        <button className="btn btn-outline-primary" 
-                          onClick={() => setShowModal(true)}>Edit</button>
-                        <button className="btn btn-outline-primary ms-2">Delete</button>
+                      {permissionType.update && <button className="btn btn-outline-primary" 
+                          onClick={() => setShowModal(true)}>Edit</button>}
+                       {permissionType.delete &&  <button className="btn btn-outline-primary ms-2">Delete</button>}
                       </div>
                     </div>
                     <div className="payment-detail d-flex justify-content-around">

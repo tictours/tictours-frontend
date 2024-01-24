@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { MenuList } from "./Menu";
 import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 import { ThemeContext } from "../../../context/ThemeContext";
+import { useSelector } from "react-redux";
 
 const reducer = (previousState, updatedState) => ({
   ...previousState,
@@ -72,6 +73,29 @@ const SideBar = () => {
   path = path[path.length - 1];
   /// Active menu
 
+  const {userPermission} = useSelector((state)=> state)
+  // console.log('userper',userPermission)
+  const [visibleItems, setVisibleItems] = useState([]);
+  useEffect(() => {
+    // Filter sidebar items based on user's permissions
+    // console.log('sidebar permis',userPermission)
+    const filteredItems = MenuList.filter((item) =>
+      userPermission.some((permission) => {
+        const permissionSlug = permission.slug;
+        // Find the index of the first occurrence of '-read-'
+        const indexOfRead = permissionSlug.indexOf("-read-");
+
+        // Extract the substring before '-read-'
+        const extractedPermission = permissionSlug.substring(0, indexOfRead)
+
+       const specialMenu = item.title === 'Settings' 
+       return extractedPermission === item.to || specialMenu;
+      })
+    );
+    // console.log('sidebar filt',filteredItems)
+    setVisibleItems(filteredItems);
+  }, [userPermission]);
+
   return (
     <div
       onMouseEnter={() => ChangeIconSidebar(true)}
@@ -88,7 +112,7 @@ const SideBar = () => {
     >
       <PerfectScrollbar className="dlabnav-scroll">
         <ul className="metismenu" id="menu">
-          {MenuList.map((data, index) => {
+          {visibleItems?.map((data, index) => {
             let menuClass = data.classsChange;
             if (menuClass === "menu-title") {
               return (

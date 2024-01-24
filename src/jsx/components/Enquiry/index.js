@@ -9,6 +9,7 @@ import CustomModal from "../../layouts/CustomModal";
 import { URLS } from "../../../constants";
 import { CustomTable } from "../common/CustomTable";
 import { useAsync } from "../../utilis/useAsync";
+import { usePermissionType } from "../../utilis/usePermissionType";
 
 const RightIcon = () => {
   return (
@@ -114,6 +115,7 @@ const Enquiry = () => {
   const url = URLS.ENQUIRY_URL
   const enquiryData = useAsync(url);
   const tableData = enquiryData?.data?.data;
+  const permissionType = usePermissionType('enquiry')
 
   const onView = (id) => {
     navigate(`/enquiry-detail/${id}`)
@@ -234,7 +236,7 @@ const Enquiry = () => {
                       </Link>
                     </span>
                   </div>
-                  <div className="invoice-btn">
+                 {permissionType.write &&  <div className="invoice-btn">
                     <button
                       onClick={() => setShowModal(true)}
                       className="btn btn-primary"
@@ -257,7 +259,7 @@ const Enquiry = () => {
                         />
                       </svg>
                     </button>
-                  </div>
+                  </div>}
                 </div>
               </div>
             </div>
@@ -445,6 +447,7 @@ const Enquiry = () => {
             length={tableData?.length}
             loading={enquiryData?.loading}
             url={url}
+            permissionType={permissionType}
             // url2={patchUrl}
           />
         </div>

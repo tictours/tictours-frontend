@@ -9,6 +9,7 @@ import {
   signUp,
 } from "../../services/AuthService";
 import { FormAction } from "../slices/formSlice";
+import { setUserPermission } from "../slices/permissionSlice";
 
 export const SIGNUP_CONFIRMED_ACTION = "[signup action] confirmed signup";
 export const SIGNUP_FAILED_ACTION = "[signup action] failed signup";
@@ -59,10 +60,7 @@ export function loginAction(email, password, navigate) {
           navigate,
         );
         dispatch(loginConfirmedAction(response.data));
-        //console.log('kk------1');
-        //console.log(kk);
-        //console.log(response.data);
-        //console.log('kk------2');
+        // dispatch(setUserPermission(response.data?.permissions))
         //return response.data;
         //return 'success';
         //history.push('/dashboard');

@@ -183,6 +183,7 @@ import RoleDetail from "./components/Settings/UserManagement/Role/detail";
 import Supplier from "./components/Settings/Supplier";
 import EnquiryDetail from "./components/Enquiry/detail";
 import PackageTerms from "./components/Settings/PackageTerms";
+import PrivateRoute from "./components/privateRoute";
 
 const enquiryMenu = [
   { name: "profile", path: "", component: "" },
@@ -206,6 +207,11 @@ const hotelMenu = [
 ];
 
 const Markup = () => {
+  const LeadsProtected = ( ) => (
+    <PrivateRoute permission={'leads'}>
+      <Leads/>
+    </PrivateRoute>
+  )
   const allRoutes = [
     { url: "banking", component: <Banking /> },
     { url: "ticketing", component: <Ticketing /> },
@@ -268,7 +274,7 @@ const Markup = () => {
     { url: "table-bootstrap-basic", component: <BootstrapTable /> },
 
     // Leads
-    { url: "leads", component: <Leads /> },
+    { url: "leads", component: <LeadsProtected /> },
     { url: "add-lead", component: <EditProfile /> },
     // Settings
     { url: "settings", component: <Settings /> },
@@ -309,7 +315,16 @@ const Markup = () => {
     // enquiry
     {url:'enquiry-detail/:id',component:<EnquiryDetail/>}
   ];
-
+  const HomeProtected = () => (
+    <PrivateRoute permission="dashboard">
+      <Home />
+    </PrivateRoute>
+    )
+  const EnquiryProtected = () => (
+    <PrivateRoute permission="enquiry">
+      <Enquiry />
+    </PrivateRoute>
+    )
   return (
     <>
       <Routes>
@@ -322,7 +337,7 @@ const Markup = () => {
         <Route path="/page-lock-screen" element={<LockScreen />} />
         <Route element={<Layout7 />}>
           <Route path="/" exact element={<Home />} />
-          <Route path="/dashboard" exact element={<Home />} />
+          <Route path="/dashboard" exact element={<HomeProtected />} />
           <Route path="/dashboard-dark" exact element={<DashboardDark />} />
           <Route path="/header-theme" exact element={<Theme1 />} />
           <Route path="/sidebar-compact" exact element={<Theme3 />} />
@@ -379,7 +394,7 @@ const Markup = () => {
           <Route path="/ui-pagination" exact element={<UiPagination />} />
         </Route>
         <Route element={<Layout7 />}>
-          <Route exact path="/enquiry" element={<Enquiry />} />
+          <Route exact path="/enquiry" element={<EnquiryProtected />} />
           <Route path="/enquiry/:id" element={<Tabs menu={enquiryMenu} />}>
             <Route path="*" element={null} />
             <Route path="profile" element={<EditProfile />} />

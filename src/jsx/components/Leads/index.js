@@ -4,6 +4,7 @@ import { Badge, Dropdown } from "react-bootstrap";
 
 import InvoiceSlider from "../Dashboard/InvoiceSlider";
 import QuestionIcon from "../Dashboard/Ticketing/QuestionIcon";
+import { usePermissionType } from "../../utilis/usePermissionType";
 
 const RightIcon = () => {
   return (
@@ -105,6 +106,7 @@ const tableBlog = [
 
 const Leads = () => {
   const navigate = useNavigate();
+  const permissionType = usePermissionType('lead')
   const [data, setData] = useState(
     document.querySelectorAll("#example2_wrapper tbody tr"),
   );
@@ -199,7 +201,7 @@ const Leads = () => {
                       </Link>
                     </span>
                   </div>
-                  <div className="invoice-btn">
+                  {permissionType.write && <div className="invoice-btn">
                     <button
                       className="btn btn-primary"
                       onClick={() => navigate("/add-lead")}
@@ -222,7 +224,7 @@ const Leads = () => {
                         />
                       </svg>
                     </button>
-                  </div>
+                  </div>}
                 </div>
               </div>
             </div>
@@ -340,12 +342,12 @@ const Leads = () => {
                               </svg>
                             </Dropdown.Toggle>
                             <Dropdown.Menu className="dropdown-menu-end">
-                              <Dropdown.Item
+                            {permissionType.update && <Dropdown.Item
                                 onClick={() => navigate("/add-lead")}
                               >
                                 Edit
-                              </Dropdown.Item>
-                              <Dropdown.Item>Delete</Dropdown.Item>
+                              </Dropdown.Item>}
+                              {permissionType.delete && <Dropdown.Item>Delete</Dropdown.Item>}
                             </Dropdown.Menu>
                           </Dropdown>
                         </td>

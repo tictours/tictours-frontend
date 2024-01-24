@@ -3,6 +3,7 @@ import NoData from "./NoData";
 import { Dropdown } from "react-bootstrap";
 import DeleteModal from "./DeleteModal";
 
+const initialType = {write:true,update:true,delete:true}
 export const CustomTable = ({
   children,
   length,
@@ -11,7 +12,8 @@ export const CustomTable = ({
   data = [],
   loading,
   url,
-  url2
+  url2,
+  permissionType = initialType
 }) => {
   const tableData = data;
   // Initialize variables for body1 and body2 children
@@ -200,16 +202,23 @@ export const CustomTable = ({
                                   :
                                   <>
                                   {dropItem.menu === 'Delete'?
-                              <Dropdown.Item
+                                  <>
+                             {permissionType.delete && <Dropdown.Item
                                 onClick={() => onConfirmation(item?.id,item[dropItem.showLabel])}
                               >
                                 {dropItem.menu}
-                              </Dropdown.Item>:
+                              </Dropdown.Item>
+                              }</>
+                              :
+                              <>
+                              {/* use non-edit btn logic also */}
+                             {permissionType.update &&
                               <Dropdown.Item
                               onClick={() => dropItem.onPress(item?.id,item[dropItem.showLabel])}
                             >
                               {dropItem.menu}
                             </Dropdown.Item>
+                            }</>
                               }
                               </>
                                   }

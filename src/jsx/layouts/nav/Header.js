@@ -16,14 +16,19 @@ import usf from "../../../images/svg/usflag.svg";
 import rus from "../../../images/svg/rus.svg";
 import { isDevelopement } from "../../utilis/isDevelopment";
 import ResetPassword from "../../components/common/ResetPassword";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserPermission } from "../../../store/slices/permissionSlice";
 
 const Header = ({ onNote }) => {
   const [searchBut, setSearchBut] = useState(false);
   const [showResetModal, setShowResetModal] = useState(false);
   const [selectImage, setSelectImage] = useState([alb, "Albania"]);
   const user = useSelector(state=>state.auth.auth.data)
+  const dispatch = useDispatch()
 
+  useEffect(()=>{
+    dispatch(setUserPermission(user.permissions))
+  },[])
   //For header fixed
   const [headerFix, setheaderFix] = useState(false);
   useEffect(() => {

@@ -5,6 +5,7 @@ import { Badge, Dropdown } from "react-bootstrap";
 import InvoiceSlider from "../../Dashboard/InvoiceSlider";
 import QuestionIcon from "../../Dashboard/Ticketing/QuestionIcon";
 import AddModal from "./AddModal";
+import { usePermissionType } from "../../../utilis/usePermissionType";
 
 const RightIcon = () => {
   return (
@@ -161,6 +162,7 @@ const FollowUp = () => {
     { name: "Pending", value: "2000" },
     { name: "Profit", value: "2000" },
   ];
+  const permissionType = usePermissionType('follow ups')
   return (
     <>
       <div className="row">
@@ -200,7 +202,7 @@ const FollowUp = () => {
                       </Link>
                     </span>
                   </div>
-                  <div className="invoice-btn">
+                  {permissionType.write && <div className="invoice-btn">
                     <button
                       onClick={() => setShowModal(true)}
                       className="btn btn-primary"
@@ -223,7 +225,7 @@ const FollowUp = () => {
                         />
                       </svg>
                     </button>
-                  </div>
+                  </div>}
                 </div>
               </div>
             </div>
@@ -329,8 +331,8 @@ const FollowUp = () => {
                               </svg>
                             </Dropdown.Toggle>
                             <Dropdown.Menu className="dropdown-menu-end">
-                              <Dropdown.Item>Edit</Dropdown.Item>
-                              <Dropdown.Item>Delete</Dropdown.Item>
+                            {permissionType.update && <Dropdown.Item>Edit</Dropdown.Item>}
+                              {permissionType.delete && <Dropdown.Item>Delete</Dropdown.Item>}
                             </Dropdown.Menu>
                           </Dropdown>
                         </td>

@@ -4,7 +4,7 @@ export const MenuList = [
     title: "Dashboard",
     classsChange: "mm-collapse",
     iconStyle: <i className="material-icons-outlined">dashboard</i>,
-    ...(process.env.NODE_ENV !== "development" && { to: "dashboard" }),
+    ...(process.env.NODE_ENV == "development" && { to: "dashboard" }),
     ...(process.env.NODE_ENV === "development" && {
       content: [
         {

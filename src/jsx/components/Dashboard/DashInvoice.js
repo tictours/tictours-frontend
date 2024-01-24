@@ -4,6 +4,7 @@ import { Dropdown } from "react-bootstrap";
 
 import InvoiceSlider from "./InvoiceSlider";
 import QuestionIcon from "./Ticketing/QuestionIcon";
+import { usePermissionType } from "../../utilis/usePermissionType";
 
 const RightIcon = () => {
   return (
@@ -159,6 +160,7 @@ const Invoice = () => {
       }
     }
   };
+  const permissionType = usePermissionType('finance')
   return (
     <>
       <div className="row">
@@ -198,7 +200,7 @@ const Invoice = () => {
                       </Link>
                     </span>
                   </div>
-                  <div className="invoice-btn">
+                  {permissionType.write && <div className="invoice-btn">
                     <button className="btn btn-primary">
                       New Invoice{" "}
                       <svg
@@ -218,7 +220,7 @@ const Invoice = () => {
                         />
                       </svg>
                     </button>
-                  </div>
+                  </div>}
                 </div>
               </div>
             </div>
@@ -346,8 +348,8 @@ const Invoice = () => {
                               </svg>
                             </Dropdown.Toggle>
                             <Dropdown.Menu className="dropdown-menu-end">
-                              <Dropdown.Item>Delete</Dropdown.Item>
-                              <Dropdown.Item>Edit</Dropdown.Item>
+                            {permissionType.delete && <Dropdown.Item>Delete</Dropdown.Item>}
+                              {permissionType.update && <Dropdown.Item>Edit</Dropdown.Item>}
                             </Dropdown.Menu>
                           </Dropdown>
                         </td>
