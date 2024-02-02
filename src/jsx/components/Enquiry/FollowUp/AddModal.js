@@ -43,7 +43,7 @@ const AddModal = ({ setShowModal, showModal }) => {
         }) => (
           <CustomModal
             showModal={showModal}
-            title={"Add Supplier Payment"}
+            title={"Add Follow Ups"}
             handleModalClose={() => {
               setShowModal(false);
               //   setFormComponent('setupForm')

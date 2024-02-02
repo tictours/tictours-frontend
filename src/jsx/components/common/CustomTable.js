@@ -15,7 +15,7 @@ export const CustomTable = ({
   url2,
   permissionType = initialType
 }) => {
-  const tableData = data;
+  // const tableData = data;
   // Initialize variables for body1 and body2 children
   let tHead = [];
   let tBody = [];
@@ -38,7 +38,7 @@ export const CustomTable = ({
   const totalPages = Math.ceil(length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentData = data.slice(startIndex, endIndex);
+  const tableData = data.slice(startIndex, endIndex);
 
   const sort = 8;
   const activePag = React.useRef(0);
@@ -60,6 +60,8 @@ export const CustomTable = ({
     .map((_, i) => i + 1);
 
   const changePage = (newPage) => {
+    // console.log(newPage)
+    // newPage+=1 //rm if any issue
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
     }
@@ -139,7 +141,7 @@ export const CustomTable = ({
               </tr>
             </thead>
             <tbody>
-              {tableData?.length === 0 ? (
+              {data?.length === 0 ? (
                 <NoData isLoading={loading} />
               ) : (
                 tableData.map((item, index) => (
@@ -262,7 +264,8 @@ export const CustomTable = ({
                 className="paginate_button previous disabled"
                 // to="/invoice"
                 onClick={() =>
-                  activePag.current > 0 && changePage(activePag.current - 1)
+                  // activePag.current > 0 && 
+                  changePage(currentPage - 1)
                 }
               >
                 <i className="fa-solid fa-angle-left"></i>
@@ -273,9 +276,9 @@ export const CustomTable = ({
                     key={i}
                     // to=""
                     className={`paginate_button  ${
-                      activePag.current === i ? "current" : ""
+                      currentPage === number ? "current" : ""
                     } `}
-                    onClick={() => changePage(i)}
+                    onClick={() => changePage(number)}
                   >
                     {number}
                   </button>
@@ -286,8 +289,8 @@ export const CustomTable = ({
                 className="paginate_button next"
                 // to=""
                 onClick={() =>
-                  activePag.current + 1 < paggination.length &&
-                  changePage(activePag.current + 1)
+                  // activePag.current + 1 < paggination.length &&
+                  changePage(currentPage + 1)
                 }
               >
                 <i className="fa-solid fa-angle-right"></i>

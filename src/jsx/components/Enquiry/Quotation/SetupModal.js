@@ -141,6 +141,7 @@ function SetupModal() {
         formData.append(`entries[${index}][entry_type]`,checkFormValue(data.insertType?.toUpperCase()))
         formData.append(`entries[${index}][date]`,checkFormValue(formatDate(date)))
         formData.append(`entries[${index}][no_of_person]`,checkFormValue(data.person,'number'))
+        formData.append('price_mode','TOTAL_PRICE')  
         if(data.insertType === 'hotel'){
           formData.append(`entries[${index}][option]`,checkFormValue(data.option?.value))
           formData.append(`entries[${index}][room_id]`,checkFormValue(data.roomType?.value))
