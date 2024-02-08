@@ -16,6 +16,9 @@ import { URLS } from "../../../../constants";
 import ShareModal from "./ShareModal";
 import ReactSelect from "../../common/ReactSelect";
 import { ModeBtn } from "../../common/ModeBtn";
+import axiosInstance  from '../../../../services/AxiosInstance'
+import { ViewerModal } from "../../common/Viewer";
+import pdfFile from '../../../../pdf/diet-sheet.pdf'
 
 const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const {
@@ -33,6 +36,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const [showActivityModal, setShowActivityModal] = useState(false);
   const [showTransferModal, setShowTransferModal] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [showViewerModal, setShowViewerModal] = useState(false);
   const [selectedModalData, setSelectedModalData] = useState({});
   const isEdit = !!values.itineraryId;
   const [editId, setEditId] = useState("");
@@ -84,7 +88,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
     while (currentDate <= endDate) {
       // datesArr.push(new Date(currentDate));
       const existingPlan = planArrValue.find((item)=> {
-        console.log(formatDate(currentDate),'item',item)
+        // console.log(formatDate(currentDate),'item',item)
        return item.date === formatDate(currentDate)
       }
         )
@@ -225,6 +229,18 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
     setShowModal(true);
     setFormComponent("setupForm");
   };
+  const getPdfPrint = async() => {
+    try {
+      const url = URLS.PRINT_ITINERARY_URL+values.itineraryId
+      const response = await axiosInstance().get(url);
+      console.log('resss',response)
+      // setData(response.data);
+      // setShowViewerModal(true)
+    } catch (error) {
+      // setError(error);
+      console.log('err',error)
+    }
+  }
   return (
     <>
       <form
@@ -249,7 +265,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
             onClick={handleSubmit}
             disabled={readOnly}
           />
-          <LoadingButton label="Quotation" type="button" className="me-2" />
+          <LoadingButton label="Quotation" type="button" className="me-2" onClick={getPdfPrint}/>
           <LoadingButton
             label="Pricing"
             type="button"
@@ -516,6 +532,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
         // editId={editId}
         // data={editData}
       />
+      <ViewerModal showModal={showViewerModal} handleClose={()=>setShowViewerModal(false)} file={pdfFile}/>
     </>
   );
 };

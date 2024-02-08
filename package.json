@@ -2,6 +2,7 @@
   "name": "finlab",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://127.0.0.1:3000",
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^35.3.2",
     "@ckeditor/ckeditor5-react": "^5.0.3",
@@ -42,6 +43,7 @@
     "react-modal-video": "^2.0.0",
     "react-multiselect-dropdown-bootstrap": "^1.1.0",
     "react-nestable": "^2.0.0",
+    "react-pdf": "^7.7.0",
     "react-perfect-scrollbar": "^1.5.8",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.1",

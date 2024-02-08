@@ -7,6 +7,8 @@ const CustomModal = ({
   title,
   children,
   modalClass = "",
+  style,
+  ...props
 }) => {
   return (
     <>
@@ -14,6 +16,8 @@ const CustomModal = ({
         show={showModal}
         onHide={handleModalClose}
         dialogClassName={`custom-modal ${modalClass}`}
+        style={style}
+        {...props}
         // centered
       >
         <Modal.Header closeButton>

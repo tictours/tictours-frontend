@@ -6,6 +6,7 @@ const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   headers: {
     "Content-Type": type,
+    // 'Access-Control-Allow-Origin': '*',
     // 'Authorization': `Bearer ${authToken}`, // Include the token in the "Authorization" header
   },
 });
