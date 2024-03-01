@@ -57,6 +57,10 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   const transferData = transferFetchData?.data?.data;
   const destinationFetchData = useAsync(URLS.DESTINATION_URL);
   const destinationData = destinationFetchData?.data?.data;
+  const destinationId = values.destination?.value;
+  const subDestinationUrl = `${URLS.SUB_DESTINATION_URL}?destination_id=${destinationId}`;
+  const subDestinationFetchData = useAsync(subDestinationUrl, destinationId);
+  const subDestinationData = subDestinationFetchData?.data?.data;
   let dataList;
   if (values.categoryOptions === "Hotel") {
     dataList = hotelData;
@@ -99,7 +103,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
       const obj = {
         date: new Date(currentDate),
         day: currentDay,
-        dayDestination:values.destination,
+        dayDestination:{label:'',value:''},
         schedule: [],
       };
       scheduleArray.push(obj);
@@ -123,7 +127,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
 
   const handleAddCategory = () => {
     if (values.categoryOptions === "Hotel") {
-      navigation("/add-hotel");
+      navigation("/hotels");
     }
     if (values.categoryOptions === "Activity") {
       navigation("/activity");
@@ -165,11 +169,35 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
   };
   const showScheduleValue = values.planArr[`${values.planIndex}`];
   const onInsert = (value, setShowModal) => {
-    // console.log("value", value);
+    // check is this the insert of already existing data
     const isEdit = !!editId || editId === 0;
     // if(values.categoryOptions !== "Hotel"){
-    const insertSchedule = values.planArr.map((data, key) => {
-      if (key === values.planIndex) {
+      const insertSchedule = values.planArr.map((data, key) => {
+      if(!isEdit && value.insertType == 'hotel'){
+        // Step 1: Parse the date strings into Date objects
+      const startDate = new Date(value.startDate);
+      const endDate = new Date(value.endDate);
+      const currentDate = new Date(data.date);
+    
+      // Set the time component of startDate to midnight (00:00:00)
+      startDate.setHours(0, 0, 0, 0);
+    
+      // Set the time component of endDate to midnight (00:00:00)
+      endDate.setHours(0, 0, 0, 0);
+  
+      // Set the time component of currentDate to midnight (00:00:00)
+      currentDate.setHours(0, 0, 0, 0);
+  
+          const dateCondition = startDate <= currentDate && endDate >= currentDate
+        if(dateCondition){
+          const val = { ...data, schedule: [...data.schedule, {...value,startDate:currentDate,endDate:currentDate}] }
+          return val
+        }else{
+          const val = { ...data, schedule: [...data.schedule] }
+          return val
+        }
+      }
+      else if (key === values.planIndex) {
         let insertData;
         if (isEdit) {
           const editArr = data.schedule.map((arrItem, key) => {
@@ -290,31 +318,22 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                   </div>
                 </div>
                 <div className="col-md-9">
-                  <p className="text-center mb-1">{formatDate(item.date)}</p>
-                  {/* <SelectField
-                    name={`dayDestination`}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    values={values}
-                    options={destinationData}
-                    optionValue='id'
-                    optionLabel='name'
-
-                  /> */}
+                  <p className="text-center mb-1">{formatDate(item?.date)}</p>
                   <ReactSelect
-                  options={destinationData}
-                  value={values.destination}
-                  onChange={(selected) => onDayDestination(key,selected)}
-                  optionValue="id"
-                  optionLabel="name"
-                  formik={formik}
-                  onBlur={handleBlur}
-                  // inputId='destination'
-                  // className='custom-input'
-                  // required
-                  isDisabled={true}
-                  showBorderOnDisabled={true}
-                />
+                    options={subDestinationData}
+                    value={item.dayDestination}
+                    onChange={(selected) => onDayDestination(key,selected)}
+                    optionValue="id"
+                    optionLabel="name"
+                    chooseLabel='Select SubDestination'
+                    formik={formik}
+                    onBlur={handleBlur}
+                    // inputId='destination'
+                    // className='custom-input'
+                    // required
+                    // isDisabled={true}
+                    // showBorderOnDisabled={true}
+                  />
                 </div>
               </div>
             ))}
@@ -445,6 +464,7 @@ const PackageForm = ({ formik, setFormComponent, setShowModal }) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   values={values}
+                  // suffix={'Add'}
                   options={categoryOptions}
                 />
               </div>
