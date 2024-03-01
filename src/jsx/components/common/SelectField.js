@@ -9,6 +9,7 @@ function SelectField(props) {
     values,
     setValue,
     selected = '',
+    suffix='',
     options,
     optionValue,
     optionLabel,
@@ -54,7 +55,7 @@ function SelectField(props) {
                 key={key}
                 value={optionValue ? option[optionValue] : option}
               >
-                {optionLabel ? option[optionLabel] : option}
+                {`${suffix} ${optionLabel ? option[optionLabel] : option}`}
               </option>
             ))}
           </>

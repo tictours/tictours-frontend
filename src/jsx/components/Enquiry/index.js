@@ -4,7 +4,7 @@ import { Badge, Dropdown } from "react-bootstrap";
 
 import InvoiceSlider from "../Dashboard/InvoiceSlider";
 import QuestionIcon from "../Dashboard/Ticketing/QuestionIcon";
-import EditProfile from "../AppsMenu/AppProfile/EditProfile";
+import AddEnquiry from "./add";
 import CustomModal from "../../layouts/CustomModal";
 import { URLS } from "../../../constants";
 import { CustomTable } from "../common/CustomTable";
@@ -125,7 +125,7 @@ const Enquiry = () => {
   }
   const tableArray = [
     { label: "Sl no", value: "index", className: "text-center" },
-    { label: "Client / Agent", value: "type" },
+    { label: "Type", value: "type" },
     { label: "Name", value: ["customer", "name"],condition:["agent", "name"] },
     { label: "Lead Source", value: ["lead_source", "name"] },
     { label: "Requirement", value: ["requirements"] },
@@ -460,7 +460,7 @@ const Enquiry = () => {
         }}
         modalClass="insert-modal"
       >
-        <EditProfile setShowModal={setShowModal} />
+        <AddEnquiry setShowModal={setShowModal} />
       </CustomModal>
     </>
   );
