@@ -18,6 +18,7 @@ import { FetchAction } from "../../../store/slices/fetchSlice";
 import CustomSlider from "../common/Slider";
 import { ModeBtn } from "../common/ModeBtn";
 import ProfileSlider from "../AppsMenu/AppProfile/Slider";
+import { FormAction } from "../../../store/slices/formSlice";
 
 const initialValues = {
   type: "B2B",
@@ -162,10 +163,16 @@ const EditProfile = ({ setShowModal }) => {
         "destination_id",
         checkFormValue(values.destination?.value)
       );
-      formData.append(
-        "sub_destination_id",
-        checkFormValue(values.subDestination?.value)
-      );
+    //   formData.append(
+    //     "sub_destination_id",
+    //     checkFormValue(values.subDestination?.value)
+    //   );     
+      values.subDestination.forEach((data,ind)=>{
+        formData.append(
+            `sub_destinations[${ind}]`,
+            checkFormValue(data?.value)
+          )
+      })
       formData.append("start_date", formatDate(values.startDate));
       formData.append("end_date", formatDate(values.endDate));
       formData.append("adult_count", checkFormValue(values.adult));
@@ -192,6 +199,7 @@ const EditProfile = ({ setShowModal }) => {
         navigate(`${response?.data?.id}/profile`);
       }
       if (response?.success) {
+        dispatch(FormAction.setRefresh())
         notifyCreate("Profile", isEdit);
       }
     } catch (error) {
@@ -224,10 +232,10 @@ const EditProfile = ({ setShowModal }) => {
         value: editData.destination?.id,
         label: editData.destination?.name,
       });
-      setFieldValue("subDestination", {
-        value: editData.sub_destination?.id,
-        label: editData.sub_destination?.name,
-      });
+      // setFieldValue("subDestinations", {
+      //   value: editData.sub_destination?.id,
+      //   label: editData.sub_destination?.name,
+      // });
       setFieldValue("startDate", parseDate(editData.start_date));
       setFieldValue("endDate", parseDate(editData.end_date));
       setFieldValue("adult", checkFormValue(editData.adult_count));
@@ -239,6 +247,11 @@ const EditProfile = ({ setShowModal }) => {
         value: editData.assigned_to_user?.id,
         label: editData.assigned_to_user?.first_name,
       });
+      const subDestinationArr = editData.sub_destinations.map((data) => {
+        const val = { label: data.name, value: data.id, isExist: true };
+        return val;
+      });
+      setFieldValue("subDestination", subDestinationArr);
       const requirementArr = editData.requirements.map((data) => {
         const val = { label: data.name, value: data.id, isExist: true };
         return val;
@@ -478,6 +491,7 @@ const EditProfile = ({ setShowModal }) => {
                       optionLabel="name"
                       required
                       isDisabled={readOnly}
+                      isMulti
                     />
                   </div>
                   <div className="col-sm-6 m-b30">
