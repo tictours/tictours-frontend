@@ -124,7 +124,7 @@ export const CustomTable = ({
           id="example2_wrapper"
         >
           <table
-            className="table-responsive-lg table display mb-4 dataTablesCard  text-black dataTable no-footer"
+            className="table-responsive-lg table display mb-4 dataTablesCard  text-black dataTable no-footer custom-table"
             id="example2"
           >
             <thead>
@@ -235,7 +235,7 @@ export const CustomTable = ({
                       :
 
                         <td
-                          className={arrValue?.className ? arrValue.className : ""}
+                          className={`${arrValue?.className ? arrValue.className : ""} custom-cell`}
                         >
                           {arrValue?.value === 'index'? index+1 :getValue(item, arrValue?.value,arrValue?.condition)}
                         </td>

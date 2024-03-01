@@ -219,3 +219,10 @@
 .custom-slide .slide-value{
   font-weight: 600;
 }
+.custom-cell{
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
