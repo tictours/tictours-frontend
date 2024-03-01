@@ -58,9 +58,9 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
 
   const initialValues = {
     startDate: SETUP.TODAY_DATE,
-    startTime: SETUP.START_TIME,
+    startTime: '14:00',
     endDate: SETUP.TODAY_DATE,
-    endTime: SETUP.END_TIME,
+    endTime: '12:00',
     option:hotelOptions[0],
     insertType:'hotel'
   };
@@ -87,17 +87,21 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
     }else{
       if(hotelDetailData){
       const destinationObj = {label:hotelDetailData?.destination_name,value:hotelDetailData?.destination_id}
+      const subDestinationObj = {label:hotelDetailData?.sub_destination_name,value:hotelDetailData?.sub_destination_id}
       const roomTypeObj = {label:hotelDetailData?.rooms[0]?.room_type_name,value:hotelDetailData?.rooms[0]?.id}
       const categoryObj = {label:hotelDetailData?.category_name,value:hotelDetailData?.category_id}
       setFieldValue('destination',destinationObj)
+      setFieldValue('subDestination',subDestinationObj)
       setFieldValue('name',hotelDetailData?.name)
       setFieldValue('id',hotelDetailData?.id)
       setFieldValue('roomOption',hotelDetailData?.rooms)
+      const initialMealPlan = selectedRoom?.meal_plans[0]
+      setFieldValue('mealPlan',[{label:initialMealPlan?.name,value:initialMealPlan?.id}])
       setFieldValue('roomType',roomTypeObj)
       setFieldValue('category',categoryObj)
       setFieldValue('image',hotelDetailData?.document_2[0]?.file_url)
     }}
-  },[editId,hotelId,hotelDetailData])
+  },[editId,hotelId,hotelDetailData,selectedRoom])
   
   const roomTypeId = values.roomType?.value
   useEffect(()=>{
@@ -135,8 +139,8 @@ const InsertHotel = ({ showModal, setShowModal, data, onClick,editId,onClose }) 
                 <div className="row">
                   <div className="col-sm-6">
                     <ReactSelect
-                      label="Destination"
-                      value={values.destination}
+                      label="Sub Destination"
+                      value={values.subDestination}
                       onChange={(selected) =>
                         setFieldValue("destination", selected)
                       }
