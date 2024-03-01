@@ -134,6 +134,7 @@ import { ThemeContext } from "../context/ThemeContext";
 
 // Enquiry
 import Enquiry from "./components/Enquiry";
+import AddEnquiry from "./components/Enquiry/add";
 import Tabs from "./components/common/Tabs";
 import Quotation from "./components/Enquiry/Quotation";
 import FollowUp from "./components/Enquiry/FollowUp";
@@ -397,7 +398,7 @@ const Markup = () => {
           <Route exact path="/enquiry" element={<EnquiryProtected />} />
           <Route path="/enquiry/:id" element={<Tabs menu={enquiryMenu} />}>
             <Route path="*" element={null} />
-            <Route path="profile" element={<EditProfile />} />
+            <Route path="profile" element={<AddEnquiry />} />
             <Route path="quotation" element={<Quotation />} />
             <Route path="follow-ups" element={<FollowUp />} />
             <Route path="quotation/itinerary" element={<SetupModal />} />
