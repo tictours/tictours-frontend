@@ -63,6 +63,7 @@ function SetupModal() {
       setFieldValue('discount',checkFormValue(data.discount_amount))
       setFieldValue('paymentDescription',checkFormValue(data.description))
       setFieldValue('priceOption',data.price_mode === 'PER_PERSON'?{value:'PER',label:'Price Per Traveller'}:{value:'TOTAL',label:'Total Price'})
+      setFieldValue('perPersonAmount',data.per_person_amounts)
       const priceInObj = {label:data.currency,value:data.currency}
       setFieldValue('priceIn',priceInObj)
       const destinationObj = {label:data.destination.name,value:data.destination.id}

@@ -114,13 +114,13 @@ const handleInputChange = (planIndex,index, newValue,type='amount') => {
   setFieldValue('planArr',newData);
 };
 const handlePriceMode = (type) => {
+  // check select price option with current quotation price option
   if(values.priceOption.value !== type){
   const newData = values.planArr?.map((item,planArrInd) => (
      {
        ...item,
        schedule: item.schedule.map((scheduleItem,ind) =>{
         const person = scheduleItem.insertType === 'activity' ? scheduleItem.person : values.adult + values.child
-        // console.log('pers',person)
        const result = { ...scheduleItem, amount: type == 'TOTAL' ? scheduleItem.amount * person :  scheduleItem.amount / person } 
       return result
       }
@@ -411,7 +411,7 @@ const calculateTotal = (amount,markup) =>{
                                             </th> */}
                 {/* <th>#</th> */}
                 <th>Service</th>
-                <th>Price</th>
+                {values.priceOption.value=== 'TOTAL'? <th>Price</th>: <><th>Adult</th><th>Child</th></>}
                 <th>Markup</th>
                 <th>CGST (0%)</th>
                 <th>SGST (0%)</th>
@@ -455,7 +455,7 @@ const calculateTotal = (amount,markup) =>{
                       </div>
                     </div>
                   </td>
-                  <td>{getHotelOptionTotal(item.amount,item.markup)}</td>
+                  {values.priceOption.value=== 'TOTAL'? <td>{getHotelOptionTotal(item.amount,item.markup)}</td>: <><td>{values?.perPersonAmount?.adult}</td><td>{values?.perPersonAmount?.child}</td></>}
                   <td>{calculateInputMarkup(item.amount,item.markup)}</td>
                   {addOnField.map((field,key)=>(
                   <td className="package-td" key={key}>
