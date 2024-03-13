@@ -154,6 +154,7 @@ const EditProfile = ({ setShowModal }) => {
       if (isB2b) {
         formData.append("agent_id", values.typeValue?.value);
       } else {
+        formData.append("customer_id", values.typeValue?.value);
         formData.append("name", checkFormValue(values.name));
         formData.append("email", checkFormValue(values.email));
         formData.append("mobile", checkFormValue(values.mobile));
@@ -219,7 +220,7 @@ const EditProfile = ({ setShowModal }) => {
         value: checkFormValue(editData.type),
       };
       const typeObj = {
-        label: checkFormValue(typeData?.name),
+        label: checkFormValue(isB2b ? typeData?.name : typeData?.mobile),
         value: checkFormValue(typeData?.id),
       };
       setFieldValue("type", checkFormValue(type));
@@ -269,6 +270,8 @@ const EditProfile = ({ setShowModal }) => {
     }
   }
   useEffect(() => {
+    // setfield work only on editmode
+    if(!readOnly){
     if (!!values.typeValue?.label && selectedTypeData) {
       setFieldValue("name", checkFormValue(selectedTypeData.name));
       setFieldValue("email", checkFormValue(selectedTypeData.email));
@@ -284,6 +287,7 @@ const EditProfile = ({ setShowModal }) => {
       setFieldValue("mobile", '');
       setFieldValue("salute", '');
     }
+  }
   }, [selectedTypeValue?.id, selectedTypeData?.id,values.typeValue?.label]);
 
   return (
@@ -647,7 +651,7 @@ const EditProfile = ({ setShowModal }) => {
                   <div className="">
                     <h6 className="my-4">Package Suggestion</h6>
                     {suggestionArr.map((item,ind)=>(
-                      <div className="d-flex border suggestion-card p-2 rounded mb-2">
+                      <div className="d-flex border suggestion-card p-2 rounded mb-2" key={ind}>
                         <div>
                           <h6>{item.name}</h6>
                           <p>{item.description}</p>
